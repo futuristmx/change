@@ -47,6 +47,7 @@ export default function DecisionCartography() {
               key={n.title}
               onClick={() => setActive(i)}
               aria-pressed={i === active}
+              aria-label={`${n.title}, paso ${i + 1} de ${NODES.length}`}
               style={{ border: 0, background: "transparent", padding: 0, textAlign: "center", cursor: "pointer", fontFamily: "var(--font-primary)", color: "inherit" }}
             >
               <span

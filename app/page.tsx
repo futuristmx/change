@@ -28,7 +28,7 @@ export default function Home() {
     <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
       <Header />
 
-      <main style={{ flex: 1 }}>
+      <main id="main-content" style={{ flex: 1 }}>
 
         {/* ═══ HERO ═══ */}
         <section style={{ position: "relative", overflow: "hidden", background: "radial-gradient(110% 80% at 84% -10%,rgba(138,108,255,.14) 0%,rgba(89,184,217,.06) 32%,rgba(255,255,255,0) 58%),linear-gradient(180deg,#FFFFFF 0%,#F8F7F4 70%,#F2EFEA 100%)" }}>
@@ -46,11 +46,11 @@ export default function Home() {
             <div className="ch-herorow" style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(400px,520px)", gap: "clamp(48px,7vw,96px)", alignItems: "end", marginTop: "clamp(44px,6vw,72px)" }}>
               <div>
                 <Reveal delay={120} as="p" style={{ margin: 0, maxWidth: 520, font: "400 clamp(19px,1.7vw,24px)/1.45 var(--font-primary)", letterSpacing: "-.02em", color: "var(--ink-graphite)" }}>
-                  Change convierte decisiones ambiguas en sistemas de claridad, para que el rumbo no dependa de una sola cabeza.
+                  El rumbo de una organización no debería depender de la cabeza de una sola persona. Change convierte el criterio directivo en un sistema claro, compartido y trazable.
                 </Reveal>
                 <Reveal delay={200} style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 36 }}>
                   <Link href="/contacto" className="btn btn-primary">Trabajar una decisión</Link>
-                  <Link href="#metodo" className="btn btn-secondary">Ver cómo se mueve el criterio</Link>
+                  <Link href="#metodo" className="btn btn-secondary">Ver el método</Link>
                 </Reveal>
               </div>
               <Reveal delay={240}><DecisionCartography /></Reveal>
@@ -133,14 +133,34 @@ export default function Home() {
             <SectionHead kicker="Ruta de trabajo" title="Empieza por una decisión. Escala cuando el criterio ya existe." lead="La entrada no es un gran proyecto. Es una conversación difícil trabajada con estructura." />
             <div className="ch-grid3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
               {[
-                { n: "01", h: "Mapa de Claridad", p: "Lectura estratégica para nombrar la decisión atorada y el criterio que debe gobernarla.", c: "var(--ink-graphite)" },
-                { n: "02", h: "Sprint de Rumbo", p: "Trabajo acotado para convertir claridad en rutas, apuestas y primeros movimientos.", c: "var(--ink-graphite)" },
-                { n: "03", h: "Mission Control", p: "Sistema vivo para sostener trazabilidad, reportes y seguimiento ejecutivo.", c: "var(--change-violet)" },
+                { n: "01", h: "Mapa de Claridad", p: "Lectura estratégica para nombrar la decisión atorada y el criterio que debe gobernarla.", c: "var(--ink-graphite)", detail: [
+                  ["Resuelve", "Una decisión ambigua o atorada sin estructura compartida."],
+                  ["Entregamos", "Lectura estratégica · Marco de criterios · Primer movimiento."],
+                  ["Cuándo", "Cuando la decisión ya está encima pero no hay consenso en qué importa más."],
+                ] },
+                { n: "02", h: "Sprint de Rumbo", p: "Trabajo acotado para convertir claridad en rutas, apuestas y primeros movimientos.", c: "var(--ink-graphite)", detail: [
+                  ["Resuelve", "Claridad que no se convierte en dirección ni proyectos concretos."],
+                  ["Entregamos", "Mapa de opciones · Criterios comparables · Trade-offs · Roadmap ejecutivo."],
+                  ["Cuándo", "Cuando hay más de una apuesta posible y el equipo no puede priorizar."],
+                ] },
+                { n: "03", h: "Mission Control", p: "Sistema vivo para sostener trazabilidad, reportes y seguimiento ejecutivo.", c: "var(--change-violet)", detail: [
+                  ["Resuelve", "Estrategia que se diluye entre juntas, documentos y chats."],
+                  ["Entregamos", "Sistema vivo de trazabilidad · Radar de señales · Memoria de criterios."],
+                  ["Cuándo", "Cuando el criterio existe pero necesita escala, gobierno y continuidad."],
+                ] },
               ].map((r, i) => (
-                <Reveal key={r.n} delay={i * 120} as="article" className="ch-card" style={{ border: "1px solid var(--border-subtle)", background: "rgba(255,255,255,.8)", padding: "36px 32px" }}>
+                <Reveal key={r.n} delay={i * 120} as="article" className="ch-card" style={{ border: "1px solid var(--border-subtle)", background: "rgba(255,255,255,.8)", padding: "36px 32px", display: "flex", flexDirection: "column" }}>
                   <div style={{ font: "300 clamp(40px,4vw,56px)/1 var(--font-secondary)", color: r.c }}>{r.n}</div>
                   <h3 style={{ margin: "18px 0 10px", font: "600 23px var(--font-primary)", letterSpacing: "-.03em", color: "var(--ink-graphite)" }}>{r.h}</h3>
                   <p style={{ margin: 0, font: "400 15px/1.6 var(--font-primary)", color: "var(--text-muted)" }}>{r.p}</p>
+                  <div style={{ marginTop: 20, paddingTop: 18, borderTop: "1px solid var(--border-subtle)", display: "flex", flexDirection: "column", gap: 12 }}>
+                    {r.detail.map(([label, text]) => (
+                      <div key={label} style={{ display: "grid", gridTemplateColumns: "84px 1fr", gap: 12, alignItems: "baseline" }}>
+                        <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--text-faint)" }}>{label}</span>
+                        <span style={{ font: "400 13.5px/1.5 var(--font-primary)", color: "var(--text-muted)" }}>{text}</span>
+                      </div>
+                    ))}
+                  </div>
                 </Reveal>
               ))}
             </div>
@@ -174,13 +194,13 @@ export default function Home() {
             <SectionHead kicker="Decisiones habilitadas" title="Decisiones que sobrevivieron a la operación." lead="La evidencia de Change no es estética. Es capacidad directiva instalada." />
             <div className="ch-declist" style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 20 }}>
               {[
-                { k: "Expansión", h: "¿Dónde crecer sin diluir esencia?", p: "Tensión familiar, marca, capacidad operativa y timing." },
-                { k: "Sucesión", h: "¿Cómo transferir criterio sin perder control?", p: "Decisiones que antes dependían de una sola lectura." },
-                { k: "Portafolio", h: "¿Qué apuestas merecen recursos?", p: "Criterios comparables para priorizar innovación." },
-                { k: "Riesgo", h: "¿Qué se rompe primero bajo presión?", p: "Escenarios, vulnerabilidades y respuesta anticipatoria." },
+                { k: "Expansión", c: "var(--opportunity-orange)", h: "¿Dónde crecer sin diluir esencia?", p: "Tensión entre velocidad, capacidad operativa y marca en contextos de crecimiento real." },
+                { k: "Sucesión", c: "var(--human-pink)", h: "¿Cómo transferir criterio sin perder control?", p: "Decisiones que antes dependían de una sola lectura — y que ahora necesitan escala." },
+                { k: "Portafolio", c: "var(--signal-cyan)", h: "¿Qué apuestas merecen recursos?", p: "Criterios comparables para priorizar innovación cuando el presupuesto no alcanza para todo." },
+                { k: "Riesgo", c: "var(--warning)", h: "¿Qué se rompe primero bajo presión?", p: "Escenarios, vulnerabilidades y respuesta anticipatoria antes de que llegue la urgencia." },
               ].map((d, i) => (
                 <Reveal key={d.k} delay={i * 80} as="article" className="ch-card" style={{ background: "rgba(255,255,255,.82)", border: "1px solid var(--border-subtle)", padding: 36 }}>
-                  <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".13em", textTransform: "uppercase", color: "var(--strategic-gray)" }}>{d.k}</span>
+                  <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".13em", textTransform: "uppercase", color: d.c }}>{d.k}</span>
                   <h3 style={{ margin: "14px 0 8px", font: "600 clamp(22px,2vw,30px)/1.02 var(--font-primary)", letterSpacing: "-.03em", color: "var(--ink-graphite)" }}>{d.h}</h3>
                   <p style={{ margin: 0, font: "400 15px/1.55 var(--font-primary)", color: "var(--text-muted)" }}>{d.p}</p>
                 </Reveal>
