@@ -17,6 +17,7 @@
 /* ── UPGRADE 2.4 (aditivo): dataviz + density ── */
 @import "./tokens/dataviz.css";
 @import "./tokens/density.css";
+@import "../components/ds/cards.css";
 
 /* Web fonts BD Orange Variable (Typekit) + IBM Plex Mono (Google) are loaded
    via <link> in app/layout.tsx — @import after Tailwind's inlined rules would
