@@ -1,0 +1,30 @@
+/* ════════════════════════════════════════════════════════════
+   Change UI — Spacing & layout
+   8px-based rhythm. Whitespace is read as a premium signal.
+   ════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Spacing scale ── */
+  --space-0:  0;
+  --space-1:  4px;    /* micro adjustments */
+  --space-2:  8px;    /* compaction */
+  --space-3:  12px;   /* inline separation */
+  --space-4:  16px;   /* component separation */
+  --space-6:  24px;   /* internal breathing */
+  --space-8:  32px;   /* groups */
+  --space-12: 48px;   /* small sections */
+  --space-18: 72px;   /* primary sections */
+  --space-24: 96px;   /* editorial pauses */
+  --space-32: 128px;  /* large transitions */
+
+  /* ── Layout ── */
+  --layout-max:      1280px;
+  --layout-max-wide: 1440px;
+  --layout-gutter:   24px;
+  --layout-margin:   clamp(20px, 5vw, 80px);
+
+  /* Sidebar / nav metrics (from product) */
+  --sidebar-width:   256px;
+  --topnav-height:   64px;
+  --control-height:  44px;   /* min touch / input height (AA) */
+}

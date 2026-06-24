@@ -1,0 +1,41 @@
+/* ════════════════════════════════════════════════════════════
+   Change UI — Typography scale
+   Postea drives the system. Tracking tightens as size grows.
+   BD Orange Variable (--font-accent) is reserved for large
+   numerals, hero accents and key words — prefer weights 300–500.
+   ════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Font sizes ── */
+  --text-display: clamp(56px, 7vw, 112px);
+  --text-h1:      clamp(40px, 5vw, 72px);
+  --text-h2:      clamp(30px, 3.4vw, 48px);
+  --text-h3:      clamp(22px, 2vw, 28px);
+  --text-lead:    19px;
+  --text-base:    16px;   /* body min 15px for AA legibility */
+  --text-sm:      14px;
+  --text-xs:      13px;
+  --text-meta:    11px;   /* mono labels, uppercase, tracked */
+
+  /* ── Weights ── */
+  --weight-light:    300;
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+
+  /* ── Line heights ── */
+  --leading-display: 0.96;
+  --leading-tight:   1.04;
+  --leading-snug:    1.16;
+  --leading-heading: 1.22;
+  --leading-body:    1.6;
+  --leading-relaxed: 1.7;
+
+  /* ── Letter spacing ── */
+  --tracking-display: -0.05em;
+  --tracking-h1:      -0.04em;
+  --tracking-h2:      -0.03em;
+  --tracking-h3:      -0.02em;
+  --tracking-body:    0;
+  --tracking-meta:    0.1em;   /* mono labels */
+}

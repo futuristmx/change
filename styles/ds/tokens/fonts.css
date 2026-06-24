@@ -1,0 +1,39 @@
+/* ════════════════════════════════════════════════════════════
+   Change UI — Fonts
+   Postea (primary) is SELF-HOSTED from licensed .otf binaries in
+   assets/fonts/ (weights 300/400/600/700/800 + italic). The Adobe
+   Typekit kit is still imported for BD Orange Variable (secondary)
+   and as a fallback source for Postea's thin/hairline display weights.
+   Mono is a web/system fallback stack.
+   ════════════════════════════════════════════════════════════ */
+
+/* Typekit kit vjn7ksg VERIFIED (2026-06-09) to serve:
+   - "bd-orange-variable"  (normal, weight 100–800) ← source for --font-secondary
+   - "postea-variable"     (normal + italic, weight 100–800) ← thin/hairline fallback
+   No local file for BD Orange is needed; do NOT substitute another family. */
+@import url("https://use.typekit.net/vjn7ksg.css");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap");
+
+/* ── Self-hosted Postea (primary) ── */
+@font-face{font-family:"Postea";src:url("../assets/fonts/Postea-Light.otf") format("opentype");font-weight:300;font-style:normal;font-display:swap}
+@font-face{font-family:"Postea";src:url("../assets/fonts/Postea-Regular.otf") format("opentype");font-weight:400 500;font-style:normal;font-display:swap}
+@font-face{font-family:"Postea";src:url("../assets/fonts/Postea-RegularItalic.otf") format("opentype");font-weight:400 500;font-style:italic;font-display:swap}
+@font-face{font-family:"Postea";src:url("../assets/fonts/Postea-Semibold.otf") format("opentype");font-weight:600;font-style:normal;font-display:swap}
+@font-face{font-family:"Postea";src:url("../assets/fonts/Postea-Bold.otf") format("opentype");font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:"Postea";src:url("../assets/fonts/Postea-Extrabold.otf") format("opentype");font-weight:800;font-style:normal;font-display:swap}
+
+:root {
+  /* Family stacks — primary is ~85–90% of the system, secondary ~10–15%.
+     Self-hosted "Postea" first; "postea-variable" (Typekit) covers the
+     thin/hairline weights not shipped as local binaries. */
+  --font-primary:   "Postea", "postea-variable", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --font-secondary: "bd-orange-variable", "Postea", "postea-variable", "Helvetica Neue", Arial, sans-serif;
+  --font-mono:      "IBM Plex Mono", "JetBrains Mono", "Space Mono", "SFMono-Regular", Consolas, monospace;
+
+  /* Semantic aliases */
+  --font-body:      var(--font-primary);
+  --font-heading:   var(--font-primary);
+  --font-display:   var(--font-primary);     /* use --font-secondary only for brand moments */
+  --font-accent:    var(--font-secondary);   /* large numerals, hero accents, key words */
+  --font-meta:      var(--font-mono);        /* labels, horizons, codes, confidence */
+}

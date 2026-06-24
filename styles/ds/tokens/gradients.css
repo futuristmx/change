@@ -1,0 +1,147 @@
+/* ════════════════════════════════════════════════════════════
+   Change UI — Gradients, dividers & line/node system
+   Gradients are functional atmosphere, never decorative.
+   Use Violet Atmosphere with intent (CTA, recommendation, key
+   moment) — not as an automatic card background.
+   ════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Light atmospheres ── */
+  --gradient-celestial-horizon: linear-gradient(180deg, #DCEAF5 0%, #F5F6F7 48%, #F3EEE9 100%);  /* @kind color */
+  --gradient-violet-atmosphere: linear-gradient(135deg, rgba(109,59,255,0.18) 0%, rgba(138,108,255,0.10) 42%, rgba(255,255,255,0) 100%);  /* @kind color */
+  --gradient-sky-pearl:         linear-gradient(135deg, rgba(220,234,245,0.60) 0%, rgba(255,255,255,0.90) 55%, rgba(243,238,233,0.42) 100%);  /* @kind color */
+  --gradient-ethereal-glow:     radial-gradient(circle at top center, rgba(138,108,255,0.18) 0%, rgba(220,234,245,0.12) 34%, rgba(255,255,255,0) 70%);  /* @kind color */
+  --gradient-violet-whisper:    linear-gradient(135deg, rgba(241,237,255,0.92) 0%, rgba(255,255,255,0.96) 56%, rgba(220,234,245,0.36) 100%);  /* @kind color */
+
+  /* ── Brand & display type gradients (hero words, numerals, emphasis only) ── */
+  --gradient-type-electric:      linear-gradient(135deg, #1F1148 0%, #6D3BFF 48%, #59B8D9 100%);  /* @kind color */
+  --gradient-type-soft-violet:   linear-gradient(135deg, #5524E0 0%, #8A6CFF 58%, #B7A8FF 100%);  /* @kind color */
+  --gradient-type-electric-dark: linear-gradient(135deg, #FFFFFF 0%, #D9D2FF 24%, #8A6CFF 58%, #59B8D9 100%);  /* @kind color */
+  --gradient-type-violet-dark:   linear-gradient(135deg, #F1EDFF 0%, #8A6CFF 48%, #6D3BFF 100%);  /* @kind color */
+
+  /* ── Brand accent (solid violet sweep — buttons, key chips) ── */
+  --gradient-accent: linear-gradient(135deg, #6D3BFF 0%, #8A6CFF 100%);  /* @kind color */
+
+  /* ── Dark atmospheres (command centers / signal maps) ── */
+  --gradient-dark-violet-horizon: radial-gradient(circle at 82% 12%, rgba(109,59,255,0.32) 0%, rgba(109,59,255,0.09) 34%, rgba(10,14,21,0) 58%), linear-gradient(135deg, #0A0E15 0%, #121722 56%, #1A202C 100%);  /* @kind color */
+  --gradient-dark-signal-field:   radial-gradient(circle at 18% 18%, rgba(89,184,217,0.16) 0%, rgba(89,184,217,0.04) 36%, rgba(10,14,21,0) 62%), radial-gradient(circle at 82% 70%, rgba(109,59,255,0.24) 0%, rgba(109,59,255,0.06) 38%, rgba(10,14,21,0) 66%), linear-gradient(180deg, #0A0E15 0%, #121722 100%);  /* @kind color */
+  --gradient-dark-electric-surface: linear-gradient(145deg, rgba(31,17,72,0.92) 0%, rgba(18,23,34,0.96) 48%, rgba(10,14,21,1) 100%), radial-gradient(circle at 78% 18%, rgba(109,59,255,0.22) 0%, rgba(109,59,255,0) 48%);  /* @kind color */
+  --gradient-dark-pearl:          linear-gradient(180deg, #121722 0%, #171D2A 54%, #0A0E15 100%);  /* @kind color */
+  --gradient-dark-future-glow:    radial-gradient(circle at 50% 0%, rgba(138,108,255,0.26) 0%, rgba(109,59,255,0.10) 32%, rgba(10,14,21,0) 64%), linear-gradient(180deg, #0A0E15 0%, #121722 52%, #0A0E15 100%);  /* @kind color */
+
+  /* ── Ethereal dividers (signature 1px gradient rules) ── */
+  --divider-ethereal:      linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(109,59,255,0.32) 26%, rgba(220,234,245,0.54) 52%, rgba(138,108,255,0.26) 76%, rgba(255,255,255,0) 100%);  /* @kind color */
+  --divider-ethereal-dark: linear-gradient(90deg, rgba(10,14,21,0) 0%, rgba(89,184,217,0.36) 22%, rgba(123,82,255,0.68) 50%, rgba(109,59,255,0.40) 76%, rgba(10,14,21,0) 100%);  /* @kind color */
+  --divider-ethereal-dark-glow: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(89,184,217,0.22) 18%, rgba(109,59,255,0.48) 48%, rgba(217,210,255,0.24) 70%, rgba(255,255,255,0) 100%);  /* @kind color */
+  --divider-ethereal-dark-shadow: 0 0 18px rgba(109,59,255,0.20), 0 0 32px rgba(89,184,217,0.08);  /* @kind shadow */
+
+  /* ── Line & node system (strategic visuals) ── */
+  --line-structural: rgba(46, 46, 51, 0.16);
+  --line-active:     rgba(109, 59, 255, 0.42);
+  --line-signal:     rgba(89, 184, 217, 0.40);
+  --line-dark:       rgba(255, 255, 255, 0.12);
+  /* dark-mode line-and-node */
+  --line-dark-structural: rgba(255, 255, 255, 0.12);
+  --line-dark-active:     rgba(109, 59, 255, 0.48);
+  --line-dark-signal:     rgba(89, 184, 217, 0.36);
+  --node-active:     #6D3BFF;
+  --node-secondary:  #8A6CFF;
+  --node-signal:     #59B8D9;
+  --node-neutral:    #BFC3CB;
+  --node-halo-dark:  rgba(109, 59, 255, 0.16);
+  --line-width:      1.5px;  /* @kind spacing */
+}
+
+/* ════════════════════════════════════════════════════════════
+   PREMIUM DARK CARD SURFACES — differentiated fills for cards &
+   panels on dark backgrounds. The five base --gradient-dark-*
+   surfaces above are page/section atmospheres; THESE are for the
+   cards that sit on top. Each has its own light-source geometry +
+   hue, so adjacent cards never read the same. Pair every one with
+   --shadow-dark-card / --shadow-dark-card-violet (elevation.css)
+   for the lit-edge premium feel.
+   ──────────────────────────────────────────────────────────────
+   PICK BY MEANING, not decoration:
+   · slate    → default / neutral data card (cool graphite)
+   · obsidian → recedes behind brighter cards (near-black, flat)
+   · sweep    → hero / cover card (brighter diagonal)
+   · violet   → identity / insight / AI card (violet-warmed body)
+   · edge-*   → selected / category-tagged card (top light bar)
+   · spot-*   → featured corner-lit card
+   · rose / mineral / solar → semantic cards (human / validated / opportunity)
+   ════════════════════════════════════════════════════════════ */
+:root {
+  --gradient-dark-card-slate:    linear-gradient(158deg, #1B2233 0%, #141A28 54%, #0F1420 100%);  /* @kind color */
+  --gradient-dark-card-obsidian: linear-gradient(180deg, #11151F 0%, #0B0F18 100%);  /* @kind color */
+  --gradient-dark-card-sweep:    linear-gradient(115deg, #232A4C 0%, #161D31 44%, #0E1320 100%);  /* @kind color */
+  --gradient-dark-card-violet:   linear-gradient(150deg, #241845 0%, #181B30 56%, #10131F 100%);  /* @kind color */
+
+  /* Top-edge "light bar" cards — a thin lit strip over a dark body (selected / tagged) */
+  --gradient-dark-card-edge-violet: linear-gradient(180deg, rgba(123,82,255,0.26) 0%, rgba(123,82,255,0) 17%), linear-gradient(165deg, #171C30 0%, #0F1018 100%);  /* @kind color */
+  --gradient-dark-card-edge-cyan:   linear-gradient(180deg, rgba(89,184,217,0.24) 0%, rgba(89,184,217,0) 17%), linear-gradient(165deg, #131E26 0%, #0E1119 100%);  /* @kind color */
+
+  /* Corner spotlight cards — radial light from a corner (featured) */
+  --gradient-dark-card-spot-violet: radial-gradient(125% 95% at 100% 0%, rgba(123,82,255,0.28) 0%, rgba(123,82,255,0) 48%), linear-gradient(160deg, #181D30 0%, #0E121C 100%);  /* @kind color */
+  --gradient-dark-card-spot-cyan:   radial-gradient(125% 95% at 0% 0%, rgba(89,184,217,0.24) 0%, rgba(89,184,217,0) 48%), linear-gradient(160deg, #121A26 0%, #0E1119 100%);  /* @kind color */
+
+  /* Semantic dark cards — Futurist Calm hue, glow from a corner */
+  --gradient-dark-card-rose:    radial-gradient(125% 100% at 100% 100%, rgba(184,106,164,0.22) 0%, rgba(184,106,164,0) 50%), linear-gradient(158deg, #201826 0%, #11121C 100%);  /* @kind color */
+  --gradient-dark-card-mineral: radial-gradient(125% 100% at 0% 100%, rgba(90,166,122,0.20) 0%, rgba(90,166,122,0) 50%), linear-gradient(158deg, #14201D 0%, #0E1318 100%);  /* @kind color */
+  --gradient-dark-card-solar:   radial-gradient(125% 100% at 100% 0%, rgba(201,122,58,0.22) 0%, rgba(201,122,58,0) 50%), linear-gradient(158deg, #221B12 0%, #14110E 100%);  /* @kind color */
+}
+
+/* ════════════════════════════════════════════════════════════
+   EXTENDED TYPE GRADIENTS — hero words & large numerals only.
+   Clip with: background:var(--…);-webkit-background-clip:text;
+   background-clip:text;color:transparent. Never on paragraphs,
+   labels, tables or running metadata. One per viewport.
+   ════════════════════════════════════════════════════════════ */
+:root {
+  --gradient-type-cyan:        linear-gradient(120deg, #2C7491 0%, #59B8D9 58%, #8AD3EC 100%);  /* @kind color */
+  --gradient-type-aurora:      linear-gradient(120deg, #6D3BFF 0%, #B86AA4 50%, #59B8D9 100%);  /* @kind color */
+  --gradient-type-solar:       linear-gradient(120deg, #8A4A1E 0%, #C97A3A 56%, #E0A368 100%);  /* @kind color */
+  --gradient-type-mineral:     linear-gradient(120deg, #2F7C57 0%, #5AA67A 60%, #8FCBA6 100%);  /* @kind color */
+  /* dark variants — lighter stops so they read on #0A0E15 */
+  --gradient-type-cyan-dark:   linear-gradient(120deg, #8AD3EC 0%, #59B8D9 54%, #8A6CFF 100%);  /* @kind color */
+  --gradient-type-aurora-dark: linear-gradient(120deg, #D9D2FF 0%, #8A6CFF 40%, #59B8D9 100%);  /* @kind color */
+  --gradient-type-pearl-dark:  linear-gradient(180deg, #FFFFFF 0%, #C9D2E8 100%);  /* @kind color */
+}
+
+/* ════════════════════════════════════════════════════════════
+   LINE GRADIENTS — fading / relational strokes. Use as the
+   `background` of a 1–1.5px element, or as `border-image-source`.
+   (For SVG <line>/<path> strokes keep the solid --line-* tokens.)
+   ════════════════════════════════════════════════════════════ */
+:root {
+  --line-gradient-violet:       linear-gradient(90deg, rgba(109,59,255,0) 0%, rgba(109,59,255,0.55) 50%, rgba(109,59,255,0) 100%);  /* @kind color */
+  --line-gradient-signal:       linear-gradient(90deg, rgba(89,184,217,0) 0%, rgba(89,184,217,0.50) 50%, rgba(89,184,217,0) 100%);  /* @kind color */
+  --line-gradient-relation:     linear-gradient(90deg, rgba(109,59,255,0.60) 0%, rgba(89,184,217,0.50) 100%);  /* @kind color */
+  --line-gradient-progress:     linear-gradient(90deg, #6D3BFF 0%, #8A6CFF 100%);  /* @kind color */
+  /* dark */
+  --line-gradient-violet-dark:  linear-gradient(90deg, rgba(138,108,255,0) 0%, rgba(138,108,255,0.70) 50%, rgba(138,108,255,0) 100%);  /* @kind color */
+  --line-gradient-signal-dark:  linear-gradient(90deg, rgba(89,184,217,0) 0%, rgba(89,184,217,0.60) 50%, rgba(89,184,217,0) 100%);  /* @kind color */
+  --line-gradient-relation-dark:linear-gradient(90deg, rgba(138,108,255,0.72) 0%, rgba(89,184,217,0.60) 100%);  /* @kind color */
+}
+
+/* ════════════════════════════════════════════════════════════
+   NODE GRADIENTS & GLOWS — radial fills for emphasis nodes/dots,
+   plus halo glows. Glows pair as box-shadow on the node element.
+   ════════════════════════════════════════════════════════════ */
+:root {
+  --node-gradient-violet: radial-gradient(circle at 36% 32%, #B7A8FF 0%, #6D3BFF 56%, #4218C8 100%);  /* @kind color */
+  --node-gradient-signal: radial-gradient(circle at 36% 32%, #BDE6F3 0%, #59B8D9 56%, #2C7491 100%);  /* @kind color */
+  --node-gradient-rose:   radial-gradient(circle at 36% 32%, #E3B8D6 0%, #B86AA4 58%, #7E466F 100%);  /* @kind color */
+  --node-glow-violet:     0 0 0 4px rgba(109,59,255,0.14), 0 0 12px rgba(109,59,255,0.45);  /* @kind shadow */
+  --node-glow-signal:     0 0 0 4px rgba(89,184,217,0.14), 0 0 12px rgba(89,184,217,0.42);  /* @kind shadow */
+}
+
+/* ════════════════════════════════════════════════════════════
+   BUTTON GRADIENTS — use with intent (primary CTA, key chips).
+   Pair on-dark with --shadow-btn-violet (elevation.css).
+   ════════════════════════════════════════════════════════════ */
+:root {
+  --gradient-btn-primary:    linear-gradient(180deg, #7A4DFF 0%, #6D3BFF 52%, #5524E0 100%);  /* @kind color */
+  --gradient-btn-electric:   linear-gradient(120deg, #6D3BFF 0%, #7A4DFF 54%, #59B8D9 100%);  /* @kind color */
+  --gradient-btn-deep:       linear-gradient(180deg, #5524E0 0%, #4218C8 100%);  /* @kind color */
+  --gradient-btn-dark-ghost: linear-gradient(180deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.04) 100%);  /* @kind color */
+}

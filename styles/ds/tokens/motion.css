@@ -1,0 +1,45 @@
+/* ════════════════════════════════════════════════════════════
+   Change UI — Motion
+   Restrained and purposeful. Motion clarifies hierarchy, reveals
+   relationships, gives feedback or guides attention. Never decorative.
+   Always honour prefers-reduced-motion.
+   ════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Durations ── */
+  --duration-fast:     120ms;   /* @kind other */
+  --duration-standard: 220ms;   /* @kind other */
+  --duration-premium:  330ms;   /* @kind other */
+  --duration-enter:    420ms;   /* @kind other */
+  --duration-line:     1100ms;  /* @kind other */
+  --duration-pulse:    5000ms;  /* @kind other */
+
+  /* ── Easing ── */
+  --ease-premium:  cubic-bezier(0.22, 1, 0.36, 1);  /* @kind other */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);    /* @kind other */
+  --ease-out:      cubic-bezier(0, 0, 0.2, 1);      /* @kind other */
+
+  /* ── Composed transitions ── */
+  --transition-base:  all var(--duration-standard) var(--ease-premium);  /* @kind other */
+  --transition-color: color var(--duration-fast) var(--ease-premium), background-color var(--duration-fast) var(--ease-premium), border-color var(--duration-fast) var(--ease-premium);  /* @kind other */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast:     1ms;  /* @kind other */
+    --duration-standard: 1ms;  /* @kind other */
+    --duration-premium:  1ms;  /* @kind other */
+    --duration-enter:    1ms;  /* @kind other */
+    --duration-line:     1ms;  /* @kind other */
+    --duration-pulse:    1ms;  /* @kind other */
+  }
+}
+
+/* Toast entrance — restrained 8px rise + fade. Reduced-motion makes it instant. */
+@keyframes change-toast-enter {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  @keyframes change-toast-enter { from { opacity: 1; } to { opacity: 1; } }
+}

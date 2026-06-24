@@ -1,0 +1,100 @@
+/* ════════════════════════════════════════════════════════════
+   Change UI — Radius, borders, shadows, opacity, z-index
+   Soft and quiet. No hard or decorative shadows.
+   ════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Radius — "Editorial Flat Premium / Sharp": major containers are square.
+     The base scale is zeroed so cards, panels, buttons, inputs, modals, tables
+     and nav inherit sharp geometry. --radius-full survives ONLY for small
+     circular nodes (bullets, status/signal dots, line-and-node points). ── */
+  --radius-control: 0px;   /* buttons, inputs, controls */
+  --radius-card:    0px;   /* cards, modules */
+  --radius-panel:   0px;   /* panels, drawers, tables, sidebars */
+  --radius-hero:    0px;   /* hero surfaces, modals */
+  --radius-xs:   0px;
+  --radius-sm:   0px;
+  --radius-md:   0px;
+  --radius-lg:   0px;
+  --radius-node: 50%;     /* nodes, dots, signal points only */
+  --radius-full: 999px;   /* legacy alias → small round markers only */
+
+  /* ── Border widths ── */
+  --border-thin:   1px;     /* @kind spacing */
+  --border-medium: 1.5px;   /* @kind spacing */
+
+  /* ── Outlines — graphite hierarchy is the default structural language ── */
+  --outline-soft:            1px solid rgba(46, 46, 51, 0.08);   /* @kind color */
+  --outline-graphite:        1px solid rgba(46, 46, 51, 0.16);   /* @kind color */
+  --outline-graphite-strong: 1px solid rgba(46, 46, 51, 0.24);   /* @kind color */
+  --outline-violet:          1px solid rgba(109, 59, 255, 0.28); /* @kind color */
+
+  /* ── Shadows — graphite, architectural, restrained. Resting = none. ── */
+  --shadow-none:             none;
+  --shadow-graphite-soft:    0 4px 14px rgba(46, 46, 51, 0.05);   /* neutral emphasis */
+  --shadow-graphite:         0 10px 28px rgba(46, 46, 51, 0.09);  /* floating panel */
+  --shadow-graphite-premium: 0 18px 48px rgba(46, 46, 51, 0.12);  /* modal / large surface */
+  --shadow-violet-active:    0 12px 32px rgba(109, 59, 255, 0.11); /* selected strategic object */
+  /* legacy aliases repointed to the graphite system */
+  --shadow-xs:    var(--shadow-graphite-soft);
+  --shadow-sm:    var(--shadow-graphite-soft);
+  --shadow-md:    var(--shadow-graphite-soft);
+  --shadow-lg:    var(--shadow-graphite);
+  --shadow-violet: var(--shadow-violet-active);
+  --shadow-dark:  0 24px 72px rgba(10, 14, 21, 0.22);
+
+  /* ── PREMIUM DARK ELEVATION & GLOWS — for cards/buttons over dark
+     surfaces (.change-dark, command centers, report covers). On dark,
+     a flat shadow disappears; depth comes from a deeper drop shadow
+     PLUS a lit top edge (inset highlight) and, for emphasis, a colored
+     glow ring. Compose: surface gradient (gradients.css) + one shadow
+     token here.
+     ──────────────────────────────────────────────────────────────
+     · --shadow-dark-card        neutral premium card (depth + lit edge)
+     · --shadow-dark-card-violet identity / selected card (violet ring)
+     · --shadow-dark-card-cyan   signal / data card (cyan ring)
+     · --shadow-btn-violet[-hover] primary CTA on dark
+     · --glow-* / --edge-* atomic pieces to build your own
+     ── */
+  /* Lit top edges — the single most "premium" dark detail */
+  --edge-highlight-top:    inset 0 1px 0 rgba(255, 255, 255, 0.08);   /* @kind shadow */
+  --edge-highlight-violet: inset 0 1px 0 rgba(183, 168, 255, 0.22);   /* @kind shadow */
+  --edge-highlight-cyan:   inset 0 1px 0 rgba(157, 220, 240, 0.20);   /* @kind shadow */
+
+  /* Neutral dark depth scale (no color) */
+  --shadow-dark-sm: 0 2px 8px rgba(0, 0, 0, 0.40);    /* @kind shadow */
+  --shadow-dark-md: 0 12px 32px rgba(0, 0, 0, 0.46);  /* @kind shadow */
+  --shadow-dark-lg: 0 28px 72px rgba(0, 0, 0, 0.55);  /* @kind shadow */
+
+  /* Colored glow rings (ring + soft bloom) — emphasis only */
+  --glow-violet-sm: 0 0 0 1px rgba(138, 108, 255, 0.22), 0 8px 28px rgba(109, 59, 255, 0.22);  /* @kind shadow */
+  --glow-violet-md: 0 0 0 1px rgba(138, 108, 255, 0.30), 0 16px 44px rgba(109, 59, 255, 0.30); /* @kind shadow */
+  --glow-cyan-sm:   0 0 0 1px rgba(89, 184, 217, 0.22), 0 8px 28px rgba(89, 184, 217, 0.20);   /* @kind shadow */
+
+  /* Composite premium card shadows on dark (depth + ring + lit edge) */
+  --shadow-dark-card:        0 18px 44px rgba(0, 0, 0, 0.48), inset 0 1px 0 rgba(255, 255, 255, 0.06);  /* @kind shadow */
+  --shadow-dark-card-violet: 0 18px 44px rgba(0, 0, 0, 0.46), 0 0 0 1px rgba(138, 108, 255, 0.20), inset 0 1px 0 rgba(183, 168, 255, 0.16);  /* @kind shadow */
+  --shadow-dark-card-cyan:   0 18px 44px rgba(0, 0, 0, 0.46), 0 0 0 1px rgba(89, 184, 217, 0.20), inset 0 1px 0 rgba(157, 220, 240, 0.16);   /* @kind shadow */
+
+  /* Button glows on dark (bloom + bright top edge) */
+  --shadow-btn-violet:       0 8px 22px rgba(109, 59, 255, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.16);  /* @kind shadow */
+  --shadow-btn-violet-hover: 0 12px 30px rgba(109, 59, 255, 0.42), inset 0 1px 0 rgba(255, 255, 255, 0.20); /* @kind shadow */
+  --shadow-btn-electric:     0 8px 24px rgba(89, 184, 217, 0.26), 0 4px 14px rgba(109, 59, 255, 0.30), inset 0 1px 0 rgba(255, 255, 255, 0.18);  /* @kind shadow */
+
+  /* ── Opacity ── */
+  --opacity-disabled: 0.40;   /* @kind other */
+  --opacity-muted:    0.64;   /* @kind other */
+  --opacity-hover:    0.88;   /* @kind other */
+
+  /* ── Blur (used sparingly, for premium overlays only) ── */
+  --blur-overlay: 12px;   /* @kind other */
+
+  /* ── z-index ── */
+  --z-base:     0;     /* @kind other */
+  --z-raised:   10;    /* @kind other */
+  --z-sticky:   100;   /* @kind other */
+  --z-dropdown: 200;   /* @kind other */
+  --z-overlay:  900;   /* @kind other */
+  --z-modal:    1000;  /* @kind other */
+  --z-toast:    1100;  /* @kind other */
+}

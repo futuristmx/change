@@ -1,0 +1,115 @@
+/* ════════════════════════════════════════════════════════════
+   Change Web — global stylesheet
+   Tailwind v4 + Change UI Design System tokens (self-hosted Postea).
+   Token sources live in /styles/ds/tokens (framework-agnostic CSS).
+   ════════════════════════════════════════════════════════════ */
+@import "tailwindcss";
+
+/* ── DS tokens (color/type/space/elevation/gradients/motion/icons) ── */
+@import "../styles/ds/tokens/colors.css";
+@import "../styles/ds/tokens/typography.css";
+@import "../styles/ds/tokens/spacing.css";
+@import "../styles/ds/tokens/elevation.css";
+@import "../styles/ds/tokens/gradients.css";
+@import "../styles/ds/tokens/motion.css";
+@import "../styles/ds/tokens/icons.css";
+
+/* Web fonts BD Orange Variable (Typekit) + IBM Plex Mono (Google) are loaded
+   via <link> in app/layout.tsx — @import after Tailwind's inlined rules would
+   be dropped by the browser. */
+
+/* ── Self-hosted Postea (primary family) — served from /public/fonts ── */
+@font-face { font-family: "Postea"; src: url("/fonts/Postea-Light.otf") format("opentype"); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: "Postea"; src: url("/fonts/Postea-Regular.otf") format("opentype"); font-weight: 400 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Postea"; src: url("/fonts/Postea-RegularItalic.otf") format("opentype"); font-weight: 400 500; font-style: italic; font-display: swap; }
+@font-face { font-family: "Postea"; src: url("/fonts/Postea-Semibold.otf") format("opentype"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Postea"; src: url("/fonts/Postea-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Postea"; src: url("/fonts/Postea-Extrabold.otf") format("opentype"); font-weight: 800; font-style: normal; font-display: swap; }
+
+/* ── Font family aliases (override DS fonts.css which we don't import) ── */
+:root {
+  --font-primary:   "Postea", "postea-variable", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --font-secondary: "bd-orange-variable", "Postea", "postea-variable", "Helvetica Neue", Arial, sans-serif;
+  --font-mono:      "IBM Plex Mono", "JetBrains Mono", "Space Mono", "SFMono-Regular", Consolas, monospace;
+  --font-body:      var(--font-primary);
+  --font-heading:   var(--font-primary);
+  --font-display:   var(--font-primary);
+  --font-accent:    var(--font-secondary);
+  --font-meta:      var(--font-mono);
+}
+
+/* ════════════════════════════════════════════════════════════
+   Base
+   ════════════════════════════════════════════════════════════ */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--surface-page);
+  color: var(--text-body);
+  font-family: var(--font-primary);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+img, svg { display: block; max-width: 100%; }
+::selection { background: var(--lavender-mist); }
+
+/* Accessible focus ring */
+:focus-visible {
+  outline: 2px solid var(--change-violet);
+  outline-offset: 2px;
+}
+
+/* ── Layout helpers ── */
+.wrap {
+  width: min(1340px, calc(100% - clamp(40px, 8vw, 128px)));
+  margin-inline: auto;
+}
+
+/* ════════════════════════════════════════════════════════════
+   Buttons — DS "Editorial Flat Premium / Sharp"
+   ════════════════════════════════════════════════════════════ */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  height: 48px; padding: 0 24px;
+  font: 500 16px/1 var(--font-primary); letter-spacing: -0.02em;
+  border: 1px solid transparent; border-radius: var(--radius-control, 0);
+  cursor: pointer; white-space: nowrap;
+  transition: background var(--duration-standard) var(--ease-premium),
+              border-color var(--duration-standard) var(--ease-premium),
+              box-shadow var(--duration-standard) var(--ease-premium),
+              color var(--duration-standard) var(--ease-premium),
+              transform var(--duration-standard) var(--ease-premium);
+}
+.btn-sm { height: 42px; padding: 0 18px; font-size: 14.5px; }
+.btn-primary { background: var(--change-violet); color: #fff; }
+.btn-primary:hover { background: var(--deep-violet); transform: translateY(-1px); }
+.btn-secondary { background: #fff; color: var(--ink-graphite); border-color: rgba(46,46,51,.16); box-shadow: 0 4px 14px rgba(46,46,51,.05); }
+.btn-secondary:hover { border-color: rgba(46,46,51,.32); box-shadow: 0 10px 28px rgba(46,46,51,.09); }
+.btn-light { background: #fff; color: #1B191F; }
+.btn-light:hover { background: var(--lavender-mist); }
+.btn-dghost { background: transparent; color: #fff; border-color: rgba(255,255,255,.26); }
+.btn-dghost:hover { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.42); }
+
+/* ── Reveal-on-scroll (driven by IntersectionObserver in Reveal.tsx) ── */
+[data-reveal] {
+  opacity: 0; transform: translateY(22px);
+  transition: opacity .7s var(--ease-premium), transform .7s var(--ease-premium);
+}
+[data-reveal].is-visible { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+  [data-pulse] { animation: none !important; }
+}
+
+/* ── Ambient pulse (signal dots) ── */
+@keyframes hpulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(89,184,217,.45); }
+  50% { opacity: .5; box-shadow: 0 0 0 5px rgba(89,184,217,0); }
+}
+[data-pulse] { animation: hpulse 2.6s var(--ease-premium) infinite; }

@@ -1,0 +1,334 @@
+/* ════════════════════════════════════════════════════════════
+   Change UI — Color
+   Distribution: 70–75% light neutrals · 10–15% structural grays
+   · 8–10% brand violet (signature, not saturation) · 3–5% celestial
+   + semantic accents. The system is dominantly light.
+   ════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Neutrals ── */
+  --ink-graphite:    #2E2E33;
+  --deep-warm-gray:  #4A4A52;
+  --strategic-gray:  #667085;
+  --soft-stone-gray: #BFC3CB;
+  --mist-gray:       #D9DEE4;
+  --pearl-light:     #EEF2F6;
+  --cloud-white:     #F5F6F7;
+  --pure-white:      #F9F9F6;
+
+  /* ── Brand violet (the signature) ── */
+  /* Electric Future Violet scale — magnetic, premium, calm (never neon) */
+  --change-violet-950: #1F1148;
+  --change-violet-900: #32108F;
+  --change-violet-800: #4218C8;
+  --change-violet-700: #5524E0;
+  --change-violet-600: #6D3BFF;
+  --change-violet-500: #7A4DFF;
+  --change-violet-400: #8A6CFF;
+  --change-violet-300: #B7A8FF;
+  --change-violet-200: #D9D2FF;
+  --change-violet-100: #F1EDFF;
+
+  /* Named brand tokens (semantic aliases over the scale) */
+  --change-violet:   #6D3BFF;  /* 600 · Electric Future Violet — primary CTA, active, selected, primary nodes */
+  --deep-violet:     #5524E0;  /* 700 · hover, selected, stronger emphasis, active borders, dark highlights */
+  --pressed-violet:  #4218C8;  /* 800 · pressed / high-contrast active / dark UI accents only */
+  --soft-violet:     #8A6CFF;  /* 400 · secondary accents, charts, line-and-node, secondary badges */
+  --lavender-mist:   #D9D2FF;  /* 200 · subtle backgrounds, borders, inactive surfaces, empty states */
+  --violet-whisper:  #F1EDFF;  /* 100 · large low-intensity surfaces, hover backgrounds, atmosphere */
+  --violet-ink:      #1F1148;  /* 950 · deepest violet — text on light violet, dark base */
+  --violet-subtle:   rgba(109, 59, 255, 0.10);
+
+  /* ── Celestial / ethereal tones ── */
+  --sky-mist:          #DCEAF5;
+  --pale-horizon-blue: #CFE1F0;
+  --atmosphere-blue:   #BFD6EA;
+  --warm-haze:         #F3EEE9;
+
+  /* ── Semantic / secondary accents — "Futurist Calm" (limited, meaningful use) ── */
+  --signal-cyan:        #59B8D9;  /* Polar Cyan · signals, data, information, weak signals */
+  --human-pink:         #B86AA4;  /* Future Rose · human / cultural / behavioral / stakeholder */
+  --opportunity-orange: #C97A3A;  /* Solar Clay · opportunity, urgency, market movement */
+  --success:            #5AA67A;  /* Mineral Green · validation, accepted, completed */
+  --warning:            #C98C42;  /* Quiet Amber · pending, caution, dependency, delay */
+  --error:              #C85E55;  /* Muted Ember · errors, blockers, destructive, critical */
+
+  /* ── Dark intelligence base ── */
+  --dark-0: #0A0E15;
+  --dark-1: #121722;
+  --dark-2: #1A202C;
+  --dark-3: #212631;
+  --dark-text:        #F0F4FF;
+  --dark-text-muted:  rgba(240, 244, 255, 0.55);
+
+  /* ════════════════════════════════════════════════════════════
+     SEMANTIC ALIASES — reference these in components, not raw hex.
+     Defaults are the LIGHT experience (proposals, client rooms).
+     ════════════════════════════════════════════════════════════ */
+
+  /* Surfaces */
+  --surface-page:     var(--cloud-white);
+  --surface-card:     var(--pure-white);
+  --surface-soft:     var(--pearl-light);
+  --surface-inset:    #E8ECF0;
+  --surface-raised:   var(--pure-white);
+
+  /* Text */
+  --text-strong:   var(--ink-graphite);
+  --text-body:     var(--deep-warm-gray);
+  --text-muted:    var(--strategic-gray);
+  --text-faint:    var(--soft-stone-gray);
+  --text-on-dark:  var(--dark-text);
+  --text-accent:   var(--change-violet);
+  --text-inverse:  var(--pure-white);
+
+  /* Borders & dividers */
+  --border-subtle:  var(--mist-gray);
+  --border-strong:  var(--soft-stone-gray);
+  --border-violet:  rgba(109, 59, 255, 0.20);
+  --divider:        var(--mist-gray);
+
+  /* Brand action */
+  --action-primary:         var(--change-violet);
+  --action-primary-hover:   var(--deep-violet);
+  --action-primary-pressed: var(--pressed-violet);
+  --action-primary-subtle:  var(--violet-subtle);
+  --focus-ring:            rgba(109, 59, 255, 0.35);
+
+  /* Status — derived from Futurist Calm. fg = accessible darkened hue (light
+     mode text); bg = pure hue tint at 12%. Dark mode lightens fg below. */
+  --status-success-fg: #2F7C57;
+  --status-success-bg: rgba(90, 166, 122, 0.12);
+  --status-warning-fg: #95642A;
+  --status-warning-bg: rgba(201, 140, 66, 0.12);
+  --status-error-fg:   #B04A41;
+  --status-error-bg:   rgba(200, 94, 85, 0.12);
+  --status-info-fg:    #2C7491;
+  --status-info-bg:    rgba(89, 184, 217, 0.12);
+  --status-neutral-fg: #4B5563;
+  --status-neutral-bg: rgba(107, 114, 128, 0.10);
+
+  /* Badge / status pill — "Soft Solid": neutral text, semantic dot + tint + border.
+     Text stays graphite (light) / #F0F1F5 (dark) so status never relies on color alone. */
+  --badge-text:            var(--ink-graphite);
+  --badge-success-dot:     var(--success);
+  --badge-success-bg:      rgba(90, 166, 122, 0.12);
+  --badge-success-border:  rgba(90, 166, 122, 0.20);
+  --badge-violet-dot:      var(--change-violet);
+  --badge-violet-bg:       rgba(109, 59, 255, 0.10);
+  --badge-violet-border:   rgba(109, 59, 255, 0.20);
+  --badge-opportunity-dot:    var(--opportunity-orange);
+  --badge-opportunity-bg:     rgba(201, 122, 58, 0.12);
+  --badge-opportunity-border: rgba(201, 122, 58, 0.20);
+  --badge-signal-dot:      var(--signal-cyan);
+  --badge-signal-bg:       rgba(89, 184, 217, 0.12);
+  --badge-signal-border:   rgba(89, 184, 217, 0.20);
+  --badge-error-dot:       var(--error);
+  --badge-error-bg:        rgba(200, 94, 85, 0.12);
+  --badge-error-border:    rgba(200, 94, 85, 0.20);
+  --badge-neutral-dot:     var(--strategic-gray);
+  --badge-neutral-bg:      var(--pure-white);
+  --badge-neutral-border:  rgba(46, 46, 51, 0.14);
+
+  /* Status label (Editorial Sharp) — rectangular white container, graphite
+     outline + soft shadow; the circular dot carries the semantic color. */
+  --status-surface: var(--pure-white);
+  --status-outline: rgba(46, 46, 51, 0.16);
+  --status-shadow:  0 4px 14px rgba(46, 46, 51, 0.05);
+
+  /* Secondary / ghost button — dark-aware surfaces */
+  --btn-secondary-surface:        var(--pure-white);
+  --btn-secondary-text:           var(--ink-graphite);
+  --btn-secondary-outline:        rgba(46, 46, 51, 0.16);
+  --btn-secondary-outline-strong: rgba(46, 46, 51, 0.24);
+  --btn-secondary-shadow:         0 4px 14px rgba(46, 46, 51, 0.05);
+  --btn-secondary-shadow-hover:   0 10px 28px rgba(46, 46, 51, 0.09);
+  --btn-ghost-text:               var(--strategic-gray);
+  --btn-ghost-text-hover:         var(--ink-graphite);
+  --btn-ghost-hover-surface:      var(--cloud-white);
+  --btn-link-text:                var(--ink-graphite);
+
+  /* Feedback — Toast (Editorial Sharp): white surface, graphite outline + shadow */
+  --toast-surface:          var(--pure-white);
+  --toast-outline:          rgba(46, 46, 51, 0.16);
+  --toast-shadow:           0 10px 28px rgba(46, 46, 51, 0.09);
+  --toast-title:            var(--ink-graphite);
+  --toast-desc:             var(--strategic-gray);
+  --toast-close:            var(--soft-stone-gray);
+  --toast-close-hover:      var(--ink-graphite);
+  --toast-close-hover-bg:   var(--cloud-white);
+
+  /* Feedback — Empty state */
+  --empty-surface:            linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(245,246,247,0.98) 100%);
+  --empty-surface-structured: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(238,242,246,0.76) 100%);
+  --empty-outline:            rgba(46, 46, 51, 0.16);
+  --empty-shadow:             0 4px 14px rgba(46, 46, 51, 0.05);
+  --empty-frame-bg:           var(--pure-white);
+  --empty-frame-outline:      rgba(46, 46, 51, 0.16);
+  --empty-title:              var(--ink-graphite);
+  --empty-desc:               var(--strategic-gray);
+  --empty-helper:             var(--deep-warm-gray);
+  --empty-helper-border:      rgba(46, 46, 51, 0.08);
+  --empty-line:               rgba(46, 46, 51, 0.16);
+  --empty-node:               var(--ink-graphite);
+  --empty-node-halo:          rgba(46, 46, 51, 0.08);
+
+  /* Form fields (Editorial Sharp) — zero-radius, graphite outline, violet focus */
+  --field-surface:          var(--pure-white);
+  --field-surface-disabled: var(--cloud-white);
+  --field-outline:          rgba(46, 46, 51, 0.16);
+  --field-shadow:           0 4px 14px rgba(46, 46, 51, 0.05);
+  --field-text:             var(--ink-graphite);
+  --field-label:            var(--deep-warm-gray);
+  --field-placeholder:      var(--strategic-gray);
+  --field-icon:             var(--strategic-gray);
+  /* Switch — sharp rectangular track */
+  --switch-off:             var(--soft-stone-gray);
+  --switch-on:              var(--change-violet);
+  --switch-knob:            var(--pure-white);
+
+  /* Navigation — Tabs (Editorial Index / Line-and-Node) */
+  --tab-baseline:      rgba(46, 46, 51, 0.12);
+  --tab-text:          var(--strategic-gray);
+  --tab-text-hover:    var(--ink-graphite);
+  --tab-text-active:   var(--change-violet);
+  --tab-underline:     var(--change-violet);
+  --tab-disabled:      var(--soft-stone-gray);
+  --tab-num:           var(--strategic-gray);
+  --tab-hover-surface: linear-gradient(180deg, rgba(245,246,247,0.64) 0%, rgba(255,255,255,0) 100%);
+  --tab-node-inactive: var(--soft-stone-gray);
+  --tab-node-active:   var(--change-violet);
+  --tab-node-halo:     rgba(46, 46, 51, 0.08);
+
+  /* Strategic — quiet track for progress / confidence bars */
+  --track-graphite:    rgba(46, 46, 51, 0.08);
+}
+
+/* ════════════════════════════════════════════════════════════
+   DARK EXPERIENCE — strategic intelligence, command centers,
+   signal maps, risk dashboards, analytical workspaces.
+   Apply .change-dark (or [data-theme="dark"]) to a wrapper.
+   ════════════════════════════════════════════════════════════ */
+.change-dark,
+[data-theme="dark"] {
+  --surface-page:    var(--dark-0);
+  --surface-card:    #161B2E;
+  --surface-soft:    var(--dark-2);
+  --surface-inset:   var(--dark-1);
+  --surface-raised:  #1D2340;
+
+  --text-strong:  var(--dark-text);
+  --text-body:    rgba(240, 244, 255, 0.72);
+  --text-muted:   rgba(240, 244, 255, 0.45);
+  --text-faint:   rgba(240, 244, 255, 0.30);
+  --text-accent:  #B7A8FF;
+
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.15);
+  --border-violet: rgba(138, 108, 255, 0.30);
+  --divider:       rgba(255, 255, 255, 0.10);
+
+  --action-primary:        var(--soft-violet);
+  --action-primary-hover:  #B7A8FF;
+  --action-primary-subtle: rgba(138, 108, 255, 0.15);
+  --focus-ring:            rgba(138, 108, 255, 0.45);
+
+  /* Status — Futurist Calm lightened for dark intelligence surfaces */
+  --status-success-fg: #7FC79E;
+  --status-success-bg: rgba(90, 166, 122, 0.18);
+  --status-warning-fg: #E1B271;
+  --status-warning-bg: rgba(201, 140, 66, 0.18);
+  --status-error-fg:   #E18A82;
+  --status-error-bg:   rgba(200, 94, 85, 0.18);
+  --status-info-fg:    #82D0E8;
+  --status-info-bg:    rgba(89, 184, 217, 0.18);
+  --status-neutral-fg: rgba(240, 244, 255, 0.62);
+  --status-neutral-bg: rgba(255, 255, 255, 0.08);
+
+  /* Badge — dark intelligence treatments (text reads #F0F1F5, stronger borders) */
+  --badge-text:            #F0F1F5;
+  --badge-success-bg:      rgba(90, 166, 122, 0.14);
+  --badge-success-border:  rgba(90, 166, 122, 0.34);
+  --badge-violet-bg:       rgba(109, 59, 255, 0.18);
+  --badge-violet-border:   rgba(217, 210, 255, 0.34);
+  --badge-opportunity-bg:     rgba(201, 122, 58, 0.16);
+  --badge-opportunity-border: rgba(201, 122, 58, 0.36);
+  --badge-signal-bg:       rgba(89, 184, 217, 0.14);
+  --badge-signal-border:   rgba(89, 184, 217, 0.34);
+  --badge-error-bg:        rgba(200, 94, 85, 0.16);
+  --badge-error-border:    rgba(200, 94, 85, 0.36);
+  --badge-neutral-bg:      rgba(255, 255, 255, 0.055);
+  --badge-neutral-border:  rgba(255, 255, 255, 0.14);
+
+  /* Status label — dark intelligence */
+  --status-surface: rgba(255, 255, 255, 0.045);
+  --status-outline: rgba(255, 255, 255, 0.10);
+  --status-shadow:  none;
+
+  /* Secondary / ghost button — dark intelligence */
+  --btn-secondary-surface:        rgba(255, 255, 255, 0.06);
+  --btn-secondary-text:           #F0F1F5;
+  --btn-secondary-outline:        rgba(255, 255, 255, 0.18);
+  --btn-secondary-outline-strong: rgba(217, 210, 255, 0.36);
+  --btn-secondary-shadow:         none;
+  --btn-secondary-shadow-hover:   none;
+  --btn-ghost-text:               rgba(240, 244, 255, 0.62);
+  --btn-ghost-text-hover:         #F0F1F5;
+  --btn-ghost-hover-surface:      rgba(255, 255, 255, 0.06);
+  --btn-link-text:                #F0F1F5;
+
+  /* Feedback — Toast (dark intelligence) */
+  --toast-surface:          rgba(255, 255, 255, 0.045);
+  --toast-outline:          rgba(255, 255, 255, 0.10);
+  --toast-shadow:           0 18px 48px rgba(10, 14, 21, 0.22);
+  --toast-title:            #F0F1F5;
+  --toast-desc:             rgba(240, 241, 245, 0.70);
+  --toast-close:            rgba(240, 241, 245, 0.50);
+  --toast-close-hover:      #FFFFFF;
+  --toast-close-hover-bg:   rgba(255, 255, 255, 0.08);
+
+  /* Feedback — Empty state (dark intelligence) */
+  --empty-surface:            radial-gradient(circle at 82% 12%, rgba(109,59,255,0.14), rgba(10,14,21,0) 34%), linear-gradient(180deg, #0A0E15 0%, #121722 100%);
+  --empty-surface-structured: radial-gradient(circle at 82% 12%, rgba(109,59,255,0.14), rgba(10,14,21,0) 34%), linear-gradient(180deg, #0A0E15 0%, #121722 100%);
+  --empty-outline:            rgba(255, 255, 255, 0.10);
+  --empty-shadow:             0 24px 72px rgba(10, 14, 21, 0.22);
+  --empty-frame-bg:           rgba(255, 255, 255, 0.045);
+  --empty-frame-outline:      rgba(255, 255, 255, 0.12);
+  --empty-title:              #F0F1F5;
+  --empty-desc:               rgba(240, 241, 245, 0.70);
+  --empty-helper:             rgba(240, 241, 245, 0.62);
+  --empty-helper-border:      rgba(255, 255, 255, 0.10);
+  --empty-line:               rgba(255, 255, 255, 0.14);
+  --empty-node:               rgba(240, 241, 245, 0.78);
+  --empty-node-halo:          rgba(255, 255, 255, 0.06);
+
+  /* Form fields — dark intelligence */
+  --field-surface:          rgba(255, 255, 255, 0.045);
+  --field-surface-disabled: rgba(255, 255, 255, 0.02);
+  --field-outline:          rgba(255, 255, 255, 0.18);
+  --field-shadow:           none;
+  --field-text:             #F0F1F5;
+  --field-label:            rgba(240, 244, 255, 0.72);
+  --field-placeholder:      rgba(240, 244, 255, 0.50);
+  --field-icon:             rgba(240, 244, 255, 0.55);
+  /* Switch — dark */
+  --switch-off:             rgba(255, 255, 255, 0.22);
+  --switch-on:              var(--change-violet);
+  --switch-knob:            #F0F1F5;
+
+  /* Navigation — Tabs (dark intelligence) */
+  --tab-baseline:      rgba(255, 255, 255, 0.12);
+  --tab-text:          rgba(240, 241, 245, 0.64);
+  --tab-text-hover:    #FFFFFF;
+  --tab-text-active:   var(--lavender-mist);
+  --tab-underline:     var(--change-violet);
+  --tab-disabled:      rgba(240, 241, 245, 0.32);
+  --tab-num:           rgba(240, 241, 245, 0.52);
+  --tab-hover-surface: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0) 100%);
+  --tab-node-inactive: rgba(240, 241, 245, 0.42);
+  --tab-node-active:   var(--change-violet);
+  --tab-node-halo:     rgba(255, 255, 255, 0.06);
+
+  /* Strategic — quiet track (dark) */
+  --track-graphite:    rgba(255, 255, 255, 0.10);
+}

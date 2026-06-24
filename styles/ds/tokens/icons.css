@@ -1,0 +1,54 @@
+/* ════════════════════════════════════════════════════════════
+   Change UI — Iconography tokens
+   Two-layer system: Phosphor (functional) + proprietary Change
+   strategic glyphs. NO Lucide. Stroke-based, currentColor, calm.
+   ════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Icon color ── */
+  --icon-color-default: #4A4A52;   /* default monoline */
+  --icon-color-muted:   #667085;   /* secondary / inactive */
+  --icon-color-active:  #6D3BFF;   /* Electric Future Violet — primary strategic accent */
+  --icon-color-signal:  #59B8D9;   /* Polar Cyan — signal node accent */
+  --icon-color-success: #5AA67A;   /* Mineral Green */
+  --icon-color-warning: #C98C42;   /* Quiet Amber */
+  --icon-color-error:   #C85E55;   /* Muted Ember */
+
+  /* ── Icon size ── */
+  --icon-size-xs: 16px;
+  --icon-size-sm: 20px;
+  --icon-size-md: 24px;
+  --icon-size-lg: 32px;
+  --icon-size-xl: 44px;
+  --icon-size-glyph-display: 56px;  /* 56–72 in hero / card modules */
+
+  /* ── Stroke (visual weight; round caps + joins) ── */
+  --icon-stroke:          1.5;   /* base */
+  --icon-stroke-delicate: 1.25;  /* fine glyphs */
+  --icon-stroke-emphasis: 1.75;  /* emphasis line — max */
+
+  /* ── Node sizing (strategic glyphs) ── */
+  --icon-node-sm: 3px;
+  --icon-node-md: 4px;
+  --icon-node-lg: 6px;
+
+  /* ── Treatment B · Soft Icon Tile ── */
+  --icon-tile-bg:            rgba(255, 255, 255, 0.68);
+  --icon-tile-border:        rgba(46, 46, 51, 0.10);
+  --icon-tile-radius:        16px;   /* 14–18 */
+  --icon-tile-bg-hover:      rgba(245, 246, 247, 0.90);
+  --icon-tile-bg-active:     rgba(109, 59, 255, 0.08);
+  --icon-tile-border-active: rgba(109, 59, 255, 0.22);
+
+  /* ── Treatment C · Strategic Node Tile ── */
+  --icon-node-tile-border:   rgba(109, 59, 255, 0.18);
+
+  /* ── Motion (calm, precise) ── */
+  --icon-ease:            cubic-bezier(0.22, 1, 0.36, 1); /* @kind other */
+  --icon-dur-hover:       200ms;   /* @kind other */
+  --icon-dur-active:      280ms;   /* @kind other */
+  --icon-dur-line-draw:   900ms;   /* @kind other */
+  --icon-dur-node-pulse:  1200ms;  /* @kind other */
+  --icon-dur-pulse-ambient: 5000ms; /* @kind other */
+  --icon-dur-success:     600ms;   /* @kind other */
+}
