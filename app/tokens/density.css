@@ -1,0 +1,33 @@
+/* Change UI — Density (UPGRADE 2.4 · additive) */
+:root {
+  --density-card-pad:   24px;
+  --density-card-gap:   16px;
+  --density-row-pad:    16px 18px;
+  --density-stack-gap:  16px;
+  --density-title-size: 20px;
+  --density-meta-size:  11px;
+}
+.density-editorial {
+  --density-card-pad:   24px;
+  --density-card-gap:   16px;
+  --density-row-pad:    16px 18px;
+  --density-stack-gap:  16px;
+  --density-title-size: 20px;
+  --density-meta-size:  11px;
+}
+.density-standard {
+  --density-card-pad:   16px;
+  --density-card-gap:   12px;
+  --density-row-pad:    12px 14px;
+  --density-stack-gap:  12px;
+  --density-title-size: 18px;
+  --density-meta-size:  11px;
+}
+.density-compact {
+  --density-card-pad:   14px;
+  --density-card-gap:   8px;
+  --density-row-pad:    10px 12px;
+  --density-stack-gap:  8px;
+  --density-title-size: 15px;
+  --density-meta-size:  10px;
+}
