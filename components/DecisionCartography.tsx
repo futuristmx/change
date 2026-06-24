@@ -12,10 +12,10 @@ interface Node {
 
 const NODES: Node[] = [
   { title: "Señal", micro: "qué cambia", copy: "Lo que empieza a moverse afuera: mercado, usuario, tecnología, regulación o competencia.", color: "var(--signal-cyan)", halo: "rgba(89,184,217,.18)" },
-  { title: "Escenario", micro: "qué podría pasar", copy: "La señal se vuelve posibilidad estratégica: qué puede pasar, con qué ritmo y bajo qué condiciones.", color: "var(--change-violet)", halo: "rgba(109,59,255,.12)" },
-  { title: "Criterio", micro: "qué importa", copy: "El equipo explicita qué debe pesar más: margen, velocidad, control, marca, aprendizaje o resiliencia.", color: "var(--change-violet)", halo: "rgba(109,59,255,.12)" },
-  { title: "Decisión", micro: "qué se elige", copy: "La conversación deja de ser opinión dispersa y se vuelve una elección con trade-offs visibles.", color: "var(--change-violet)", halo: "rgba(109,59,255,.12)" },
-  { title: "Proyecto", micro: "qué se mueve", copy: "La decisión baja a iniciativas, responsables, ritmo e hitos concretos.", color: "var(--change-violet)", halo: "rgba(109,59,255,.12)" },
+  { title: "Escenario", micro: "qué podría pasar", copy: "La señal se vuelve posibilidad estratégica: qué puede pasar, con qué ritmo y bajo qué condiciones.", color: "var(--change-violet)", halo: "color-mix(in srgb, var(--change-violet) 12%, transparent)" },
+  { title: "Criterio", micro: "qué importa", copy: "El equipo explicita qué debe pesar más: margen, velocidad, control, marca, aprendizaje o resiliencia.", color: "var(--change-violet)", halo: "color-mix(in srgb, var(--change-violet) 12%, transparent)" },
+  { title: "Decisión", micro: "qué se elige", copy: "La conversación deja de ser opinión dispersa y se vuelve una elección con trade-offs visibles.", color: "var(--change-violet)", halo: "color-mix(in srgb, var(--change-violet) 12%, transparent)" },
+  { title: "Proyecto", micro: "qué se mueve", copy: "La decisión baja a iniciativas, responsables, ritmo e hitos concretos.", color: "var(--change-violet)", halo: "color-mix(in srgb, var(--change-violet) 12%, transparent)" },
   { title: "Sistema", micro: "qué sostiene", copy: "El criterio queda vivo: trazable, revisable y gobernable en el tiempo.", color: "var(--ink-graphite)", halo: "rgba(46,46,51,.1)" },
 ];
 
@@ -58,14 +58,14 @@ export default function DecisionCartography() {
                   transition: "transform .3s var(--ease-premium), box-shadow .3s var(--ease-premium)",
                 }}
               />
-              <strong style={{ display: "block", font: "500 13px var(--font-primary)", letterSpacing: "-.01em", color: i === active ? "var(--change-violet)" : "#1B191F", transition: "color .3s" }}>{n.title}</strong>
+              <strong style={{ display: "block", font: "500 13px var(--font-primary)", letterSpacing: "-.01em", color: i === active ? "var(--change-violet)" : "var(--ink-strong)", transition: "color .3s" }}>{n.title}</strong>
               <span style={{ display: "block", marginTop: 5, font: "600 11px var(--font-mono)", letterSpacing: ".08em", textTransform: "uppercase", color: "var(--text-faint)" }}>{n.micro}</span>
             </button>
           ))}
         </div>
 
         <div style={{ margin: "30px 0 0", padding: 24, border: "1px solid var(--border-subtle)", background: "#fff" }}>
-          <h3 style={{ margin: 0, font: "600 19px var(--font-primary)", letterSpacing: "-.02em", color: "#1B191F" }}>{node.title}</h3>
+          <h3 style={{ margin: 0, font: "600 19px var(--font-primary)", letterSpacing: "-.02em", color: "var(--ink-strong)" }}>{node.title}</h3>
           <p style={{ margin: "9px 0 0", font: "400 14.5px/1.55 var(--font-primary)", color: "var(--text-muted)" }}>{node.copy}</p>
         </div>
       </div>
