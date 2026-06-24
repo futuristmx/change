@@ -14,7 +14,7 @@ function SectionHead({ kicker, title, lead }: { kicker: string; title: string; l
       <div>
         <Reveal style={{ display: "flex", alignItems: "center", gap: 11, marginBottom: 20 }}>
           <span style={{ width: 7, height: 7, background: "var(--change-violet)" }} />
-          <span style={{ font: "600 10px var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)" }}>{kicker}</span>
+          <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)" }}>{kicker}</span>
         </Reveal>
         <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(34px,4.6vw,66px)/.98 var(--font-primary)", letterSpacing: "-.05em", color: "#1B191F", textWrap: "balance" }}>{title}</Reveal>
       </div>
@@ -35,7 +35,7 @@ export default function Home() {
           <div style={{ position: "relative", width: WRAP, margin: "0 auto", padding: "clamp(84px,12vw,150px) 0 clamp(64px,8vw,100px)" }}>
             <Reveal style={{ display: "inline-flex", alignItems: "center", gap: 11, marginBottom: 34, padding: "7px 14px 7px 11px", border: "1px solid var(--border-subtle)", background: "rgba(255,255,255,.55)" }}>
               <span data-pulse style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--signal-cyan)" }} />
-              <span style={{ font: "600 10.5px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-muted)" }}>Convertimos incertidumbre en criterio</span>
+              <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-muted)" }}>Convertimos incertidumbre en criterio</span>
             </Reveal>
 
             <Reveal delay={60} as="h1" style={{ margin: 0, maxWidth: "15ch", font: "600 clamp(48px,8vw,118px)/.9 var(--font-primary)", letterSpacing: "-.055em", color: "#1B191F" }}>
@@ -71,7 +71,7 @@ export default function Home() {
                 <Reveal key={c.h} delay={i * 120} as="article" className="ch-card" style={{ background: "rgba(255,255,255,.82)", border: "1px solid var(--border-subtle)", padding: 36, minHeight: 248, display: "flex", flexDirection: "column" }}>
                   <h3 style={{ margin: 0, font: "600 clamp(24px,2.1vw,32px)/1 var(--font-primary)", letterSpacing: "-.04em", color: "#1B191F" }}>{c.h}</h3>
                   <p style={{ margin: "18px 0 0", font: "400 15.5px/1.55 var(--font-primary)", color: "var(--text-muted)" }}>{c.p}</p>
-                  <span style={{ marginTop: "auto", paddingTop: 24, font: "600 10px var(--font-mono)", letterSpacing: ".13em", textTransform: "uppercase", color: "var(--opportunity-orange)" }}>{c.r}</span>
+                  <span style={{ marginTop: "auto", paddingTop: 24, font: "600 11px var(--font-mono)", letterSpacing: ".13em", textTransform: "uppercase", color: "var(--opportunity-orange)" }}>{c.r}</span>
                 </Reveal>
               ))}
             </div>
@@ -91,7 +91,7 @@ export default function Home() {
               ].map((s, i) => (
                 <Reveal key={s.n} delay={i * 100} className="ch-card" style={{ background: s.bg, border: "1px solid var(--border-subtle)", padding: "30px 26px 34px" }}>
                   <div style={{ height: 3, background: s.track, marginBottom: 26 }}><div style={{ width: s.w, height: "100%", background: s.bar }} /></div>
-                  <span style={{ font: "600 10px var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: s.emph ? "var(--change-violet)" : "var(--text-faint)" }}>{s.n}</span>
+                  <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: s.emph ? "var(--change-violet)" : "var(--text-faint)" }}>{s.n}</span>
                   <h3 style={{ margin: "13px 0 8px", font: "600 22px var(--font-primary)", letterSpacing: "-.03em", color: "#1B191F" }}>{s.h}</h3>
                   <p style={{ margin: 0, font: "400 14px/1.5 var(--font-primary)", color: s.emph ? "var(--deep-warm-gray)" : "var(--text-muted)" }}>{s.p}</p>
                 </Reveal>
@@ -154,7 +154,7 @@ export default function Home() {
               <div>
                 <Reveal style={{ display: "flex", alignItems: "center", gap: 11, marginBottom: 20 }}>
                   <span data-pulse style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--signal-cyan)" }} />
-                  <span style={{ font: "600 10px var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "rgba(255,255,255,.55)" }}>Mission Control</span>
+                  <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "rgba(255,255,255,.55)" }}>Mission Control</span>
                 </Reveal>
                 <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(34px,4.4vw,64px)/.98 var(--font-primary)", letterSpacing: "-.05em", color: "#fff", textWrap: "balance" }}>El criterio no debería morir en una junta.</Reveal>
                 <Reveal delay={120} as="p" style={{ margin: "24px 0 0", maxWidth: 480, font: "400 clamp(18px,1.5vw,22px)/1.45 var(--font-primary)", letterSpacing: "-.02em", color: "rgba(255,255,255,.7)" }}>Conecta señales, decisiones, proyectos y reportes vivos para que el rumbo se revise, ajuste y sostenga.</Reveal>
@@ -180,7 +180,7 @@ export default function Home() {
                 { k: "Riesgo", h: "¿Qué se rompe primero bajo presión?", p: "Escenarios, vulnerabilidades y respuesta anticipatoria." },
               ].map((d, i) => (
                 <Reveal key={d.k} delay={i * 80} as="article" className="ch-card" style={{ background: "rgba(255,255,255,.82)", border: "1px solid var(--border-subtle)", padding: 36 }}>
-                  <span style={{ font: "600 10px var(--font-mono)", letterSpacing: ".13em", textTransform: "uppercase", color: "var(--strategic-gray)" }}>{d.k}</span>
+                  <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".13em", textTransform: "uppercase", color: "var(--strategic-gray)" }}>{d.k}</span>
                   <h3 style={{ margin: "14px 0 8px", font: "600 clamp(22px,2vw,30px)/1.02 var(--font-primary)", letterSpacing: "-.03em", color: "#1B191F" }}>{d.h}</h3>
                   <p style={{ margin: 0, font: "400 15px/1.55 var(--font-primary)", color: "var(--text-muted)" }}>{d.p}</p>
                 </Reveal>
@@ -196,7 +196,7 @@ export default function Home() {
               <div>
                 <Reveal style={{ display: "flex", alignItems: "center", gap: 11, marginBottom: 20 }}>
                   <span style={{ width: 7, height: 7, background: "var(--change-violet)" }} />
-                  <span style={{ font: "600 10px var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)" }}>Equipo</span>
+                  <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)" }}>Equipo</span>
                 </Reveal>
                 <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(32px,4.2vw,60px)/.98 var(--font-primary)", letterSpacing: "-.05em", color: "#1B191F", textWrap: "balance" }}>Change no es una voz individual. Es una mesa de criterio.</Reveal>
                 <Reveal delay={120} as="p" style={{ margin: "24px 0 0", maxWidth: 500, font: "400 clamp(17px,1.4vw,20px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>Estrategia, foresight, diseño, tecnología, operación y narrativa, conectadas según el reto.</Reveal>
