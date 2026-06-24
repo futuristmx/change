@@ -30,31 +30,63 @@ export default function Home() {
 
       <main id="main-content" style={{ flex: 1 }}>
 
-        {/* ═══ HERO ═══ */}
-        <section style={{ position: "relative", overflow: "hidden", background: "radial-gradient(110% 80% at 84% -10%,rgba(138,108,255,.14) 0%,rgba(89,184,217,.06) 32%,rgba(255,255,255,0) 58%),linear-gradient(180deg,#FFFFFF 0%,#F8F7F4 70%,#F2EFEA 100%)" }}>
-          <div style={{ position: "relative", width: WRAP, margin: "0 auto", padding: "clamp(84px,12vw,150px) 0 clamp(64px,8vw,100px)" }}>
+        {/* ═══ HERO (1 columna, centrado) ═══ */}
+        <section style={{ position: "relative", overflow: "hidden", background: "radial-gradient(120% 90% at 50% -10%,rgba(138,108,255,.14) 0%,rgba(89,184,217,.06) 34%,rgba(255,255,255,0) 60%),linear-gradient(180deg,#FFFFFF 0%,#F8F7F4 70%,#F2EFEA 100%)" }}>
+          <div style={{ position: "relative", width: WRAP, margin: "0 auto", padding: "clamp(88px,12vw,156px) 0 clamp(72px,9vw,116px)", textAlign: "center" }}>
             <Reveal style={{ display: "inline-flex", alignItems: "center", gap: 11, marginBottom: 34, padding: "7px 14px 7px 11px", border: "1px solid var(--border-subtle)", background: "rgba(255,255,255,.55)" }}>
               <span data-pulse style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--signal-cyan)" }} />
               <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-muted)" }}>Convertimos incertidumbre en criterio</span>
             </Reveal>
 
-            <Reveal delay={60} as="h1" style={{ margin: 0, maxWidth: "15ch", font: "600 clamp(48px,8vw,118px)/.9 var(--font-primary)", letterSpacing: "-.055em", color: "var(--ink-graphite)" }}>
+            <Reveal delay={60} as="h1" style={{ margin: "0 auto", maxWidth: "16ch", font: "600 clamp(48px,8vw,118px)/.9 var(--font-primary)", letterSpacing: "-.055em", color: "var(--ink-graphite)" }}>
               La claridad no aparece.<br />
               <span style={{ background: "var(--gradient-type-electric)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>Se diseña.</span>
             </Reveal>
 
-            <div className="ch-herorow" style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(400px,520px)", gap: "clamp(48px,7vw,96px)", alignItems: "end", marginTop: "clamp(44px,6vw,72px)" }}>
-              <div>
-                <Reveal delay={120} as="p" style={{ margin: 0, maxWidth: 520, font: "400 clamp(19px,1.7vw,24px)/1.45 var(--font-primary)", letterSpacing: "-.02em", color: "var(--ink-graphite)" }}>
-                  El rumbo de una organización no debería depender de la cabeza de una sola persona. Change convierte el criterio directivo en un sistema claro, compartido y trazable.
-                </Reveal>
-                <Reveal delay={200} style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 36 }}>
-                  <Link href="/contacto" className="btn btn-primary">Trabajar una decisión</Link>
-                  <Link href="#metodo" className="btn btn-secondary">Ver el método</Link>
-                </Reveal>
+            <Reveal delay={120} as="p" style={{ margin: "clamp(28px,4vw,40px) auto 0", maxWidth: 640, font: "400 clamp(19px,1.7vw,24px)/1.45 var(--font-primary)", letterSpacing: "-.02em", color: "var(--ink-graphite)" }}>
+              El rumbo de una organización no debería depender de la cabeza de una sola persona. Change convierte el criterio directivo en un sistema claro, compartido y trazable.
+            </Reveal>
+            <Reveal delay={200} style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12, marginTop: 36 }}>
+              <Link href="/contacto" className="btn btn-primary">Trabajar una decisión</Link>
+              <Link href="#metodo" className="btn btn-secondary">Ver el método</Link>
+            </Reveal>
+
+            {/* cadena estática — apertura hacia la sección Cartografía (oculta en mobile) */}
+            <Reveal delay={280}>
+              <div aria-hidden="true" className="ch-herochain" style={{ display: "flex", alignItems: "center", justifyContent: "center", flexWrap: "wrap", gap: 10, marginTop: "clamp(44px,6vw,68px)" }}>
+                {[
+                  { t: "Señal", c: "var(--signal-cyan)" },
+                  { t: "Escenario", c: "var(--change-violet)" },
+                  { t: "Criterio", c: "var(--change-violet)" },
+                  { t: "Decisión", c: "var(--change-violet)" },
+                  { t: "Proyecto", c: "var(--change-violet)" },
+                  { t: "Sistema", c: "var(--ink-graphite)" },
+                ].map((n, i, arr) => (
+                  <span key={n.t} style={{ display: "inline-flex", alignItems: "center", gap: 10 }}>
+                    <span style={{ display: "inline-flex", alignItems: "center", gap: 7 }}>
+                      <span style={{ width: 8, height: 8, borderRadius: 999, background: n.c }} />
+                      <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".08em", textTransform: "uppercase", color: "var(--text-muted)" }}>{n.t}</span>
+                    </span>
+                    {i < arr.length - 1 && <span style={{ color: "var(--border-subtle)" }}>→</span>}
+                  </span>
+                ))}
               </div>
-              <Reveal delay={240}><DecisionCartography /></Reveal>
+            </Reveal>
+          </div>
+        </section>
+
+        {/* ═══ CARTOGRAFÍA DE DECISIÓN (sección firma) ═══ */}
+        <section id="cartografia" style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-sky-pearl)" }}>
+          <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(92px,11vw,168px) 0" }}>
+            <div style={{ maxWidth: 760, marginBottom: "clamp(40px,5vw,60px)" }}>
+              <Reveal style={{ display: "flex", alignItems: "center", gap: 11, marginBottom: 20 }}>
+                <span style={{ width: 7, height: 7, background: "var(--change-violet)" }} />
+                <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)" }}>La cadena del criterio</span>
+              </Reveal>
+              <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(34px,4.6vw,66px)/.98 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>De la señal al sistema. Sin perder el hilo.</Reveal>
+              <Reveal delay={120} as="p" style={{ margin: "20px 0 0", maxWidth: "54ch", font: "400 clamp(17px,1.4vw,20px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>La cadena que convierte incertidumbre en criterio gobernable — paso a paso, con memoria.</Reveal>
             </div>
+            <Reveal delay={160}><DecisionCartography /></Reveal>
           </div>
         </section>
 
@@ -260,10 +292,13 @@ export default function Home() {
       {/* responsive collapse for home grids */}
       <style>{`
         @media (max-width: 980px) {
-          .ch-herorow, .ch-sechead, .ch-grid3, .ch-ladder, .ch-missionshell, .ch-declist, .ch-teamstrip { grid-template-columns: 1fr !important; }
+          .ch-sechead, .ch-grid3, .ch-ladder, .ch-missionshell, .ch-declist, .ch-teamstrip { grid-template-columns: 1fr !important; }
           .ch-staterow { grid-template-columns: 1fr 1fr !important; }
           .ch-mrow { grid-template-columns: 92px 1fr !important; }
           .ch-mrow > div:last-child { display: none !important; }
+        }
+        @media (max-width: 768px) {
+          .ch-herochain { display: none !important; }
         }
         @media (max-width: 620px) {
           .ch-staterow { grid-template-columns: 1fr !important; }
