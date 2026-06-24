@@ -16,7 +16,7 @@ function SectionHead({ kicker, title, lead }: { kicker: string; title: string; l
           <span style={{ width: 7, height: 7, background: "var(--change-violet)" }} />
           <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)" }}>{kicker}</span>
         </Reveal>
-        <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(34px,4.6vw,66px)/.98 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-strong)", textWrap: "balance" }}>{title}</Reveal>
+        <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(34px,4.6vw,66px)/.98 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>{title}</Reveal>
       </div>
       <Reveal delay={120} as="p" style={{ margin: 0, font: "400 clamp(17px,1.4vw,20px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>{lead}</Reveal>
     </div>
@@ -38,7 +38,7 @@ export default function Home() {
               <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-muted)" }}>Convertimos incertidumbre en criterio</span>
             </Reveal>
 
-            <Reveal delay={60} as="h1" style={{ margin: 0, maxWidth: "15ch", font: "600 clamp(48px,8vw,118px)/.9 var(--font-primary)", letterSpacing: "-.055em", color: "var(--ink-strong)" }}>
+            <Reveal delay={60} as="h1" style={{ margin: 0, maxWidth: "15ch", font: "600 clamp(48px,8vw,118px)/.9 var(--font-primary)", letterSpacing: "-.055em", color: "var(--ink-graphite)" }}>
               La claridad no aparece.<br />
               <span style={{ background: "var(--gradient-type-electric)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>Se diseña.</span>
             </Reveal>
@@ -69,7 +69,7 @@ export default function Home() {
                 { h: "La operación simula avance.", p: "La agenda se llena de movimiento, pero no necesariamente de dirección.", r: "Riesgo · rumbo diluido" },
               ].map((c, i) => (
                 <Reveal key={c.h} delay={i * 120} as="article" className="ch-card" style={{ background: "rgba(255,255,255,.82)", border: "1px solid var(--border-subtle)", padding: 36, minHeight: 248, display: "flex", flexDirection: "column" }}>
-                  <h3 style={{ margin: 0, font: "600 clamp(24px,2.1vw,32px)/1 var(--font-primary)", letterSpacing: "-.04em", color: "var(--ink-strong)" }}>{c.h}</h3>
+                  <h3 style={{ margin: 0, font: "600 clamp(24px,2.1vw,32px)/1 var(--font-primary)", letterSpacing: "-.04em", color: "var(--ink-graphite)" }}>{c.h}</h3>
                   <p style={{ margin: "18px 0 0", font: "400 15.5px/1.55 var(--font-primary)", color: "var(--text-muted)" }}>{c.p}</p>
                   <span style={{ marginTop: "auto", paddingTop: 24, font: "600 11px var(--font-mono)", letterSpacing: ".13em", textTransform: "uppercase", color: "var(--opportunity-orange)" }}>{c.r}</span>
                 </Reveal>
@@ -92,7 +92,7 @@ export default function Home() {
                 <Reveal key={s.n} delay={i * 100} className="ch-card" style={{ background: s.bg, border: "1px solid var(--border-subtle)", padding: "30px 26px 34px" }}>
                   <div style={{ height: 3, background: s.track, marginBottom: 26 }}><div style={{ width: s.w, height: "100%", background: s.bar }} /></div>
                   <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: s.emph ? "var(--change-violet)" : "var(--text-faint)" }}>{s.n}</span>
-                  <h3 style={{ margin: "13px 0 8px", font: "600 22px var(--font-primary)", letterSpacing: "-.03em", color: "var(--ink-strong)" }}>{s.h}</h3>
+                  <h3 style={{ margin: "13px 0 8px", font: "600 22px var(--font-primary)", letterSpacing: "-.03em", color: "var(--ink-graphite)" }}>{s.h}</h3>
                   <p style={{ margin: 0, font: "400 14px/1.5 var(--font-primary)", color: s.emph ? "var(--deep-warm-gray)" : "var(--text-muted)" }}>{s.p}</p>
                 </Reveal>
               ))}
@@ -119,7 +119,7 @@ export default function Home() {
                     <span style={{ position: "relative", zIndex: 1, width: 9, height: 9, borderRadius: "50%", background: i === arr.length - 1 ? "var(--change-violet)" : "var(--soft-violet)", boxShadow: "0 0 0 4px #fff" }} />
                     <span style={{ font: "300 clamp(28px,2.6vw,38px) var(--font-secondary)", color: "var(--ink-graphite)" }}>{m.n}</span>
                   </div>
-                  <div style={{ display: "flex", alignItems: "center" }}><h3 style={{ margin: 0, font: "600 20px var(--font-primary)", letterSpacing: "-.02em", color: "var(--ink-strong)" }}>{m.h}</h3></div>
+                  <div style={{ display: "flex", alignItems: "center" }}><h3 style={{ margin: 0, font: "600 20px var(--font-primary)", letterSpacing: "-.02em", color: "var(--ink-graphite)" }}>{m.h}</h3></div>
                   <div style={{ display: "flex", alignItems: "center" }}><p style={{ margin: 0, font: "400 15px var(--font-primary)", color: "var(--text-muted)" }}>{m.p}</p></div>
                 </div>
               ))}
@@ -139,7 +139,7 @@ export default function Home() {
               ].map((r, i) => (
                 <Reveal key={r.n} delay={i * 120} as="article" className="ch-card" style={{ border: "1px solid var(--border-subtle)", background: "rgba(255,255,255,.8)", padding: "36px 32px" }}>
                   <div style={{ font: "300 clamp(40px,4vw,56px)/1 var(--font-secondary)", color: r.c }}>{r.n}</div>
-                  <h3 style={{ margin: "18px 0 10px", font: "600 23px var(--font-primary)", letterSpacing: "-.03em", color: "var(--ink-strong)" }}>{r.h}</h3>
+                  <h3 style={{ margin: "18px 0 10px", font: "600 23px var(--font-primary)", letterSpacing: "-.03em", color: "var(--ink-graphite)" }}>{r.h}</h3>
                   <p style={{ margin: 0, font: "400 15px/1.6 var(--font-primary)", color: "var(--text-muted)" }}>{r.p}</p>
                 </Reveal>
               ))}
@@ -148,7 +148,7 @@ export default function Home() {
         </section>
 
         {/* ═══ MISSION CONTROL (dark) ═══ */}
-        <section className="change-dark" style={{ position: "relative", overflow: "hidden", background: "radial-gradient(circle at 82% 0%,color-mix(in srgb, var(--change-violet) 22%, transparent),transparent 38%),linear-gradient(180deg,var(--surface-dark) 0%,var(--surface-dark-2) 100%)" }}>
+        <section className="change-dark" style={{ position: "relative", overflow: "hidden", background: "radial-gradient(circle at 82% 0%,color-mix(in srgb, var(--change-violet) 22%, transparent),transparent 38%),linear-gradient(180deg,var(--surface-dark) 0%,var(--surface-dark-secondary) 100%)" }}>
           <div style={{ position: "relative", width: WRAP, margin: "0 auto", padding: "clamp(92px,11vw,168px) 0" }}>
             <div className="ch-missionshell" style={{ display: "grid", gridTemplateColumns: "minmax(0,.9fr) minmax(0,1.1fr)", gap: "clamp(44px,5vw,80px)", alignItems: "center" }}>
               <div>
@@ -181,7 +181,7 @@ export default function Home() {
               ].map((d, i) => (
                 <Reveal key={d.k} delay={i * 80} as="article" className="ch-card" style={{ background: "rgba(255,255,255,.82)", border: "1px solid var(--border-subtle)", padding: 36 }}>
                   <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".13em", textTransform: "uppercase", color: "var(--strategic-gray)" }}>{d.k}</span>
-                  <h3 style={{ margin: "14px 0 8px", font: "600 clamp(22px,2vw,30px)/1.02 var(--font-primary)", letterSpacing: "-.03em", color: "var(--ink-strong)" }}>{d.h}</h3>
+                  <h3 style={{ margin: "14px 0 8px", font: "600 clamp(22px,2vw,30px)/1.02 var(--font-primary)", letterSpacing: "-.03em", color: "var(--ink-graphite)" }}>{d.h}</h3>
                   <p style={{ margin: 0, font: "400 15px/1.55 var(--font-primary)", color: "var(--text-muted)" }}>{d.p}</p>
                 </Reveal>
               ))}
@@ -198,11 +198,11 @@ export default function Home() {
                   <span style={{ width: 7, height: 7, background: "var(--change-violet)" }} />
                   <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)" }}>Equipo</span>
                 </Reveal>
-                <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(32px,4.2vw,60px)/.98 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-strong)", textWrap: "balance" }}>Change no es una voz individual. Es una mesa de criterio.</Reveal>
+                <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(32px,4.2vw,60px)/.98 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>Change no es una voz individual. Es una mesa de criterio.</Reveal>
                 <Reveal delay={120} as="p" style={{ margin: "24px 0 0", maxWidth: 500, font: "400 clamp(17px,1.4vw,20px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>Estrategia, foresight, diseño, tecnología, operación y narrativa, conectadas según el reto.</Reveal>
               </div>
               <Reveal delay={120} as="aside" className="ch-card" style={{ border: "1px solid var(--border-subtle)", background: "rgba(255,255,255,.85)", padding: "32px 30px" }}>
-                <h3 style={{ margin: "0 0 24px", font: "600 20px var(--font-primary)", letterSpacing: "-.02em", color: "var(--ink-strong)" }}>Una mesa senior, no una fábrica de entregables.</h3>
+                <h3 style={{ margin: "0 0 24px", font: "600 20px var(--font-primary)", letterSpacing: "-.02em", color: "var(--ink-graphite)" }}>Una mesa senior, no una fábrica de entregables.</h3>
                 <div style={{ display: "flex", flexDirection: "column" }}>
                   {[
                     { n: "Andrés Valencia", r: "futuros · estrategia · narrativa" },
@@ -211,7 +211,7 @@ export default function Home() {
                     { n: "Partners estratégicos", r: "según reto y especialidad" },
                   ].map((m) => (
                     <div key={m.n} style={{ display: "flex", justifyContent: "space-between", gap: 16, alignItems: "baseline", padding: "15px 0", borderTop: "1px solid var(--border-subtle)" }}>
-                      <strong style={{ font: "600 16px var(--font-primary)", color: "var(--ink-strong)" }}>{m.n}</strong>
+                      <strong style={{ font: "600 16px var(--font-primary)", color: "var(--ink-graphite)" }}>{m.n}</strong>
                       <span style={{ font: "500 11px var(--font-mono)", letterSpacing: ".03em", color: "var(--text-muted)", textAlign: "right" }}>{m.r}</span>
                     </div>
                   ))}
@@ -222,7 +222,7 @@ export default function Home() {
         </section>
 
         {/* ═══ CTA FINAL (dark) ═══ */}
-        <section style={{ position: "relative", overflow: "hidden", background: "radial-gradient(circle at 50% -10%,color-mix(in srgb, var(--change-violet) 24%, transparent),transparent 52%),var(--surface-dark-2)" }}>
+        <section style={{ position: "relative", overflow: "hidden", background: "radial-gradient(circle at 50% -10%,color-mix(in srgb, var(--change-violet) 24%, transparent),transparent 52%),var(--surface-dark-secondary)" }}>
           <div style={{ position: "relative", width: WRAP, margin: "0 auto", padding: "clamp(96px,12vw,176px) 0", textAlign: "center" }}>
             <Reveal as="h2" style={{ margin: "0 auto", maxWidth: "18ch", font: "600 clamp(36px,5vw,76px)/1.0 var(--font-primary)", letterSpacing: "-.05em", color: "#fff", textWrap: "balance" }}>Trae una decisión difícil. Sal con una estructura.</Reveal>
             <Reveal delay={100} as="p" style={{ margin: "26px auto 0", maxWidth: 560, font: "400 clamp(16px,1.4vw,19px)/1.6 var(--font-primary)", color: "rgba(255,255,255,.6)" }}>La primera conversación no vende una solución: revela qué decisión necesita estructura y qué criterio falta explicitar.</Reveal>

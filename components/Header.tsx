@@ -72,7 +72,7 @@ export default function Header() {
               style={{
                 display: "none", alignItems: "center", justifyContent: "center",
                 width: 42, height: 42, background: "transparent",
-                border: "1px solid var(--border-subtle)", cursor: "pointer", color: "var(--ink-strong)",
+                border: "1px solid var(--border-subtle)", cursor: "pointer", color: "var(--ink-graphite)",
               }}
             >
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.4">
@@ -92,7 +92,7 @@ export default function Header() {
                 href={item.href}
                 onClick={() => setOpen(false)}
                 style={{
-                  padding: "13px 4px", font: "500 16px var(--font-primary)", color: "var(--ink-strong)",
+                  padding: "13px 4px", font: "500 16px var(--font-primary)", color: "var(--ink-graphite)",
                   borderBottom: i < NAV.length - 1 ? "1px solid var(--border-subtle)" : "none",
                 }}
               >

@@ -21,9 +21,9 @@ interface PageScaffoldProps {
  */
 export default function PageScaffold({ kicker, title, lead, dark = false, children }: PageScaffoldProps) {
   const heroBg = dark
-    ? "radial-gradient(circle at 82% 0%,color-mix(in srgb, var(--change-violet) 22%, transparent),transparent 40%),linear-gradient(180deg,var(--surface-dark) 0%,var(--surface-dark-2) 100%)"
+    ? "radial-gradient(circle at 82% 0%,color-mix(in srgb, var(--change-violet) 22%, transparent),transparent 40%),linear-gradient(180deg,var(--surface-dark) 0%,var(--surface-dark-secondary) 100%)"
     : "radial-gradient(110% 80% at 84% -10%,rgba(138,108,255,.14) 0%,rgba(89,184,217,.06) 32%,rgba(255,255,255,0) 58%),linear-gradient(180deg,#FFFFFF 0%,#F8F7F4 70%,#F2EFEA 100%)";
-  const titleColor = dark ? "#fff" : "var(--ink-strong)";
+  const titleColor = dark ? "#fff" : "var(--ink-graphite)";
   const leadColor = dark ? "rgba(255,255,255,.7)" : "var(--ink-graphite)";
   const kickerColor = dark ? "rgba(255,255,255,.55)" : "var(--text-muted)";
 

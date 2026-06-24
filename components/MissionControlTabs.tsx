@@ -69,7 +69,7 @@ export default function MissionControlTabs() {
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 1, background: "rgba(255,255,255,.07)", border: "1px solid rgba(255,255,255,.07)", borderTop: 0 }}>
           {STATS.map((s) => (
-            <div key={s.label} style={{ background: "var(--surface-dark-3)", padding: "18px 20px" }}>
+            <div key={s.label} style={{ background: "var(--surface-dark-tertiary)", padding: "18px 20px" }}>
               <div style={{ font: "300 clamp(26px,3vw,36px)/1 var(--font-secondary)", color: s.color }}>{s.value}</div>
               <div style={{ marginTop: 7, font: "600 11px var(--font-mono)", letterSpacing: ".08em", textTransform: "uppercase", color: "rgba(255,255,255,.5)" }}>{s.label}</div>
             </div>
