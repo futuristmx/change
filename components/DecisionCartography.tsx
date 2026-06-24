@@ -32,8 +32,8 @@ export default function DecisionCartography() {
       }}
     >
       <div style={{ display: "flex", justifyContent: "space-between", gap: 16, alignItems: "center", padding: "18px 22px", borderBottom: "1px solid var(--border-subtle)" }}>
-        <span style={{ font: "600 10px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-muted)" }}>Cartografía de decisión</span>
-        <span style={{ display: "inline-flex", alignItems: "center", gap: 7, font: "600 9.5px var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-muted)" }}>
+        <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-muted)" }}>Cartografía de decisión</span>
+        <span style={{ display: "inline-flex", alignItems: "center", gap: 7, font: "600 11px var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-muted)" }}>
           <span data-pulse style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--signal-cyan)" }} />
           Interactivo
         </span>
@@ -59,7 +59,7 @@ export default function DecisionCartography() {
                 }}
               />
               <strong style={{ display: "block", font: "500 13px var(--font-primary)", letterSpacing: "-.01em", color: i === active ? "var(--change-violet)" : "#1B191F", transition: "color .3s" }}>{n.title}</strong>
-              <span style={{ display: "block", marginTop: 5, font: "600 8.5px var(--font-mono)", letterSpacing: ".08em", textTransform: "uppercase", color: "var(--text-faint)" }}>{n.micro}</span>
+              <span style={{ display: "block", marginTop: 5, font: "600 11px var(--font-mono)", letterSpacing: ".08em", textTransform: "uppercase", color: "var(--text-faint)" }}>{n.micro}</span>
             </button>
           ))}
         </div>

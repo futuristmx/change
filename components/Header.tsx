@@ -57,7 +57,7 @@ export default function Header() {
                   color: "var(--text-muted)", font: "500 13.5px var(--font-primary)", letterSpacing: "-0.01em",
                 }}
               >
-                <span style={{ font: "600 9px var(--font-mono)", letterSpacing: "0.04em", color: "var(--soft-stone-gray)" }}>{item.idx}</span>
+                <span style={{ font: "600 11px var(--font-mono)", letterSpacing: "0.04em", color: "var(--soft-stone-gray)" }}>{item.idx}</span>
                 {item.label}
               </Link>
             ))}

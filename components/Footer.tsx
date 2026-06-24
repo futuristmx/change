@@ -16,28 +16,28 @@ export default function Footer() {
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-            <div style={{ font: "600 10px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(240,244,255,.4)", marginBottom: 4 }}>Explorar</div>
+            <div style={{ font: "600 11px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(240,244,255,.4)", marginBottom: 4 }}>Explorar</div>
             <Link href="/contacto" style={{ font: "400 14px var(--font-primary)", color: "rgba(240,244,255,.62)" }}>Claridad</Link>
             <Link href="/capacidades" style={{ font: "400 14px var(--font-primary)", color: "rgba(240,244,255,.62)" }}>Método</Link>
             <Link href="/mission-control" style={{ font: "400 14px var(--font-primary)", color: "rgba(240,244,255,.62)" }}>Mission Control</Link>
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-            <div style={{ font: "600 10px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(240,244,255,.4)", marginBottom: 4 }}>Firma</div>
+            <div style={{ font: "600 11px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(240,244,255,.4)", marginBottom: 4 }}>Firma</div>
             <Link href="/equipo" style={{ font: "400 14px var(--font-primary)", color: "rgba(240,244,255,.62)" }}>Equipo</Link>
             <Link href="/field-notes" style={{ font: "400 14px var(--font-primary)", color: "rgba(240,244,255,.62)" }}>Field Notes</Link>
             <Link href="/casos" style={{ font: "400 14px var(--font-primary)", color: "rgba(240,244,255,.62)" }}>Decisiones</Link>
           </div>
 
           <div>
-            <div style={{ font: "600 10px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(240,244,255,.4)", marginBottom: 16 }}>Empieza por ver claro</div>
+            <div style={{ font: "600 11px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(240,244,255,.4)", marginBottom: 16 }}>Empieza por ver claro</div>
             <Link href="/contacto" className="btn btn-primary btn-sm">Trabajar una decisión</Link>
           </div>
         </div>
 
         <div style={{ display: "flex", flexWrap: "wrap", gap: 16, justifyContent: "space-between", alignItems: "center", marginTop: 52, paddingTop: 26, borderTop: "1px solid rgba(255,255,255,.1)" }}>
           <span style={{ font: "400 12.5px var(--font-primary)", color: "rgba(240,244,255,.4)" }}>© 2026 Change · Inteligencia estratégica</span>
-          <span style={{ font: "600 10px var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "rgba(240,244,255,.4)" }}>México</span>
+          <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "rgba(240,244,255,.4)" }}>México</span>
         </div>
       </div>
 

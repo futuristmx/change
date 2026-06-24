@@ -32,7 +32,8 @@ export const metadata: Metadata = {
       "Convertimos incertidumbre en criterio. Inteligencia estratégica serena para decisiones complejas.",
   },
   robots: { index: true, follow: true },
-  icons: { icon: "/assets/change_icon_violet.svg" },
+  // Favicon: app/icon.svg (Change icon, Electric Future Violet #6D3BFF, sin fondo)
+  // se sirve automáticamente por convención de Next.js.
 };
 
 export const viewport: Viewport = {
