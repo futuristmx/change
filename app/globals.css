@@ -14,6 +14,10 @@
 @import "../styles/ds/tokens/motion.css";
 @import "../styles/ds/tokens/icons.css";
 
+/* ── UPGRADE 2.4 (aditivo): dataviz + density ── */
+@import "./tokens/dataviz.css";
+@import "./tokens/density.css";
+
 /* Web fonts BD Orange Variable (Typekit) + IBM Plex Mono (Google) are loaded
    via <link> in app/layout.tsx — @import after Tailwind's inlined rules would
    be dropped by the browser. */
@@ -46,6 +50,28 @@
   --surface-dark:           #0E0D12;  /* base de sección dark — Mission Control */
   --surface-dark-secondary: #16151C;  /* base de sección dark / CTA final */
   --surface-dark-tertiary:  #101019;  /* inset dark — celdas de métricas */
+}
+
+/* ── Card lifecycle states (UPGRADE 2.4 · additive) ──
+   Referencian tokens semánticos del DS → re-resuelven solos por tema.
+   Aquí (globals.css, no el colors.css sincronizado) para sobrevivir /design-sync. */
+:root {
+  --surface-selected:   var(--surface-soft);
+  --border-selected:    var(--border-strong);
+  --node-selected:      var(--text-strong);
+  --node-selected-halo: var(--track-graphite);
+  --surface-locked:     var(--surface-soft);
+  --border-locked:      var(--border-strong);
+  --text-locked:        var(--text-muted);
+}
+.change-dark, [data-theme="dark"] {
+  --surface-selected:   var(--surface-soft);
+  --border-selected:    var(--border-strong);
+  --node-selected:      var(--text-strong);
+  --node-selected-halo: var(--track-graphite);
+  --surface-locked:     var(--surface-soft);
+  --border-locked:      var(--border-strong);
+  --text-locked:        var(--text-muted);
 }
 
 /* ════════════════════════════════════════════════════════════
