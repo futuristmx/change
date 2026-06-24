@@ -20,7 +20,7 @@ export default function ContactoPage() {
         <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(72px,9vw,128px) 0" }}>
           <div className="ch-contact-grid" style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(0,1.1fr)", gap: "clamp(44px,6vw,88px)", alignItems: "start" }}>
             <div>
-              <h2 style={{ margin: 0, font: "600 clamp(26px,3vw,40px)/1.05 var(--font-primary)", letterSpacing: "-.04em", color: "var(--ink-strong)", textWrap: "balance" }}>
+              <h2 style={{ margin: 0, font: "600 clamp(26px,3vw,40px)/1.05 var(--font-primary)", letterSpacing: "-.04em", color: "var(--ink-graphite)", textWrap: "balance" }}>
                 Trae una decisión difícil. Sal con una estructura.
               </h2>
               <p style={{ margin: "20px 0 0", maxWidth: "42ch", font: "400 16.5px/1.6 var(--font-primary)", color: "var(--text-muted)" }}>

@@ -32,8 +32,8 @@ export default function DecisionCartography() {
       }}
     >
       <div style={{ display: "flex", justifyContent: "space-between", gap: 16, alignItems: "center", padding: "18px 22px", borderBottom: "1px solid var(--border-subtle)" }}>
-        <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-muted)" }}>Cartografía de decisión</span>
-        <span style={{ display: "inline-flex", alignItems: "center", gap: 7, font: "600 11px var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-muted)" }}>
+        <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-muted)" }}>Cartografía de decisión</span>
+        <span style={{ display: "inline-flex", alignItems: "center", gap: 7, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-muted)" }}>
           <span data-pulse style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--signal-cyan)" }} />
           Interactivo
         </span>
@@ -58,14 +58,14 @@ export default function DecisionCartography() {
                   transition: "transform .3s var(--ease-premium), box-shadow .3s var(--ease-premium)",
                 }}
               />
-              <strong style={{ display: "block", font: "500 13px var(--font-primary)", letterSpacing: "-.01em", color: i === active ? "var(--change-violet)" : "var(--ink-strong)", transition: "color .3s" }}>{n.title}</strong>
-              <span style={{ display: "block", marginTop: 5, font: "600 11px var(--font-mono)", letterSpacing: ".08em", textTransform: "uppercase", color: "var(--text-faint)" }}>{n.micro}</span>
+              <strong style={{ display: "block", font: "500 13px var(--font-primary)", letterSpacing: "-.01em", color: i === active ? "var(--change-violet)" : "var(--ink-graphite)", transition: "color .3s" }}>{n.title}</strong>
+              <span style={{ display: "block", marginTop: 5, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".08em", textTransform: "uppercase", color: "var(--text-faint)" }}>{n.micro}</span>
             </button>
           ))}
         </div>
 
         <div style={{ margin: "30px 0 0", padding: 24, border: "1px solid var(--border-subtle)", background: "#fff" }}>
-          <h3 style={{ margin: 0, font: "600 19px var(--font-primary)", letterSpacing: "-.02em", color: "var(--ink-strong)" }}>{node.title}</h3>
+          <h3 style={{ margin: 0, font: "600 19px var(--font-primary)", letterSpacing: "-.02em", color: "var(--ink-graphite)" }}>{node.title}</h3>
           <p style={{ margin: "9px 0 0", font: "400 14.5px/1.55 var(--font-primary)", color: "var(--text-muted)" }}>{node.copy}</p>
         </div>
       </div>
