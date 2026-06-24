@@ -30,7 +30,7 @@ export default function PageScaffold({ kicker, title, lead, dark = false, childr
   return (
     <div className={dark ? "change-dark" : undefined} style={{ minHeight: "100vh", display: "flex", flexDirection: "column", background: dark ? "var(--surface-dark)" : "var(--surface-page)" }}>
       <Header />
-      <main style={{ flex: 1 }}>
+      <main id="main-content" style={{ flex: 1 }}>
         <section style={{ position: "relative", overflow: "hidden", background: heroBg }}>
           <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(96px,13vw,170px) 0 clamp(64px,8vw,110px)" }}>
             <Reveal style={{ display: "inline-flex", alignItems: "center", gap: 11, marginBottom: 28 }}>
