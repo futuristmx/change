@@ -54,6 +54,16 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  // 301/302 de rutas heredadas → rutas vigentes (evita 404 silenciosos).
+  async redirects() {
+    return [
+      { source: "/services", destination: "/capacidades", permanent: true },
+      { source: "/projects", destination: "/casos", permanent: true },
+      { source: "/about", destination: "/equipo", permanent: true },
+      { source: "/contact", destination: "/contacto", permanent: true },
+      { source: "/signals", destination: "/#metodo", permanent: false },
+    ];
+  },
 };
 
 export default nextConfig;

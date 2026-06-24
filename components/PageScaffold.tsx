@@ -21,14 +21,14 @@ interface PageScaffoldProps {
  */
 export default function PageScaffold({ kicker, title, lead, dark = false, children }: PageScaffoldProps) {
   const heroBg = dark
-    ? "radial-gradient(circle at 82% 0%,rgba(109,59,255,.22),transparent 40%),linear-gradient(180deg,#0E0D12 0%,#16151C 100%)"
+    ? "radial-gradient(circle at 82% 0%,color-mix(in srgb, var(--change-violet) 22%, transparent),transparent 40%),linear-gradient(180deg,var(--surface-dark) 0%,var(--surface-dark-2) 100%)"
     : "radial-gradient(110% 80% at 84% -10%,rgba(138,108,255,.14) 0%,rgba(89,184,217,.06) 32%,rgba(255,255,255,0) 58%),linear-gradient(180deg,#FFFFFF 0%,#F8F7F4 70%,#F2EFEA 100%)";
-  const titleColor = dark ? "#fff" : "#1B191F";
+  const titleColor = dark ? "#fff" : "var(--ink-strong)";
   const leadColor = dark ? "rgba(255,255,255,.7)" : "var(--ink-graphite)";
   const kickerColor = dark ? "rgba(255,255,255,.55)" : "var(--text-muted)";
 
   return (
-    <div className={dark ? "change-dark" : undefined} style={{ minHeight: "100vh", display: "flex", flexDirection: "column", background: dark ? "#0E0D12" : "var(--surface-page)" }}>
+    <div className={dark ? "change-dark" : undefined} style={{ minHeight: "100vh", display: "flex", flexDirection: "column", background: dark ? "var(--surface-dark)" : "var(--surface-page)" }}>
       <Header />
       <main style={{ flex: 1 }}>
         <section style={{ position: "relative", overflow: "hidden", background: heroBg }}>

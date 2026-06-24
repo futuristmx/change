@@ -6,30 +6,30 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://change.live";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Change — La claridad no aparece. Se diseña.",
+    default: "Change · Inteligencia estratégica para decisiones complejas",
     template: "%s · Change",
   },
   description:
-    "Change convierte decisiones ambiguas en sistemas de claridad, para que el rumbo no dependa de una sola cabeza. Inteligencia estratégica serena para decisiones complejas.",
+    "Change convierte decisiones ambiguas en sistemas de claridad para que el rumbo no dependa de una sola cabeza. Mapa de Claridad, Sprint de Rumbo, Mission Control.",
   keywords: [
     "estrategia", "foresight", "futuros", "inteligencia estratégica",
     "toma de decisiones", "consultoría estratégica", "México", "Change",
   ],
   authors: [{ name: "Change" }],
+  alternates: { canonical: SITE_URL },
   openGraph: {
     type: "website",
     locale: "es_MX",
     url: SITE_URL,
     siteName: "Change",
-    title: "Change — La claridad no aparece. Se diseña.",
+    title: "Change · Inteligencia estratégica para decisiones complejas",
     description:
-      "Convertimos incertidumbre en criterio. Inteligencia estratégica serena para decisiones complejas.",
+      "La claridad no aparece. Se diseña. Convertimos criterio directivo en sistemas trazables y gobernables.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Change — La claridad no aparece. Se diseña.",
-    description:
-      "Convertimos incertidumbre en criterio. Inteligencia estratégica serena para decisiones complejas.",
+    title: "Change · Inteligencia estratégica",
+    description: "La claridad no aparece. Se diseña.",
   },
   robots: { index: true, follow: true },
   // Favicon: app/icon.svg (Change icon, Electric Future Violet #6D3BFF, sin fondo)
