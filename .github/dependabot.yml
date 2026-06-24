@@ -8,7 +8,6 @@ updates:
     groups:
       production-dependencies:
         dependency-type: "production"
-        # Security patches and minor/patch upgrades only — keep grouped.
         update-types:
           - "minor"
           - "patch"
@@ -17,18 +16,11 @@ updates:
         update-types:
           - "minor"
           - "patch"
-    # Major bumps (Next 16, eslint 10, React 20…) break the build and must be
-    # adopted deliberately, not auto-merged. Security advisories still open PRs.
+    # Major bumps (Next 16, React 20, zod 4, TS 6, eslint 10…) routinely break
+    # the build and must be adopted deliberately — never auto-proposed.
+    # Security advisories still open PRs regardless of this rule.
     ignore:
-      - dependency-name: "next"
-        update-types: ["version-update:semver-major"]
-      - dependency-name: "react"
-        update-types: ["version-update:semver-major"]
-      - dependency-name: "react-dom"
-        update-types: ["version-update:semver-major"]
-      - dependency-name: "eslint"
-        update-types: ["version-update:semver-major"]
-      - dependency-name: "eslint-config-next"
+      - dependency-name: "*"
         update-types: ["version-update:semver-major"]
     labels:
       - "dependencies"
