@@ -16,7 +16,7 @@ export default function ContactoPage() {
     <PageScaffold
       kicker="Contacto"
       title="Trae una decisión difícil. Sal con una primera lectura."
-      lead="No empieza con un proyecto ni con una propuesta. Empieza con una decisión real que tienes enfrente. Prueba el modelo con un escenario o describe tu caso directamente — el board lee lo que llega."
+      lead="No empieza con un proyecto ni con una propuesta. Empieza con una decisión real que tienes enfrente. Prueba el modelo con el simulador o escríbenos directamente."
     >
       <DecisionSimulator />
 
@@ -26,7 +26,7 @@ export default function ContactoPage() {
           <div style={{ maxWidth: 640 }}>
             <p style={{ margin: "0 0 6px", font: "600 11.5px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-muted)" }}>Alternativa</p>
             <h2 style={{ margin: "0 0 14px", font: "600 clamp(22px,2.6vw,32px)/1.1 var(--font-primary)", letterSpacing: "-.035em", color: "var(--ink-graphite)" }}>Prefiero escribir un mensaje breve.</h2>
-            <p style={{ margin: "0 0 36px", font: "400 15px/1.6 var(--font-primary)", color: "var(--text-muted)" }}>Si el simulador no es el formato que buscas, puedes escribirnos directamente. Sin captación de leads ni propuesta automática — el board lee lo que llega y responde si hay alineación.</p>
+            <p style={{ margin: "0 0 36px", font: "400 15px/1.6 var(--font-primary)", color: "var(--text-muted)" }}>Si el simulador no es el formato que buscas, puedes escribirnos directamente. Tu caso llega al board senior de Change. Si hay una tensión real que podamos trabajar, te respondemos con una primera lectura y un siguiente paso posible.</p>
             <ContactFormSimple />
           </div>
         </div>

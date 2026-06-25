@@ -179,7 +179,7 @@ export default function ContactFormSimple() {
         >
           {status === "sending" ? "Enviando..." : "Enviar mensaje"}
         </button>
-        <span style={{ font: "400 12px/1.45 var(--font-mono)", color: "var(--text-faint)", letterSpacing: ".04em" }}>Sin pitch automático. El board lee lo que llega.</span>
+        <span style={{ font: "400 12px/1.45 var(--font-mono)", color: "var(--text-faint)", letterSpacing: ".04em" }}>Sin pitch automático. Sin propuesta cerrada.</span>
       </div>
 
       <style>{`

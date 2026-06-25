@@ -41,7 +41,7 @@ export default function Footer() {
 
           <div>
             <div style={{ font: "600 11px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(240,244,255,.8)", marginBottom: 16 }}>Empieza por una decisión</div>
-            <Link href="/contacto" className="btn btn-primary btn-sm">Trabajar una decisión</Link>
+            <Link href="/contacto" className="btn btn-primary btn-sm">Simular una decisión</Link>
           </div>
         </div>
 
