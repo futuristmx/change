@@ -4,64 +4,62 @@ import PageScaffold from "@/components/PageScaffold";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
-  title: "La mesa de criterio que piensa contigo",
+  title: "La mesa senior que construye capacidad de futuro",
   description:
-    "Change no es una voz individual. Es una mesa de criterio: estrategia, foresight, diseño, tecnología, operación y narrativa, conectadas según el reto.",
+    "Interpretar el cambio, decidir bajo ambigüedad y sostener el rumbo no caben en una sola cabeza. Change reúne las formas de pensar que una decisión difícil necesita al mismo tiempo.",
 };
 
 const WRAP = "min(1340px, calc(100% - clamp(40px,8vw,128px)))";
 
 const MESA = [
   {
-    initials: "AV",
-    name: "Andrés Valencia",
-    role: "Futuros · Estrategia · Narrativa",
-    c: "var(--change-violet)",
-    p: "Lee las señales del entorno y las convierte en criterio. Sostiene la lectura de largo plazo y la traduce a la decisión que tienes enfrente — sin perder ni el rigor ni la calma.",
+    n: "Andrés Valencia", arc: "Leer e interpretar", disc: "futuros, estrategia y narrativa", c: "var(--signal-cyan)",
+    p: "Detecta qué está cambiando antes de que la urgencia lo vuelva obvio y traduce ese cambio en sentido. Su aporte es la capa de interpretación: convertir señales dispersas en una lectura que la organización puede usar para decidir.",
+    ev: "Radar de señales · Mapa de tensiones",
   },
   {
-    initials: "MC",
-    name: "Miguel Cadena",
-    role: "Negocio · Dirección · Crecimiento",
-    c: "var(--opportunity-orange)",
-    p: "Aterriza la estrategia en términos de negocio: crecimiento, capacidad operativa y la realidad de dirigir una empresa que ya está en marcha. La claridad que no mueve el negocio no sirve.",
+    n: "Miguel Cadena", arc: "Decidir y aterrizar", disc: "negocio, dirección y crecimiento", c: "var(--change-violet)",
+    p: "Lleva la lectura al terreno donde se juega el negocio: qué importa, qué se sacrifica y qué consecuencia tiene cada camino. Su aporte es el filo de la decisión — la conversación honesta sobre trade-offs antes de comprometer recursos.",
+    ev: "Matriz de trade-offs · Reporte ejecutivo",
   },
   {
-    initials: "EF",
-    name: "Eric O. Fuentes",
-    role: "Diseño · Sistema · Ejecución",
-    c: "var(--signal-cyan)",
-    p: "Convierte el criterio en sistema. Lo que se decide se vuelve algo que se puede ver, operar y sostener — no un documento que se archiva, sino un instrumento que la organización usa.",
+    n: "Eric O. Fuentes", arc: "Diseñar y sostener", disc: "diseño, sistema y ejecución", c: "var(--ink-graphite)",
+    p: "Da forma a la decisión y construye lo que la mantiene viva cuando la sesión termina. Su aporte es traducir la decisión en algo que se ejecuta y se sigue en el tiempo, no en un documento que se archiva.",
+    ev: "Roadmap vivo · Mission Control",
   },
   {
-    initials: "+",
-    name: "Partners estratégicos",
-    role: "Según reto y especialidad",
-    c: "var(--soft-stone-gray)",
-    p: "Especialistas que se suman cuando el reto lo pide. La mesa base se mantiene senior y enfocada; la profundidad técnica entra por proyecto, sin inflar la estructura.",
+    n: "Partners", arc: "Profundidad por reto", disc: "especialistas convocados según el caso", c: "var(--soft-stone-gray)",
+    p: "Cuando un reto exige conocimiento de un dominio específico, sumamos al especialista adecuado a la mesa, sin diluir el método ni inflar la estructura. La mesa crece por la pregunta, no por el organigrama.",
+    ev: "El dominio que el reto exige",
   },
+];
+
+const ESCALERA = [
+  { n: "Mapa de Claridad", tag: "Entrada", c: "var(--ink-graphite)", p: "Una primera lectura de la decisión y sus tensiones. El punto donde se ve si vale la pena ir más a fondo." },
+  { n: "Sprint de Rumbo", tag: "Acotado", c: "var(--soft-violet)", p: "Un tramo de trabajo con alcance definido para llevar una decisión de la lectura al diseño, con artefactos al final." },
+  { n: "Mission Control", tag: "Sistema vivo", c: "var(--change-violet)", p: "La infraestructura que sostiene el aprendizaje en el tiempo. Llega cuando ya hay una relación de trabajo, nunca en frío." },
 ];
 
 export default function EquipoPage() {
   return (
     <PageScaffold
-      kicker="Equipo"
-      title="Quién va a pensar contigo."
-      lead="Change no es una voz individual ni una firma sin rostro. Es una mesa de criterio: estrategia, foresight, diseño, negocio y narrativa, conectadas según el reto. Una mesa senior, no una fábrica de entregables."
+      kicker="La mesa"
+      title="La capacidad de futuro se construye con una mesa senior."
+      lead="Interpretar el cambio, decidir bajo ambigüedad y sostener el rumbo no caben en una sola cabeza. Change reúne las formas de pensar que una decisión difícil necesita al mismo tiempo."
     >
-      {/* ═══ POR QUÉ IMPORTA QUIÉN PIENSA CONTIGO ═══ */}
+      {/* ═══ POR QUÉ UNA MESA ═══ */}
       <section style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-sky-pearl)" }}>
         <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(88px,11vw,160px) 0" }}>
           <div className="eq-intro" style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(300px,440px)", gap: "clamp(44px,5vw,80px)", alignItems: "end" }}>
             <div>
               <Reveal style={{ display: "flex", alignItems: "center", gap: 11, marginBottom: 20 }}>
                 <span style={{ width: 7, height: 7, background: "var(--change-violet)" }} />
-                <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)" }}>Por qué importa</span>
+                <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)" }}>Por qué una mesa</span>
               </Reveal>
-              <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(30px,4.2vw,58px)/.99 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>Una decisión difícil no se la confías a un logo.</Reveal>
+              <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(30px,4.2vw,58px)/.99 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>El rumbo no debería depender de una sola cabeza.</Reveal>
             </div>
             <Reveal delay={120} as="p" style={{ margin: 0, font: "400 clamp(17px,1.4vw,20px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>
-              En las empresas que acompañamos, el criterio se le compra a personas con nombre y trayectoria — no a una marca. Por eso la mesa está antes que la metodología.
+              La incertidumbre no se resuelve con más opinión, sino con formas de pensar que se corrigen entre sí. Cada perfil cubre una parte del arco de una decisión: leer la señal, interpretar lo que significa, decidir qué importa, diseñar la respuesta y sostener el aprendizaje.
             </Reveal>
           </div>
         </div>
@@ -72,43 +70,42 @@ export default function EquipoPage() {
         <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(88px,11vw,160px) 0" }}>
           <Reveal style={{ display: "flex", alignItems: "center", gap: 11, marginBottom: 20 }}>
             <span style={{ width: 7, height: 7, background: "var(--change-violet)" }} />
-            <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)" }}>La mesa de criterio</span>
+            <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)" }}>Cómo trabaja la mesa</span>
           </Reveal>
-          <Reveal delay={60} as="h2" style={{ margin: "0 0 clamp(40px,5vw,60px)", maxWidth: "20ch", font: "600 clamp(30px,4.2vw,58px)/.99 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>Cada reto activa la combinación que necesita.</Reveal>
+          <Reveal delay={60} as="h2" style={{ margin: "0 0 16px", maxWidth: "22ch", font: "600 clamp(30px,4.2vw,56px)/.99 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>Cada perfil cubre un tramo del arco de una decisión.</Reveal>
+          <Reveal delay={100} as="p" style={{ margin: "0 0 clamp(40px,5vw,60px)", maxWidth: "56ch", font: "400 clamp(16px,1.3vw,19px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>No repartimos un proyecto en tareas. Repartimos una decisión en capacidades, y cada capacidad deja un artefacto que puedes ver.</Reveal>
           <div className="eq-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 20 }}>
             {MESA.map((m, i) => (
-              <Reveal key={m.name} delay={i * 90} as="article" className="ch-card" style={{ background: "rgba(255,255,255,.85)", border: "1px solid var(--border-subtle)", padding: "32px 30px", display: "flex", gap: 22, alignItems: "flex-start" }}>
-                <div aria-hidden="true" style={{ flexShrink: 0, width: 60, height: 60, display: "flex", alignItems: "center", justifyContent: "center", border: "1px solid var(--border-subtle)", background: "color-mix(in srgb, var(--change-violet) 5%, #fff)", font: "600 19px var(--font-mono)", letterSpacing: ".02em", color: m.c }}>
-                  {m.initials}
-                </div>
-                <div>
-                  <h3 style={{ margin: 0, font: "600 21px var(--font-primary)", letterSpacing: "-.02em", color: "var(--ink-graphite)" }}>{m.name}</h3>
-                  <span style={{ display: "block", marginTop: 6, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".08em", textTransform: "uppercase", color: "var(--ink-graphite)" }}>{m.role}</span>
-                  <p style={{ margin: "14px 0 0", font: "400 14.5px/1.55 var(--font-primary)", color: "var(--text-muted)" }}>{m.p}</p>
-                </div>
+              <Reveal key={m.n} delay={(i % 2) * 90} as="article" className="ch-card" style={{ background: "rgba(255,255,255,.85)", border: "1px solid var(--border-subtle)", padding: "32px 30px", display: "flex", flexDirection: "column" }}>
+                <span style={{ display: "inline-flex", alignItems: "center", gap: 8, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--ink-graphite)" }}>
+                  <span aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: m.c }} />{m.arc}
+                </span>
+                <h3 style={{ margin: "13px 0 2px", font: "600 22px var(--font-primary)", letterSpacing: "-.02em", color: "var(--ink-graphite)" }}>{m.n}</h3>
+                <span style={{ font: "400 13px var(--font-primary)", color: "var(--text-muted)" }}>{m.disc}</span>
+                <p style={{ margin: "16px 0 0", font: "400 14.5px/1.6 var(--font-primary)", color: "var(--text-muted)" }}>{m.p}</p>
+                <span style={{ marginTop: "auto", paddingTop: 20, marginBlockStart: 20, borderTop: "1px solid var(--border-subtle)", font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".08em", textTransform: "uppercase", color: "var(--text-faint)" }}>Deja como evidencia · {m.ev}</span>
               </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ═══ CÓMO TRABAJA LA MESA ═══ */}
+      {/* ═══ CÓMO ENTRAMOS ═══ */}
       <section style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-sky-pearl)" }}>
         <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(88px,11vw,160px) 0" }}>
           <Reveal style={{ display: "flex", alignItems: "center", gap: 11, marginBottom: 20 }}>
             <span style={{ width: 7, height: 7, background: "var(--change-violet)" }} />
-            <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)" }}>Cómo trabajamos</span>
+            <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)" }}>Cómo entramos</span>
           </Reveal>
-          <Reveal delay={60} as="h2" style={{ margin: "0 0 clamp(40px,5vw,60px)", maxWidth: "22ch", font: "600 clamp(30px,4.2vw,58px)/.99 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>Senior en la mesa. Acotados en el alcance.</Reveal>
-          <div className="eq-princ" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
-            {[
-              { h: "Hablas con quien decide.", p: "Quien piensa tu reto es quien se sienta contigo. No hay capa de cuentas entre el criterio y tú." },
-              { h: "Entramos por el reto, no por el catálogo.", p: "La combinación de la mesa se arma según la decisión. No vendemos horas: instalamos criterio." },
-              { h: "Dejamos capacidad, no dependencia.", p: "El objetivo es que tu organización sostenga el rumbo — incluso cuando no estamos en la sala." },
-            ].map((c, i) => (
-              <Reveal key={c.h} delay={i * 110} as="article" className="ch-card" style={{ background: "rgba(255,255,255,.82)", border: "1px solid var(--border-subtle)", padding: 32, minHeight: 210, display: "flex", flexDirection: "column" }}>
-                <h3 style={{ margin: 0, font: "600 clamp(21px,1.9vw,26px)/1.06 var(--font-primary)", letterSpacing: "-.03em", color: "var(--ink-graphite)" }}>{c.h}</h3>
-                <p style={{ margin: "16px 0 0", font: "400 15px/1.55 var(--font-primary)", color: "var(--text-muted)" }}>{c.p}</p>
+          <Reveal delay={60} as="h2" style={{ margin: "0 0 clamp(40px,5vw,60px)", maxWidth: "22ch", font: "600 clamp(30px,4.2vw,56px)/.99 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>El trabajo empieza por una decisión, no por un retainer.</Reveal>
+          <div className="eq-ladder" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
+            {ESCALERA.map((r, i) => (
+              <Reveal key={r.n} delay={i * 120} as="article" className="ch-card" style={{ border: "1px solid var(--border-subtle)", background: "rgba(255,255,255,.85)", padding: "32px 30px", display: "flex", flexDirection: "column" }}>
+                <span style={{ display: "inline-flex", alignItems: "center", gap: 9, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--ink-graphite)" }}>
+                  <span aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: r.c }} />{r.tag}
+                </span>
+                <h3 style={{ margin: "12px 0 0", font: "600 clamp(21px,1.9vw,26px)/1.04 var(--font-primary)", letterSpacing: "-.03em", color: "var(--ink-graphite)" }}>{r.n}</h3>
+                <p style={{ margin: "13px 0 0", font: "400 14.5px/1.6 var(--font-primary)", color: "var(--text-muted)" }}>{r.p}</p>
               </Reveal>
             ))}
           </div>
@@ -118,8 +115,8 @@ export default function EquipoPage() {
       {/* ═══ CTA ═══ */}
       <section style={{ position: "relative", overflow: "hidden", background: "radial-gradient(circle at 50% -10%,color-mix(in srgb, var(--change-violet) 24%, transparent),transparent 52%),var(--surface-dark-secondary)" }}>
         <div style={{ position: "relative", width: WRAP, margin: "0 auto", padding: "clamp(88px,12vw,168px) 0", textAlign: "center" }}>
-          <Reveal as="h2" style={{ margin: "0 auto", maxWidth: "18ch", font: "600 clamp(34px,5vw,72px)/1.0 var(--font-primary)", letterSpacing: "-.05em", color: "#fff", textWrap: "balance" }}>Conoce a la mesa con una decisión real.</Reveal>
-          <Reveal delay={100} as="p" style={{ margin: "24px auto 0", maxWidth: 560, font: "400 clamp(16px,1.4vw,19px)/1.6 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>La mejor forma de saber si pensamos como tú necesitas es trabajar juntos una decisión que traigas atorada.</Reveal>
+          <Reveal as="h2" style={{ margin: "0 auto", maxWidth: "18ch", font: "600 clamp(34px,5vw,72px)/1.0 var(--font-primary)", letterSpacing: "-.05em", color: "#fff", textWrap: "balance" }}>Trae la decisión que más te pesa hoy.</Reveal>
+          <Reveal delay={100} as="p" style={{ margin: "24px auto 0", maxWidth: 560, font: "400 clamp(16px,1.4vw,19px)/1.6 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>No necesitas tener claro el problema ni el camino. Eso es justo lo que la mesa hace contigo.</Reveal>
           <Reveal delay={160} style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12, marginTop: 38 }}>
             <Link href="/contacto" className="btn btn-light">Trabajar una decisión</Link>
             <Link href="/capacidades" className="btn btn-dghost">Ver el método</Link>
@@ -129,7 +126,7 @@ export default function EquipoPage() {
 
       <style>{`
         @media (max-width: 980px) {
-          .eq-intro, .eq-grid, .eq-princ { grid-template-columns: 1fr !important; }
+          .eq-intro, .eq-grid, .eq-ladder { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </PageScaffold>
