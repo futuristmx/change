@@ -1,6 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { Glyph, type GlyphName } from "@/components/ds";
+
+const GLYPH_MAP: Record<string, GlyphName> = {
+  Leer: "insight",
+  Interpretar: "risk",
+  Decidir: "decision",
+  Diseñar: "project",
+  Sostener: "status",
+};
 
 interface Node {
   title: string;
@@ -105,8 +114,11 @@ export default function MethodFlow() {
                 aria-label={`${n.title}, paso ${i + 1} de ${NODES.length}`}
                 style={{ border: 0, background: "transparent", padding: 0, textAlign: "center", cursor: "pointer", fontFamily: "var(--font-primary)", color: "inherit", opacity: inView ? 1 : 0, transform: inView ? "translateY(0)" : "translateY(8px)", transition: `opacity .5s ${120 + i * 90}ms, transform .5s ${120 + i * 90}ms var(--ease-premium)` }}
               >
-                <span aria-hidden="true" style={{ display: "block", marginBottom: 14, font: "300 clamp(26px,2.8vw,38px)/1 var(--font-secondary)", color: on ? "var(--change-violet)" : "var(--strategic-gray)", transition: "color var(--duration-standard) var(--ease-premium)" }}>
+                <span aria-hidden="true" style={{ display: "block", marginBottom: 8, font: "300 clamp(26px,2.8vw,38px)/1 var(--font-secondary)", color: on ? "var(--change-violet)" : "var(--strategic-gray)", transition: "color var(--duration-standard) var(--ease-premium)" }}>
                   {String(i + 1).padStart(2, "0")}
+                </span>
+                <span aria-hidden="true" style={{ display: "inline-flex", justifyContent: "center", alignItems: "center", marginBottom: 10, color: n.color, opacity: on ? 1 : 0.55, transition: "opacity var(--duration-standard) var(--ease-premium), color var(--duration-standard) var(--ease-premium)" }}>
+                  <Glyph name={GLYPH_MAP[n.title] ?? "nav"} size={20} />
                 </span>
                 <span
                   style={{

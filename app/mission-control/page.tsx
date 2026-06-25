@@ -28,6 +28,7 @@ export default function MissionControlPage() {
   return (
     <PageScaffold
       dark
+      ambient
       kicker="Mission Control"
       title="Donde la capacidad de futuro se sostiene."
       lead="Las señales se interpretan, las decisiones se toman, los rumbos se diseñan. Mission Control es donde todo eso permanece vivo en lugar de perderse entre juntas."

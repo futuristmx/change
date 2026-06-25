@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef } from "react";
+import { Toast } from "@/components/ds";
 
 const LABEL_STYLE: React.CSSProperties = {
   display: "block",
@@ -78,13 +79,22 @@ export default function ContactFormSimple() {
 
   if (status === "ok") {
     return (
-      <div style={{ padding: "48px 0", textAlign: "center" }}>
-        <span style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 40, height: 40, borderRadius: "50%", background: "var(--change-violet)", margin: "0 auto 20px" }}>
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12" /></svg>
-        </span>
-        <p style={{ margin: "0 0 8px", font: "600 18px/1.3 var(--font-primary)", letterSpacing: "-.02em", color: "var(--ink-graphite)" }}>Tu mensaje llegó.</p>
-        <p style={{ margin: 0, font: "400 14px/1.6 var(--font-primary)", color: "var(--text-muted)", maxWidth: 380, marginLeft: "auto", marginRight: "auto" }}>El board lo lee. Si hay alineación para trabajar juntos, te buscamos en menos de dos días hábiles.</p>
-      </div>
+      <>
+        <div style={{ padding: "48px 0", textAlign: "center" }} role="status" aria-live="polite">
+          <span style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 40, height: 40, borderRadius: "50%", background: "var(--change-violet)", margin: "0 auto 20px" }}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12" /></svg>
+          </span>
+          <p style={{ margin: "0 0 8px", font: "600 18px/1.3 var(--font-primary)", letterSpacing: "-.02em", color: "var(--ink-graphite)" }}>Tu mensaje llegó.</p>
+          <p style={{ margin: 0, font: "400 14px/1.6 var(--font-primary)", color: "var(--text-muted)", maxWidth: 380, marginLeft: "auto", marginRight: "auto" }}>El board lo lee. Si hay alineación para trabajar juntos, te buscamos en menos de dos días hábiles.</p>
+        </div>
+        <Toast
+          open
+          tone="success"
+          title="Tu mensaje llegó."
+          description="El board lo lee. Te buscamos en menos de dos días hábiles."
+          onClose={() => setStatus("idle")}
+        />
+      </>
     );
   }
 

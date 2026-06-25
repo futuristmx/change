@@ -2,6 +2,7 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
+import { SignalField } from "@/components/ds";
 
 const WRAP = "min(1340px, calc(100% - clamp(40px,8vw,128px)))";
 
@@ -11,6 +12,8 @@ interface PageScaffoldProps {
   lead: string;
   /** optional dark hero (Mission Control) */
   dark?: boolean;
+  /** ambient SignalField behind the hero */
+  ambient?: boolean;
   children?: React.ReactNode;
 }
 
@@ -19,7 +22,7 @@ interface PageScaffoldProps {
  * `children` carries page-specific content. Used by the V1 inner pages
  * until each gets its full port in Fase 2.
  */
-export default function PageScaffold({ kicker, title, lead, dark = false, children }: PageScaffoldProps) {
+export default function PageScaffold({ kicker, title, lead, dark = false, ambient = false, children }: PageScaffoldProps) {
   const heroBg = dark
     ? "radial-gradient(circle at 82% 0%,color-mix(in srgb, var(--change-violet) 22%, transparent),transparent 40%),linear-gradient(180deg,var(--surface-dark) 0%,var(--surface-dark-secondary) 100%)"
     : "radial-gradient(110% 80% at 84% -10%,rgba(138,108,255,.14) 0%,rgba(89,184,217,.06) 32%,rgba(255,255,255,0) 58%),linear-gradient(180deg,#FFFFFF 0%,var(--pure-white) 70%,var(--warm-haze) 100%)";
@@ -34,7 +37,8 @@ export default function PageScaffold({ kicker, title, lead, dark = false, childr
       <div className={dark ? "change-dark" : undefined} style={{ flex: 1, display: "flex", flexDirection: "column", background: dark ? "var(--surface-dark)" : "var(--surface-page)" }}>
       <main id="main-content" style={{ flex: 1 }}>
         <section style={{ position: "relative", overflow: "hidden", background: heroBg }}>
-          <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(96px,13vw,170px) 0 clamp(64px,8vw,110px)" }}>
+          {ambient && <SignalField />}
+          <div style={{ position: "relative", width: WRAP, margin: "0 auto", padding: "clamp(96px,13vw,170px) 0 clamp(64px,8vw,110px)" }}>
             <Reveal style={{ display: "inline-flex", alignItems: "center", gap: 11, marginBottom: 28 }}>
               <span data-pulse={dark ? "" : undefined} style={{ width: 7, height: 7, borderRadius: dark ? "50%" : 0, background: dark ? "var(--signal-cyan)" : "var(--change-violet)" }} />
               <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: kickerColor }}>{kicker}</span>

@@ -1,6 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { Glyph, type GlyphName } from "@/components/ds";
+
+const STAGE_GLYPH: Record<string, GlyphName> = {
+  "Señal": "insight",
+  "Tensión": "risk",
+  "Decisión": "decision",
+  "Proyecto": "project",
+  "Aprendizaje": "status",
+};
 
 /* ── Demo ficticio plausible: UNA decisión trazada de extremo a extremo ── */
 interface Stage {
@@ -105,7 +114,11 @@ export default function MissionControlLive() {
           <div style={{ border: "1px solid rgba(255,255,255,.1)", borderLeft: `3px solid ${stage.color}`, background: "rgba(255,255,255,.03)", padding: "20px 22px", minHeight: 156 }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, flexWrap: "wrap", marginBottom: 12 }}>
               <span style={{ display: "inline-flex", alignItems: "center", gap: 8, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "#fff" }}>
-                <span aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: stage.color }} />{stage.k}
+                <span aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: stage.color }} />
+                <span aria-hidden="true" style={{ display: "inline-flex", color: stage.color }}>
+                  <Glyph name={STAGE_GLYPH[stage.k] ?? "nav"} size={18} />
+                </span>
+                {stage.k}
               </span>
               <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".08em", textTransform: "uppercase", color: "rgba(217,210,255,.85)" }}>{stage.artefacto}</span>
             </div>

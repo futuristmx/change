@@ -7,6 +7,7 @@ import SystemicDescent from "@/components/SystemicDescent";
 import CapacityScore from "@/components/CapacityScore";
 import MissionControlLive from "@/components/MissionControlLive";
 import EtherealDivider from "@/components/ds/EtherealDivider";
+import { Badge, SignalField, type BadgeTone } from "@/components/ds";
 
 const WRAP = "min(1340px, calc(100% - clamp(40px,8vw,128px)))";
 
@@ -95,6 +96,19 @@ const CREDIBILIDAD_PUNTOS = [
   "La información sensible no se usa como material público sin autorización expresa.",
 ];
 
+/* Map de color-token a tono semántico del Badge DS. */
+function mapTone(colorVar: string): BadgeTone {
+  switch (colorVar) {
+    case "var(--signal-cyan)":          return "signal";
+    case "var(--soft-violet)":          return "violet";
+    case "var(--change-violet)":        return "violet";
+    case "var(--opportunity-orange)":   return "opportunity";
+    case "var(--ink-graphite)":         return "neutral";
+    case "var(--human-pink)":           return "opportunity";
+    default:                            return "neutral";
+  }
+}
+
 export default function Home() {
   return (
     <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
@@ -103,6 +117,7 @@ export default function Home() {
 
         {/* ═══ 01 · HERO ═══ */}
         <section style={{ position: "relative", overflow: "hidden", background: "radial-gradient(120% 90% at 50% -10%,rgba(138,108,255,.14) 0%,rgba(89,184,217,.06) 34%,rgba(255,255,255,0) 60%),var(--gradient-celestial-horizon)" }}>
+          <SignalField />
           <div style={{ position: "relative", width: WRAP, margin: "0 auto", padding: "clamp(88px,12vw,156px) 0 clamp(72px,9vw,116px)", textAlign: "center" }}>
             <Reveal style={{ display: "inline-flex", alignItems: "center", gap: 11, marginBottom: 34, padding: "7px 14px 7px 11px", border: "1px solid var(--border-subtle)", background: "rgba(255,255,255,.55)" }}>
               <span data-pulse style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--signal-cyan)" }} />
@@ -241,8 +256,8 @@ export default function Home() {
             <div className="ch-grid4" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 16 }}>
               {ARTEFACTOS.map((a, i) => (
                 <Reveal key={a.h} delay={(i % 4) * 80} as="article" className="ch-card" style={{ background: "rgba(255,255,255,.85)", border: "1px solid var(--border-subtle)", padding: "28px 26px 30px", display: "flex", flexDirection: "column", minHeight: 220 }}>
-                  <span style={{ display: "inline-flex", alignItems: "center", gap: 8, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--ink-graphite)" }}>
-                    <span aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: a.c }} />{a.k}
+                  <span style={{ display: "inline-flex" }}>
+                    <Badge tone={mapTone(a.c)}>{a.k}</Badge>
                   </span>
                   <h3 style={{ margin: "16px 0 0", font: "600 20px var(--font-primary)", letterSpacing: "-.02em", color: "var(--ink-graphite)" }}>{a.h}</h3>
                   <p style={{ margin: "10px 0 0", font: "400 14px/1.55 var(--font-primary)", color: "var(--text-muted)" }}>{a.p}</p>
@@ -315,9 +330,8 @@ export default function Home() {
                   <span style={{ display: "block", font: "300 clamp(38px,4vw,54px)/1 var(--font-accent)", letterSpacing: "-.04em", color: "var(--change-violet)", marginBottom: 20 }}>{paso.n}</span>
                   <h3 style={{ margin: "0 0 12px", font: "600 clamp(18px,1.6vw,22px)/1.15 var(--font-primary)", letterSpacing: "-.025em", color: "var(--ink-graphite)" }}>{paso.h}</h3>
                   <p style={{ margin: "0 0 24px", font: "400 14.5px/1.55 var(--font-primary)", color: "var(--text-muted)", flexGrow: 1 }}>{paso.p}</p>
-                  <span style={{ display: "inline-flex", alignItems: "center", gap: 7, font: "600 10.5px var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-muted)", borderTop: "1px solid var(--border-subtle)", paddingTop: 16 }}>
-                    <span aria-hidden="true" style={{ width: 5, height: 5, borderRadius: "50%", background: "var(--change-violet)" }} />
-                    {paso.label}
+                  <span style={{ display: "inline-flex", borderTop: "1px solid var(--border-subtle)", paddingTop: 16 }}>
+                    <Badge tone="violet">{paso.label}</Badge>
                   </span>
                 </Reveal>
               ))}

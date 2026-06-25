@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { contactSchema } from "@/lib/contact-schema";
+import { Toast } from "@/components/ds";
 
 type Status = "idle" | "submitting" | "success" | "error";
 type Errors = Record<string, string>;
@@ -114,15 +115,24 @@ export default function ContactForm() {
 
   if (status === "success") {
     return (
-      <div style={{ border: "1px solid var(--border-subtle)", background: "var(--surface-card)", padding: "clamp(32px,4vw,48px)" }}>
-        <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--success)" }}>Recibido</span>
-        <h3 style={{ margin: "14px 0 10px", font: "600 clamp(22px,2.4vw,30px)/1.05 var(--font-primary)", letterSpacing: "-.03em", color: "var(--ink-graphite)" }}>
-          Listo. Tu decisión llegó.
-        </h3>
-        <p style={{ margin: 0, font: "400 15.5px/1.6 var(--font-primary)", color: "var(--text-muted)" }}>
-          La estamos leyendo y te buscamos pronto con una primera estructura del reto. Mientras tanto, no necesitas hacer nada más.
-        </p>
-      </div>
+      <>
+        <div style={{ border: "1px solid var(--border-subtle)", background: "var(--surface-card)", padding: "clamp(32px,4vw,48px)" }} role="status" aria-live="polite">
+          <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--success)" }}>Recibido</span>
+          <h3 style={{ margin: "14px 0 10px", font: "600 clamp(22px,2.4vw,30px)/1.05 var(--font-primary)", letterSpacing: "-.03em", color: "var(--ink-graphite)" }}>
+            Listo. Tu decisión llegó.
+          </h3>
+          <p style={{ margin: 0, font: "400 15.5px/1.6 var(--font-primary)", color: "var(--text-muted)" }}>
+            La estamos leyendo y te buscamos pronto con una primera estructura del reto. Mientras tanto, no necesitas hacer nada más.
+          </p>
+        </div>
+        <Toast
+          open
+          tone="success"
+          title="Listo. Tu decisión llegó."
+          description="La estamos leyendo. Te buscamos pronto con una primera estructura del reto."
+          onClose={() => setStatus("idle")}
+        />
+      </>
     );
   }
 
