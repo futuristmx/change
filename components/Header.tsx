@@ -5,9 +5,9 @@ import Link from "next/link";
 import Image from "next/image";
 
 const NAV = [
-  { idx: "01", label: "Claridad", href: "/contacto" },
-  { idx: "02", label: "Método", href: "/capacidades" },
-  { idx: "03", label: "Mission Control", href: "/mission-control" },
+  { idx: "01", label: "Método", href: "/capacidades" },
+  { idx: "02", label: "Mission Control", href: "/mission-control" },
+  { idx: "03", label: "Casos", href: "/casos" },
   { idx: "04", label: "Equipo", href: "/equipo" },
   { idx: "05", label: "Field Notes", href: "/field-notes" },
 ];
