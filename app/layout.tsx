@@ -6,14 +6,14 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://change.live";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Change · Inteligencia estratégica para decisiones complejas",
+    default: "Change · Capacidad de futuro para actuar sin certeza",
     template: "%s · Change",
   },
   description:
-    "Change convierte decisiones ambiguas en sistemas de claridad para que el rumbo no dependa de una sola cabeza. Mapa de Claridad, Sprint de Rumbo, Mission Control.",
+    "Change diseña capacidad de futuro: leer lo que cambia, interpretar tensiones, decidir con criterio, diseñar respuestas y sostener aprendizaje antes de que la urgencia decida por ti.",
   keywords: [
-    "estrategia", "foresight", "futuros", "inteligencia estratégica",
-    "toma de decisiones", "consultoría estratégica", "México", "Change",
+    "capacidad de futuro", "inteligencia estratégica", "foresight", "futuros",
+    "toma de decisiones", "pensamiento sistémico", "diseño estratégico", "México", "Change",
   ],
   authors: [{ name: "Change" }],
   alternates: { canonical: SITE_URL },
@@ -22,14 +22,14 @@ export const metadata: Metadata = {
     locale: "es_MX",
     url: SITE_URL,
     siteName: "Change",
-    title: "Change · Inteligencia estratégica para decisiones complejas",
+    title: "Change · Capacidad de futuro para actuar sin certeza",
     description:
-      "La claridad no aparece. Se diseña. Convertimos criterio directivo en sistemas trazables y gobernables.",
+      "La certeza dejó de ser condición para actuar. Change diseña capacidad de futuro: leer, interpretar, decidir, diseñar y sostener.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Change · Inteligencia estratégica",
-    description: "La claridad no aparece. Se diseña.",
+    title: "Change · Capacidad de futuro",
+    description: "La certeza dejó de ser condición para actuar.",
   },
   robots: { index: true, follow: true },
   // Favicon: app/icon.svg (Change icon, Electric Future Violet #6D3BFF, sin fondo)
@@ -69,7 +69,7 @@ export default function RootLayout({
               url: SITE_URL,
               email: "andres@change.live",
               description:
-                "Inteligencia estratégica para decisiones complejas. Change convierte el criterio directivo en sistemas claros, compartidos y trazables.",
+                "Change diseña capacidad de futuro: la habilidad de una organización para leer cambio, interpretar tensiones, decidir con criterio, diseñar respuestas y sostener aprendizaje antes de que la urgencia la obligue.",
               areaServed: { "@type": "Country", name: "México" },
               knowsLanguage: "es-MX",
               logo: `${SITE_URL}/assets/change_logo_graphite.svg`,
