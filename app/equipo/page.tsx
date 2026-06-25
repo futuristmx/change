@@ -4,7 +4,7 @@ import PageScaffold from "@/components/PageScaffold";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
-  title: "La mesa senior que construye capacidad de futuro",
+  title: "El board senior que construye capacidad de futuro",
   description:
     "Interpretar el cambio, decidir bajo ambigüedad y sostener el rumbo no caben en una sola cabeza. Change reúne las formas de pensar que una decisión difícil necesita al mismo tiempo.",
 };
@@ -23,13 +23,8 @@ const MESA = [
     ev: "Matriz de trade-offs · Reporte ejecutivo",
   },
   {
-    n: "Eric O. Fuentes", arc: "Diseñar y sostener", disc: "diseño, sistema y ejecución", c: "var(--ink-graphite)",
-    p: "Da forma a la decisión y construye lo que la mantiene viva cuando la sesión termina. Su aporte es traducir la decisión en algo que se ejecuta y se sigue en el tiempo, no en un documento que se archiva.",
-    ev: "Roadmap vivo · Mission Control",
-  },
-  {
-    n: "Partners", arc: "Profundidad por reto", disc: "especialistas convocados según el caso", c: "var(--soft-stone-gray)",
-    p: "Cuando un reto exige conocimiento de un dominio específico, sumamos al especialista adecuado a la mesa, sin diluir el método ni inflar la estructura. La mesa crece por la pregunta, no por el organigrama.",
+    n: "Red de especialistas", arc: "Profundidad por reto", disc: "especialistas convocados según el caso", c: "var(--soft-stone-gray)",
+    p: "Cuando un reto exige conocimiento de un dominio específico, sumamos al especialista adecuado al board, sin diluir el método ni inflar la estructura. El board crece por la pregunta, no por el organigrama.",
     ev: "El dominio que el reto exige",
   },
 ];
@@ -43,8 +38,8 @@ const ESCALERA = [
 export default function EquipoPage() {
   return (
     <PageScaffold
-      kicker="La mesa"
-      title="La capacidad de futuro se construye con una mesa senior."
+      kicker="Board"
+      title="La capacidad de futuro se construye con un board senior."
       lead="Interpretar el cambio, decidir bajo ambigüedad y sostener el rumbo no caben en una sola cabeza. Change reúne las formas de pensar que una decisión difícil necesita al mismo tiempo."
     >
       {/* ═══ POR QUÉ UNA MESA ═══ */}
@@ -54,7 +49,7 @@ export default function EquipoPage() {
             <div>
               <Reveal style={{ display: "flex", alignItems: "center", gap: 11, marginBottom: 20 }}>
                 <span style={{ width: 7, height: 7, background: "var(--change-violet)" }} />
-                <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)" }}>Por qué una mesa</span>
+                <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)" }}>Por qué un board</span>
               </Reveal>
               <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(30px,4.2vw,58px)/.99 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>El rumbo no debería depender de una sola cabeza.</Reveal>
             </div>
@@ -70,7 +65,7 @@ export default function EquipoPage() {
         <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(88px,11vw,160px) 0" }}>
           <Reveal style={{ display: "flex", alignItems: "center", gap: 11, marginBottom: 20 }}>
             <span style={{ width: 7, height: 7, background: "var(--change-violet)" }} />
-            <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)" }}>Cómo trabaja la mesa</span>
+            <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)" }}>Cómo trabaja el board</span>
           </Reveal>
           <Reveal delay={60} as="h2" style={{ margin: "0 0 16px", maxWidth: "22ch", font: "600 clamp(30px,4.2vw,56px)/.99 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>Cada perfil cubre un tramo del arco de una decisión.</Reveal>
           <Reveal delay={100} as="p" style={{ margin: "0 0 clamp(40px,5vw,60px)", maxWidth: "56ch", font: "400 clamp(16px,1.3vw,19px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>No repartimos un proyecto en tareas. Repartimos una decisión en capacidades, y cada capacidad deja un artefacto que puedes ver.</Reveal>
@@ -116,7 +111,7 @@ export default function EquipoPage() {
       <section style={{ position: "relative", overflow: "hidden", background: "radial-gradient(circle at 50% -10%,color-mix(in srgb, var(--change-violet) 24%, transparent),transparent 52%),var(--surface-dark-secondary)" }}>
         <div style={{ position: "relative", width: WRAP, margin: "0 auto", padding: "clamp(88px,12vw,168px) 0", textAlign: "center" }}>
           <Reveal as="h2" style={{ margin: "0 auto", maxWidth: "18ch", font: "600 clamp(34px,5vw,72px)/1.0 var(--font-primary)", letterSpacing: "-.05em", color: "#fff", textWrap: "balance" }}>Trae la decisión que más te pesa hoy.</Reveal>
-          <Reveal delay={100} as="p" style={{ margin: "24px auto 0", maxWidth: 560, font: "400 clamp(16px,1.4vw,19px)/1.6 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>No necesitas tener claro el problema ni el camino. Eso es justo lo que la mesa hace contigo.</Reveal>
+          <Reveal delay={100} as="p" style={{ margin: "24px auto 0", maxWidth: 560, font: "400 clamp(16px,1.4vw,19px)/1.6 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>No necesitas tener claro el problema ni el camino. Eso es justo lo que el board hace contigo.</Reveal>
           <Reveal delay={160} style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12, marginTop: 38 }}>
             <Link href="/contacto" className="btn btn-light">Trabajar una decisión</Link>
             <Link href="/capacidades" className="btn btn-dghost">Ver el método</Link>

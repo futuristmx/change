@@ -34,7 +34,17 @@ export type IntentEvent =
   | "score_cta_contacto"
   | "depth_mission_control"
   | "depth_artefactos"
-  | "depth_casos";
+  | "depth_casos"
+  | "simulator_started"
+  | "simulator_scenario_selected"
+  | "simulator_step_completed"
+  | "simulator_chip_selected"
+  | "simulator_answer_edited"
+  | "simulator_result_viewed"
+  | "simulator_retry"
+  | "simulator_contact_started"
+  | "simulator_submitted"
+  | "simulator_abandoned";
 
 /** Envía un evento de intención. No bloquea, no lanza, no recolecta PII. */
 export function track(event: IntentEvent, props?: Record<string, unknown>): void {

@@ -57,8 +57,7 @@ const TENSIONES = [
 const MESA = [
   { n: "Andrés Valencia", arc: "Leer · Interpretar", c: "var(--signal-cyan)", p: "Trae señales del entorno y las vuelve tensiones nombradas y narrativa que la organización entiende." },
   { n: "Miguel Cadena", arc: "Decidir", c: "var(--change-violet)", p: "Convierte la lectura en apuestas con costo explícito y en crecimiento que se sostiene." },
-  { n: "Eric O. Fuentes", arc: "Diseñar · Sostener", c: "var(--ink-graphite)", p: "Da forma a la decisión y construye la infraestructura para que el aprendizaje no se pierda." },
-  { n: "Partners", arc: "Por reto", c: "var(--soft-stone-gray)", p: "Sumamos especialistas cuando una tensión específica lo exige, sin inflar la estructura." },
+  { n: "Red de especialistas", arc: "Por reto", c: "var(--soft-stone-gray)", p: "Sumamos especialistas cuando una tensión específica lo exige, sin inflar la estructura." },
 ];
 
 export default function Home() {
@@ -207,10 +206,10 @@ export default function Home() {
               <div>
                 <Reveal style={{ display: "flex", alignItems: "center", gap: 11, marginBottom: 20 }}>
                   <span style={{ width: 7, height: 7, background: "var(--change-violet)" }} />
-                  <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)" }}>La mesa</span>
+                  <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)" }}>Board</span>
                 </Reveal>
-                <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(32px,4.2vw,60px)/.98 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>Una mesa para pensar lo que todavía no tiene forma.</Reveal>
-                <Reveal delay={120} as="p" style={{ margin: "24px 0 0", maxWidth: 500, font: "400 clamp(17px,1.4vw,20px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>Change no es una persona ni una metodología empacada. Es una mesa donde se cruzan lectura del futuro, dirección de negocio y diseño de sistema, sobre el mismo arco de trabajo.</Reveal>
+                <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(32px,4.2vw,60px)/.98 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>Un board para pensar lo que todavía no tiene forma.</Reveal>
+                <Reveal delay={120} as="p" style={{ margin: "24px 0 0", maxWidth: 500, font: "400 clamp(17px,1.4vw,20px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>Change no es una persona ni una metodología empacada. Es el board donde se cruzan lectura del futuro, dirección de negocio y diseño de sistema, sobre el mismo arco de trabajo.</Reveal>
               </div>
               <Reveal delay={120} as="aside" className="ch-card" style={{ border: "1px solid var(--border-subtle)", background: "rgba(255,255,255,.85)", padding: "32px 30px" }}>
                 <div style={{ display: "flex", flexDirection: "column" }}>

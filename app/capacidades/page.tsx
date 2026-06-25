@@ -54,8 +54,7 @@ const ESCALERA = [
 const MESA = [
   { n: "Andrés Valencia", arc: "Leer e interpretar", c: "var(--signal-cyan)", p: "Futuros, estrategia y narrativa. Lleva la señal del entorno hasta la tensión que tu organización debe resolver." },
   { n: "Miguel Cadena", arc: "Decidir y aterrizar", c: "var(--change-violet)", p: "Negocio, dirección y crecimiento. Convierte la lectura en una decisión que el negocio puede ejecutar." },
-  { n: "Eric O. Fuentes", arc: "Diseñar y sostener", c: "var(--ink-graphite)", p: "Diseño, sistema y ejecución. Da forma a la decisión y construye la infraestructura que la mantiene viva." },
-  { n: "Partners", arc: "Profundidad", c: "var(--soft-stone-gray)", p: "Especialistas que entran cuando el reto exige una profundidad específica de sector o disciplina." },
+  { n: "Red de especialistas", arc: "Profundidad", c: "var(--soft-stone-gray)", p: "Especialistas que entran cuando el reto exige una profundidad específica de sector o disciplina." },
 ];
 
 export default function CapacidadesPage() {
@@ -154,7 +153,7 @@ export default function CapacidadesPage() {
                 <span style={{ width: 7, height: 7, background: "var(--change-violet)" }} />
                 <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)" }}>Quién lo construye</span>
               </Reveal>
-              <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(30px,4vw,56px)/.99 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>Tres disciplinas, un mismo método.</Reveal>
+              <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(30px,4vw,56px)/.99 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>Un board senior, un mismo método.</Reveal>
               <Reveal delay={120} as="p" style={{ margin: "24px 0 0", maxWidth: "48ch", font: "400 clamp(17px,1.4vw,20px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>La capacidad de futuro exige leer, interpretar, decidir, diseñar y sostener al mismo tiempo. Por eso el trabajo no recae en una sola cabeza.</Reveal>
             </div>
             <Reveal delay={120} as="aside" className="ch-card" style={{ border: "1px solid var(--border-subtle)", background: "rgba(255,255,255,.85)", padding: "30px 28px" }}>
