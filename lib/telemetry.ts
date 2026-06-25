@@ -45,7 +45,8 @@ export type IntentEvent =
   | "simulator_contact_started"
   | "simulator_submitted"
   | "simulator_abandoned"
-  | "simulator_result_copied";
+  | "simulator_result_copied"
+  | "simulator_step_skipped";
 
 /** Envía un evento de intención. No bloquea, no lanza, no recolecta PII. */
 export function track(event: IntentEvent, props?: Record<string, unknown>): void {
