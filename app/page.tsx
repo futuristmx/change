@@ -2,7 +2,7 @@ import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
-import DecisionCartography from "@/components/DecisionCartography";
+import MethodFlow from "@/components/MethodFlow";
 import MissionControlTabs from "@/components/MissionControlTabs";
 
 const WRAP = "min(1340px, calc(100% - clamp(40px,8vw,128px)))";
@@ -31,13 +31,6 @@ const ARCO = [
   { t: "Sostener", c: "var(--ink-graphite)" },
 ];
 
-const METODO = [
-  { v: "Leer", q: "¿Qué está cambiando alrededor antes de que se vuelva urgente?", p: "Rastreamos las señales que importan y separamos ruido de movimiento real.", art: "Radar de señales", c: "var(--signal-cyan)" },
-  { v: "Interpretar", q: "¿Qué significa lo que cambia para esta organización en particular?", p: "Convertimos señales sueltas en tensiones nombradas — el paso que casi nadie da, y donde se gana o se pierde la lectura.", art: "Mapa de tensiones", c: "var(--soft-violet)" },
-  { v: "Decidir", q: "¿Qué importa de verdad y qué se sacrifica?", p: "Hacemos explícitos los criterios y los trade-offs para que la decisión se pueda defender y repetir.", art: "Matriz de trade-offs", c: "var(--change-violet)" },
-  { v: "Diseñar", q: "¿Qué forma concreta toma la decisión?", p: "La bajamos a rumbo accionable: roadmap, prototipo o narrativa que el equipo puede ejecutar.", art: "Roadmap vivo", c: "var(--change-violet)" },
-  { v: "Sostener", q: "¿Cómo se mantiene vivo el aprendizaje en la siguiente coyuntura?", p: "Le damos memoria a la estrategia para que no se reinicie cada vez que cambia el contexto.", art: "Mission Control", c: "var(--ink-graphite)" },
-];
 
 const ARTEFACTOS = [
   { h: "Radar de señales", p: "Lo que está cambiando alrededor, ordenado por relevancia y no por volumen de ruido.", k: "Leer", c: "var(--signal-cyan)" },
@@ -147,42 +140,18 @@ export default function Home() {
           </div>
         </section>
 
-        {/* ═══ 04 · MÉTODO ═══ */}
-        <section id="metodo" style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-sky-pearl)" }}>
+        {/* ═══ 04 · MÉTODO (visual interactivo) ═══ */}
+        <section id="metodo" style={{ borderTop: "1px solid var(--border-subtle)", background: "linear-gradient(180deg,var(--gradient-sky-pearl),#FFFFFF)" }}>
           <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(92px,11vw,168px) 0" }}>
-            <SectionHead kicker="El método" title="Leer. Interpretar. Decidir. Diseñar. Sostener." lead="Cinco movimientos que convierten incertidumbre en instrumentos de decisión. No es un proceso lineal de una sola vez: es la forma en que una organización aprende a leerse a sí misma y a su entorno." />
-            <Reveal style={{ border: "1px solid var(--border-subtle)", background: "rgba(255,255,255,.7)" }}>
-              {METODO.map((m, i, arr) => (
-                <div key={m.v} className="ch-mrow" style={{ display: "grid", gridTemplateColumns: "210px 1fr 230px", alignItems: "stretch", gap: 24, padding: "0 28px 0 0", borderBottom: i < arr.length - 1 ? "1px solid var(--border-subtle)" : "none" }}>
-                  <div style={{ position: "relative", display: "flex", alignItems: "center", gap: 16, padding: "26px 0 26px 28px" }}>
-                    <span style={{ position: "absolute", left: 34, top: i === 0 ? "50%" : 0, bottom: i === arr.length - 1 ? "50%" : 0, width: 1, background: "var(--line-structural)" }} />
-                    <span style={{ position: "relative", zIndex: 1, width: 11, height: 11, borderRadius: "50%", background: m.c, boxShadow: "0 0 0 4px #fff" }} />
-                    <h3 style={{ margin: 0, font: "600 clamp(20px,1.9vw,25px) var(--font-primary)", letterSpacing: "-.02em", color: "var(--ink-graphite)" }}>{m.v}</h3>
-                  </div>
-                  <div style={{ display: "flex", alignItems: "center" }}><p style={{ margin: 0, font: "400 15px/1.5 var(--font-primary)", color: "var(--text-muted)" }}><strong style={{ color: "var(--deep-warm-gray)", fontWeight: 500 }}>{m.q}</strong> {m.p}</p></div>
-                  <div style={{ display: "flex", alignItems: "center" }}>
-                    <span style={{ display: "inline-flex", alignItems: "center", gap: 8, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--ink-graphite)" }}>
-                      <span aria-hidden="true" style={{ width: 6, height: 6, borderRadius: "50%", background: m.c }} />{m.art}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </Reveal>
-          </div>
-        </section>
-
-        {/* ═══ 05 · CARTOGRAFÍA INTERACTIVA ═══ */}
-        <section style={{ borderTop: "1px solid var(--border-subtle)", background: "linear-gradient(180deg,#FFFFFF,var(--pure-white))" }}>
-          <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(92px,11vw,168px) 0" }}>
-            <div style={{ maxWidth: 760, marginBottom: "clamp(40px,5vw,60px)" }}>
+            <div style={{ maxWidth: 820, marginBottom: "clamp(40px,5vw,60px)" }}>
               <Reveal style={{ display: "flex", alignItems: "center", gap: 11, marginBottom: 20 }}>
                 <span style={{ width: 7, height: 7, background: "var(--change-violet)" }} />
-                <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)" }}>El arco, paso a paso</span>
+                <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)" }}>El método</span>
               </Reveal>
-              <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(32px,4.4vw,62px)/.98 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>Recorre cada movimiento. Mira qué decisión habilita.</Reveal>
-              <Reveal delay={120} as="p" style={{ margin: "20px 0 0", maxWidth: "56ch", font: "400 clamp(17px,1.4vw,20px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>Cada nodo resuelve una pregunta, reduce un riesgo y deja un artefacto. Juntos, alimentan la memoria estratégica de la organización.</Reveal>
+              <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(32px,4.6vw,66px)/.96 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>Leer. Interpretar. Decidir. Diseñar. Sostener.</Reveal>
+              <Reveal delay={120} as="p" style={{ margin: "22px 0 0", maxWidth: "60ch", font: "400 clamp(17px,1.4vw,20px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>Cinco movimientos que convierten incertidumbre en instrumentos de decisión. Toca cada uno: verás la pregunta que resuelve, el riesgo que reduce y el artefacto que deja.</Reveal>
             </div>
-            <Reveal delay={160}><DecisionCartography /></Reveal>
+            <Reveal delay={160}><MethodFlow /></Reveal>
           </div>
         </section>
 
@@ -214,7 +183,7 @@ export default function Home() {
                   <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "rgba(255,255,255,.8)" }}>Memoria estratégica</span>
                 </Reveal>
                 <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(34px,4.4vw,64px)/.98 var(--font-primary)", letterSpacing: "-.05em", color: "#fff", textWrap: "balance" }}>La estrategia necesita memoria.</Reveal>
-                <Reveal delay={120} as="p" style={{ margin: "24px 0 0", maxWidth: 500, font: "400 clamp(17px,1.5vw,21px)/1.5 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>Mission Control sostiene señales, decisiones, proyectos y reportes vivos, para que la organización no tenga que reinventar el rumbo cada vez que cambia el contexto. Es la infraestructura donde la capacidad de futuro se queda instalada.</Reveal>
+                <Reveal delay={120} as="p" style={{ margin: "24px 0 0", maxWidth: 500, font: "400 clamp(17px,1.5vw,21px)/1.5 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>Mission Control sostiene señales, decisiones, proyectos y reportes vivos, para que la organización no tenga que reinventar el rumbo cada vez que cambia el contexto. Es la infraestructura donde el aprendizaje se queda instalado.</Reveal>
                 <Reveal delay={180} style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 36 }}>
                   <Link href="/mission-control" className="btn btn-light">Ver Mission Control</Link>
                   <Link href="/capacidades" className="btn btn-dghost">Ver el método</Link>

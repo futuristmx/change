@@ -1,6 +1,16 @@
 import Link from "next/link";
 import Image from "next/image";
 
+const COL_A = [
+  { label: "Método", href: "/capacidades" },
+  { label: "Mission Control", href: "/mission-control" },
+  { label: "Casos", href: "/casos" },
+];
+const COL_B = [
+  { label: "Equipo", href: "/equipo" },
+  { label: "Field Notes", href: "/field-notes" },
+];
+
 export default function Footer() {
   return (
     <footer style={{ background: "var(--ink-graphite)", color: "rgba(240,244,255,.8)" }}>
@@ -10,27 +20,27 @@ export default function Footer() {
             <Link href="/" aria-label="Change" style={{ display: "block", marginBottom: 20 }}>
               <Image src="/assets/change_logo_white.svg" alt="Change" width={120} height={30} style={{ height: 30, width: "auto", display: "block" }} />
             </Link>
-            <p style={{ margin: 0, maxWidth: 280, font: "400 14px/1.6 var(--font-primary)", color: "rgba(240,244,255,.8)" }}>
-              La claridad no aparece. Se diseña.
+            <p style={{ margin: 0, maxWidth: 290, font: "400 14px/1.6 var(--font-primary)", color: "rgba(240,244,255,.8)" }}>
+              La certeza dejó de ser condición para actuar.
             </p>
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
             <div style={{ font: "600 11px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(240,244,255,.8)", marginBottom: 4 }}>Explorar</div>
-            <Link href="/contacto" style={{ font: "400 14px var(--font-primary)", color: "rgba(240,244,255,.8)" }}>Claridad</Link>
-            <Link href="/capacidades" style={{ font: "400 14px var(--font-primary)", color: "rgba(240,244,255,.8)" }}>Método</Link>
-            <Link href="/mission-control" style={{ font: "400 14px var(--font-primary)", color: "rgba(240,244,255,.8)" }}>Mission Control</Link>
+            {COL_A.map((l) => (
+              <Link key={l.href} href={l.href} style={{ font: "400 14px var(--font-primary)", color: "rgba(240,244,255,.8)" }}>{l.label}</Link>
+            ))}
           </div>
 
           <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
             <div style={{ font: "600 11px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(240,244,255,.8)", marginBottom: 4 }}>Firma</div>
-            <Link href="/equipo" style={{ font: "400 14px var(--font-primary)", color: "rgba(240,244,255,.8)" }}>Equipo</Link>
-            <Link href="/field-notes" style={{ font: "400 14px var(--font-primary)", color: "rgba(240,244,255,.8)" }}>Field Notes</Link>
-            <Link href="/casos" style={{ font: "400 14px var(--font-primary)", color: "rgba(240,244,255,.8)" }}>Decisiones</Link>
+            {COL_B.map((l) => (
+              <Link key={l.href} href={l.href} style={{ font: "400 14px var(--font-primary)", color: "rgba(240,244,255,.8)" }}>{l.label}</Link>
+            ))}
           </div>
 
           <div>
-            <div style={{ font: "600 11px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(240,244,255,.8)", marginBottom: 16 }}>Empieza por ver claro</div>
+            <div style={{ font: "600 11px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(240,244,255,.8)", marginBottom: 16 }}>Empieza por una decisión</div>
             <Link href="/contacto" className="btn btn-primary btn-sm">Trabajar una decisión</Link>
           </div>
         </div>
