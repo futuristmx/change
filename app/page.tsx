@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
 import MethodFlow from "@/components/MethodFlow";
 import SystemicDescent from "@/components/SystemicDescent";
-import MissionControlTabs from "@/components/MissionControlTabs";
+import MissionControlLive from "@/components/MissionControlLive";
 
 const WRAP = "min(1340px, calc(100% - clamp(40px,8vw,128px)))";
 
@@ -176,7 +176,7 @@ export default function Home() {
                   <Link href="/capacidades" className="btn btn-dghost">Ver el método</Link>
                 </Reveal>
               </div>
-              <Reveal delay={160}><MissionControlTabs /></Reveal>
+              <Reveal delay={160}><MissionControlLive /></Reveal>
             </div>
           </div>
         </section>

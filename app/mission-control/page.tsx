@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import PageScaffold from "@/components/PageScaffold";
 import Reveal from "@/components/Reveal";
-import MissionControlTabs from "@/components/MissionControlTabs";
+import MissionControlLive from "@/components/MissionControlLive";
 
 export const metadata: Metadata = {
   title: "Mission Control: donde la capacidad de futuro se sostiene",
@@ -107,7 +107,7 @@ export default function MissionControlPage() {
               <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(28px,3.6vw,50px)/1.0 var(--font-primary)", letterSpacing: "-.04em", color: "#fff", textWrap: "balance" }}>Señales, decisiones y rumbo, leídos juntos.</Reveal>
               <Reveal delay={120} as="p" style={{ margin: "22px 0 0", maxWidth: "46ch", font: "400 clamp(16px,1.3vw,19px)/1.55 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>Mission Control conecta lo que normalmente vive disperso. El radar de señales, la memoria de decisiones y el roadmap ejecutivo se leen juntos y se sostienen con rituales de seguimiento. Lo que ves aquí es un ejemplo: los datos son ficticios y existen solo para mostrar la estructura.</Reveal>
             </div>
-            <Reveal delay={140}><MissionControlTabs /></Reveal>
+            <Reveal delay={140}><MissionControlLive /></Reveal>
           </div>
         </div>
       </section>
