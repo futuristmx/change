@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import PageScaffold from "@/components/PageScaffold";
+import PageScaffold, { GradientTitle } from "@/components/PageScaffold";
 import Reveal from "@/components/Reveal";
 import MissionControlLive from "@/components/MissionControlLive";
 import EtherealDivider from "@/components/ds/EtherealDivider";
@@ -36,7 +36,7 @@ export default function MissionControlPage() {
       dark
       ambient
       kicker="Mission Control"
-      title="Donde la capacidad de futuro se sostiene."
+      title={<GradientTitle pre="Donde la capacidad de futuro" accent="se sostiene." preGradient="var(--gradient-type-light-rose-dark)" accentGradient="var(--gradient-type-light-mineral-dark)" />}
       lead="Las señales se interpretan, las decisiones se toman, los rumbos se diseñan. Mission Control es donde todo eso permanece vivo en lugar de perderse entre juntas."
     >
       <EtherealDivider dark />

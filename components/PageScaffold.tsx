@@ -4,11 +4,37 @@ import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
 import { SignalField } from "@/components/ds";
 
+/**
+ * GradientTitle — utilidad para hero titles con dos gradientes inline.
+ * Pasa `pre` (línea 1 con gradient neutral o claro) y `accent` (frase
+ * destacada con el gradient distintivo de la página). El usuario quiere
+ * variedad entre páginas y sin azul/cyan.
+ */
+export function GradientTitle({
+  pre,
+  accent,
+  preGradient = "var(--gradient-type-neutral-pulse)",
+  accentGradient,
+}: {
+  pre: string;
+  accent: string;
+  preGradient?: string;
+  accentGradient: string;
+}) {
+  return (
+    <>
+      <span style={{ background: preGradient, WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>{pre}</span>{" "}
+      <span style={{ background: accentGradient, WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>{accent}</span>
+    </>
+  );
+}
+
 const WRAP = "min(1340px, calc(100% - clamp(40px,8vw,128px)))";
 
 interface PageScaffoldProps {
   kicker: string;
-  title: string;
+  /** Plain string OR JSX (para títulos con gradientes inline). */
+  title: React.ReactNode;
   lead: string;
   /** optional dark hero (Mission Control) */
   dark?: boolean;

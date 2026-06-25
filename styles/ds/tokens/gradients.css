@@ -108,6 +108,18 @@
   /* Hero pair — neutral graphite + dark futurism, sobrio y premium. */
   --gradient-type-neutral-pulse: linear-gradient(135deg, #2E2E33 0%, #525B6A 58%, #2E2E33 100%);  /* @kind color */
   --gradient-type-dark-future:   linear-gradient(135deg, #1F1148 0%, #3B1FA0 48%, #2C7491 100%);  /* @kind color */
+
+  /* Premium hero family — variantes sin azul/cyan, todas con base violet o
+     graphite + un acento cálido o mineral. Pensadas para emparejarse con
+     --gradient-type-neutral-pulse (línea 1) en hero titles. Una por página. */
+  --gradient-type-dark-ember:    linear-gradient(135deg, #1F1148 0%, #5524E0 38%, #8A4A1E 100%);  /* @kind color */
+  --gradient-type-dark-mineral:  linear-gradient(135deg, #1F1148 0%, #4218C8 42%, #2F7C57 100%);  /* @kind color */
+  --gradient-type-dark-rose:     linear-gradient(135deg, #2E2E33 0%, #5524E0 46%, #B86AA4 100%);  /* @kind color */
+  --gradient-type-dark-graphite: linear-gradient(135deg, #4A4A52 0%, #6D3BFF 52%, #2E2E33 100%);  /* @kind color */
+  --gradient-type-dark-warm:     linear-gradient(135deg, #1F1148 0%, #6D3BFF 40%, #C97A3A 100%);  /* @kind color */
+  /* Para hero en superficies dark (Mission Control): luminoso pero sobrio. */
+  --gradient-type-light-rose-dark:    linear-gradient(135deg, #F1EDFF 0%, #D9D2FF 38%, #E3B8D6 100%);  /* @kind color */
+  --gradient-type-light-mineral-dark: linear-gradient(135deg, #F1EDFF 0%, #B7A8FF 42%, #8FCBA6 100%);  /* @kind color */
 }
 
 /* ════════════════════════════════════════════════════════════

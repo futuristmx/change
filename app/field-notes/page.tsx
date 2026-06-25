@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import PageScaffold from "@/components/PageScaffold";
+import PageScaffold, { GradientTitle } from "@/components/PageScaffold";
 import Reveal from "@/components/Reveal";
 import { Glyph, type GlyphName } from "@/components/ds";
 
@@ -40,7 +40,7 @@ export default function FieldNotesPage() {
   return (
     <PageScaffold
       kicker="Field Notes"
-      title="Lecturas para decidir antes de que la urgencia cierre opciones."
+      title={<GradientTitle pre="Lecturas para decidir antes" accent="de que la urgencia cierre opciones." accentGradient="var(--gradient-type-dark-rose)" />}
       lead="Pocas notas, ninguna de relleno. Primera serie en preparación — las Field Notes existen cuando una señal merece convertirse en decisión, no antes."
     >
       {/* ═══ POR QUÉ EXISTE ═══ */}

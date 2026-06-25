@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import PageScaffold from "@/components/PageScaffold";
+import PageScaffold, { GradientTitle } from "@/components/PageScaffold";
 import DecisionSimulator from "@/components/DecisionSimulator";
 import ContactFormSimple from "@/components/ContactFormSimple";
 
@@ -19,7 +19,7 @@ export default function ContactoPage() {
   return (
     <PageScaffold
       kicker="Contacto"
-      title="Trae una decisión difícil. Sal con una primera lectura."
+      title={<GradientTitle pre="Trae una decisión difícil." accent="Sal con una primera lectura." accentGradient="var(--gradient-type-dark-ember)" />}
       lead="No empieza con un proyecto ni con una propuesta. Empieza con una decisión real que tienes enfrente. Prueba el modelo con el simulador o escríbenos directamente."
     >
       <DecisionSimulator />

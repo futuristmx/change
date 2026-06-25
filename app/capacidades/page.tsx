@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import PageScaffold from "@/components/PageScaffold";
+import PageScaffold, { GradientTitle } from "@/components/PageScaffold";
 import Reveal from "@/components/Reveal";
 import ArtifactGallery from "@/components/ArtifactGallery";
 import { Glyph, type GlyphName } from "@/components/ds";
@@ -61,7 +61,7 @@ export default function CapacidadesPage() {
   return (
     <PageScaffold
       kicker="Capacidades · Método"
-      title="Capacidad de futuro: la habilidad de responder antes de que el problema tenga nombre."
+      title={<GradientTitle pre="Capacidad de futuro: la habilidad de responder antes" accent="de que el problema tenga nombre." accentGradient="var(--gradient-type-dark-mineral)" />}
       lead="Mientras la mayoría contrata respuestas a problemas ya nombrados, Change construye la capacidad de responder a los que todavía no lo tienen."
     >
       {/* ═══ QUÉ ES ═══ */}
