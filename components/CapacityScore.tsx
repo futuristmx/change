@@ -193,7 +193,7 @@ export default function CapacityScore() {
 
         {!showForm ? (
           <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 24 }}>
-            <Link href="/contacto" onClick={() => track("score_cta_contacto")} className="btn btn-primary">Trabajar esta decisión</Link>
+            <Link href="/contacto" onClick={() => track("score_cta_contacto")} className="btn btn-primary">Trabajar esta decisión con Change</Link>
             <button onClick={() => { setShowForm(true); track("score_submit_requested"); }} className="btn btn-secondary">Enviarme mi resultado</button>
           </div>
         ) : (
@@ -221,7 +221,7 @@ export default function CapacityScore() {
         <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--success)" }}>Listo</span>
         <h3 style={{ margin: "14px 0 10px", font: "600 clamp(22px,2.4vw,30px)/1.08 var(--font-primary)", letterSpacing: "-.03em", color: "var(--ink-graphite)" }}>Tu lectura está en camino.</h3>
         <p style={{ margin: 0, maxWidth: "48ch", font: "400 15.5px/1.6 var(--font-primary)", color: "var(--text-muted)" }}>Te escribimos pronto. Si quieres, ya puedes traer tu punto vulnerable a una primera conversación — sin compromiso.</p>
-        <div style={{ marginTop: 22 }}><Link href="/contacto" onClick={() => track("score_cta_contacto")} className="btn btn-primary">Trabajar esta decisión</Link></div>
+        <div style={{ marginTop: 22 }}><Link href="/contacto" onClick={() => track("score_cta_contacto")} className="btn btn-primary">Trabajar esta decisión con Change</Link></div>
       </Shell>
     );
   }

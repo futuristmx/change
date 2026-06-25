@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="celestial" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#DCEAF5"/>
+      <stop offset="48%" stop-color="#F5F6F7"/>
+      <stop offset="100%" stop-color="#F3EEE9"/>
+    </linearGradient>
+    <radialGradient id="violetGlow" cx="0.5" cy="-0.1" r="0.7">
+      <stop offset="0%" stop-color="#8A6CFF" stop-opacity="0.18"/>
+      <stop offset="50%" stop-color="#DCEAF5" stop-opacity="0.10"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="typeElectric" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1F1148"/>
+      <stop offset="48%" stop-color="#6D3BFF"/>
+      <stop offset="100%" stop-color="#59B8D9"/>
+    </linearGradient>
+    <linearGradient id="arcLine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#59B8D9" stop-opacity="0.5"/>
+      <stop offset="50%" stop-color="#6D3BFF" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#2E2E33" stop-opacity="0.5"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background: Ethereal Horizon -->
+  <rect width="1200" height="630" fill="url(#celestial)"/>
+  <rect width="1200" height="630" fill="url(#violetGlow)"/>
+
+  <!-- Bottom-left meta label -->
+  <text x="80" y="78" font-family="'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace" font-size="13" letter-spacing="2.8" fill="#4B4F59" font-weight="600">CHANGE · INTELIGENCIA ESTRATÉGICA</text>
+
+  <!-- Title -->
+  <text x="80" y="280" font-family="'Helvetica Neue', Arial, system-ui, sans-serif" font-size="68" font-weight="600" fill="#2E2E33" letter-spacing="-3.4">La certeza dejó de ser</text>
+  <text x="80" y="360" font-family="'Helvetica Neue', Arial, system-ui, sans-serif" font-size="68" font-weight="600" fill="url(#typeElectric)" letter-spacing="-3.4">condición para actuar.</text>
+
+  <!-- Subtitle -->
+  <text x="80" y="420" font-family="'Helvetica Neue', Arial, system-ui, sans-serif" font-size="24" font-weight="400" fill="#4B4F59" letter-spacing="-0.3">Capacidad de futuro para actuar sin certeza.</text>
+
+  <!-- Arco Leer → Sostener -->
+  <g transform="translate(80,530)">
+    <!-- Connecting line -->
+    <line x1="14" y1="14" x2="1010" y2="14" stroke="url(#arcLine)" stroke-width="1.5"/>
+
+    <!-- Nodes -->
+    <g>
+      <circle cx="14" cy="14" r="10" fill="#59B8D9"/>
+      <text x="14" y="56" font-family="'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace" font-size="13" letter-spacing="1.4" fill="#4B4F59" font-weight="600" text-anchor="middle">LEER</text>
+    </g>
+    <g>
+      <circle cx="270" cy="14" r="10" fill="#8A6CFF"/>
+      <text x="270" y="56" font-family="'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace" font-size="13" letter-spacing="1.4" fill="#4B4F59" font-weight="600" text-anchor="middle">INTERPRETAR</text>
+    </g>
+    <g>
+      <circle cx="510" cy="14" r="10" fill="#6D3BFF"/>
+      <text x="510" y="56" font-family="'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace" font-size="13" letter-spacing="1.4" fill="#4B4F59" font-weight="600" text-anchor="middle">DECIDIR</text>
+    </g>
+    <g>
+      <circle cx="750" cy="14" r="10" fill="#6D3BFF"/>
+      <text x="750" y="56" font-family="'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace" font-size="13" letter-spacing="1.4" fill="#4B4F59" font-weight="600" text-anchor="middle">DISEÑAR</text>
+    </g>
+    <g>
+      <circle cx="1010" cy="14" r="10" fill="#2E2E33"/>
+      <text x="1010" y="56" font-family="'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace" font-size="13" letter-spacing="1.4" fill="#4B4F59" font-weight="600" text-anchor="middle">SOSTENER</text>
+    </g>
+  </g>
+</svg>

@@ -43,7 +43,7 @@ const ARTEFACTOS = [
   { h: "Mapa de tensiones", p: "Las fuerzas que se contradicen dentro de la organización, nombradas para poder trabajarlas.", k: "Interpretar", c: "var(--soft-violet)" },
   { h: "Matriz de trade-offs", p: "Qué se gana y qué se sacrifica en cada opción, con el costo a la vista.", k: "Decidir", c: "var(--change-violet)" },
   { h: "Roadmap vivo", p: "La decisión convertida en secuencia de movimientos, que se actualiza cuando cambia el terreno.", k: "Diseñar", c: "var(--change-violet)" },
-  { h: "Reporte ejecutivo", p: "La lectura completa en lenguaje de dirección, lista para llevar a una mesa que decide.", k: "Síntesis", c: "var(--opportunity-orange)" },
+  { h: "Reporte ejecutivo", p: "La lectura completa en lenguaje de dirección, lista para llevar al board que decide.", k: "Síntesis", c: "var(--opportunity-orange)" },
   { h: "Mission Control", p: "Donde señales, decisiones, proyectos y reportes se mantienen vivos y conectados.", k: "Sostener", c: "var(--ink-graphite)" },
   { h: "Field Note", p: "Una lectura corta y pública de un cambio real: de la señal a la decisión que abre.", k: "Pensamiento", c: "var(--signal-cyan)" },
   { h: "Workshop instrumentado", p: "Una sesión que no produce post-its, sino instrumentos de decisión para llevarse.", k: "Trabajo", c: "var(--human-pink)" },
@@ -526,7 +526,7 @@ export default function Home() {
                   </a>
                 </Reveal>
                 <Reveal delay={240}>
-                  <p style={{ margin: "20px 0 0", font: "400 13px/1.5 var(--font-mono)", letterSpacing: ".02em", color: "rgba(255,255,255,.45)" }}>Sin pitch ni propuesta automática. El board lee lo que llega.</p>
+                  <p style={{ margin: "20px 0 0", maxWidth: "56ch", font: "400 14px/1.55 var(--font-primary)", color: "rgba(255,255,255,.62)" }}>Tu caso llega al board senior de Change. Si hay una tensión real que podamos trabajar, te respondemos con una primera lectura y un siguiente paso posible.</p>
                 </Reveal>
               </div>
 
