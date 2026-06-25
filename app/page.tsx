@@ -9,8 +9,8 @@ import MissionControlLive from "@/components/MissionControlLive";
 
 const WRAP = "min(1340px, calc(100% - clamp(40px,8vw,128px)))";
 
-// TODO: configurar URL real de Instagram de Change
-const INSTAGRAM_URL = "#";
+const INSTAGRAM_URL = "https://www.instagram.com/change.innovation/";
+const LINKEDIN_URL = "https://www.linkedin.com/company/changeconsulting/";
 
 /* ── shared section-head ── */
 function SectionHead({ kicker, title, lead }: { kicker: string; title: string; lead: string }) {
@@ -472,7 +472,23 @@ export default function Home() {
                       <circle cx="12" cy="12" r="4" />
                       <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
                     </svg>
-                    Escribir por Instagram
+                    Instagram
+                  </a>
+                  <a
+                    href={LINKEDIN_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-dghost"
+                    style={{ display: "inline-flex", alignItems: "center", gap: 9 }}
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <rect x="2" y="2" width="20" height="20" rx="2" ry="2" />
+                      <line x1="8" y1="11" x2="8" y2="16" />
+                      <line x1="8" y1="8" x2="8" y2="8.01" strokeWidth="2.4" strokeLinecap="round" />
+                      <line x1="12" y1="16" x2="12" y2="13" />
+                      <path d="M12 11a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v5" />
+                    </svg>
+                    LinkedIn
                   </a>
                 </Reveal>
                 <Reveal delay={240}>
