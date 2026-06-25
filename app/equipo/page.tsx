@@ -17,14 +17,14 @@ const WRAP = "min(1340px, calc(100% - clamp(40px,8vw,128px)))";
 
 const MESA = [
   {
-    n: "Andrés Valencia", arc: "Leer e interpretar", disc: "futuros, estrategia y narrativa", c: "var(--signal-cyan)",
-    p: "Lee el entorno antes de que el cambio se vuelva urgente y lo convierte en una historia que la organización entiende. Su aporte es la lectura — qué está cambiando, qué significa para ti y por dónde empieza a empujar el contexto.",
-    ev: "Radar de señales · Mapa de tensiones",
+    n: "Andrés Valencia", arc: "Foresight and Business Innovation", disc: "Futuros, Innovación, Estrategia", c: "var(--signal-cyan)",
+    p: "Lee el entorno antes de que el cambio se vuelva urgente y convierte las señales emergentes en lectura estratégica accionable. Qué está cambiando, qué tensión revela y qué decisión abre para tu organización.",
+    ev: "",
   },
   {
-    n: "Miguel Cadena", arc: "Decidir y aterrizar", disc: "negocio, dirección y crecimiento", c: "var(--change-violet)",
-    p: "Lleva la lectura al terreno donde se juega el negocio: qué importa, qué pesa más, qué deja de hacerse para que lo prioritario avance. Su aporte es el filo de la decisión — la conversación honesta sobre qué se gana y qué se deja antes de comprometer recursos.",
-    ev: "Matriz de decisión · Reporte ejecutivo",
+    n: "Miguel Cadena", arc: "Propiedad Intelectual e Innovación Estratégica", disc: "PI, Modelos de negocio, Estrategia", c: "var(--change-violet)",
+    p: "Convierte la lectura en estrategia ejecutable. Define cómo se protege lo que importa, cómo escala el negocio y qué modelo lo sostiene en el tiempo.",
+    ev: "",
   },
   {
     n: "Red de especialistas", arc: "Profundidad por reto", disc: "expertos convocados según el caso", c: "var(--soft-stone-gray)",
@@ -82,7 +82,9 @@ export default function EquipoPage() {
                 <h3 style={{ margin: "13px 0 2px", font: "600 22px var(--font-primary)", letterSpacing: "-.02em", color: "var(--ink-graphite)" }}>{m.n}</h3>
                 <span style={{ font: "400 13px var(--font-primary)", color: "var(--text-muted)" }}>{m.disc}</span>
                 <p style={{ margin: "16px 0 0", font: "400 14.5px/1.6 var(--font-primary)", color: "var(--text-muted)" }}>{m.p}</p>
-                <span style={{ marginTop: "auto", paddingTop: 20, marginBlockStart: 20, borderTop: "1px solid var(--border-subtle)", font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".08em", textTransform: "uppercase", color: "var(--text-faint)" }}>Deja como evidencia · {m.ev}</span>
+                {m.ev && (
+                  <span style={{ marginTop: "auto", paddingTop: 20, marginBlockStart: 20, borderTop: "1px solid var(--border-subtle)", font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".08em", textTransform: "uppercase", color: "var(--text-faint)" }}>Deja como evidencia · {m.ev}</span>
+                )}
               </Reveal>
             ))}
           </div>
