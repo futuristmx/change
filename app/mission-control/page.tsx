@@ -10,6 +10,10 @@ export const metadata: Metadata = {
   title: "Mission Control: donde la capacidad de futuro se sostiene",
   description:
     "No es un tablero de métricas. Es memoria estratégica: la infraestructura de continuidad donde señales, decisiones y rumbo se mantienen vivos en lugar de perderse entre juntas.",
+  openGraph: {
+    images: [{ url: "/assets/og-default.png", width: 1200, height: 630, alt: "Mission Control: donde la capacidad de futuro se sostiene" }],
+  },
+  twitter: { images: ["/assets/og-default.png"] },
 };
 
 const WRAP = "min(1340px, calc(100% - clamp(40px,8vw,128px)))";

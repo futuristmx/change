@@ -101,6 +101,7 @@ export default function MissionControlLive() {
                 const on = i === active;
                 return (
                   <button key={s.k} onClick={() => select(i)} aria-pressed={on} aria-label={`${s.k}, paso ${i + 1} de ${TRACE.length}`}
+                    className="mcl-node-btn"
                     style={{ border: 0, background: "transparent", cursor: "pointer", padding: 0, textAlign: "center", fontFamily: "var(--font-primary)" }}>
                     <span data-pulse={on ? "" : undefined} style={{ display: "block", width: on ? 16 : 11, height: on ? 16 : 11, borderRadius: "50%", margin: "0 auto 9px", background: s.color, boxShadow: on ? `0 0 0 4px var(--surface-dark-tertiary), 0 0 14px ${s.color}` : "0 0 0 4px var(--surface-dark-tertiary)", transition: "all .3s var(--ease-premium)" }} />
                     <span className="mcl-nlabel" style={{ display: "block", font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".04em", textTransform: "uppercase", color: on ? "#fff" : "rgba(255,255,255,.8)", transition: "color .3s" }}>{s.k}</span>
@@ -164,6 +165,9 @@ export default function MissionControlLive() {
       <style>{`
         @media (max-width: 820px) {
           .mcl-body { grid-template-columns: 1fr !important; }
+        }
+        @media (max-width: 768px) {
+          .mcl-node-btn { min-height: 44px; padding: 8px 4px !important; }
         }
         @media (max-width: 520px) {
           .mcl-nlabel { display: none !important; }

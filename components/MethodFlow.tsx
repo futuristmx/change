@@ -109,6 +109,7 @@ export default function MethodFlow() {
             return (
               <button
                 key={n.title}
+                className="mf-node-btn"
                 onClick={() => setActive(i)}
                 aria-pressed={on}
                 aria-label={`${n.title}, paso ${i + 1} de ${NODES.length}`}
@@ -175,6 +176,7 @@ export default function MethodFlow() {
           .mf-micro { display: none !important; }
           .mf-chain { display: block !important; }
           .mf-grid { grid-template-columns: 1fr !important; }
+          .mf-node-btn { min-height: 44px; }
         }
       `}</style>
     </div>

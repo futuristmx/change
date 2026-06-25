@@ -7,6 +7,10 @@ export const metadata: Metadata = {
   title: "Trabajar una decisión · prueba el modelo de Change",
   description:
     "Cinco preguntas que leen tu decisión antes de que empiece el trabajo. Prueba el simulador con un escenario o trae tu caso directamente. Sin formulario de captación, sin propuesta automática.",
+  openGraph: {
+    images: [{ url: "/assets/og-default.png", width: 1200, height: 630, alt: "Trabajar una decisión · prueba el modelo de Change" }],
+  },
+  twitter: { images: ["/assets/og-default.png"] },
 };
 
 const WRAP = "min(1340px, calc(100% - clamp(40px,8vw,128px)))";

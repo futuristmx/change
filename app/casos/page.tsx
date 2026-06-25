@@ -8,6 +8,10 @@ export const metadata: Metadata = {
   title: "Decisiones que se convirtieron en capacidad",
   description:
     "No mostramos proyectos terminados. Mostramos seis tensiones reales, la decisión que cada una hizo posible y el sistema que dejó instalado. Casos anonimizados por tensión y sector.",
+  openGraph: {
+    images: [{ url: "/assets/og-default.png", width: 1200, height: 630, alt: "Decisiones que se convirtieron en capacidad" }],
+  },
+  twitter: { images: ["/assets/og-default.png"] },
 };
 
 const WRAP = "min(1340px, calc(100% - clamp(40px,8vw,128px)))";

@@ -8,6 +8,10 @@ export const metadata: Metadata = {
   title: "Field Notes: lecturas para decidir antes que la urgencia",
   description:
     "Notas breves sobre lo que está cambiando y lo que ese cambio te obliga a decidir. No comentamos la noticia: la convertimos en una decisión que tu organización todavía puede tomar a tiempo.",
+  openGraph: {
+    images: [{ url: "/assets/og-default.png", width: 1200, height: 630, alt: "Field Notes: lecturas para decidir antes que la urgencia" }],
+  },
+  twitter: { images: ["/assets/og-default.png"] },
 };
 
 const WRAP = "min(1340px, calc(100% - clamp(40px,8vw,128px)))";

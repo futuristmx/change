@@ -568,7 +568,8 @@ export default function Home() {
           </div>
         </section>
 
-        <div aria-hidden="true" style={{ height: "clamp(80px,8vw,120px)", background: "linear-gradient(180deg, var(--surface-dark-secondary) 0%, var(--surface-soft) 100%)" }} />
+        {/* Transición dark continua hacia Footer (Footer pasa a --gradient-dark-pearl en Fase 5). */}
+        <div aria-hidden="true" style={{ height: "clamp(60px,6vw,90px)", background: "var(--surface-dark-secondary)" }} />
       </main>
       <Footer />
 

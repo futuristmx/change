@@ -1,7 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import { ScrollProgress } from "@/components/ds";
+import StickyCta from "@/components/StickyCta";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://change.live";
+const OG_IMAGE = "/assets/og-default.png";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -25,11 +28,13 @@ export const metadata: Metadata = {
     title: "Change · Capacidad de futuro para actuar sin certeza",
     description:
       "La certeza dejó de ser condición para actuar. Change diseña capacidad de futuro: leer, interpretar, decidir, diseñar y sostener.",
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: "Change · Capacidad de futuro para actuar sin certeza" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Change · Capacidad de futuro",
     description: "La certeza dejó de ser condición para actuar.",
+    images: [OG_IMAGE],
   },
   robots: { index: true, follow: true },
   // Favicon: app/icon.svg (Change icon, Electric Future Violet #6D3BFF, sin fondo)
@@ -77,7 +82,9 @@ export default function RootLayout({
           }}
         />
         <a href="#main-content" className="skip-link">Ir al contenido principal</a>
+        <ScrollProgress />
         {children}
+        <StickyCta />
       </body>
     </html>
   );

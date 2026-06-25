@@ -82,7 +82,7 @@ export default function Header() {
               className="ch-burger"
               style={{
                 display: "none", alignItems: "center", justifyContent: "center",
-                width: 42, height: 42, background: "transparent",
+                width: 44, height: 44, background: "transparent",
                 border: "1px solid var(--border-subtle)", cursor: "pointer", color: "var(--ink-graphite)",
               }}
             >
@@ -106,7 +106,10 @@ export default function Header() {
                   aria-current={active ? "page" : undefined}
                   onClick={() => setOpen(false)}
                   style={{
-                    padding: "13px 4px",
+                    padding: "14px 4px",
+                    minHeight: 44,
+                    display: "flex",
+                    alignItems: "center",
                     font: active ? "600 16px var(--font-primary)" : "500 16px var(--font-primary)",
                     color: active ? "var(--change-violet)" : "var(--ink-graphite)",
                     borderBottom: i < NAV.length - 1 ? "1px solid var(--border-subtle)" : "none",
