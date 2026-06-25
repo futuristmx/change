@@ -52,9 +52,9 @@ const ARTE = [
 ];
 
 const ESCALERA: Array<{ n: string; tag: string; c: string; p: string; g: GlyphName; duration: string }> = [
-  { n: "Mapa de Claridad", tag: "Entrada", c: "var(--signal-cyan)", g: "insight", duration: "2–3 semanas", p: "El punto de partida. Tomamos la decisión que tienes enfrente y la ponemos en orden: qué cambia, qué tensiona, qué está en juego. Sales con una lectura que tu equipo no tenía y con la primera versión de tus artefactos." },
-  { n: "Sprint de Rumbo", tag: "Acotado", c: "var(--soft-violet)", g: "decision", duration: "6–10 semanas", p: "Un trabajo enfocado sobre un reto definido. Recorremos las cinco capacidades sobre tu caso real y aterrizamos la decisión en instrumentos. Sales con una respuesta diseñada, lista para ejecutar." },
-  { n: "Mission Control", tag: "Sistema vivo", c: "var(--change-violet)", g: "status", duration: "Continuo", p: "La infraestructura de memoria estratégica que mantiene viva cada decisión y avisa cuando el entorno se mueve. El destino de quien ya construyó músculo, no el punto de entrada." },
+  { n: "Mapa de Claridad", tag: "Entrada", c: "var(--signal-cyan)", g: "insight", duration: "2–3 SEMANAS", p: "El punto de partida. Tomamos la decisión que tienes enfrente y la ponemos en orden: qué cambia, qué tensiona, qué está en juego. Sales con una lectura que tu equipo no tenía y con la primera versión de tus artefactos." },
+  { n: "Sprint de Rumbo", tag: "Acotado", c: "var(--soft-violet)", g: "decision", duration: "6–10 SEMANAS", p: "Un trabajo enfocado sobre un reto definido. Recorremos las cinco capacidades sobre tu caso real y aterrizamos la decisión en instrumentos. Sales con una respuesta diseñada, lista para ejecutar." },
+  { n: "Mission Control", tag: "Sistema vivo", c: "var(--change-violet)", g: "status", duration: "CONTINUO", p: "La infraestructura de memoria estratégica que mantiene viva cada decisión y avisa cuando el entorno se mueve. El destino de quien ya construyó músculo, no el punto de entrada." },
 ];
 
 export default function CapacidadesPage() {
@@ -132,7 +132,7 @@ export default function CapacidadesPage() {
                   Paso {String(i + 1).padStart(2, "0")} · {r.tag}
                 </span>
                 <h3 style={{ margin: "0 0 6px", font: "600 clamp(22px,2vw,28px)/1.04 var(--font-primary)", letterSpacing: "-.03em", color: "var(--ink-graphite)" }}>{r.n}</h3>
-                <span style={{ display: "inline-block", marginBottom: 14, font: "300 16px/1 var(--font-accent)", letterSpacing: "-.01em", color: r.c }}>{r.duration}</span>
+                <span style={{ display: "inline-block", marginBottom: 14, font: "600 17px/1 var(--font-accent)", letterSpacing: ".08em", color: r.c }}>{r.duration}</span>
                 <p style={{ margin: 0, font: "400 14.5px/1.6 var(--font-primary)", color: "var(--text-muted)" }}>{r.p}</p>
               </Reveal>
             ))}

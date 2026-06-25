@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Glyph, type GlyphName } from "@/components/ds";
 
 const GLYPH_K: Record<string, GlyphName> = {
@@ -113,176 +113,162 @@ const DETAIL_COLS = [
   { key: "method" as const,   label: "Conexión con el método" },
 ];
 
+/**
+ * useResponsiveCols — devuelve cuántas columnas tiene el grid en cada
+ * breakpoint, sincronizado con las media queries del propio componente.
+ * Inicia con el default desktop para evitar mismatch SSR.
+ */
+function useResponsiveCols() {
+  const [cols, setCols] = useState(4);
+  useEffect(() => {
+    function compute() {
+      const w = window.innerWidth;
+      if (w <= 520) setCols(1);
+      else if (w <= 900) setCols(2);
+      else setCols(4);
+    }
+    compute();
+    window.addEventListener("resize", compute);
+    return () => window.removeEventListener("resize", compute);
+  }, []);
+  return cols;
+}
+
+interface ArtCardProps {
+  art: Artifact;
+  i: number;
+  active: boolean;
+  onToggle: (i: number) => void;
+}
+
+function ArtCard({ art, i, active, onToggle }: ArtCardProps) {
+  const glowShadow = `0 14px 36px ${art.c.replace("var(", "color-mix(in srgb, var(").replace(")", ") 24%, transparent)")}`;
+  return (
+    <button
+      type="button"
+      role="listitem"
+      aria-expanded={active}
+      aria-controls={`art-detail-${i}`}
+      onClick={() => onToggle(i)}
+      className="art-card"
+      style={{
+        all: "unset",
+        display: "flex",
+        flexDirection: "column",
+        cursor: "pointer",
+        padding: "24px 22px 26px",
+        background: active ? "rgba(255,255,255,1)" : "rgba(255,255,255,.75)",
+        border: `1px solid ${active ? art.c : "var(--border-subtle)"}`,
+        borderTop: `3px solid ${art.c}`,
+        transition:
+          "transform var(--duration-standard) var(--ease-premium), border-color var(--duration-standard) var(--ease-premium), box-shadow var(--duration-standard) var(--ease-premium), background var(--duration-standard) var(--ease-premium)",
+        boxShadow: active ? glowShadow : "none",
+        outline: "none",
+        textAlign: "left",
+        minHeight: 210,
+      }}
+      onFocus={(e) => {
+        (e.currentTarget as HTMLButtonElement).style.boxShadow = "0 0 0 3px var(--change-violet)";
+      }}
+      onBlur={(e) => {
+        (e.currentTarget as HTMLButtonElement).style.boxShadow = active ? glowShadow : "none";
+      }}
+    >
+      <span aria-hidden="true" style={{ display: "inline-flex", marginBottom: 12, color: art.c, opacity: active ? 1 : 0.7, transition: "opacity var(--duration-standard)" }}>
+        <Glyph name={GLYPH_K[art.k] ?? "nav"} size={26} />
+      </span>
+      <span style={{ display: "inline-flex", alignItems: "center", gap: 7, font: "600 var(--text-meta, 11px) var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--ink-graphite)", marginBottom: 14 }}>
+        <span aria-hidden="true" style={{ width: 6, height: 6, borderRadius: "50%", background: art.c, flexShrink: 0 }} />
+        {art.k}
+      </span>
+      <span style={{ display: "block", font: "600 17px/1.2 var(--font-primary)", letterSpacing: "-.02em", color: "var(--ink-graphite)", marginBottom: 10 }}>{art.h}</span>
+      <span style={{ display: "block", font: "400 13px/1.55 var(--font-primary)", color: "var(--text-muted)", flexGrow: 1 }}>{art.p}</span>
+      <span aria-hidden="true" style={{ marginTop: 16, font: "600 11px var(--font-mono)", letterSpacing: ".08em", color: active ? art.c : "var(--text-faint)", transition: "color .18s ease" }}>
+        {active ? "Cerrar ↑" : "Ver detalle →"}
+      </span>
+    </button>
+  );
+}
+
+function DetailPanel({ sel, selected }: { sel: Artifact; selected: number }) {
+  return (
+    <div
+      id={`art-detail-${selected}`}
+      role="region"
+      aria-label={`Detalle: ${sel.h}`}
+      aria-live="polite"
+      style={{ marginTop: 12, marginBottom: 12, overflow: "hidden", animation: "art-detail-in .28s var(--ease-premium)" }}
+    >
+      <div style={{ padding: "36px 40px", border: `1px solid ${sel.c}`, borderTop: `3px solid ${sel.c}`, background: "rgba(255,255,255,.97)" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 28 }}>
+          <span aria-hidden="true" style={{ width: 8, height: 8, borderRadius: "50%", background: sel.c, flexShrink: 0 }} />
+          <span style={{ font: "600 13px var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--ink-graphite)" }}>{sel.h}</span>
+          <span style={{ font: "400 13px var(--font-primary)", color: "var(--text-muted)", marginLeft: 4 }}>· {sel.k}</span>
+        </div>
+        <div className="art-detail-cols" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: "28px 36px" }}>
+          {DETAIL_COLS.map((col) => (
+            <div key={col.key}>
+              <span style={{ display: "block", font: "600 10.5px var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-faint)", marginBottom: 10 }}>
+                {col.label}
+              </span>
+              <p style={{ margin: 0, font: "400 14px/1.65 var(--font-primary)", color: "var(--ink-graphite)" }}>{sel[col.key]}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function ArtifactGallery() {
   const [selected, setSelected] = useState<number | null>(null);
+  const cols = useResponsiveCols();
 
   function toggle(i: number) {
-    setSelected(prev => (prev === i ? null : i));
+    setSelected((prev) => (prev === i ? null : i));
   }
 
   const sel = selected !== null ? ARTIFACTS[selected] : null;
+  // Fila de la card seleccionada → entre qué row insertar el detail.
+  const selectedRow = selected !== null ? Math.floor(selected / cols) : -1;
+
+  // Particiona ARTIFACTS en filas según cols. Después de cada fila se
+  // inserta inline el panel detail si esa fila contiene la card activa.
+  const rows: Artifact[][] = [];
+  for (let i = 0; i < ARTIFACTS.length; i += cols) {
+    rows.push(ARTIFACTS.slice(i, i + cols));
+  }
 
   return (
     <div>
-      <div
-        className="art-grid"
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(4,1fr)",
-          gap: 12,
-        }}
-        role="list"
-      >
-        {ARTIFACTS.map((art, i) => {
-          const active = selected === i;
-          return (
-            <button
-              key={art.h}
-              type="button"
-              role="listitem"
-              aria-expanded={active}
-              aria-controls={`art-detail-${i}`}
-              onClick={() => toggle(i)}
-              className="art-card"
-              style={{
-                all: "unset",
-                display: "flex",
-                flexDirection: "column",
-                cursor: "pointer",
-                padding: "24px 22px 26px",
-                background: active ? "rgba(255,255,255,1)" : "rgba(255,255,255,.75)",
-                border: `1px solid ${active ? art.c : "var(--border-subtle)"}`,
-                borderTop: `3px solid ${art.c}`,
-                transition: "transform var(--duration-standard) var(--ease-premium), border-color var(--duration-standard) var(--ease-premium), box-shadow var(--duration-standard) var(--ease-premium), background var(--duration-standard) var(--ease-premium)",
-                boxShadow: active ? `0 14px 36px ${art.c.replace('var(', 'color-mix(in srgb, var(').replace(')', ') 24%, transparent)')}` : "none",
-                outline: "none",
-                textAlign: "left",
-                minHeight: 210,
-              }}
-              onFocus={e => { (e.currentTarget as HTMLButtonElement).style.boxShadow = "0 0 0 3px var(--change-violet)"; }}
-              onBlur={e => { (e.currentTarget as HTMLButtonElement).style.boxShadow = active ? `0 14px 36px ${art.c.replace('var(', 'color-mix(in srgb, var(').replace(')', ') 24%, transparent)')}` : "none"; }}
-            >
-              <span aria-hidden="true" style={{ display: "inline-flex", marginBottom: 12, color: art.c, opacity: active ? 1 : 0.7, transition: "opacity var(--duration-standard)" }}>
-                <Glyph name={GLYPH_K[art.k] ?? "nav"} size={26} />
-              </span>
-              <span style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: 7,
-                font: "600 var(--text-meta, 11px) var(--font-mono)",
-                letterSpacing: ".1em",
-                textTransform: "uppercase",
-                color: "var(--ink-graphite)",
-                marginBottom: 14,
-              }}>
-                <span aria-hidden="true" style={{ width: 6, height: 6, borderRadius: "50%", background: art.c, flexShrink: 0 }} />
-                {art.k}
-              </span>
-              <span style={{
-                display: "block",
-                font: "600 17px/1.2 var(--font-primary)",
-                letterSpacing: "-.02em",
-                color: "var(--ink-graphite)",
-                marginBottom: 10,
-              }}>
-                {art.h}
-              </span>
-              <span style={{
-                display: "block",
-                font: "400 13px/1.55 var(--font-primary)",
-                color: "var(--text-muted)",
-                flexGrow: 1,
-              }}>
-                {art.p}
-              </span>
-              <span aria-hidden="true" style={{
-                marginTop: 16,
-                font: "600 11px var(--font-mono)",
-                letterSpacing: ".08em",
-                color: active ? art.c : "var(--text-faint)",
-                transition: "color .18s ease",
-              }}>
-                {active ? "Cerrar ↑" : "Ver detalle →"}
-              </span>
-            </button>
-          );
-        })}
-      </div>
-
-      {/* Panel de detalle — aparece debajo del grid completo */}
-      <div
-        id={selected !== null ? `art-detail-${selected}` : undefined}
-        role="region"
-        aria-label={sel ? `Detalle: ${sel.h}` : undefined}
-        aria-live="polite"
-        style={{
-          overflow: "hidden",
-          maxHeight: sel ? 600 : 0,
-          opacity: sel ? 1 : 0,
-          transition: "max-height .3s ease, opacity .25s ease",
-          marginTop: sel ? 12 : 0,
-        }}
-      >
-        {sel && (
-          <div style={{
-            padding: "36px 40px",
-            border: `1px solid ${sel.c}`,
-            borderTop: `3px solid ${sel.c}`,
-            background: "rgba(255,255,255,.97)",
-          }}>
-            <div style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 10,
-              marginBottom: 28,
-            }}>
-              <span aria-hidden="true" style={{ width: 8, height: 8, borderRadius: "50%", background: sel.c, flexShrink: 0 }} />
-              <span style={{ font: "600 13px var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--ink-graphite)" }}>
-                {sel.h}
-              </span>
-              <span style={{ font: "400 13px var(--font-primary)", color: "var(--text-muted)", marginLeft: 4 }}>
-                · {sel.k}
-              </span>
-            </div>
-
-            <div className="art-detail-cols" style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(4,1fr)",
-              gap: "28px 36px",
-            }}>
-              {DETAIL_COLS.map(col => (
-                <div key={col.key}>
-                  <span style={{
-                    display: "block",
-                    font: "600 10.5px var(--font-mono)",
-                    letterSpacing: ".12em",
-                    textTransform: "uppercase",
-                    color: "var(--text-faint)",
-                    marginBottom: 10,
-                  }}>
-                    {col.label}
-                  </span>
-                  <p style={{
-                    margin: 0,
-                    font: "400 14px/1.65 var(--font-primary)",
-                    color: "var(--ink-graphite)",
-                  }}>
-                    {sel[col.key]}
-                  </p>
-                </div>
-              ))}
-            </div>
+      {rows.map((row, rowIdx) => (
+        <div key={rowIdx}>
+          <div
+            className="art-grid"
+            style={{ display: "grid", gridTemplateColumns: `repeat(${cols},1fr)`, gap: 12 }}
+            role="list"
+          >
+            {row.map((art, colIdx) => {
+              const globalI = rowIdx * cols + colIdx;
+              return <ArtCard key={art.h} art={art} i={globalI} active={selected === globalI} onToggle={toggle} />;
+            })}
           </div>
-        )}
-      </div>
+          {sel && selectedRow === rowIdx && <DetailPanel sel={sel} selected={selected as number} />}
+        </div>
+      ))}
 
       <style>{`
+        @keyframes art-detail-in {
+          from { opacity: 0; transform: translateY(-6px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          [role="region"][id^="art-detail-"] { animation: none !important; }
+        }
         @media (max-width: 900px) {
-          .art-grid { grid-template-columns: repeat(2,1fr) !important; }
           .art-detail-cols { grid-template-columns: 1fr 1fr !important; }
         }
         @media (max-width: 520px) {
-          .art-grid { grid-template-columns: 1fr !important; }
           .art-detail-cols { grid-template-columns: 1fr !important; }
         }
       `}</style>
