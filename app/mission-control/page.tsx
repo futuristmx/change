@@ -3,6 +3,8 @@ import Link from "next/link";
 import PageScaffold from "@/components/PageScaffold";
 import Reveal from "@/components/Reveal";
 import MissionControlLive from "@/components/MissionControlLive";
+import EtherealDivider from "@/components/ds/EtherealDivider";
+import { Glyph, type GlyphName } from "@/components/ds";
 
 export const metadata: Metadata = {
   title: "Mission Control: donde la capacidad de futuro se sostiene",
@@ -18,10 +20,10 @@ const TENSIONES = [
   { k: "Decisiones aisladas", t: "tensión 03", p: "Una señal del entorno, una decisión de inversión y una entrega del roadmap ocurren en mundos separados, sin que nadie vea cómo una afecta a la otra." },
 ];
 
-const ESCALERA = [
-  { n: "Mapa de Claridad", tag: "empieza aquí", p: "El punto de entrada. Una decisión, leída e interpretada hasta volverse accionable." },
-  { n: "Sprint de Rumbo", tag: "después", p: "Un reto acotado, trabajado de principio a fin con los instrumentos del método." },
-  { n: "Mission Control", tag: "el sistema vivo", p: "El sistema vivo que sostiene el rumbo en el tiempo. Llega cuando hay capacidad que sostener." },
+const ESCALERA: Array<{ n: string; tag: string; p: string; g: GlyphName; c: string }> = [
+  { n: "Mapa de Claridad", tag: "empieza aquí", p: "El punto de entrada. Una decisión, leída e interpretada hasta volverse accionable.", g: "insight", c: "var(--signal-cyan)" },
+  { n: "Sprint de Rumbo", tag: "después", p: "Un reto acotado, trabajado de principio a fin con los instrumentos del método.", g: "decision", c: "var(--soft-violet)" },
+  { n: "Mission Control", tag: "el sistema vivo", p: "El sistema vivo que sostiene el rumbo en el tiempo. Llega cuando hay capacidad que sostener.", g: "status", c: "var(--change-violet)" },
 ];
 
 export default function MissionControlPage() {
@@ -33,8 +35,9 @@ export default function MissionControlPage() {
       title="Donde la capacidad de futuro se sostiene."
       lead="Las señales se interpretan, las decisiones se toman, los rumbos se diseñan. Mission Control es donde todo eso permanece vivo en lugar de perderse entre juntas."
     >
+      <EtherealDivider dark />
       {/* ═══ QUÉ ES / QUÉ NO ES ═══ */}
-      <section style={{ borderTop: "1px solid rgba(255,255,255,.1)", background: "linear-gradient(180deg,var(--surface-dark-secondary),var(--surface-dark))" }}>
+      <section style={{ background: "linear-gradient(180deg,var(--surface-dark-secondary),var(--surface-dark))" }}>
         <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(80px,10vw,150px) 0" }}>
           <Reveal style={{ display: "flex", alignItems: "center", gap: 11, marginBottom: 20 }}>
             <span data-pulse style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--signal-cyan)" }} />
@@ -52,7 +55,7 @@ export default function MissionControlPage() {
                   "Un repositorio donde las decisiones se guardan y se olvidan.",
                 ].map((t) => (
                   <li key={t} style={{ display: "flex", gap: 12, font: "400 15.5px/1.5 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>
-                    <span aria-hidden="true" style={{ flexShrink: 0, marginTop: 7, width: 11, height: 1, background: "rgba(255,255,255,.34)" }} />{t}
+                    <span aria-hidden="true" style={{ flexShrink: 0, marginTop: 7, width: 7, height: 7, borderRadius: "50%", background: "var(--error)" }} />{t}
                   </li>
                 ))}
               </ul>
@@ -66,7 +69,7 @@ export default function MissionControlPage() {
                   "La memoria que mantiene vivo el porqué cuando cambia el contexto.",
                 ].map((t) => (
                   <li key={t} style={{ display: "flex", gap: 12, font: "400 15.5px/1.5 var(--font-primary)", color: "rgba(255,255,255,.82)" }}>
-                    <span aria-hidden="true" style={{ flexShrink: 0, marginTop: 8, width: 6, height: 6, borderRadius: "50%", background: "var(--change-violet)" }} />{t}
+                    <span aria-hidden="true" style={{ flexShrink: 0, marginTop: 7, width: 7, height: 7, borderRadius: "50%", background: "var(--success)" }} />{t}
                   </li>
                 ))}
               </ul>
@@ -75,8 +78,9 @@ export default function MissionControlPage() {
         </div>
       </section>
 
+      <EtherealDivider dark />
       {/* ═══ EL PROBLEMA QUE RESUELVE ═══ */}
-      <section style={{ borderTop: "1px solid rgba(255,255,255,.1)", background: "var(--surface-dark)" }}>
+      <section style={{ background: "var(--surface-dark)" }}>
         <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(80px,10vw,150px) 0" }}>
           <Reveal style={{ display: "flex", alignItems: "center", gap: 11, marginBottom: 20 }}>
             <span style={{ width: 7, height: 7, background: "var(--change-violet)" }} />
@@ -96,8 +100,9 @@ export default function MissionControlPage() {
         </div>
       </section>
 
+      <EtherealDivider dark />
       {/* ═══ TRES PLANOS + DEMO ═══ */}
-      <section style={{ position: "relative", overflow: "hidden", borderTop: "1px solid rgba(255,255,255,.1)", background: "radial-gradient(circle at 82% 0%,color-mix(in srgb, var(--change-violet) 18%, transparent),transparent 42%),var(--surface-dark)" }}>
+      <section style={{ position: "relative", overflow: "hidden", background: "radial-gradient(circle at 82% 0%,color-mix(in srgb, var(--change-violet) 18%, transparent),transparent 42%),var(--surface-dark)" }}>
         <div style={{ position: "relative", width: WRAP, margin: "0 auto", padding: "clamp(80px,10vw,150px) 0" }}>
           <div className="mc-demo" style={{ display: "grid", gridTemplateColumns: "minmax(0,.85fr) minmax(0,1.15fr)", gap: "clamp(44px,5vw,80px)", alignItems: "center" }}>
             <div>
@@ -113,28 +118,39 @@ export default function MissionControlPage() {
         </div>
       </section>
 
+      <EtherealDivider dark />
       {/* ═══ EL ÚLTIMO ESCALÓN ═══ */}
-      <section style={{ borderTop: "1px solid rgba(255,255,255,.1)", background: "linear-gradient(180deg,var(--surface-dark),var(--surface-dark-secondary))" }}>
+      <section style={{ background: "linear-gradient(180deg,var(--surface-dark),var(--surface-dark-secondary))" }}>
         <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(80px,10vw,150px) 0" }}>
           <Reveal style={{ display: "flex", alignItems: "center", gap: 11, marginBottom: 20 }}>
             <span style={{ width: 7, height: 7, background: "var(--change-violet)" }} />
             <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "rgba(255,255,255,.8)" }}>El último escalón</span>
           </Reveal>
           <Reveal delay={60} as="h2" style={{ margin: "0 0 clamp(40px,5vw,56px)", maxWidth: "20ch", font: "600 clamp(30px,4.2vw,58px)/.99 var(--font-primary)", letterSpacing: "-.05em", color: "#fff", textWrap: "balance" }}>Mission Control no se instala. Se gana.</Reveal>
-          <div className="mc-foso" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
+          {/* Vertical line-and-node ladder */}
+          <div className="mc-ladder" style={{ position: "relative", display: "flex", flexDirection: "column", gap: "clamp(24px,3vw,40px)", paddingLeft: 8 }}>
+            {/* rail vertical */}
+            <span aria-hidden="true" style={{ position: "absolute", left: 14, top: 6, bottom: 6, width: 2, background: "var(--line-gradient-relation)" }} />
             {ESCALERA.map((r, i) => (
-              <Reveal key={r.n} delay={i * 110} as="article" className="ch-card" style={{ border: "1px solid rgba(255,255,255,.1)", background: "rgba(255,255,255,.04)", padding: "30px 28px", display: "flex", flexDirection: "column", minHeight: 180 }}>
-                <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: i === ESCALERA.length - 1 ? "var(--change-violet-300)" : "rgba(255,255,255,.8)" }}>{r.tag}</span>
-                <h3 style={{ margin: "14px 0 0", font: "600 clamp(20px,1.8vw,25px)/1.06 var(--font-primary)", letterSpacing: "-.03em", color: "#fff" }}>{r.n}</h3>
-                <p style={{ margin: "12px 0 0", font: "400 14px/1.55 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>{r.p}</p>
+              <Reveal key={r.n} delay={i * 110} as="article" className="mc-rung" style={{ position: "relative", display: "grid", gridTemplateColumns: "44px 1fr", gap: 18, alignItems: "start", paddingLeft: `clamp(0px, ${i * 2.4}vw, ${i * 36}px)` }}>
+                {/* nodo circular con glyph */}
+                <span aria-hidden="true" style={{ position: "relative", width: 30, height: 30, borderRadius: "50%", background: r.c, display: "inline-flex", alignItems: "center", justifyContent: "center", color: "#fff", boxShadow: `0 0 0 6px var(--surface-dark), 0 0 0 7px ${r.c}` }}>
+                  <Glyph name={r.g} size={14} />
+                </span>
+                <div>
+                  <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: i === ESCALERA.length - 1 ? "var(--change-violet-300)" : "rgba(255,255,255,.8)" }}>{r.tag}</span>
+                  <h3 style={{ margin: "8px 0 0", font: "600 clamp(20px,1.8vw,25px)/1.06 var(--font-primary)", letterSpacing: "-.03em", color: "#fff" }}>{r.n}</h3>
+                  <p style={{ margin: "10px 0 0", maxWidth: "62ch", font: "400 14.5px/1.55 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>{r.p}</p>
+                </div>
               </Reveal>
             ))}
           </div>
         </div>
       </section>
 
+      <EtherealDivider dark />
       {/* ═══ CTA ═══ */}
-      <section style={{ position: "relative", overflow: "hidden", borderTop: "1px solid rgba(255,255,255,.1)", background: "radial-gradient(circle at 50% -10%,color-mix(in srgb, var(--change-violet) 26%, transparent),transparent 52%),var(--surface-dark-secondary)" }}>
+      <section style={{ position: "relative", overflow: "hidden", background: "radial-gradient(circle at 50% -10%,color-mix(in srgb, var(--change-violet) 26%, transparent),transparent 52%),var(--surface-dark-secondary)" }}>
         <div style={{ position: "relative", width: WRAP, margin: "0 auto", padding: "clamp(88px,12vw,168px) 0", textAlign: "center" }}>
           <Reveal as="h2" style={{ margin: "0 auto", maxWidth: "20ch", font: "600 clamp(34px,5vw,72px)/1.0 var(--font-primary)", letterSpacing: "-.05em", color: "#fff", textWrap: "balance" }}>Empieza por la decisión, no por el sistema.</Reveal>
           <Reveal delay={100} as="p" style={{ margin: "24px auto 0", maxWidth: 580, font: "400 clamp(16px,1.4vw,19px)/1.6 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>Tráenos una decisión que tu organización tenga que tomar bajo ambigüedad. La trabajamos juntos y, si hay capacidad que sostener, Mission Control llega después.</Reveal>
@@ -148,6 +164,9 @@ export default function MissionControlPage() {
       <style>{`
         @media (max-width: 980px) {
           .mc-vs, .mc-demo, .mc-foso { grid-template-columns: 1fr !important; }
+        }
+        @media (max-width: 620px) {
+          .mc-rung { padding-left: 0 !important; }
         }
       `}</style>
     </PageScaffold>

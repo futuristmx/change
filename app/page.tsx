@@ -7,7 +7,7 @@ import SystemicDescent from "@/components/SystemicDescent";
 import CapacityScore from "@/components/CapacityScore";
 import MissionControlLive from "@/components/MissionControlLive";
 import EtherealDivider from "@/components/ds/EtherealDivider";
-import { Badge, SignalField, type BadgeTone } from "@/components/ds";
+import { Badge, SignalField, Glyph, type BadgeTone, type GlyphName } from "@/components/ds";
 
 const WRAP = "min(1340px, calc(100% - clamp(40px,8vw,128px)))";
 
@@ -30,12 +30,12 @@ function SectionHead({ kicker, title, lead }: { kicker: string; title: string; l
   );
 }
 
-const ARCO = [
-  { t: "Leer", c: "var(--signal-cyan)" },
-  { t: "Interpretar", c: "var(--soft-violet)" },
-  { t: "Decidir", c: "var(--change-violet)" },
-  { t: "Diseñar", c: "var(--change-violet)" },
-  { t: "Sostener", c: "var(--ink-graphite)" },
+const ARCO: Array<{ t: string; c: string; g: GlyphName }> = [
+  { t: "Leer", c: "var(--signal-cyan)", g: "insight" },
+  { t: "Interpretar", c: "var(--soft-violet)", g: "risk" },
+  { t: "Decidir", c: "var(--change-violet)", g: "decision" },
+  { t: "Diseñar", c: "var(--change-violet)", g: "project" },
+  { t: "Sostener", c: "var(--ink-graphite)", g: "status" },
 ];
 
 const ARTEFACTOS = [
@@ -140,11 +140,16 @@ export default function Home() {
               <div aria-hidden="true" className="ch-herochain" style={{ display: "flex", alignItems: "center", justifyContent: "center", flexWrap: "wrap", gap: 10, marginTop: "clamp(44px,6vw,68px)" }}>
                 {ARCO.map((n, i, arr) => (
                   <span key={n.t} style={{ display: "inline-flex", alignItems: "center", gap: 10 }}>
-                    <span style={{ display: "inline-flex", alignItems: "center", gap: 7 }}>
-                      <span style={{ width: 8, height: 8, borderRadius: 999, background: n.c }} />
-                      <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".08em", textTransform: "uppercase", color: "var(--text-muted)" }}>{n.t}</span>
+                    <span style={{ display: "inline-flex", flexDirection: "column", alignItems: "center", gap: 4 }}>
+                      <span aria-hidden="true" style={{ color: n.c, display: "inline-flex" }}>
+                        <Glyph name={n.g} size={14} />
+                      </span>
+                      <span style={{ display: "inline-flex", alignItems: "center", gap: 7 }}>
+                        <span style={{ width: 8, height: 8, borderRadius: 999, background: n.c }} />
+                        <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".08em", textTransform: "uppercase", color: "var(--text-muted)" }}>{n.t}</span>
+                      </span>
                     </span>
-                    {i < arr.length - 1 && <span style={{ color: "var(--border-subtle)" }}>→</span>}
+                    {i < arr.length - 1 && <span aria-hidden="true" style={{ width: 24, height: 1, background: "var(--line-gradient-relation)" }} />}
                   </span>
                 ))}
               </div>
@@ -267,7 +272,7 @@ export default function Home() {
           </div>
         </section>
 
-        <EtherealDivider />
+        <div aria-hidden="true" style={{ height: "clamp(80px,8vw,120px)", background: "linear-gradient(180deg, var(--surface-soft) 0%, var(--surface-dark) 100%)" }} />
         {/* ═══ 07 · MISSION CONTROL (dark) ═══ */}
         <section className="change-dark" style={{ position: "relative", overflow: "hidden", background: "var(--gradient-dark-signal-field)" }}>
           <div style={{ position: "relative", width: WRAP, margin: "0 auto", padding: "clamp(92px,11vw,168px) 0" }}>
@@ -289,7 +294,7 @@ export default function Home() {
           </div>
         </section>
 
-        <EtherealDivider dark />
+        <div aria-hidden="true" style={{ height: "clamp(80px,8vw,120px)", background: "linear-gradient(180deg, var(--surface-dark-secondary) 0%, var(--surface-soft) 100%)" }} />
         {/* ═══ 08 · CAPACIDADES INSTALADAS / DECISIONES ═══ */}
         <section style={{ background: "var(--surface-soft)" }}>
           <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(92px,11vw,168px) 0" }}>
@@ -475,7 +480,7 @@ export default function Home() {
           </div>
         </section>
 
-        <EtherealDivider />
+        <div aria-hidden="true" style={{ height: "clamp(80px,8vw,120px)", background: "linear-gradient(180deg, var(--surface-page) 0%, var(--surface-dark) 100%)" }} />
         {/* ═══ 14 · CONTACTO EN HOME ═══ */}
         <section className="change-dark" style={{ position: "relative", overflow: "hidden", background: "var(--gradient-dark-pearl)" }}>
           <div style={{ position: "relative", width: WRAP, margin: "0 auto", padding: "clamp(92px,11vw,168px) 0" }}>
@@ -563,6 +568,7 @@ export default function Home() {
           </div>
         </section>
 
+        <div aria-hidden="true" style={{ height: "clamp(80px,8vw,120px)", background: "linear-gradient(180deg, var(--surface-dark-secondary) 0%, var(--surface-soft) 100%)" }} />
       </main>
       <Footer />
 
