@@ -43,7 +43,7 @@ export default function LineEvolution({ data, width = 560, height = 220, labels 
       {/* nodo de foco al final (validado) */}
       <circle cx={ex} cy={ey} r={5} fill="var(--evo-validated)" stroke="var(--surface-card)" strokeWidth={2} />
       {labels && labels.map((l, i) => (
-        <text key={l} x={PAD + i * stepX} y={height - 4} textAnchor="middle" style={{ font: "600 10px var(--font-mono)", letterSpacing: ".06em", textTransform: "uppercase", fill: "var(--chart-label)" }}>{l}</text>
+        <text key={l} x={PAD + i * stepX} y={height - 4} textAnchor="middle" style={{ font: "600 11px var(--font-mono)", letterSpacing: ".06em", textTransform: "uppercase", fill: "var(--chart-label)" }}>{l}</text>
       ))}
     </svg>
   );

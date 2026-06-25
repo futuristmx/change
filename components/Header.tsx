@@ -53,7 +53,7 @@ export default function Header() {
                 key={item.href}
                 href={item.href}
                 style={{
-                  display: "inline-flex", alignItems: "center", gap: 6, height: 36, padding: "0 15px",
+                  display: "inline-flex", alignItems: "center", gap: 6, height: 44, padding: "0 15px",
                   color: "var(--text-muted)", font: "500 13.5px var(--font-primary)", letterSpacing: "-0.01em",
                 }}
               >

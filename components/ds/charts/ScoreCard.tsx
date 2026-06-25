@@ -42,7 +42,7 @@ export default function ScoreCard({
 
       {typeof confidence === "number" && (
         <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-          <div style={{ display: "flex", justifyContent: "space-between", font: "600 10px var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-faint)" }}>
+          <div style={{ display: "flex", justifyContent: "space-between", font: "600 11px var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-faint)" }}>
             <span>Confianza</span><span>{confidence}%</span>
           </div>
           <div style={{ height: 4, background: "var(--chart-track)", overflow: "hidden" }}>

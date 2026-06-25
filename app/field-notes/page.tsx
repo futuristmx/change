@@ -4,7 +4,7 @@ import PageScaffold from "@/components/PageScaffold";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
-  title: "Field Notes",
+  title: "Field Notes: señales que exigen una decisión",
   description:
     "Lo que estamos viendo cambiar. Señales, lecturas y preguntas desde el cruce entre estrategia y futuros. Cada nota cierra en una implicación para decidir.",
 };
@@ -74,7 +74,7 @@ export default function FieldNotesPage() {
       </section>
 
       {/* ═══ QUÉ VAS A ENCONTRAR ═══ */}
-      <section style={{ borderTop: "1px solid var(--border-subtle)", background: "linear-gradient(180deg,#FFFFFF,#FAFAF8)" }}>
+      <section style={{ borderTop: "1px solid var(--border-subtle)", background: "linear-gradient(180deg,#FFFFFF,var(--pure-white))" }}>
         <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(88px,11vw,160px) 0" }}>
           <Reveal style={{ display: "flex", alignItems: "center", gap: 11, marginBottom: 20 }}>
             <span style={{ width: 7, height: 7, background: "var(--change-violet)" }} />

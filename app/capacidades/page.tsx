@@ -4,7 +4,7 @@ import PageScaffold from "@/components/PageScaffold";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
-  title: "Método",
+  title: "Método: anticipar, decidir, diseñar y sostener",
   description:
     "No compras una capacidad suelta. Entras a una cadena que escala contigo: Anticipar, Decidir, Diseñar y Sostener. Cuatro capacidades conectadas que vuelven el criterio un sistema vivo.",
 };
@@ -127,7 +127,7 @@ export default function CapacidadesPage() {
       </section>
 
       {/* ═══ LA ESCALERA (hogar canónico) ═══ */}
-      <section style={{ borderTop: "1px solid var(--border-subtle)", background: "linear-gradient(180deg,#FFFFFF,#FAFAF8)" }}>
+      <section style={{ borderTop: "1px solid var(--border-subtle)", background: "linear-gradient(180deg,#FFFFFF,var(--pure-white))" }}>
         <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(88px,11vw,160px) 0" }}>
           <Head
             kicker="La escalera"
@@ -189,7 +189,7 @@ export default function CapacidadesPage() {
       <section style={{ position: "relative", overflow: "hidden", background: "radial-gradient(circle at 50% -10%,color-mix(in srgb, var(--change-violet) 24%, transparent),transparent 52%),var(--surface-dark-secondary)" }}>
         <div style={{ position: "relative", width: WRAP, margin: "0 auto", padding: "clamp(88px,12vw,168px) 0", textAlign: "center" }}>
           <Reveal as="h2" style={{ margin: "0 auto", maxWidth: "18ch", font: "600 clamp(34px,5vw,72px)/1.0 var(--font-primary)", letterSpacing: "-.05em", color: "#fff", textWrap: "balance" }}>El arco empieza por una sola decisión.</Reveal>
-          <Reveal delay={100} as="p" style={{ margin: "24px auto 0", maxWidth: 560, font: "400 clamp(16px,1.4vw,19px)/1.6 var(--font-primary)", color: "rgba(255,255,255,.6)" }}>Trae la que traes atorada. Empezamos por el Mapa de Claridad y desde ahí decidimos hasta dónde escalar.</Reveal>
+          <Reveal delay={100} as="p" style={{ margin: "24px auto 0", maxWidth: 560, font: "400 clamp(16px,1.4vw,19px)/1.6 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>Trae la que traes atorada. Empezamos por el Mapa de Claridad y desde ahí decidimos hasta dónde escalar.</Reveal>
           <Reveal delay={160} style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12, marginTop: 38 }}>
             <Link href="/contacto" className="btn btn-light">Trabajar una decisión</Link>
             <Link href="/mission-control" className="btn btn-dghost">Ver cómo se sostiene</Link>

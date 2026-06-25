@@ -58,6 +58,24 @@ export default function RootLayout({
         />
       </head>
       <body>
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Change",
+              url: SITE_URL,
+              email: "andres@change.live",
+              description:
+                "Inteligencia estratégica para decisiones complejas. Change convierte el criterio directivo en sistemas claros, compartidos y trazables.",
+              areaServed: { "@type": "Country", name: "México" },
+              knowsLanguage: "es-MX",
+              logo: `${SITE_URL}/assets/change_logo_graphite.svg`,
+            }),
+          }}
+        />
         <a href="#main-content" className="skip-link">Ir al contenido principal</a>
         {children}
       </body>

@@ -22,7 +22,7 @@ export default function Heatmap({ data, columnLabels, rowLabels, colorVar = "var
         <div style={{ display: "grid", gridTemplateColumns: `${rowLabels ? "56px " : ""}repeat(${cols}, 1fr)`, gap: 6 }}>
           {rowLabels && <span />}
           {columnLabels.map((c) => (
-            <span key={c} style={{ font: "600 10px var(--font-mono)", letterSpacing: ".06em", textTransform: "uppercase", color: "var(--chart-label)", textAlign: "center" }}>{c}</span>
+            <span key={c} style={{ font: "600 11px var(--font-mono)", letterSpacing: ".06em", textTransform: "uppercase", color: "var(--chart-label)", textAlign: "center" }}>{c}</span>
           ))}
         </div>
       )}
