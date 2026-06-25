@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
 import MethodFlow from "@/components/MethodFlow";
+import SystemicDescent from "@/components/SystemicDescent";
 import MissionControlTabs from "@/components/MissionControlTabs";
 
 const WRAP = "min(1340px, calc(100% - clamp(40px,8vw,128px)))";
@@ -105,22 +106,8 @@ export default function Home() {
         {/* ═══ 02 · TENSIONES SISTÉMICAS ═══ */}
         <section style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-sky-pearl)" }}>
           <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(92px,11vw,168px) 0" }}>
-            <SectionHead kicker="Tensiones sistémicas" title="El problema no es el cambio. Es no tener capacidad para interpretarlo a tiempo." lead="El cambio no avisa con el lenguaje de tus decisiones. Lo que falla no es la información: es la capacidad de leerla, ordenarla y volverla decisión antes de que sea tarde." />
-            <div className="ch-grid3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
-              {[
-                { h: "Época", m: "Lo macro", c: "var(--signal-cyan)", p: "La certeza dejó de llegar antes de las decisiones importantes. Hoy se decide con información incompleta, señales contradictorias y ventanas que se cierran rápido. Esperar a estar seguro ya es, en sí mismo, una decisión — casi siempre la peor." },
-                { h: "Contexto", m: "Lo competitivo", c: "var(--soft-violet)", p: "Las empresas crecen más rápido que sus sistemas para decidir. El negocio se expande, suma frentes y aumenta lo que está en juego, pero la forma de pensar el rumbo sigue siendo la de cuando todo cabía en una cabeza." },
-                { h: "Organización", m: "Lo interno", c: "var(--change-violet)", p: "La operación avanza, pero el aprendizaje no siempre se sostiene. Se decide, se ejecuta y se sigue, sin que la organización retenga por qué decidió así. Cada coyuntura vuelve a empezar de cero y el aprendizaje se evapora." },
-              ].map((c, i) => (
-                <Reveal key={c.h} delay={i * 120} as="article" className="ch-card" style={{ background: "rgba(255,255,255,.82)", border: "1px solid var(--border-subtle)", padding: 36, minHeight: 280, display: "flex", flexDirection: "column" }}>
-                  <span style={{ display: "inline-flex", alignItems: "center", gap: 8, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--ink-graphite)" }}>
-                    <span aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: c.c }} />{c.m}
-                  </span>
-                  <h3 style={{ margin: "16px 0 0", font: "600 clamp(26px,2.4vw,36px)/1 var(--font-primary)", letterSpacing: "-.04em", color: "var(--ink-graphite)" }}>{c.h}</h3>
-                  <p style={{ margin: "16px 0 0", font: "400 15px/1.6 var(--font-primary)", color: "var(--text-muted)" }}>{c.p}</p>
-                </Reveal>
-              ))}
-            </div>
+            <SectionHead kicker="Tensiones sistémicas" title="El problema no es el cambio. Es no tener capacidad para interpretarlo a tiempo." lead="Una tensión no nace en tu organización: baja hasta ella. Recorre el descenso — de la época al contexto, del contexto a tu mesa — hasta la decisión que te toca." />
+            <Reveal delay={120}><SystemicDescent /></Reveal>
           </div>
         </section>
 
