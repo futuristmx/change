@@ -23,18 +23,14 @@
    via <link> in app/layout.tsx — @import after Tailwind's inlined rules would
    be dropped by the browser. */
 
-/* ── Self-hosted Postea (primary family) — served from /public/fonts ── */
-@font-face { font-family: "Postea"; src: url("/fonts/Postea-Light.otf") format("opentype"); font-weight: 300; font-style: normal; font-display: swap; }
-@font-face { font-family: "Postea"; src: url("/fonts/Postea-Regular.otf") format("opentype"); font-weight: 400 500; font-style: normal; font-display: swap; }
-@font-face { font-family: "Postea"; src: url("/fonts/Postea-RegularItalic.otf") format("opentype"); font-weight: 400 500; font-style: italic; font-display: swap; }
-@font-face { font-family: "Postea"; src: url("/fonts/Postea-Semibold.otf") format("opentype"); font-weight: 600; font-style: normal; font-display: swap; }
-@font-face { font-family: "Postea"; src: url("/fonts/Postea-Bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
-@font-face { font-family: "Postea"; src: url("/fonts/Postea-Extrabold.otf") format("opentype"); font-weight: 800; font-style: normal; font-display: swap; }
+/* ── Postea: servida por Adobe Fonts / Typekit (kit vjn7ksg, "postea-variable").
+   Se cargó vía <link> en app/layout.tsx. NO se versionan .otf comerciales en el
+   repo público (licencia). ── */
 
 /* ── Font family aliases (override DS fonts.css which we don't import) ── */
 :root {
-  --font-primary:   "Postea", "postea-variable", "Helvetica Neue", Arial, system-ui, sans-serif;
-  --font-secondary: "bd-orange-variable", "Postea", "postea-variable", "Helvetica Neue", Arial, sans-serif;
+  --font-primary:   "postea-variable", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --font-secondary: "bd-orange-variable", "postea-variable", "Helvetica Neue", Arial, sans-serif;
   --font-mono:      "IBM Plex Mono", "JetBrains Mono", "Space Mono", "SFMono-Regular", Consolas, monospace;
   --font-body:      var(--font-primary);
   --font-heading:   var(--font-primary);
