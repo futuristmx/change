@@ -83,7 +83,7 @@ export default function EquipoPage() {
                 </div>
                 <div>
                   <h3 style={{ margin: 0, font: "600 21px var(--font-primary)", letterSpacing: "-.02em", color: "var(--ink-graphite)" }}>{m.name}</h3>
-                  <span style={{ display: "block", marginTop: 6, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".08em", textTransform: "uppercase", color: m.c }}>{m.role}</span>
+                  <span style={{ display: "block", marginTop: 6, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".08em", textTransform: "uppercase", color: "var(--ink-graphite)" }}>{m.role}</span>
                   <p style={{ margin: "14px 0 0", font: "400 14.5px/1.55 var(--font-primary)", color: "var(--text-muted)" }}>{m.p}</p>
                 </div>
               </Reveal>
