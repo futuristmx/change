@@ -20,7 +20,7 @@ const FIELD_BASE: React.CSSProperties = {
 
 const LABEL: React.CSSProperties = {
   display: "block",
-  font: "600 10px var(--font-mono)",
+  font: "600 11px var(--font-mono)",
   letterSpacing: ".12em",
   textTransform: "uppercase",
   color: "var(--field-label)",
@@ -79,7 +79,7 @@ export default function ContactForm() {
   if (status === "success") {
     return (
       <div style={{ border: "1px solid var(--border-subtle)", background: "var(--surface-card)", padding: "clamp(32px,4vw,48px)" }}>
-        <span style={{ font: "600 10px var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--success)" }}>Recibido</span>
+        <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--success)" }}>Recibido</span>
         <h3 style={{ margin: "14px 0 10px", font: "600 clamp(22px,2.4vw,30px)/1.05 var(--font-primary)", letterSpacing: "-.03em", color: "var(--ink-graphite)" }}>
           Gracias. Tu decisión está en buenas manos.
         </h3>

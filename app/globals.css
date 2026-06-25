@@ -65,6 +65,17 @@
   --border-locked:      var(--border-strong);
   --text-locked:        var(--text-muted);
 }
+
+/* ── Contraste AAA (WCAG 2.2 AAA · 7:1 texto normal) — decisión de Andrés, 2026-06-24 ──
+   Oscurece los grises de texto secundario para alcanzar AAA en superficies claras.
+   Local (no en el colors.css sincronizado) para sobrevivir /design-sync.
+   Antes: --text-muted #667085 = 4.6:1 (solo AA) · --text-faint #BFC3CB = 1.7:1.
+   Ahora #4B4F59 = 7.3–7.8:1 sobre white/cloud/pearl. AAA colapsa la jerarquía de
+   luminancia; el nivel "faint" se diferencia por tamaño, mayúsculas y tracking. */
+:root {
+  --text-muted: #4B4F59;
+  --text-faint: #4B4F59;
+}
 .change-dark, [data-theme="dark"] {
   --surface-selected:   var(--surface-soft);
   --border-selected:    var(--border-strong);

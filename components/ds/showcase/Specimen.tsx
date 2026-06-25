@@ -31,7 +31,7 @@ function Section({ title, note, children }: { title: string; note?: string; chil
 function Toggle<T extends string>({ label, options, value, onChange }: { label: string; options: readonly T[]; value: T; onChange: (v: T) => void }) {
   return (
     <div style={{ display: "inline-flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
-      <span style={{ font: "600 10px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-faint)" }}>{label}</span>
+      <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-faint)" }}>{label}</span>
       <div style={{ display: "inline-flex", gap: 2, padding: 4, border: "1px solid var(--border-subtle)", background: "var(--surface-soft)" }}>
         {options.map((o) => (
           <button key={o} type="button" onClick={() => onChange(o)} aria-pressed={o === value}
@@ -152,7 +152,7 @@ export default function Specimen() {
 function Frame({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div>
-      <div style={{ font: "600 10px var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-faint)", marginBottom: 12 }}>{label}</div>
+      <div style={{ font: "600 11px var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-faint)", marginBottom: 12 }}>{label}</div>
       <div style={{ border: "1px solid var(--border-subtle)", background: "var(--surface-card)", padding: 24 }}>{children}</div>
     </div>
   );

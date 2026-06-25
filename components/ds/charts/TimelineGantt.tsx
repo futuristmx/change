@@ -33,7 +33,7 @@ export default function TimelineGantt({ rows, months, today = 0.42 }: TimelineGa
         return (
           <g key={m}>
             <line x1={x} y1={TOP} x2={x} y2={H - BOTTOM} stroke="var(--chart-grid)" strokeWidth={1} />
-            <text x={x + 6} y={TOP - 14} style={{ font: "600 10px var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", fill: "var(--chart-label)" }}>{m}</text>
+            <text x={x + 6} y={TOP - 14} style={{ font: "600 11px var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", fill: "var(--chart-label)" }}>{m}</text>
           </g>
         );
       })}
@@ -50,7 +50,7 @@ export default function TimelineGantt({ rows, months, today = 0.42 }: TimelineGa
       })}
       {/* marcador HOY (violeta — único acento de foco) */}
       <line x1={xAt(today)} y1={TOP - 4} x2={xAt(today)} y2={H - BOTTOM} stroke="var(--chart-today)" strokeWidth={1.5} />
-      <text x={xAt(today)} y={H - 8} textAnchor="middle" style={{ font: "600 10px var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", fill: "var(--chart-today)" }}>Hoy</text>
+      <text x={xAt(today)} y={H - 8} textAnchor="middle" style={{ font: "600 11px var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", fill: "var(--chart-today)" }}>Hoy</text>
     </svg>
   );
 }

@@ -4,7 +4,7 @@ import PageScaffold from "@/components/PageScaffold";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
-  title: "Equipo",
+  title: "La mesa de criterio que piensa contigo",
   description:
     "Change no es una voz individual. Es una mesa de criterio: estrategia, foresight, diseño, tecnología, operación y narrativa, conectadas según el reto.",
 };
@@ -68,7 +68,7 @@ export default function EquipoPage() {
       </section>
 
       {/* ═══ LA MESA ═══ */}
-      <section style={{ borderTop: "1px solid var(--border-subtle)", background: "linear-gradient(180deg,#FFFFFF,#FAFAF8)" }}>
+      <section style={{ borderTop: "1px solid var(--border-subtle)", background: "linear-gradient(180deg,#FFFFFF,var(--pure-white))" }}>
         <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(88px,11vw,160px) 0" }}>
           <Reveal style={{ display: "flex", alignItems: "center", gap: 11, marginBottom: 20 }}>
             <span style={{ width: 7, height: 7, background: "var(--change-violet)" }} />
@@ -119,7 +119,7 @@ export default function EquipoPage() {
       <section style={{ position: "relative", overflow: "hidden", background: "radial-gradient(circle at 50% -10%,color-mix(in srgb, var(--change-violet) 24%, transparent),transparent 52%),var(--surface-dark-secondary)" }}>
         <div style={{ position: "relative", width: WRAP, margin: "0 auto", padding: "clamp(88px,12vw,168px) 0", textAlign: "center" }}>
           <Reveal as="h2" style={{ margin: "0 auto", maxWidth: "18ch", font: "600 clamp(34px,5vw,72px)/1.0 var(--font-primary)", letterSpacing: "-.05em", color: "#fff", textWrap: "balance" }}>Conoce a la mesa con una decisión real.</Reveal>
-          <Reveal delay={100} as="p" style={{ margin: "24px auto 0", maxWidth: 560, font: "400 clamp(16px,1.4vw,19px)/1.6 var(--font-primary)", color: "rgba(255,255,255,.6)" }}>La mejor forma de saber si pensamos como tú necesitas es trabajar juntos una decisión que traigas atorada.</Reveal>
+          <Reveal delay={100} as="p" style={{ margin: "24px auto 0", maxWidth: 560, font: "400 clamp(16px,1.4vw,19px)/1.6 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>La mejor forma de saber si pensamos como tú necesitas es trabajar juntos una decisión que traigas atorada.</Reveal>
           <Reveal delay={160} style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12, marginTop: 38 }}>
             <Link href="/contacto" className="btn btn-light">Trabajar una decisión</Link>
             <Link href="/capacidades" className="btn btn-dghost">Ver el método</Link>

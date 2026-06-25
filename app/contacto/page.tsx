@@ -3,7 +3,7 @@ import PageScaffold from "@/components/PageScaffold";
 import ContactForm from "@/components/ContactForm";
 
 export const metadata: Metadata = {
-  title: "Claridad",
+  title: "Trabajar una decisión · sesión de claridad",
   description: "La decisión difícil no necesita más opiniones. Necesita estructura. Trae una decisión y sal con un sistema de claridad.",
 };
 
@@ -28,11 +28,11 @@ export default function ContactoPage() {
               </p>
               <div style={{ marginTop: 32, paddingTop: 28, borderTop: "1px solid var(--border-subtle)", display: "flex", flexDirection: "column", gap: 14 }}>
                 <div>
-                  <div style={{ font: "600 10px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-faint)", marginBottom: 6 }}>Correo directo</div>
+                  <div style={{ font: "600 11px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-faint)", marginBottom: 6 }}>Correo directo</div>
                   <a href="mailto:andres@change.live" style={{ font: "500 16px var(--font-primary)", color: "var(--change-violet)" }}>andres@change.live</a>
                 </div>
                 <div>
-                  <div style={{ font: "600 10px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-faint)", marginBottom: 6 }}>Base</div>
+                  <div style={{ font: "600 11px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-faint)", marginBottom: 6 }}>Base</div>
                   <span style={{ font: "500 16px var(--font-primary)", color: "var(--ink-graphite)" }}>México</span>
                 </div>
               </div>
