@@ -28,8 +28,10 @@ export default function PageScaffold({ kicker, title, lead, dark = false, childr
   const kickerColor = dark ? "rgba(255,255,255,.8)" : "var(--text-muted)";
 
   return (
-    <div className={dark ? "change-dark" : undefined} style={{ minHeight: "100vh", display: "flex", flexDirection: "column", background: dark ? "var(--surface-dark)" : "var(--surface-page)" }}>
+    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+      {/* Header always outside the dark wrapper so its CSS vars stay in light-mode context */}
       <Header />
+      <div className={dark ? "change-dark" : undefined} style={{ flex: 1, display: "flex", flexDirection: "column", background: dark ? "var(--surface-dark)" : "var(--surface-page)" }}>
       <main id="main-content" style={{ flex: 1 }}>
         <section style={{ position: "relative", overflow: "hidden", background: heroBg }}>
           <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(96px,13vw,170px) 0 clamp(64px,8vw,110px)" }}>
@@ -58,6 +60,7 @@ export default function PageScaffold({ kicker, title, lead, dark = false, childr
         )}
       </main>
       <Footer />
+      </div>
     </div>
   );
 }

@@ -18,10 +18,10 @@ const csp = [
   `frame-ancestors 'none'`,
   `object-src 'none'`,
   `script-src 'self' 'unsafe-inline'${process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : ""}`,
-  `style-src 'self' 'unsafe-inline' https://use.typekit.net https://fonts.googleapis.com`,
-  `font-src 'self' https://use.typekit.net https://fonts.gstatic.com data:`,
+  `style-src 'self' 'unsafe-inline' https://use.typekit.net https://p.typekit.net https://fonts.googleapis.com`,
+  `font-src 'self' https://use.typekit.net https://p.typekit.net https://fonts.gstatic.com data:`,
   `img-src 'self' data: blob:`,
-  `connect-src 'self' https://use.typekit.net https://fonts.googleapis.com https://fonts.gstatic.com ${supabaseHost}`.trim(),
+  `connect-src 'self' https://use.typekit.net https://p.typekit.net https://fonts.googleapis.com https://fonts.gstatic.com ${supabaseHost}`.trim(),
   `manifest-src 'self'`,
   `upgrade-insecure-requests`,
 ].join("; ");
