@@ -3,6 +3,7 @@ import Link from "next/link";
 import PageScaffold from "@/components/PageScaffold";
 import Reveal from "@/components/Reveal";
 import ArtifactGallery from "@/components/ArtifactGallery";
+import { Glyph, type GlyphName } from "@/components/ds";
 
 export const metadata: Metadata = {
   title: "Método: leer, interpretar, decidir, diseñar y sostener",
@@ -34,7 +35,7 @@ function Head({ kicker, title, lead }: { kicker: string; title: string; lead: st
 const CAPS = [
   { v: "Leer", q: "¿Qué está cambiando?", c: "var(--signal-cyan)", art: "Radar de señales", p: "Separamos el ruido de la señal. Identificamos los movimientos del entorno que sí importan para tu decisión, antes de que se vuelvan obvios para todos." },
   { v: "Interpretar", q: "¿Qué significa para nosotros?", c: "var(--soft-violet)", art: "Mapa de tensiones", p: "Una señal sin lectura es un dato suelto. Conectamos lo que cambia con lo que tensiona a tu organización: dónde se contradicen las fuerzas, qué presión se acumula, qué está en juego. Es la capa que casi nadie da, y la que cambia la conversación." },
-  { v: "Decidir", q: "¿Qué importa y qué se sacrifica?", c: "var(--change-violet)", art: "Matriz de trade-offs", p: "Toda decisión real implica renunciar a algo. Hacemos explícitos los criterios, los trade-offs y lo que cada camino cuesta, para que la decisión deje de depender de quién habla más fuerte y empiece a depender de qué pesa más." },
+  { v: "Decidir", q: "¿Qué importa y qué se sacrifica?", c: "var(--change-violet)", art: "Matriz de decisión", p: "Toda decisión real implica renunciar a algo. Hacemos explícitos los criterios, los criterios y sacrificios y lo que cada camino cuesta, para que la decisión deje de depender de quién habla más fuerte y empiece a depender de qué pesa más." },
   { v: "Diseñar", q: "¿Qué forma toma?", c: "var(--change-violet)", art: "Roadmap vivo", p: "Una decisión sin forma no se ejecuta. Le damos cuerpo: la secuencia de movimientos, el prototipo que prueba la apuesta, la narrativa que alinea al equipo. La estrategia deja de ser intención y se vuelve algo que se puede empezar el lunes." },
   { v: "Sostener", q: "¿Cómo se mantiene vivo?", c: "var(--ink-graphite)", art: "Mission Control", p: "Lo difícil no es decidir bien una vez. Es no perder el rumbo cuando el entorno se mueve otra vez. Instalamos la memoria estratégica que mantiene viva la decisión, registra lo aprendido y avisa cuando las condiciones cambian." },
 ];
@@ -42,7 +43,7 @@ const CAPS = [
 const ARTE = [
   { h: "Radar de señales", p: "El mapa de lo que se mueve en tu entorno y todavía no es evidente.", k: "Leer", c: "var(--signal-cyan)" },
   { h: "Mapa de tensiones", p: "Las fuerzas en contradicción que definen el campo donde vas a decidir.", k: "Interpretar", c: "var(--soft-violet)" },
-  { h: "Matriz de trade-offs", p: "Los criterios y sacrificios de cada camino, explícitos sobre la mesa.", k: "Decidir", c: "var(--change-violet)" },
+  { h: "Matriz de decisión", p: "Los criterios y sacrificios de cada camino, explícitos sobre la mesa.", k: "Decidir", c: "var(--change-violet)" },
   { h: "Roadmap vivo", p: "La secuencia de movimientos que se actualiza conforme cambian las condiciones.", k: "Diseñar", c: "var(--change-violet)" },
   { h: "Reporte ejecutivo", p: "La síntesis que lleva la decisión al lenguaje del consejo y de quien firma.", k: "Diseñar", c: "var(--opportunity-orange)" },
   { h: "Field Note", p: "El registro corto de lo aprendido en el camino, para que el juicio no se pierda.", k: "Sostener", c: "var(--signal-cyan)" },
@@ -50,16 +51,10 @@ const ARTE = [
   { h: "Mission Control", p: "La infraestructura de memoria estratégica donde la capacidad permanece viva entre decisiones.", k: "Sostener", c: "var(--ink-graphite)" },
 ];
 
-const ESCALERA = [
-  { n: "Mapa de Claridad", tag: "Entrada", c: "var(--ink-graphite)", p: "El punto de partida. Tomamos la decisión que tienes enfrente y la ponemos en orden: qué cambia, qué tensiona, qué está en juego. Sales con una lectura que tu equipo no tenía y con la primera versión de tus artefactos." },
-  { n: "Sprint de Rumbo", tag: "Acotado", c: "var(--soft-violet)", p: "Un trabajo enfocado sobre un reto definido. Recorremos las cinco capacidades sobre tu caso real y aterrizamos la decisión en instrumentos. Sales con una respuesta diseñada, no con un diagnóstico." },
-  { n: "Mission Control", tag: "Sistema vivo", c: "var(--change-violet)", p: "Cuando la organización necesita sostener la capacidad en el tiempo, instalamos la infraestructura de memoria estratégica que mantiene viva cada decisión y avisa cuando el entorno se mueve. El destino de quien ya construyó músculo, no el punto de entrada." },
-];
-
-const MESA = [
-  { n: "Andrés Valencia", arc: "Leer e interpretar", c: "var(--signal-cyan)", p: "Futuros, estrategia y narrativa. Lleva la señal del entorno hasta la tensión que tu organización debe resolver." },
-  { n: "Miguel Cadena", arc: "Decidir y aterrizar", c: "var(--change-violet)", p: "Negocio, dirección y crecimiento. Convierte la lectura en una decisión que el negocio puede ejecutar." },
-  { n: "Red de especialistas", arc: "Profundidad", c: "var(--soft-stone-gray)", p: "Especialistas que entran cuando el reto exige una profundidad específica de sector o disciplina." },
+const ESCALERA: Array<{ n: string; tag: string; c: string; p: string; g: GlyphName; duration: string }> = [
+  { n: "Mapa de Claridad", tag: "Entrada", c: "var(--signal-cyan)", g: "insight", duration: "2–3 semanas", p: "El punto de partida. Tomamos la decisión que tienes enfrente y la ponemos en orden: qué cambia, qué tensiona, qué está en juego. Sales con una lectura que tu equipo no tenía y con la primera versión de tus artefactos." },
+  { n: "Sprint de Rumbo", tag: "Acotado", c: "var(--soft-violet)", g: "decision", duration: "6–10 semanas", p: "Un trabajo enfocado sobre un reto definido. Recorremos las cinco capacidades sobre tu caso real y aterrizamos la decisión en instrumentos. Sales con una respuesta diseñada, lista para ejecutar." },
+  { n: "Mission Control", tag: "Sistema vivo", c: "var(--change-violet)", g: "status", duration: "Continuo", p: "La infraestructura de memoria estratégica que mantiene viva cada decisión y avisa cuando el entorno se mueve. El destino de quien ya construyó músculo, no el punto de entrada." },
 ];
 
 export default function CapacidadesPage() {
@@ -121,49 +116,26 @@ export default function CapacidadesPage() {
         </div>
       </section>
 
-      {/* ═══ CONSTRUCCIÓN PROGRESIVA (escalera) ═══ */}
+      {/* ═══ CONSTRUCCIÓN PROGRESIVA (escalera viva line-and-node) ═══ */}
       <section style={{ borderTop: "1px solid var(--border-subtle)", background: "linear-gradient(180deg,#FFFFFF,var(--pure-white))" }}>
         <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(88px,11vw,160px) 0" }}>
           <Head kicker="Construcción progresiva" title="La capacidad no se entrega de golpe. Se construye por etapas." lead="Empiezas con una decisión y, si el sistema lo amerita, lo conviertes en una forma permanente de operar. Cada etapa deja valor por sí sola y prepara la siguiente." />
-          <div className="cap-ladder" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
+          <div className="cap-ladder" style={{ position: "relative", display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 24 }}>
+            {/* Rail conector con gradient relación */}
+            <div aria-hidden="true" className="cap-ladder-rail" style={{ position: "absolute", left: "16%", right: "16%", top: 36, height: 2, background: "var(--line-gradient-relation)", opacity: 0.5 }} />
             {ESCALERA.map((r, i) => (
-              <Reveal key={r.n} delay={i * 120} as="article" className="ch-card" style={{ border: "1px solid var(--border-subtle)", background: "rgba(255,255,255,.85)", padding: "34px 30px", display: "flex", flexDirection: "column" }}>
-                <span style={{ display: "inline-flex", alignItems: "center", gap: 9, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--ink-graphite)" }}>
-                  <span aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: r.c }} />{r.tag}
+              <Reveal key={r.n} delay={i * 140} as="article" className="ch-card cap-ladder-card" style={{ position: "relative", border: "1px solid var(--border-subtle)", background: "rgba(255,255,255,.94)", padding: "60px 30px 30px", display: "flex", flexDirection: "column", textAlign: "center" }}>
+                <span aria-hidden="true" style={{ position: "absolute", top: 24, left: "50%", transform: "translateX(-50%)", width: 26, height: 26, borderRadius: "50%", background: r.c, display: "inline-flex", alignItems: "center", justifyContent: "center", color: "#fff", boxShadow: `0 0 0 6px var(--surface-page), 0 8px 22px ${r.c}` }}>
+                  <Glyph name={r.g} size={14} />
                 </span>
-                <h3 style={{ margin: "12px 0 0", font: "600 clamp(22px,2vw,28px)/1.04 var(--font-primary)", letterSpacing: "-.03em", color: "var(--ink-graphite)" }}>{r.n}</h3>
-                <p style={{ margin: "14px 0 0", font: "400 14.5px/1.6 var(--font-primary)", color: "var(--text-muted)" }}>{r.p}</p>
+                <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 8 }}>
+                  Paso {String(i + 1).padStart(2, "0")} · {r.tag}
+                </span>
+                <h3 style={{ margin: "0 0 6px", font: "600 clamp(22px,2vw,28px)/1.04 var(--font-primary)", letterSpacing: "-.03em", color: "var(--ink-graphite)" }}>{r.n}</h3>
+                <span style={{ display: "inline-block", marginBottom: 14, font: "300 16px/1 var(--font-accent)", letterSpacing: "-.01em", color: r.c }}>{r.duration}</span>
+                <p style={{ margin: 0, font: "400 14.5px/1.6 var(--font-primary)", color: "var(--text-muted)" }}>{r.p}</p>
               </Reveal>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ═══ QUIÉN LO CONSTRUYE ═══ */}
-      <section style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-sky-pearl)" }}>
-        <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(80px,10vw,140px) 0" }}>
-          <div className="cap-mesa" style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(320px,440px)", gap: "clamp(44px,5vw,80px)", alignItems: "start" }}>
-            <div>
-              <Reveal style={{ display: "flex", alignItems: "center", gap: 11, marginBottom: 20 }}>
-                <span style={{ width: 7, height: 7, background: "var(--change-violet)" }} />
-                <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)" }}>Quién lo construye</span>
-              </Reveal>
-              <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(30px,4vw,56px)/.99 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>Un board senior, un mismo método.</Reveal>
-              <Reveal delay={120} as="p" style={{ margin: "24px 0 0", maxWidth: "48ch", font: "400 clamp(17px,1.4vw,20px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>La capacidad de futuro exige leer, interpretar, decidir, diseñar y sostener al mismo tiempo. Por eso el trabajo no recae en una sola cabeza.</Reveal>
-            </div>
-            <Reveal delay={120} as="aside" className="ch-card" style={{ border: "1px solid var(--border-subtle)", background: "rgba(255,255,255,.85)", padding: "30px 28px" }}>
-              {MESA.map((m, i) => (
-                <div key={m.n} style={{ padding: "15px 0", borderTop: i === 0 ? "none" : "1px solid var(--border-subtle)" }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", gap: 12, alignItems: "baseline" }}>
-                    <strong style={{ font: "600 16px var(--font-primary)", color: "var(--ink-graphite)" }}>{m.n}</strong>
-                    <span style={{ display: "inline-flex", alignItems: "center", gap: 6, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".06em", textTransform: "uppercase", color: "var(--ink-graphite)", textAlign: "right" }}>
-                      <span aria-hidden="true" style={{ width: 6, height: 6, borderRadius: "50%", background: m.c }} />{m.arc}
-                    </span>
-                  </div>
-                  <p style={{ margin: "7px 0 0", font: "400 13px/1.5 var(--font-primary)", color: "var(--text-muted)" }}>{m.p}</p>
-                </div>
-              ))}
-            </Reveal>
           </div>
         </div>
       </section>

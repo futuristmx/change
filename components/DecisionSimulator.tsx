@@ -547,25 +547,37 @@ export default function DecisionSimulator() {
       <section ref={containerRef} style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-sky-pearl)", scrollMarginTop: 80 }}>
         <div style={{ ...WRAP, padding: "clamp(32px,4vw,44px) 0" }}>
 
+          {/* Barra global de progreso — fija bajo el header sticky.
+              Gradient violeta, se rellena por step. */}
+          <div
+            aria-hidden="true"
+            style={{
+              position: "fixed",
+              top: 80,
+              left: 0,
+              right: 0,
+              height: 4,
+              background: "var(--track-graphite)",
+              zIndex: 90,
+            }}
+          >
+            <div
+              role="progressbar"
+              aria-label="Avance del simulador"
+              aria-valuemin={0}
+              aria-valuemax={5}
+              aria-valuenow={step + 1}
+              style={{
+                height: "100%",
+                width: `${((step + 1) / 5) * 100}%`,
+                background: "var(--line-gradient-progress)",
+                transition: "width var(--duration-premium) var(--ease-premium)",
+              }}
+            />
+          </div>
+
           {/* ── Widget card ── */}
           <div className="sim-quiz-card" style={{ position: "relative", display: "grid", gridTemplateColumns: "1fr 252px", border: "1px solid var(--border-subtle)", background: "var(--surface-card)" }}>
-
-            {/* Barra superior de progreso — gradient violeta, se rellena por step */}
-            <div aria-hidden="true" style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: "var(--track-graphite)" }}>
-              <div
-                role="progressbar"
-                aria-label="Avance del simulador"
-                aria-valuemin={0}
-                aria-valuemax={5}
-                aria-valuenow={step + 1}
-                style={{
-                  height: "100%",
-                  width: `${((step + 1) / 5) * 100}%`,
-                  background: "var(--line-gradient-progress)",
-                  transition: "width var(--duration-premium) var(--ease-premium)",
-                }}
-              />
-            </div>
 
 
             {/* columna izquierda — pregunta */}

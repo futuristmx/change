@@ -18,17 +18,17 @@ const WRAP = "min(1340px, calc(100% - clamp(40px,8vw,128px)))";
 const MESA = [
   {
     n: "Andrés Valencia", arc: "Leer e interpretar", disc: "futuros, estrategia y narrativa", c: "var(--signal-cyan)",
-    p: "Detecta qué está cambiando antes de que la urgencia lo vuelva obvio y traduce ese cambio en sentido. Su aporte es la capa de interpretación: convertir señales dispersas en una lectura que la organización puede usar para decidir.",
+    p: "Lee el entorno antes de que el cambio se vuelva urgente y lo convierte en una historia que la organización entiende. Su aporte es la lectura — qué está cambiando, qué significa para ti y por dónde empieza a empujar el contexto.",
     ev: "Radar de señales · Mapa de tensiones",
   },
   {
     n: "Miguel Cadena", arc: "Decidir y aterrizar", disc: "negocio, dirección y crecimiento", c: "var(--change-violet)",
-    p: "Lleva la lectura al terreno donde se juega el negocio: qué importa, qué se sacrifica y qué consecuencia tiene cada camino. Su aporte es el filo de la decisión — la conversación honesta sobre trade-offs antes de comprometer recursos.",
-    ev: "Matriz de trade-offs · Reporte ejecutivo",
+    p: "Lleva la lectura al terreno donde se juega el negocio: qué importa, qué pesa más, qué deja de hacerse para que lo prioritario avance. Su aporte es el filo de la decisión — la conversación honesta sobre qué se gana y qué se deja antes de comprometer recursos.",
+    ev: "Matriz de decisión · Reporte ejecutivo",
   },
   {
-    n: "Red de especialistas", arc: "Profundidad por reto", disc: "especialistas convocados según el caso", c: "var(--soft-stone-gray)",
-    p: "Cuando un reto exige conocimiento de un dominio específico, sumamos al especialista adecuado al board, sin diluir el método ni inflar la estructura. El board crece por la pregunta, no por el organigrama.",
+    n: "Red de especialistas", arc: "Profundidad por reto", disc: "expertos convocados según el caso", c: "var(--soft-stone-gray)",
+    p: "Cuando un reto exige conocimiento de un dominio específico — cultura organizacional, tecnología, finanzas, operación — sumamos al especialista correcto al board, sin inflar la estructura. El board crece por la pregunta, no por el organigrama.",
     ev: "El dominio que el reto exige",
   },
 ];

@@ -190,6 +190,14 @@ img, svg { display: block; max-width: 100%; }
   border-color: rgba(109, 59, 255, 0.28);
   box-shadow: var(--shadow-graphite-soft);
 }
+.art-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(109, 59, 255, 0.36);
+}
+.cap-ladder-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(109, 59, 255, 0.32);
+}
 @media (prefers-reduced-motion: reduce) {
-  .ch-card:hover { transform: none; }
+  .ch-card:hover, .art-card:hover, .cap-ladder-card:hover { transform: none; }
 }

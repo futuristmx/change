@@ -24,7 +24,7 @@ const CASOS = [
     flow: [
       "Montamos un radar de señales del entorno competitivo y de consumo: qué premiaba cada mercado nuevo y dónde la identidad actual ayudaba o estorbaba.",
       "Un mapa de tensiones reveló que el conflicto no era marca contra mercado, sino núcleo contra superficie: lo innegociable estaba mezclado con lo que sí podía moverse, y nadie había separado las dos capas.",
-      "Una matriz de trade-offs fijó qué elementos de identidad eran constantes en todos los mercados y cuáles eran variables locales — y qué se sacrificaba al cruzar esa línea.",
+      "Una matriz de decisión fijó qué elementos de identidad eran constantes en todos los mercados y cuáles eran variables locales — y qué se sacrificaba al cruzar esa línea.",
       "Un sistema de identidad de dos capas: un núcleo fijo y un repertorio de adaptaciones permitidas, con su narrativa de por qué cada parte existe.",
       "La distinción núcleo/superficie quedó instalada en Mission Control como criterio vivo: cada propuesta de adaptación se evalúa contra la misma regla, sin reabrir la discusión de fondo.",
       "La organización dejó de discutir su identidad caso por caso. Ahora sabe qué puede mover sin perderse — y esa es la capacidad que viaja a cada mercado nuevo.",
@@ -37,7 +37,7 @@ const CASOS = [
     flow: [
       "Inventariamos todas las apuestas en curso y las señales que cada una perseguía: cuáles respondían a un cambio real del entorno y cuáles a inercia interna.",
       "El mapa de tensiones mostró que el verdadero conflicto no era entre proyectos, sino entre dos lógicas: defender lo que ya funciona y construir lo que viene.",
-      "Una matriz de trade-offs con criterios explícitos — impacto, reversibilidad, costo de no hacerlo — forzó la conversación que se venía evitando: a qué se le dice que no, y qué se gana al decirlo.",
+      "Una matriz de decisión con criterios explícitos — impacto, reversibilidad, costo de no hacerlo — forzó la conversación que se venía evitando: a qué se le dice que no, y qué se gana al decirlo.",
       "Un roadmap vivo con un puñado de apuestas priorizadas, sus condiciones de continuidad y los puntos donde se revisaría la decisión.",
       "Los criterios de priorización quedaron como memoria estratégica en Mission Control. Cada nueva iniciativa entra por la misma matriz, no por quién la propone con más fuerza.",
       "Decir que no dejó de sentirse como una pérdida y empezó a ser una señal de rumbo. La organización ahora elige con un criterio que puede explicar — y defender.",
@@ -63,7 +63,7 @@ const CASOS = [
     flow: [
       "Un radar de señales rastreó los puntos de tensión tempranos: dónde aparecían las primeras grietas en operaciones, finanzas y dependencia de proveedores cuando la demanda se movía.",
       "El mapa de tensiones distinguió fragilidad de riesgo: importaban los puntos donde una falla arrastraba a las demás — los nudos, no las puntas.",
-      "Una matriz de trade-offs evaluó qué reforzar primero, sabiendo que blindar todo era imposible: qué se protege, qué se acepta como riesgo vivible y qué señal dispararía la acción.",
+      "Una matriz de decisión evaluó qué reforzar primero, sabiendo que blindar todo era imposible: qué se protege, qué se acepta como riesgo vivible y qué señal dispararía la acción.",
       "Un roadmap de resiliencia con escenarios de presión, sus indicadores de alerta temprana y las respuestas ya decididas para cada uno — antes de necesitarlas.",
       "Los indicadores de alerta quedaron instalados en Mission Control como criterio vivo: cuando una señal de presión se enciende, la organización ya sabe qué decidió hacer — no improvisa en el peor momento.",
       "La organización dejó de esperar la crisis para descubrir sus puntos débiles. Ahora los ve venir — y eso convierte la presión en algo que se administra, no que se padece.",
@@ -76,7 +76,7 @@ const CASOS = [
     flow: [
       "Un radar de señales captó cómo se había movido el usuario: qué empezó a esperar por default, con qué otras experiencias se comparaba ahora y dónde la fricción se había vuelto invisible para la organización pero no para él.",
       "El mapa de tensiones nombró la brecha: la organización seguía optimizando lo que sabía hacer, mientras el usuario había cambiado de pregunta. No era un problema de ejecución, era de supuesto.",
-      "Una matriz de trade-offs definió qué partes de la experiencia se rediseñaban a fondo y cuáles se sostenían — porque rediseñar todo a la vez era arriesgar lo que sí seguía funcionando.",
+      "Una matriz de decisión definió qué partes de la experiencia se rediseñaban a fondo y cuáles se sostenían — porque rediseñar todo a la vez era arriesgar lo que sí seguía funcionando.",
       "Un roadmap vivo de la nueva experiencia, priorizado por dónde la distancia entre lo que el usuario esperaba y lo que recibía era mayor — y por dónde cerrarla rendía más.",
       "Las señales de comportamiento del usuario quedaron como lectura viva dentro de Mission Control. La experiencia dejó de revisarse cuando los números asustan y pasó a leerse de forma continua.",
       "La organización dejó de diseñar para el usuario que recordaba y empezó a diseñar para el que tiene enfrente. Esa lectura ahora es un hábito, no un proyecto.",
@@ -100,10 +100,23 @@ const CASOS = [
 export default function CasosPage() {
   return (
     <PageScaffold
-      kicker="Casos por tensión"
+      kicker="Casos por tensión · Nuestro trabajo"
       title="Decisiones que se convirtieron en capacidad."
-      lead="Seis tensiones reales, la decisión que cada una hizo posible y el sistema que dejó instalado — la capacidad de futuro de volver a decidir sin Change en la sala. Casos anonimizados por tensión y sector."
+      lead="Seis tensiones reales que Change ha trabajado: la decisión que cada una hizo posible y el sistema que dejó instalado — la capacidad de futuro de volver a decidir sin Change en la sala. Casos reales con nombre y sector anonimizados por confidencialidad estratégica de cada cliente."
     >
+      {/* ═══ DISCLAIMER DE CREDIBILIDAD — destacado ═══ */}
+      <section style={{ background: "var(--surface-page)" }}>
+        <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(36px,4vw,52px) 0" }}>
+          <Reveal className="ch-card" style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: 18, alignItems: "start", border: "1px solid var(--border-violet)", background: "rgba(109,59,255,.04)", padding: "22px 26px" }}>
+            <span aria-hidden="true" style={{ flexShrink: 0, marginTop: 6, width: 8, height: 8, borderRadius: "50%", background: "var(--change-violet)" }} />
+            <div>
+              <span style={{ display: "block", marginBottom: 6, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--change-violet)" }}>Sobre estos casos</span>
+              <p style={{ margin: 0, font: "500 15.5px/1.55 var(--font-primary)", color: "var(--ink-graphite)", maxWidth: "78ch" }}>Todos los proyectos que aquí aparecen son trabajos reales del board de Change. Los nombres de las organizaciones, el sector y los detalles operativos se omiten para proteger el contexto estratégico de cada cliente. La tensión, el método y el sistema instalado son tal cual ocurrieron.</p>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
       {/* ═══ LOS 6 CASOS ═══ */}
       {CASOS.map((caso, idx) => (
         <CasoCard
@@ -127,7 +140,7 @@ export default function CasosPage() {
             {[
               ["Leer", "Un radar de señales para ver qué cambia antes de que sea urgente.", "var(--signal-cyan)"],
               ["Interpretar", "Un mapa de tensiones para entender qué significa, no solo qué pasa.", "var(--soft-violet)"],
-              ["Decidir", "Una matriz de trade-offs que hace el criterio explícito y defendible.", "var(--change-violet)"],
+              ["Decidir", "Una matriz de decisión que hace el criterio explícito y defendible.", "var(--change-violet)"],
               ["Diseñar", "Un roadmap vivo que le da forma ejecutable a la decisión.", "var(--change-violet)"],
               ["Sostener", "Mission Control: la memoria estratégica donde la capacidad se queda viva.", "var(--lavender-mist)"],
             ].map(([v, p, c], i, arr) => (

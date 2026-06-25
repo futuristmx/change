@@ -105,6 +105,9 @@
   --gradient-type-cyan-dark:   linear-gradient(120deg, #8AD3EC 0%, #59B8D9 54%, #8A6CFF 100%);  /* @kind color */
   --gradient-type-aurora-dark: linear-gradient(120deg, #D9D2FF 0%, #8A6CFF 40%, #59B8D9 100%);  /* @kind color */
   --gradient-type-pearl-dark:  linear-gradient(180deg, #FFFFFF 0%, #C9D2E8 100%);  /* @kind color */
+  /* Hero pair — neutral graphite + dark futurism, sobrio y premium. */
+  --gradient-type-neutral-pulse: linear-gradient(135deg, #2E2E33 0%, #525B6A 58%, #2E2E33 100%);  /* @kind color */
+  --gradient-type-dark-future:   linear-gradient(135deg, #1F1148 0%, #3B1FA0 48%, #2C7491 100%);  /* @kind color */
 }
 
 /* ════════════════════════════════════════════════════════════

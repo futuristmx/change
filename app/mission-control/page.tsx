@@ -47,8 +47,8 @@ export default function MissionControlPage() {
             <span data-pulse style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--signal-cyan)" }} />
             <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "rgba(255,255,255,.8)" }}>Qué es</span>
           </Reveal>
-          <Reveal delay={60} as="h2" style={{ margin: "0 0 8px", maxWidth: "22ch", font: "600 clamp(30px,4.2vw,58px)/.99 var(--font-primary)", letterSpacing: "-.05em", color: "#fff", textWrap: "balance" }}>Memoria estratégica viva, no un tablero más.</Reveal>
-          <Reveal delay={100} as="p" style={{ margin: "0 0 clamp(40px,5vw,56px)", maxWidth: "60ch", font: "400 clamp(16px,1.3vw,19px)/1.55 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>Mission Control sostiene el porqué de cada decisión: con qué criterio se tomó, qué cambió desde entonces y hacia dónde apunta el rumbo. Donde un tablero archiva, Mission Control conserva trazabilidad.</Reveal>
+          <Reveal delay={60} as="h2" style={{ margin: "0 0 8px", maxWidth: "22ch", font: "600 clamp(30px,4.2vw,58px)/.99 var(--font-primary)", letterSpacing: "-.05em", color: "#fff", textWrap: "balance" }}>Memoria Viva: una plataforma exclusiva para clientes de Change.</Reveal>
+          <Reveal delay={100} as="p" style={{ margin: "0 0 clamp(40px,5vw,56px)", maxWidth: "62ch", font: "400 clamp(16px,1.3vw,19px)/1.55 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>Mission Control es la plataforma propia donde quedan vivos los criterios, señales, decisiones y rumbo de cada relación con Change. Acceso exclusivo para organizaciones cliente — el porqué de cada decisión se queda disponible cuando el contexto vuelve a moverse.</Reveal>
           <div className="mc-vs" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
             <Reveal className="ch-card" style={{ border: "1px solid rgba(255,255,255,.1)", background: "var(--gradient-dark-card-slate)", padding: "32px 30px" }}>
               <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".13em", textTransform: "uppercase", color: "rgba(255,255,255,.8)" }}>Lo que evitamos</span>
@@ -108,7 +108,7 @@ export default function MissionControlPage() {
       {/* ═══ TRES PLANOS + DEMO ═══ */}
       <section style={{ position: "relative", overflow: "hidden", background: "radial-gradient(circle at 82% 0%,color-mix(in srgb, var(--change-violet) 18%, transparent),transparent 42%),var(--surface-dark)" }}>
         <div style={{ position: "relative", width: WRAP, margin: "0 auto", padding: "clamp(80px,10vw,150px) 0" }}>
-          <div className="mc-demo" style={{ display: "grid", gridTemplateColumns: "minmax(0,.85fr) minmax(0,1.15fr)", gap: "clamp(44px,5vw,80px)", alignItems: "center" }}>
+          <div className="mc-demo" style={{ display: "grid", gridTemplateColumns: "minmax(0,.85fr) minmax(0,1.15fr)", gap: "clamp(44px,5vw,80px)", alignItems: "start" }}>
             <div>
               <Reveal style={{ display: "inline-flex", alignItems: "center", gap: 10, marginBottom: 22, padding: "6px 12px", border: "1px solid rgba(255,255,255,.18)", background: "rgba(255,255,255,.04)" }}>
                 <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--signal-cyan)" }} />
