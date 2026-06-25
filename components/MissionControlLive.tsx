@@ -86,7 +86,7 @@ export default function MissionControlLive() {
           {/* cadena de nodos */}
           <div style={{ position: "relative", marginBottom: 22 }}>
             <div style={{ position: "absolute", left: "8%", right: "8%", top: 9, height: 2, background: "rgba(255,255,255,.12)" }} />
-            <div style={{ position: "absolute", left: "8%", top: 9, height: 2, width: `calc(${fill}% * 0.84)`, background: "linear-gradient(90deg,var(--signal-cyan),var(--change-violet))", transition: "width .5s var(--ease-premium)" }} />
+            <div style={{ position: "absolute", left: "8%", top: 9, height: 2, width: `calc(${fill}% * 0.84)`, background: "var(--line-gradient-relation)", transition: "width var(--duration-premium) var(--ease-premium)" }} />
             <div style={{ position: "relative", display: "grid", gridTemplateColumns: `repeat(${TRACE.length},1fr)`, gap: 4 }}>
               {TRACE.map((s, i) => {
                 const on = i === active;
