@@ -75,7 +75,7 @@ export default function Header() {
           </div>
 
           <div style={{ justifySelf: "end", display: "flex", alignItems: "center", gap: 12 }}>
-            <Link href="/contacto" className="btn btn-primary btn-sm ch-cta">Trabajar una decisión</Link>
+            <Link href="/contacto" className="btn btn-primary btn-sm ch-cta">Simular una decisión</Link>
             <button
               onClick={() => setOpen((v) => !v)}
               aria-label="Menú" aria-expanded={open}

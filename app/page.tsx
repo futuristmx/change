@@ -116,7 +116,7 @@ export default function Home() {
               Change ayuda a organizaciones a leer lo que cambia, decidir sin esperar certeza y sostener aprendizaje antes de que la urgencia decida por ellas.
             </Reveal>
             <Reveal delay={200} style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12, marginTop: 36 }}>
-              <Link href="/contacto" className="btn btn-primary">Trabajar una decisión</Link>
+              <Link href="/contacto" className="btn btn-primary">Simular una decisión</Link>
               <Link href="#score" className="btn btn-secondary">Medir mi capacidad de futuro</Link>
             </Reveal>
 
@@ -527,7 +527,7 @@ export default function Home() {
             <Reveal delay={60} as="h2" style={{ margin: "0 auto", maxWidth: "18ch", font: "600 clamp(36px,5vw,76px)/1.0 var(--font-primary)", letterSpacing: "-.05em", color: "#fff", textWrap: "balance" }}>Empieza por una decisión. Construye capacidad desde ahí.</Reveal>
             <Reveal delay={120} as="p" style={{ margin: "26px auto 0", maxWidth: 600, font: "400 clamp(16px,1.4vw,19px)/1.6 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>La primera conversación no vende una solución cerrada. Identifica qué tensión enfrentas, qué decisión necesita estructura y qué capacidad debe empezar a construirse. De ahí sale el primer paso, acotado y concreto.</Reveal>
             <Reveal delay={180} style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12, marginTop: 40 }}>
-              <Link href="/contacto" className="btn btn-light">Trabajar una decisión</Link>
+              <Link href="/contacto" className="btn btn-light">Simular una decisión</Link>
               <Link href="/capacidades" className="btn btn-dghost">Conocer el método</Link>
             </Reveal>
           </div>
