@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import PageScaffold from "@/components/PageScaffold";
 import Reveal from "@/components/Reveal";
+import CasoCard from "@/components/CasoCard";
 
 export const metadata: Metadata = {
   title: "Decisiones que se convirtieron en capacidad",
@@ -10,8 +11,6 @@ export const metadata: Metadata = {
 };
 
 const WRAP = "min(1340px, calc(100% - clamp(40px,8vw,128px)))";
-
-const STEPS = ["Leer", "Interpretar", "Decidir", "Diseñar", "Sostener", "Capacidad instalada"];
 
 const CASOS = [
   {
@@ -103,27 +102,12 @@ export default function CasosPage() {
     >
       {/* ═══ LOS 6 CASOS ═══ */}
       {CASOS.map((caso, idx) => (
-        <section key={caso.k} style={{ borderTop: "1px solid var(--border-subtle)", background: idx % 2 === 0 ? "var(--gradient-sky-pearl)" : "linear-gradient(180deg,#FFFFFF,var(--pure-white))" }}>
-          <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(80px,9vw,140px) 0" }}>
-            <div style={{ maxWidth: 820, marginBottom: 44 }}>
-              <Reveal style={{ display: "inline-flex", alignItems: "center", gap: 9, marginBottom: 16, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--ink-graphite)" }}>
-                <span aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: caso.c }} />Tensión {String(idx + 1).padStart(2, "0")} · {caso.k}
-              </Reveal>
-              <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(28px,3.6vw,50px)/1.02 var(--font-primary)", letterSpacing: "-.04em", color: "var(--ink-graphite)", textWrap: "balance" }}>{caso.h}</Reveal>
-              <Reveal delay={120} as="p" style={{ margin: "20px 0 0", font: "400 clamp(16px,1.4vw,19px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>{caso.s}</Reveal>
-            </div>
-            <div className="cs-flow" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 18 }}>
-              {caso.flow.map((text, i) => (
-                <Reveal key={i} delay={i * 60} as="article" className="ch-card" style={{ background: "rgba(255,255,255,.85)", border: "1px solid var(--border-subtle)", borderTop: `2px solid ${i === STEPS.length - 1 ? caso.c : "var(--border-subtle)"}`, padding: "24px 24px 26px", display: "flex", flexDirection: "column" }}>
-                  <span style={{ display: "inline-flex", alignItems: "center", gap: 8, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--ink-graphite)", marginBottom: 12 }}>
-                    <span aria-hidden="true" style={{ width: 6, height: 6, borderRadius: "50%", background: i === STEPS.length - 1 ? caso.c : "var(--soft-violet)" }} />{STEPS[i]}
-                  </span>
-                  <p style={{ margin: 0, font: "400 13.5px/1.55 var(--font-primary)", color: i === STEPS.length - 1 ? "var(--deep-warm-gray)" : "var(--text-muted)" }}>{text}</p>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </section>
+        <CasoCard
+          key={caso.k}
+          caso={caso}
+          idx={idx}
+          bg={idx % 2 === 0 ? "var(--gradient-sky-pearl)" : "linear-gradient(180deg,#FFFFFF,var(--pure-white))"}
+        />
       ))}
 
       {/* ═══ EL PATRÓN ═══ */}

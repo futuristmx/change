@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import PageScaffold from "@/components/PageScaffold";
 import Reveal from "@/components/Reveal";
+import ArtifactGallery from "@/components/ArtifactGallery";
 
 export const metadata: Metadata = {
   title: "Método: leer, interpretar, decidir, diseñar y sostener",
@@ -112,17 +113,7 @@ export default function CapacidadesPage() {
       <section style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-sky-pearl)" }}>
         <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(88px,11vw,160px) 0" }}>
           <Head kicker="La capacidad se ve" title="Cada capacidad deja un instrumento, no una opinión." lead="No facilitamos talleres. Construimos instrumentos de decisión: artefactos con los que el pensamiento se vuelve algo que tu equipo puede leer, usar y defender." />
-          <div className="cap-grid4" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 16 }}>
-            {ARTE.map((a, i) => (
-              <Reveal key={a.h} delay={(i % 4) * 80} as="article" className="ch-card" style={{ background: "rgba(255,255,255,.85)", border: "1px solid var(--border-subtle)", padding: "28px 26px 30px", display: "flex", flexDirection: "column", minHeight: 210 }}>
-                <span style={{ display: "inline-flex", alignItems: "center", gap: 8, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--ink-graphite)" }}>
-                  <span aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: a.c }} />{a.k}
-                </span>
-                <h3 style={{ margin: "16px 0 0", font: "600 19px var(--font-primary)", letterSpacing: "-.02em", color: "var(--ink-graphite)" }}>{a.h}</h3>
-                <p style={{ margin: "10px 0 0", font: "400 13.5px/1.55 var(--font-primary)", color: "var(--text-muted)" }}>{a.p}</p>
-              </Reveal>
-            ))}
-          </div>
+          <ArtifactGallery />
         </div>
       </section>
 

@@ -259,7 +259,34 @@ export default function DecisionSimulator() {
   const [contact, setContact] = useState<ContactData>({ nombre: "", rol: "", organizacion: "", correo: "" });
   const [submitStatus, setSubmitStatus] = useState<"idle" | "submitting" | "error">("idle");
   const [submitError, setSubmitError] = useState("");
+  const [copied, setCopied] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  function handleCopyReading() {
+    if (!reading) return;
+    const lines = [
+      "LECTURA DE CHANGE · change.live",
+      "",
+      `Movimiento principal: ${DIM_LABEL[reading.primaryDim]}` +
+        (reading.secondaryDim ? ` + ${DIM_LABEL[reading.secondaryDim]}` : ""),
+      "",
+      "TENSIÓN IDENTIFICADA",
+      reading.tension,
+      "",
+      "RIESGO DOMINANTE",
+      reading.risk,
+      "",
+      "PRIMER MOVIMIENTO",
+      reading.firstMove,
+      "",
+      `Artefacto sugerido: ${reading.artifact}`,
+    ].join("\n");
+    navigator.clipboard.writeText(lines).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2400);
+      track("simulator_result_copied", { primary_dim: reading.primaryDim });
+    }).catch(() => {/* ignore */});
+  }
 
   /* foco al textarea cuando avanza el paso */
   useEffect(() => {
@@ -679,6 +706,16 @@ export default function DecisionSimulator() {
             <button type="button" className="btn btn-secondary" onClick={handleRetry}>
               Probar otro escenario
             </button>
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={handleCopyReading}
+              aria-live="polite"
+              aria-label={copied ? "Lectura copiada al portapapeles" : "Copiar lectura al portapapeles"}
+              style={{ minWidth: 130 }}
+            >
+              {copied ? "Copiado ✓" : "Copiar lectura"}
+            </button>
           </div>
         </div>
 
@@ -823,9 +860,17 @@ export default function DecisionSimulator() {
           <h2 style={{ margin: "0 0 16px", font: "600 clamp(28px,3.8vw,52px)/1.04 var(--font-primary)", letterSpacing: "-.04em", color: "var(--ink-graphite)", maxWidth: "20ch", textWrap: "balance" }}>
             Listo. Tu decisión llegó al board.
           </h2>
-          <p style={{ margin: "0 0 36px", font: "400 16px/1.6 var(--font-primary)", color: "var(--text-muted)", maxWidth: "44ch" }}>
+          <p style={{ margin: "0 0 16px", font: "400 16px/1.6 var(--font-primary)", color: "var(--text-muted)", maxWidth: "44ch" }}>
             Andrés Valencia y Miguel Cadena leen tu caso y te buscamos en un máximo de dos días hábiles con una primera lectura. No necesitas hacer nada más.
           </p>
+          {reading && (
+            <p style={{ margin: "0 0 36px", font: "400 14px/1.5 var(--font-primary)", color: "var(--text-muted)", maxWidth: "44ch" }}>
+              <span style={{ display: "inline-flex", alignItems: "center", gap: 7 }}>
+                <span aria-hidden="true" style={{ width: 6, height: 6, borderRadius: "50%", flexShrink: 0, background: DIM_COLOR[reading.primaryDim] }} />
+                Change lo lee como caso de <strong style={{ color: "var(--ink-graphite)", marginLeft: 3 }}>{DIM_LABEL[reading.primaryDim]}</strong>.
+              </span>
+            </p>
+          )}
           <button type="button" className="btn btn-secondary" onClick={handleRetry}>
             Probar otro escenario
           </button>
