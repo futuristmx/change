@@ -11,9 +11,6 @@ import { Badge, SignalField, Glyph, type BadgeTone, type GlyphName } from "@/com
 
 const WRAP = "min(1340px, calc(100% - clamp(40px,8vw,128px)))";
 
-const INSTAGRAM_URL = "https://www.instagram.com/change.innovation/";
-const LINKEDIN_URL = "https://www.linkedin.com/company/changeconsulting/";
-
 /* ── shared section-head ── */
 function SectionHead({ kicker, title, lead }: { kicker: string; title: string; lead: string }) {
   return (
@@ -58,42 +55,17 @@ const TENSIONES = [
   { k: "Convertir visión en roadmap gobernable", c: "var(--change-violet)", p: "Hay una visión clara que no logra bajar a movimientos concretos. La volvemos secuencia accionable y sostenible en el tiempo." },
 ];
 
-const MESA = [
-  { n: "Andrés Valencia", arc: "Leer · Interpretar", c: "var(--signal-cyan)", p: "Trae señales del entorno y las vuelve tensiones nombradas y narrativa que la organización entiende." },
-  { n: "Miguel Cadena", arc: "Decidir", c: "var(--change-violet)", p: "Convierte la lectura en apuestas con costo explícito y en crecimiento que se sostiene." },
-  { n: "Red de especialistas", arc: "Por reto", c: "var(--soft-stone-gray)", p: "Sumamos especialistas cuando una tensión específica lo exige, sin inflar la estructura." },
-];
-
-const CF_IDEAS = [
-  { k: "No es tendencia", c: "var(--signal-cyan)", p: "No nace de lo que todos ya están haciendo. Surge de la decisión específica que tu organización tiene enfrente." },
-  { k: "No es predicción", c: "var(--soft-violet)", p: "El futuro no se pronostica. Se trabaja. La certeza no es la condición de entrada." },
-  { k: "No es workshop", c: "var(--change-violet)", p: "No termina en post-its. Termina en artefactos: instrumentos con los que se puede decidir." },
-  { k: "No es dashboard", c: "var(--ink-graphite)", p: "No mira solo hacia atrás. Lee hacia adelante y sostiene el porqué de cada decisión." },
-  { k: "Es capacidad organizacional", c: "var(--signal-cyan)", p: "Algo que la organización puede hacer sola después del trabajo conjunto. No una dependencia." },
-  { k: "Se entrena en decisiones reales", c: "var(--soft-violet)", p: "Cada reto instala músculo. No hay capacidad sin ejercicio concreto sobre casos reales." },
-  { k: "Se prueba en artefactos", c: "var(--change-violet)", p: "La lectura, la matriz, el mapa: instrumentos con los que se decide, no opiniones sueltas." },
-  { k: "Se sostiene con memoria", c: "var(--opportunity-orange)", p: "La decisión no se pierde entre juntas. Se queda viva donde la organización puede volver." },
+const MANIFIESTO = [
+  { k: "Se ancla en lo que está cambiando", p: "Cada arco de trabajo arranca en una señal real del entorno y una decisión específica que la organización tiene enfrente." },
+  { k: "Se entrena en decisiones reales", p: "Cada reto instala músculo. La capacidad se hace ejercitándola sobre casos concretos, no aprendiéndola en abstracto." },
+  { k: "Se ve en artefactos", p: "Radar, mapa, matriz, roadmap, memoria: instrumentos que se leen, se discuten y se usan para decidir." },
+  { k: "Se sostiene con memoria", p: "El porqué de cada decisión queda vivo. La próxima coyuntura no empieza de cero." },
 ];
 
 const COMO_TRABAJA = [
   { n: "01", h: "Primera lectura", p: "Ordenamos la decisión, la tensión y lo que está cambiando. El objetivo es entender si hay una decisión real que vale la pena trabajar.", label: "Mapa de Claridad" },
   { n: "02", h: "Trabajo acotado", p: "Si hay tracción, construimos criterios, opciones, artefactos y un primer movimiento ejecutable. Con alcance definido desde el inicio.", label: "Sprint de Rumbo" },
   { n: "03", h: "Capacidad instalada", p: "Cuando el reto lo amerita, dejamos memoria, seguimiento y gobernanza para que la decisión no se pierda después de la sesión.", label: "Mission Control" },
-];
-
-const EVITAMOS = [
-  { c: "var(--change-violet)", h: "No vendemos diagnóstico infinito", p: "Cada etapa debe acercar una decisión. No hay trabajo que no tenga un artefacto claro al final." },
-  { c: "var(--signal-cyan)", h: "No entregamos opiniones sueltas", p: "El pensamiento queda en instrumentos: radar, mapa, matriz, roadmap o memoria. Algo que se puede leer, discutir y usar." },
-  { c: "var(--ink-graphite)", h: "No forzamos Mission Control", p: "No todas las decisiones necesitan un sistema vivo. Se propone solo cuando hay capacidad que sostener." },
-  { c: "var(--opportunity-orange)", h: "No desaparecemos después del workshop", p: "El aprendizaje se documenta, se traduce y se vuelve trazable. El trabajo no termina con la sesión." },
-];
-
-const CREDIBILIDAD_PUNTOS = [
-  "Casos anonimizados por confidencialidad estratégica.",
-  "El valor se demuestra por tensión resuelta, decisión habilitada, artefacto construido y capacidad instalada.",
-  "El board senior sostiene el criterio. El método no se delega.",
-  "La red de especialistas aporta profundidad específica cuando el reto lo exige.",
-  "La información sensible no se usa como material público sin autorización expresa.",
 ];
 
 /* Map de color-token a tono semántico del Badge DS. */
@@ -191,7 +163,7 @@ export default function Home() {
               <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)" }}>La tesis de Change</span>
             </Reveal>
             <Reveal delay={60} as="h2" style={{ margin: "0 auto", maxWidth: "20ch", font: "600 clamp(30px,4.4vw,62px)/1.02 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>
-              El futuro no se predice. Se vuelve <span style={{ background: "var(--gradient-type-electric)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>interpretable, decidible y accionable.</span>
+              El futuro se vuelve <span style={{ background: "var(--gradient-type-electric)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>interpretable, decidible y accionable.</span>
             </Reveal>
             <Reveal delay={120} as="p" style={{ margin: "26px auto 0", maxWidth: 680, font: "400 clamp(17px,1.5vw,21px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>
               Trabajamos justo donde la información es incompleta, las tensiones no son evidentes y las decisiones no pueden esperar. Ahí convertimos señales del entorno, comportamiento humano, estrategia y diseño en instrumentos que se pueden usar: para decidir, actuar y aprender.
@@ -200,28 +172,25 @@ export default function Home() {
         </section>
 
         <EtherealDivider />
-        {/* ═══ 04.5 · QUÉ ES CAPACIDAD DE FUTURO ═══ */}
+        {/* ═══ 04.5 · MANIFIESTO DE CAPACIDAD DE FUTURO ═══ */}
         <section style={{ background: "var(--gradient-violet-whisper)" }}>
           <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(92px,11vw,168px) 0" }}>
-            <div style={{ maxWidth: 820, marginBottom: "clamp(44px,6vw,64px)" }}>
+            <div style={{ maxWidth: 880, marginBottom: "clamp(40px,5vw,56px)" }}>
               <Reveal style={{ display: "flex", alignItems: "center", gap: 11, marginBottom: 20 }}>
                 <span style={{ width: 7, height: 7, background: "var(--change-violet)" }} />
-                <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)" }}>Capacidad de Futuro</span>
+                <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)" }}>Manifiesto · Capacidad de futuro</span>
               </Reveal>
-              <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(30px,4.2vw,58px)/1.0 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>La capacidad que separa a las organizaciones que reaccionan de las que aprenden antes de que sea tarde.</Reveal>
-              <Reveal delay={120} as="p" style={{ margin: "22px 0 0", maxWidth: "66ch", font: "400 clamp(17px,1.4vw,20px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>
-                Capacidad de Futuro no es predecir lo que viene. Es desarrollar la habilidad organizacional para leer señales, interpretar tensiones, decidir con criterio, diseñar respuestas y sostener aprendizaje cuando todavía no hay certeza suficiente.
+              <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(30px,4.2vw,58px)/1.0 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>La habilidad organizacional de actuar cuando todavía no hay certeza.</Reveal>
+              <Reveal delay={120} as="p" style={{ margin: "22px 0 0", maxWidth: "62ch", font: "400 clamp(17px,1.4vw,20px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>
+                Capacidad de futuro es una forma de operar, instalada en la organización: leer señales débiles, interpretar tensiones de fondo, decidir con criterio explícito y sostener aprendizaje cuando el contexto vuelve a moverse.
               </Reveal>
             </div>
 
-            <div className="ch-grid4" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 16, marginBottom: "clamp(44px,6vw,64px)" }}>
-              {CF_IDEAS.map((idea, i) => (
-                <Reveal key={idea.k} delay={(i % 4) * 60} as="article" className="ch-card" style={{ background: "rgba(255,255,255,.85)", border: "1px solid var(--border-subtle)", borderTop: `3px solid ${idea.c}`, padding: "24px 22px 26px", display: "flex", flexDirection: "column" }}>
-                  <span style={{ display: "inline-flex", alignItems: "center", gap: 7, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--ink-graphite)", marginBottom: 10 }}>
-                    <span aria-hidden="true" style={{ width: 6, height: 6, borderRadius: "50%", background: idea.c }} />
-                  </span>
-                  <h3 style={{ margin: "0 0 10px", font: "600 16px/1.2 var(--font-primary)", letterSpacing: "-.02em", color: "var(--ink-graphite)" }}>{idea.k}</h3>
-                  <p style={{ margin: 0, font: "400 13px/1.55 var(--font-primary)", color: "var(--text-muted)", flexGrow: 1 }}>{idea.p}</p>
+            <div className="ch-grid4" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 16, marginBottom: "clamp(40px,5vw,56px)" }}>
+              {MANIFIESTO.map((idea, i) => (
+                <Reveal key={idea.k} delay={(i % 4) * 60} as="article" className="ch-card" style={{ background: "rgba(255,255,255,.85)", border: "1px solid var(--border-subtle)", borderTop: `3px solid var(--change-violet)`, padding: "26px 24px 28px", display: "flex", flexDirection: "column" }}>
+                  <h3 style={{ margin: 0, font: "600 17px/1.18 var(--font-primary)", letterSpacing: "-.02em", color: "var(--ink-graphite)" }}>{idea.k}</h3>
+                  <p style={{ margin: "12px 0 0", font: "400 14px/1.55 var(--font-primary)", color: "var(--text-muted)", flexGrow: 1 }}>{idea.p}</p>
                 </Reveal>
               ))}
             </div>
@@ -229,7 +198,7 @@ export default function Home() {
             <Reveal delay={80}>
               <blockquote style={{ margin: 0, padding: "clamp(28px,3vw,40px) clamp(24px,3vw,40px)", borderLeft: "3px solid var(--change-violet)", background: "rgba(109,59,255,.04)" }}>
                 <p style={{ margin: 0, font: "600 clamp(18px,2vw,26px)/1.35 var(--font-primary)", letterSpacing: "-.03em", color: "var(--ink-graphite)" }}>
-                  La pregunta no es si el contexto va a cambiar. La pregunta es si tu organización tendrá capacidad para leerlo, decidir y moverse antes de que la urgencia decida por ella.
+                  La pregunta es si tu organización tendrá capacidad para leer el contexto, decidir y moverse antes de que la urgencia decida por ella.
                 </p>
                 <footer style={{ marginTop: 18, font: "600 11px var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--text-muted)" }}>Esperar también decide.</footer>
               </blockquote>
@@ -257,7 +226,7 @@ export default function Home() {
         {/* ═══ 06 · ARTEFACTOS ═══ */}
         <section style={{ background: "var(--gradient-violet-whisper)" }}>
           <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(92px,11vw,168px) 0" }}>
-            <SectionHead kicker="Artefactos" title="La capacidad de futuro se ve." lead="No entregamos opiniones. Entregamos instrumentos que se pueden leer, discutir y usar para decidir. Esto es lo que produce el método." />
+            <SectionHead kicker="Artefactos" title="La capacidad de futuro se ve." lead="Instrumentos concretos que se pueden leer, discutir y usar para decidir. Esto es lo que produce el método." />
             <div className="ch-grid4" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 16 }}>
               {ARTEFACTOS.map((a, i) => (
                 <Reveal key={a.h} delay={(i % 4) * 80} as="article" className="ch-card" style={{ background: "rgba(255,255,255,.85)", border: "1px solid var(--border-subtle)", padding: "28px 26px 30px", display: "flex", flexDirection: "column", minHeight: 220 }}>
@@ -325,7 +294,7 @@ export default function Home() {
                 <span style={{ width: 7, height: 7, background: "var(--change-violet)" }} />
                 <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)" }}>Cómo se trabaja con Change</span>
               </Reveal>
-              <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(30px,4.2vw,58px)/1.0 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>No empezamos con una propuesta cerrada. Empezamos con una <span style={{ background: "var(--gradient-type-electric)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>decisión.</span></Reveal>
+              <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(30px,4.2vw,58px)/1.0 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>Toda relación con Change empieza con una <span style={{ background: "var(--gradient-type-electric)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>decisión real.</span></Reveal>
               <Reveal delay={120} as="p" style={{ margin: "22px 0 0", maxWidth: "60ch", font: "400 clamp(17px,1.4vw,20px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>Cada relación empieza con una decisión real que la organización necesita tomar. Desde ahí construimos, de forma acotada y progresiva.</Reveal>
             </div>
 
@@ -343,110 +312,8 @@ export default function Home() {
             </div>
 
             <Reveal delay={100}>
-              <p style={{ margin: "0 0 28px", font: "400 13.5px/1.55 var(--font-mono)", letterSpacing: ".02em", color: "var(--text-muted)", fontStyle: "italic" }}>La urgencia suele cobrar más caro que la anticipación.</p>
-              <Link href="/contacto" className="btn btn-secondary">Simular una decisión</Link>
+              <p style={{ margin: 0, font: "400 13.5px/1.55 var(--font-mono)", letterSpacing: ".02em", color: "var(--text-muted)", fontStyle: "italic" }}>La urgencia suele cobrar más caro que la anticipación.</p>
             </Reveal>
-          </div>
-        </section>
-
-        <EtherealDivider />
-        {/* ═══ 10 · LO QUE EVITAMOS ═══ */}
-        <section style={{ background: "var(--gradient-sky-pearl)" }}>
-          <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(92px,11vw,168px) 0" }}>
-            <div style={{ maxWidth: 820, marginBottom: "clamp(44px,6vw,64px)" }}>
-              <Reveal style={{ display: "flex", alignItems: "center", gap: 11, marginBottom: 20 }}>
-                <span style={{ width: 7, height: 7, background: "var(--change-violet)" }} />
-                <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)" }}>Lo que evitamos</span>
-              </Reveal>
-              <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(28px,3.8vw,54px)/1.0 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>La peor consultoría es la que termina en una presentación que nadie puede sostener.</Reveal>
-              <Reveal delay={120} as="p" style={{ margin: "22px 0 0", maxWidth: "62ch", font: "400 clamp(17px,1.4vw,20px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>Muchas organizaciones no temen pagar por estrategia. Temen pagar por algo que no cambie la forma en que deciden. Change trabaja para que cada intervención deje una lectura, un criterio, un artefacto o un sistema que la organización pueda volver a usar.</Reveal>
-            </div>
-
-            <div className="ch-declist" style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 20, marginBottom: "clamp(36px,5vw,56px)" }}>
-              {EVITAMOS.map((item, i) => (
-                <Reveal key={item.h} delay={(i % 2) * 80} as="article" className="ch-card" style={{ background: "rgba(255,255,255,.85)", border: "1px solid var(--border-subtle)", borderLeft: `3px solid ${item.c}`, padding: "28px 28px 30px" }}>
-                  <h3 style={{ margin: "0 0 10px", font: "600 clamp(16px,1.5vw,20px)/1.2 var(--font-primary)", letterSpacing: "-.025em", color: "var(--ink-graphite)" }}>{item.h}</h3>
-                  <p style={{ margin: 0, font: "400 14.5px/1.55 var(--font-primary)", color: "var(--text-muted)" }}>{item.p}</p>
-                </Reveal>
-              ))}
-            </div>
-
-            <Reveal delay={100}>
-              <blockquote style={{ margin: 0, padding: "clamp(24px,3vw,36px) clamp(20px,3vw,36px)", borderLeft: "3px solid var(--border-subtle)", background: "rgba(255,255,255,.6)" }}>
-                <p style={{ margin: 0, font: "500 clamp(17px,1.8vw,22px)/1.4 var(--font-primary)", letterSpacing: "-.02em", color: "var(--ink-graphite)" }}>El costo real no es decidir imperfectamente. Es seguir posponiendo decisiones hasta que el contexto las tome por ti.</p>
-                <footer style={{ marginTop: 14, font: "600 11px var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--text-muted)" }}>Una decisión no tomada también consume recursos.</footer>
-              </blockquote>
-            </Reveal>
-          </div>
-        </section>
-
-        <EtherealDivider />
-        {/* ═══ 11 · CREDIBILIDAD ═══ */}
-        <section style={{ background: "var(--surface-page)" }}>
-          <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(92px,11vw,168px) 0" }}>
-            <div className="ch-teamstrip" style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(320px,480px)", gap: "clamp(44px,5vw,80px)", alignItems: "start" }}>
-              <div>
-                <Reveal style={{ display: "flex", alignItems: "center", gap: 11, marginBottom: 20 }}>
-                  <span style={{ width: 7, height: 7, background: "var(--change-violet)" }} />
-                  <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)" }}>Credibilidad</span>
-                </Reveal>
-                <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(28px,3.8vw,54px)/1.0 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>Trabajamos con decisiones que no siempre pueden hacerse públicas.</Reveal>
-                <Reveal delay={120} as="p" style={{ margin: "22px 0 0", maxWidth: "56ch", font: "400 clamp(16px,1.3vw,19px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>Muchas de las decisiones que acompañamos involucran crecimiento, relevo, priorización, inversión, marca o tensiones internas. Por eso algunos casos se presentan anonimizados: protegemos el contexto estratégico antes que usarlo como credencial.</Reveal>
-              </div>
-
-              <Reveal delay={120}>
-                <aside className="ch-card" style={{ border: "1px solid var(--border-subtle)", background: "rgba(255,255,255,.85)", padding: "32px 30px" }}>
-                  <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 16 }}>
-                    {CREDIBILIDAD_PUNTOS.map((punto) => (
-                      <li key={punto} style={{ display: "flex", gap: 12, alignItems: "flex-start", font: "400 14.5px/1.55 var(--font-primary)", color: "var(--text-muted)" }}>
-                        <span aria-hidden="true" style={{ flexShrink: 0, marginTop: 6, width: 6, height: 6, borderRadius: "50%", background: "var(--change-violet)" }} />
-                        {punto}
-                      </li>
-                    ))}
-                  </ul>
-                  <p style={{ margin: "24px 0 0", padding: "16px 0 0", borderTop: "1px solid var(--border-subtle)", font: "600 13px/1.45 var(--font-primary)", letterSpacing: "-.01em", color: "var(--ink-graphite)" }}>
-                    El criterio se sostiene desde el board. La profundidad se suma por reto.
-                  </p>
-                </aside>
-              </Reveal>
-            </div>
-          </div>
-        </section>
-
-        <EtherealDivider />
-        {/* ═══ 12 · EQUIPO ═══ */}
-        <section style={{ background: "var(--surface-soft)" }}>
-          <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(92px,11vw,168px) 0" }}>
-            <div className="ch-teamstrip" style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(330px,460px)", gap: "clamp(44px,5vw,80px)", alignItems: "start" }}>
-              <div>
-                <Reveal style={{ display: "flex", alignItems: "center", gap: 11, marginBottom: 20 }}>
-                  <span style={{ width: 7, height: 7, background: "var(--change-violet)" }} />
-                  <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)" }}>Board</span>
-                </Reveal>
-                <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(32px,4.2vw,60px)/.98 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>Un board para pensar lo que todavía no tiene forma.</Reveal>
-                <Reveal delay={120} as="p" style={{ margin: "24px 0 0", maxWidth: 500, font: "400 clamp(17px,1.4vw,20px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>Change no es una persona ni una metodología empacada. Es el board donde se cruzan lectura del futuro, dirección de negocio y diseño de sistema, sobre el mismo arco de trabajo.</Reveal>
-              </div>
-              <div>
-                <Reveal delay={120} as="aside" className="ch-card" style={{ border: "1px solid var(--border-subtle)", background: "rgba(255,255,255,.85)", padding: "32px 30px" }}>
-                  <div style={{ display: "flex", flexDirection: "column" }}>
-                    {MESA.map((m, i) => (
-                      <div key={m.n} style={{ padding: "16px 0", borderTop: i === 0 ? "none" : "1px solid var(--border-subtle)" }}>
-                        <div style={{ display: "flex", justifyContent: "space-between", gap: 16, alignItems: "baseline" }}>
-                          <strong style={{ font: "600 16px var(--font-primary)", color: "var(--ink-graphite)" }}>{m.n}</strong>
-                          <span style={{ display: "inline-flex", alignItems: "center", gap: 7, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".06em", textTransform: "uppercase", color: "var(--ink-graphite)", textAlign: "right" }}>
-                            <span aria-hidden="true" style={{ width: 6, height: 6, borderRadius: "50%", background: m.c }} />{m.arc}
-                          </span>
-                        </div>
-                        <p style={{ margin: "8px 0 0", font: "400 13.5px/1.5 var(--font-primary)", color: "var(--text-muted)" }}>{m.p}</p>
-                      </div>
-                    ))}
-                  </div>
-                </Reveal>
-                <Reveal delay={180} style={{ marginTop: 20, paddingLeft: 16, borderLeft: "2px solid var(--change-violet)" }}>
-                  <p style={{ margin: 0, font: "400 13.5px/1.55 var(--font-primary)", color: "var(--text-muted)" }}>El board senior sostiene el criterio. La red de especialistas aporta profundidad específica cuando el reto lo exige. El método no se delega: se gobierna desde Change.</p>
-                </Reveal>
-              </div>
-            </div>
           </div>
         </section>
 
@@ -454,7 +321,7 @@ export default function Home() {
         {/* ═══ 13 · FIELD NOTES ═══ */}
         <section style={{ background: "var(--surface-page)" }}>
           <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(92px,11vw,168px) 0" }}>
-            <SectionHead kicker="Field Notes" title="Pensamos en voz alta para mostrar cómo leemos cambio." lead="Cada nota toma una señal real y la recorre completa: de qué cambió a qué decisión abre. Pocas notas, ninguna de relleno." />
+            <SectionHead kicker="Field Notes" title="Lecturas cortas sobre lo que cambia — y la decisión que abre." lead="Cada nota toma una señal real del entorno y la recorre completa: de qué cambió a qué decisión queda en tus manos. Pocas notas, ninguna de relleno." />
             <Reveal className="ch-card" style={{ border: "1px solid var(--border-subtle)", background: "rgba(255,255,255,.7)", padding: "clamp(32px,4vw,48px)" }}>
               <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-muted)" }}>El recorrido de cada nota</span>
               <div className="ch-fnflow" style={{ display: "grid", gridTemplateColumns: "repeat(5,1fr)", gap: 16, margin: "24px 0 28px" }}>
@@ -480,78 +347,7 @@ export default function Home() {
           </div>
         </section>
 
-        <div aria-hidden="true" style={{ height: "clamp(80px,8vw,120px)", background: "linear-gradient(180deg, var(--surface-page) 0%, var(--surface-dark) 100%)" }} />
-        {/* ═══ 14 · CONTACTO EN HOME ═══ */}
-        <section className="change-dark" style={{ position: "relative", overflow: "hidden", background: "var(--gradient-dark-pearl)" }}>
-          <div style={{ position: "relative", width: WRAP, margin: "0 auto", padding: "clamp(92px,11vw,168px) 0" }}>
-            <div className="ch-teamstrip" style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(320px,480px)", gap: "clamp(44px,5vw,80px)", alignItems: "center" }}>
-              <div>
-                <Reveal style={{ display: "flex", alignItems: "center", gap: 11, marginBottom: 20 }}>
-                  <span data-pulse style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--signal-cyan)" }} />
-                  <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "rgba(255,255,255,.8)" }}>Contacto</span>
-                </Reveal>
-                <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(30px,4vw,56px)/1.0 var(--font-primary)", letterSpacing: "-.05em", color: "#fff", textWrap: "balance" }}>No empieces con un formulario. Empieza con una decisión.</Reveal>
-                <Reveal delay={120} as="p" style={{ margin: "22px 0 0", maxWidth: "52ch", font: "400 clamp(16px,1.3vw,19px)/1.55 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>Antes de pedirte datos, el simulador te permite probar cómo Change lee una decisión difícil: eliges un escenario, respondes cinco preguntas y recibes una primera lectura. Solo si tiene sentido avanzar, compartes tu información.</Reveal>
-                <Reveal delay={200} style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 36 }}>
-                  <Link href="/contacto" className="btn btn-light">Simular una decisión</Link>
-                  <a
-                    href={INSTAGRAM_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-dghost"
-                    style={{ display: "inline-flex", alignItems: "center", gap: 9 }}
-                  >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-                      <circle cx="12" cy="12" r="4" />
-                      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
-                    </svg>
-                    Instagram
-                  </a>
-                  <a
-                    href={LINKEDIN_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-dghost"
-                    style={{ display: "inline-flex", alignItems: "center", gap: 9 }}
-                  >
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                      <rect x="2" y="2" width="20" height="20" rx="2" ry="2" />
-                      <line x1="8" y1="11" x2="8" y2="16" />
-                      <line x1="8" y1="8" x2="8" y2="8.01" strokeWidth="2.4" strokeLinecap="round" />
-                      <line x1="12" y1="16" x2="12" y2="13" />
-                      <path d="M12 11a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v5" />
-                    </svg>
-                    LinkedIn
-                  </a>
-                </Reveal>
-                <Reveal delay={240}>
-                  <p style={{ margin: "20px 0 0", maxWidth: "56ch", font: "400 14px/1.55 var(--font-primary)", color: "rgba(255,255,255,.62)" }}>Tu caso llega al board senior de Change. Si hay una tensión real que podamos trabajar, te respondemos con una primera lectura y un siguiente paso posible.</p>
-                </Reveal>
-              </div>
-
-              <Reveal delay={140}>
-                <div style={{ display: "flex", flexDirection: "column", gap: 3 }}>
-                  {[
-                    { n: "01", h: "Prueba un escenario", p: "Explora una tensión parecida a la tuya sin compartir información privada." },
-                    { n: "02", h: "Recibe una primera lectura", p: "El sistema identifica tensión, riesgo, movimiento principal y artefacto sugerido." },
-                    { n: "03", h: "Decide si avanzar", p: "Si la lectura te sirve, puedes enviar tu caso para trabajarlo con Change." },
-                  ].map((s, i) => (
-                    <div key={s.n} style={{ padding: "22px 24px", border: "1px solid rgba(255,255,255,.1)", background: "rgba(255,255,255,.04)", display: "flex", gap: 18, alignItems: "flex-start" }}>
-                      <span style={{ font: "300 24px/1 var(--font-accent)", letterSpacing: "-.02em", color: i === 2 ? "var(--signal-cyan)" : "rgba(255,255,255,.55)", flexShrink: 0, marginTop: 2 }}>{s.n}</span>
-                      <div>
-                        <strong style={{ display: "block", font: "600 15px/1.2 var(--font-primary)", color: "#fff", marginBottom: 6 }}>{s.h}</strong>
-                        <p style={{ margin: 0, font: "400 13.5px/1.5 var(--font-primary)", color: "rgba(255,255,255,.65)" }}>{s.p}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </Reveal>
-            </div>
-          </div>
-        </section>
-
-        <EtherealDivider dark />
+        <div aria-hidden="true" style={{ height: "clamp(80px,8vw,120px)", background: "linear-gradient(180deg, var(--surface-page) 0%, var(--surface-dark-secondary) 100%)" }} />
         {/* ═══ 15 · CTA FINAL (dark) ═══ */}
         <section className="change-dark" style={{ position: "relative", overflow: "hidden", background: "var(--gradient-violet-atmosphere), var(--surface-dark-secondary)" }}>
           <div style={{ position: "relative", width: WRAP, margin: "0 auto", padding: "clamp(96px,12vw,176px) 0", textAlign: "center" }}>

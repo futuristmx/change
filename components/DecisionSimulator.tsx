@@ -260,6 +260,7 @@ export default function DecisionSimulator() {
   const [submitError, setSubmitError] = useState("");
   const [copied, setCopied] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
 
   function handleCopyReading() {
     if (!reading) return;
@@ -292,6 +293,26 @@ export default function DecisionSimulator() {
       setTimeout(() => textareaRef.current?.focus(), 80);
     }
   }, [phase, step]);
+
+  // Scroll-into-view al cambiar de fase: evita que el usuario abra el quiz/
+  // resultado/contacto a mitad de scroll. Honra prefers-reduced-motion.
+  // Calcula posición absoluta del section y resta header sticky (~80px)
+  // para que el inicio del simulador quede justo bajo la nav.
+  useEffect(() => {
+    if (phase === "intro") return;
+    const reduce =
+      typeof window !== "undefined" &&
+      window.matchMedia?.("(prefers-reduced-motion:reduce)").matches;
+    requestAnimationFrame(() => {
+      const el = containerRef.current;
+      if (!el) return;
+      const top = el.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({
+        top: Math.max(0, top),
+        behavior: reduce ? "auto" : "smooth",
+      });
+    });
+  }, [phase]);
 
   function resetQuiz() {
     setStep(0);
@@ -454,7 +475,7 @@ export default function DecisionSimulator() {
   /* ── INTRO ── */
   if (phase === "intro") {
     return (
-      <section style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-sky-pearl)" }}>
+      <section ref={containerRef} style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-sky-pearl)", scrollMarginTop: 80 }}>
         <div style={{ ...WRAP, padding: "clamp(56px,7vw,88px) 0" }}>
           <div style={{ maxWidth: "52ch", marginBottom: "clamp(36px,5vw,52px)" }}>
             <span style={{ display: "block", font: "600 11px var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 16 }}>
@@ -523,11 +544,29 @@ export default function DecisionSimulator() {
     const canAdvance = currentText.trim().length >= 3;
 
     return (
-      <section style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-sky-pearl)" }}>
+      <section ref={containerRef} style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-sky-pearl)", scrollMarginTop: 80 }}>
         <div style={{ ...WRAP, padding: "clamp(32px,4vw,44px) 0" }}>
 
           {/* ── Widget card ── */}
-          <div className="sim-quiz-card" style={{ display: "grid", gridTemplateColumns: "1fr 252px", border: "1px solid var(--border-subtle)", background: "var(--surface-card)" }}>
+          <div className="sim-quiz-card" style={{ position: "relative", display: "grid", gridTemplateColumns: "1fr 252px", border: "1px solid var(--border-subtle)", background: "var(--surface-card)" }}>
+
+            {/* Barra superior de progreso — gradient violeta, se rellena por step */}
+            <div aria-hidden="true" style={{ position: "absolute", top: 0, left: 0, right: 0, height: 3, background: "var(--track-graphite)" }}>
+              <div
+                role="progressbar"
+                aria-label="Avance del simulador"
+                aria-valuemin={0}
+                aria-valuemax={5}
+                aria-valuenow={step + 1}
+                style={{
+                  height: "100%",
+                  width: `${((step + 1) / 5) * 100}%`,
+                  background: "var(--line-gradient-progress)",
+                  transition: "width var(--duration-premium) var(--ease-premium)",
+                }}
+              />
+            </div>
+
 
             {/* columna izquierda — pregunta */}
             <div style={{ padding: "clamp(22px,3vw,32px)", borderRight: "1px solid var(--border-subtle)" }}>
@@ -683,7 +722,7 @@ export default function DecisionSimulator() {
   /* ── RESULTADO ── */
   if (phase === "result" && reading) {
     return (
-      <section style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-sky-pearl)" }}>
+      <section ref={containerRef} style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-sky-pearl)", scrollMarginTop: 80 }}>
         <div style={{ ...WRAP, padding: "clamp(56px,7vw,88px) 0" }}>
           <div style={{ maxWidth: 680, marginBottom: "clamp(32px,4vw,48px)" }}>
             <span style={{ display: "block", font: "600 11px var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 14 }}>
@@ -749,7 +788,7 @@ export default function DecisionSimulator() {
   /* ── CONTACTO ── */
   if (phase === "contact") {
     return (
-      <section style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-sky-pearl)" }}>
+      <section ref={containerRef} style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-sky-pearl)", scrollMarginTop: 80 }}>
         <div style={{ ...WRAP, padding: "clamp(56px,7vw,88px) 0" }}>
           <div className="sim-contact-grid" style={{ display: "grid", gridTemplateColumns: "minmax(0,.9fr) minmax(0,1.1fr)", gap: "clamp(44px,6vw,88px)", alignItems: "start" }}>
             <div>
@@ -831,7 +870,7 @@ export default function DecisionSimulator() {
   /* ── ENVIADO ── */
   if (phase === "sent") {
     return (
-      <section style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-sky-pearl)" }}>
+      <section ref={containerRef} style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-sky-pearl)", scrollMarginTop: 80 }}>
         <div style={{ ...WRAP, padding: "clamp(88px,12vw,160px) 0" }}>
           <span style={{ display: "block", font: "600 11px var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--success)", marginBottom: 14 }}>
             Recibido
