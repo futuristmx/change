@@ -107,6 +107,10 @@ img, svg { display: block; max-width: 100%; }
   outline: 2px solid var(--change-violet);
   outline-offset: 2px;
 }
+.btn:focus-visible {
+  outline: 2px solid var(--change-violet);
+  outline-offset: 4px;
+}
 
 /* Skip-to-content — oculto hasta recibir foco por teclado */
 .skip-link {
@@ -145,8 +149,9 @@ img, svg { display: block; max-width: 100%; }
               transform var(--duration-standard) var(--ease-premium);
 }
 .btn-sm { height: 42px; padding: 0 18px; font-size: 14.5px; }
-.btn-primary { background: var(--change-violet); color: #fff; }
-.btn-primary:hover { background: var(--deep-violet); transform: translateY(-1px); }
+.btn-primary { background: var(--gradient-btn-primary); color: #fff; box-shadow: var(--shadow-violet); }
+.btn-primary:hover { filter: brightness(0.94); transform: translateY(-1px); }
+.btn-primary:active { background: var(--gradient-btn-deep); transform: translateY(0); }
 .btn-secondary { background: #fff; color: var(--ink-graphite); border-color: rgba(46,46,51,.16); box-shadow: 0 4px 14px rgba(46,46,51,.05); }
 .btn-secondary:hover { border-color: rgba(46,46,51,.32); box-shadow: 0 10px 28px rgba(46,46,51,.09); }
 .btn-light { background: #fff; color: var(--ink-graphite); }
@@ -156,8 +161,9 @@ img, svg { display: block; max-width: 100%; }
 
 /* ── Reveal-on-scroll (driven by IntersectionObserver in Reveal.tsx) ── */
 [data-reveal] {
-  opacity: 0; transform: translateY(22px);
-  transition: opacity .7s var(--ease-premium), transform .7s var(--ease-premium);
+  opacity: 0; transform: translateY(12px);
+  transition: opacity var(--duration-enter) var(--ease-premium),
+              transform var(--duration-enter) var(--ease-premium);
 }
 [data-reveal].is-visible { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) {
@@ -166,9 +172,24 @@ img, svg { display: block; max-width: 100%; }
   [data-pulse] { animation: none !important; }
 }
 
-/* ── Ambient pulse (signal dots) ── */
+/* ── Ambient pulse (signal dots) — slow heartbeat (5s), never distracting ── */
 @keyframes hpulse {
   0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(89,184,217,.45); }
-  50% { opacity: .5; box-shadow: 0 0 0 5px rgba(89,184,217,0); }
+  50% { opacity: .55; box-shadow: 0 0 0 5px rgba(89,184,217,0); }
 }
-[data-pulse] { animation: hpulse 2.6s var(--ease-premium) infinite; }
+[data-pulse] { animation: hpulse var(--duration-pulse) var(--ease-premium) infinite; }
+
+/* ── Cards — restrained hover lift (premium, never decorative) ── */
+.ch-card {
+  transition: transform var(--duration-standard) var(--ease-premium),
+              border-color var(--duration-standard) var(--ease-premium),
+              box-shadow var(--duration-standard) var(--ease-premium);
+}
+.ch-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(109, 59, 255, 0.28);
+  box-shadow: var(--shadow-graphite-soft);
+}
+@media (prefers-reduced-motion: reduce) {
+  .ch-card:hover { transform: none; }
+}

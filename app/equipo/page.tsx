@@ -7,6 +7,10 @@ export const metadata: Metadata = {
   title: "El board senior que construye capacidad de futuro",
   description:
     "Interpretar el cambio, decidir bajo ambigüedad y sostener el rumbo no caben en una sola cabeza. Change reúne las formas de pensar que una decisión difícil necesita al mismo tiempo.",
+  openGraph: {
+    images: [{ url: "/assets/og-default.png", width: 1200, height: 630, alt: "El board senior que construye capacidad de futuro" }],
+  },
+  twitter: { images: ["/assets/og-default.png"] },
 };
 
 const WRAP = "min(1340px, calc(100% - clamp(40px,8vw,128px)))";

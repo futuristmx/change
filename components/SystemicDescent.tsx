@@ -44,7 +44,7 @@ export default function SystemicDescent() {
       <div className="sd-stack" style={{ position: "relative", display: "flex", flexDirection: "column", gap: 14 }}>
         {/* rail vertical animado */}
         <div aria-hidden="true" className="sd-rail" style={{ position: "absolute", left: 21, top: 26, bottom: 92, width: 2, background: "var(--line-structural)", opacity: 0.4 }} />
-        <div aria-hidden="true" className="sd-rail" style={{ position: "absolute", left: 21, top: 26, height: inView ? "calc(100% - 118px)" : 0, width: 2, background: "linear-gradient(180deg,var(--signal-cyan),var(--change-violet))", transition: "height 1s var(--ease-premium)" }} />
+        <div aria-hidden="true" className="sd-rail" style={{ position: "absolute", left: 21, top: 26, height: inView ? "calc(100% - 118px)" : 0, width: 2, background: "linear-gradient(180deg,var(--signal-cyan),var(--change-violet))", transition: "height var(--duration-line) var(--ease-premium)" }} />
 
         {LEVELS.map((lv, i) => {
           const on = i === active;

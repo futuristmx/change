@@ -1,6 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { Glyph, type GlyphName } from "@/components/ds";
+
+const STAGE_GLYPH: Record<string, GlyphName> = {
+  "Señal": "insight",
+  "Tensión": "risk",
+  "Decisión": "decision",
+  "Proyecto": "project",
+  "Aprendizaje": "status",
+};
 
 /* ── Demo ficticio plausible: UNA decisión trazada de extremo a extremo ── */
 interface Stage {
@@ -86,12 +95,13 @@ export default function MissionControlLive() {
           {/* cadena de nodos */}
           <div style={{ position: "relative", marginBottom: 22 }}>
             <div style={{ position: "absolute", left: "8%", right: "8%", top: 9, height: 2, background: "rgba(255,255,255,.12)" }} />
-            <div style={{ position: "absolute", left: "8%", top: 9, height: 2, width: `calc(${fill}% * 0.84)`, background: "linear-gradient(90deg,var(--signal-cyan),var(--change-violet))", transition: "width .5s var(--ease-premium)" }} />
+            <div style={{ position: "absolute", left: "8%", top: 9, height: 2, width: `calc(${fill}% * 0.84)`, background: "var(--line-gradient-relation)", transition: "width var(--duration-premium) var(--ease-premium)" }} />
             <div style={{ position: "relative", display: "grid", gridTemplateColumns: `repeat(${TRACE.length},1fr)`, gap: 4 }}>
               {TRACE.map((s, i) => {
                 const on = i === active;
                 return (
                   <button key={s.k} onClick={() => select(i)} aria-pressed={on} aria-label={`${s.k}, paso ${i + 1} de ${TRACE.length}`}
+                    className="mcl-node-btn"
                     style={{ border: 0, background: "transparent", cursor: "pointer", padding: 0, textAlign: "center", fontFamily: "var(--font-primary)" }}>
                     <span data-pulse={on ? "" : undefined} style={{ display: "block", width: on ? 16 : 11, height: on ? 16 : 11, borderRadius: "50%", margin: "0 auto 9px", background: s.color, boxShadow: on ? `0 0 0 4px var(--surface-dark-tertiary), 0 0 14px ${s.color}` : "0 0 0 4px var(--surface-dark-tertiary)", transition: "all .3s var(--ease-premium)" }} />
                     <span className="mcl-nlabel" style={{ display: "block", font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".04em", textTransform: "uppercase", color: on ? "#fff" : "rgba(255,255,255,.8)", transition: "color .3s" }}>{s.k}</span>
@@ -105,7 +115,11 @@ export default function MissionControlLive() {
           <div style={{ border: "1px solid rgba(255,255,255,.1)", borderLeft: `3px solid ${stage.color}`, background: "rgba(255,255,255,.03)", padding: "20px 22px", minHeight: 156 }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, flexWrap: "wrap", marginBottom: 12 }}>
               <span style={{ display: "inline-flex", alignItems: "center", gap: 8, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "#fff" }}>
-                <span aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: stage.color }} />{stage.k}
+                <span aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: stage.color }} />
+                <span aria-hidden="true" style={{ display: "inline-flex", color: stage.color }}>
+                  <Glyph name={STAGE_GLYPH[stage.k] ?? "nav"} size={18} />
+                </span>
+                {stage.k}
               </span>
               <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".08em", textTransform: "uppercase", color: "rgba(217,210,255,.85)" }}>{stage.artefacto}</span>
             </div>
@@ -151,6 +165,9 @@ export default function MissionControlLive() {
       <style>{`
         @media (max-width: 820px) {
           .mcl-body { grid-template-columns: 1fr !important; }
+        }
+        @media (max-width: 768px) {
+          .mcl-node-btn { min-height: 44px; padding: 8px 4px !important; }
         }
         @media (max-width: 520px) {
           .mcl-nlabel { display: none !important; }

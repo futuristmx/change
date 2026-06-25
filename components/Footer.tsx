@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import EtherealDivider from "@/components/ds/EtherealDivider";
 
 const COL_A = [
   { label: "Método", href: "/capacidades" },
@@ -13,12 +14,13 @@ const COL_B = [
 
 export default function Footer() {
   return (
-    <footer style={{ background: "var(--ink-graphite)", color: "rgba(240,244,255,.8)" }}>
+    <footer className="change-dark" style={{ background: "var(--gradient-dark-pearl)", color: "rgba(240,244,255,.8)" }}>
+      <EtherealDivider dark />
       <div style={{ width: "min(1340px, calc(100% - clamp(40px,8vw,128px)))", margin: "0 auto", padding: "72px 0 44px" }}>
         <div className="ch-foot" style={{ display: "grid", gridTemplateColumns: "1.4fr 1fr 1fr 1fr", gap: 36 }}>
           <div>
             <Link href="/" aria-label="Change" style={{ display: "block", marginBottom: 20 }}>
-              <Image src="/assets/change_logo_white.svg" alt="Change" width={120} height={30} style={{ height: 30, width: "auto", display: "block" }} />
+              <Image src="/assets/change_logo_white.svg" alt="Change" width={120} height={30} loading="lazy" style={{ height: 30, width: "auto", display: "block" }} />
             </Link>
             <p style={{ margin: 0, maxWidth: 290, font: "400 14px/1.6 var(--font-primary)", color: "rgba(240,244,255,.8)" }}>
               La certeza dejó de ser condición para actuar.

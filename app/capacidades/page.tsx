@@ -8,6 +8,10 @@ export const metadata: Metadata = {
   title: "Método: leer, interpretar, decidir, diseñar y sostener",
   description:
     "No compras una capacidad suelta. Construyes capacidad de futuro: cinco movimientos que convierten incertidumbre en instrumentos de decisión.",
+  openGraph: {
+    images: [{ url: "/assets/og-default.png", width: 1200, height: 630, alt: "Método: leer, interpretar, decidir, diseñar y sostener" }],
+  },
+  twitter: { images: ["/assets/og-default.png"] },
 };
 
 const WRAP = "min(1340px, calc(100% - clamp(40px,8vw,128px)))";

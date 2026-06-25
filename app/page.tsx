@@ -6,6 +6,8 @@ import MethodFlow from "@/components/MethodFlow";
 import SystemicDescent from "@/components/SystemicDescent";
 import CapacityScore from "@/components/CapacityScore";
 import MissionControlLive from "@/components/MissionControlLive";
+import EtherealDivider from "@/components/ds/EtherealDivider";
+import { Badge, SignalField, Glyph, type BadgeTone, type GlyphName } from "@/components/ds";
 
 const WRAP = "min(1340px, calc(100% - clamp(40px,8vw,128px)))";
 
@@ -28,12 +30,12 @@ function SectionHead({ kicker, title, lead }: { kicker: string; title: string; l
   );
 }
 
-const ARCO = [
-  { t: "Leer", c: "var(--signal-cyan)" },
-  { t: "Interpretar", c: "var(--soft-violet)" },
-  { t: "Decidir", c: "var(--change-violet)" },
-  { t: "Diseñar", c: "var(--change-violet)" },
-  { t: "Sostener", c: "var(--ink-graphite)" },
+const ARCO: Array<{ t: string; c: string; g: GlyphName }> = [
+  { t: "Leer", c: "var(--signal-cyan)", g: "insight" },
+  { t: "Interpretar", c: "var(--soft-violet)", g: "risk" },
+  { t: "Decidir", c: "var(--change-violet)", g: "decision" },
+  { t: "Diseñar", c: "var(--change-violet)", g: "project" },
+  { t: "Sostener", c: "var(--ink-graphite)", g: "status" },
 ];
 
 const ARTEFACTOS = [
@@ -94,6 +96,19 @@ const CREDIBILIDAD_PUNTOS = [
   "La información sensible no se usa como material público sin autorización expresa.",
 ];
 
+/* Map de color-token a tono semántico del Badge DS. */
+function mapTone(colorVar: string): BadgeTone {
+  switch (colorVar) {
+    case "var(--signal-cyan)":          return "signal";
+    case "var(--soft-violet)":          return "violet";
+    case "var(--change-violet)":        return "violet";
+    case "var(--opportunity-orange)":   return "opportunity";
+    case "var(--ink-graphite)":         return "neutral";
+    case "var(--human-pink)":           return "opportunity";
+    default:                            return "neutral";
+  }
+}
+
 export default function Home() {
   return (
     <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
@@ -101,7 +116,8 @@ export default function Home() {
       <main id="main-content" style={{ flex: 1 }}>
 
         {/* ═══ 01 · HERO ═══ */}
-        <section style={{ position: "relative", overflow: "hidden", background: "radial-gradient(120% 90% at 50% -10%,rgba(138,108,255,.14) 0%,rgba(89,184,217,.06) 34%,rgba(255,255,255,0) 60%),linear-gradient(180deg,#FFFFFF 0%,var(--pure-white) 70%,var(--warm-haze) 100%)" }}>
+        <section style={{ position: "relative", overflow: "hidden", background: "radial-gradient(120% 90% at 50% -10%,rgba(138,108,255,.14) 0%,rgba(89,184,217,.06) 34%,rgba(255,255,255,0) 60%),var(--gradient-celestial-horizon)" }}>
+          <SignalField />
           <div style={{ position: "relative", width: WRAP, margin: "0 auto", padding: "clamp(88px,12vw,156px) 0 clamp(72px,9vw,116px)", textAlign: "center" }}>
             <Reveal style={{ display: "inline-flex", alignItems: "center", gap: 11, marginBottom: 34, padding: "7px 14px 7px 11px", border: "1px solid var(--border-subtle)", background: "rgba(255,255,255,.55)" }}>
               <span data-pulse style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--signal-cyan)" }} />
@@ -124,11 +140,16 @@ export default function Home() {
               <div aria-hidden="true" className="ch-herochain" style={{ display: "flex", alignItems: "center", justifyContent: "center", flexWrap: "wrap", gap: 10, marginTop: "clamp(44px,6vw,68px)" }}>
                 {ARCO.map((n, i, arr) => (
                   <span key={n.t} style={{ display: "inline-flex", alignItems: "center", gap: 10 }}>
-                    <span style={{ display: "inline-flex", alignItems: "center", gap: 7 }}>
-                      <span style={{ width: 8, height: 8, borderRadius: 999, background: n.c }} />
-                      <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".08em", textTransform: "uppercase", color: "var(--text-muted)" }}>{n.t}</span>
+                    <span style={{ display: "inline-flex", flexDirection: "column", alignItems: "center", gap: 4 }}>
+                      <span aria-hidden="true" style={{ color: n.c, display: "inline-flex" }}>
+                        <Glyph name={n.g} size={14} />
+                      </span>
+                      <span style={{ display: "inline-flex", alignItems: "center", gap: 7 }}>
+                        <span style={{ width: 8, height: 8, borderRadius: 999, background: n.c }} />
+                        <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".08em", textTransform: "uppercase", color: "var(--text-muted)" }}>{n.t}</span>
+                      </span>
                     </span>
-                    {i < arr.length - 1 && <span style={{ color: "var(--border-subtle)" }}>→</span>}
+                    {i < arr.length - 1 && <span aria-hidden="true" style={{ width: 24, height: 1, background: "var(--line-gradient-relation)" }} />}
                   </span>
                 ))}
               </div>
@@ -136,16 +157,18 @@ export default function Home() {
           </div>
         </section>
 
+        <EtherealDivider />
         {/* ═══ 02 · TENSIONES SISTÉMICAS ═══ */}
-        <section style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-sky-pearl)" }}>
+        <section style={{ background: "var(--surface-page)" }}>
           <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(92px,11vw,168px) 0" }}>
             <SectionHead kicker="Tensiones sistémicas" title="El problema no es el cambio. Es no tener capacidad para interpretarlo a tiempo." lead="Una tensión no nace en tu organización: baja hasta ella. Recorre el descenso — de la época al contexto, del contexto a la decisión que tienes enfrente." />
             <Reveal delay={120}><SystemicDescent /></Reveal>
           </div>
         </section>
 
+        <EtherealDivider />
         {/* ═══ 03 · SCORE DE CAPACIDAD DE FUTURO ═══ */}
-        <section id="score" style={{ borderTop: "1px solid var(--border-subtle)", background: "linear-gradient(180deg,#FFFFFF,var(--pure-white))" }}>
+        <section id="score" style={{ background: "var(--gradient-sky-pearl)" }}>
           <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(92px,11vw,168px) 0" }}>
             <div style={{ maxWidth: 720, margin: "0 auto clamp(40px,5vw,56px)", textAlign: "center" }}>
               <Reveal style={{ display: "inline-flex", alignItems: "center", gap: 11, marginBottom: 20 }}>
@@ -159,8 +182,9 @@ export default function Home() {
           </div>
         </section>
 
+        <EtherealDivider />
         {/* ═══ 04 · TESIS ═══ */}
-        <section style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-sky-pearl)" }}>
+        <section style={{ background: "var(--gradient-sky-pearl)" }}>
           <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(96px,12vw,176px) 0", textAlign: "center" }}>
             <Reveal style={{ display: "inline-flex", alignItems: "center", gap: 11, marginBottom: 26 }}>
               <span style={{ width: 7, height: 7, background: "var(--change-violet)" }} />
@@ -175,8 +199,9 @@ export default function Home() {
           </div>
         </section>
 
+        <EtherealDivider />
         {/* ═══ 04.5 · QUÉ ES CAPACIDAD DE FUTURO ═══ */}
-        <section style={{ borderTop: "1px solid var(--border-subtle)", background: "linear-gradient(180deg,#FFFFFF,var(--pure-white))" }}>
+        <section style={{ background: "var(--gradient-violet-whisper)" }}>
           <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(92px,11vw,168px) 0" }}>
             <div style={{ maxWidth: 820, marginBottom: "clamp(44px,6vw,64px)" }}>
               <Reveal style={{ display: "flex", alignItems: "center", gap: 11, marginBottom: 20 }}>
@@ -212,8 +237,9 @@ export default function Home() {
           </div>
         </section>
 
+        <EtherealDivider />
         {/* ═══ 05 · MÉTODO ═══ */}
-        <section id="metodo" style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-sky-pearl)" }}>
+        <section id="metodo" style={{ background: "var(--gradient-sky-pearl)" }}>
           <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(92px,11vw,168px) 0" }}>
             <div style={{ maxWidth: 820, marginBottom: "clamp(40px,5vw,60px)" }}>
               <Reveal style={{ display: "flex", alignItems: "center", gap: 11, marginBottom: 20 }}>
@@ -227,15 +253,16 @@ export default function Home() {
           </div>
         </section>
 
+        <EtherealDivider />
         {/* ═══ 06 · ARTEFACTOS ═══ */}
-        <section style={{ borderTop: "1px solid var(--border-subtle)", background: "linear-gradient(180deg,#FFFFFF,var(--pure-white))" }}>
+        <section style={{ background: "var(--gradient-violet-whisper)" }}>
           <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(92px,11vw,168px) 0" }}>
             <SectionHead kicker="Artefactos" title="La capacidad de futuro se ve." lead="No entregamos opiniones. Entregamos instrumentos que se pueden leer, discutir y usar para decidir. Esto es lo que produce el método." />
             <div className="ch-grid4" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 16 }}>
               {ARTEFACTOS.map((a, i) => (
                 <Reveal key={a.h} delay={(i % 4) * 80} as="article" className="ch-card" style={{ background: "rgba(255,255,255,.85)", border: "1px solid var(--border-subtle)", padding: "28px 26px 30px", display: "flex", flexDirection: "column", minHeight: 220 }}>
-                  <span style={{ display: "inline-flex", alignItems: "center", gap: 8, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--ink-graphite)" }}>
-                    <span aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: a.c }} />{a.k}
+                  <span style={{ display: "inline-flex" }}>
+                    <Badge tone={mapTone(a.c)}>{a.k}</Badge>
                   </span>
                   <h3 style={{ margin: "16px 0 0", font: "600 20px var(--font-primary)", letterSpacing: "-.02em", color: "var(--ink-graphite)" }}>{a.h}</h3>
                   <p style={{ margin: "10px 0 0", font: "400 14px/1.55 var(--font-primary)", color: "var(--text-muted)" }}>{a.p}</p>
@@ -245,8 +272,9 @@ export default function Home() {
           </div>
         </section>
 
+        <div aria-hidden="true" style={{ height: "clamp(80px,8vw,120px)", background: "linear-gradient(180deg, var(--surface-soft) 0%, var(--surface-dark) 100%)" }} />
         {/* ═══ 07 · MISSION CONTROL (dark) ═══ */}
-        <section className="change-dark" style={{ position: "relative", overflow: "hidden", background: "radial-gradient(circle at 82% 0%,color-mix(in srgb, var(--change-violet) 22%, transparent),transparent 38%),linear-gradient(180deg,var(--surface-dark) 0%,var(--surface-dark-secondary) 100%)" }}>
+        <section className="change-dark" style={{ position: "relative", overflow: "hidden", background: "var(--gradient-dark-signal-field)" }}>
           <div style={{ position: "relative", width: WRAP, margin: "0 auto", padding: "clamp(92px,11vw,168px) 0" }}>
             <div className="ch-missionshell" style={{ display: "grid", gridTemplateColumns: "minmax(0,.9fr) minmax(0,1.1fr)", gap: "clamp(44px,5vw,80px)", alignItems: "center" }}>
               <div>
@@ -266,8 +294,9 @@ export default function Home() {
           </div>
         </section>
 
+        <div aria-hidden="true" style={{ height: "clamp(80px,8vw,120px)", background: "linear-gradient(180deg, var(--surface-dark-secondary) 0%, var(--surface-soft) 100%)" }} />
         {/* ═══ 08 · CAPACIDADES INSTALADAS / DECISIONES ═══ */}
-        <section style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-sky-pearl)" }}>
+        <section style={{ background: "var(--surface-soft)" }}>
           <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(92px,11vw,168px) 0" }}>
             <SectionHead kicker="Capacidades instaladas" title="No mostramos proyectos. Mostramos capacidades instaladas." lead="Cada trabajo de Change deja a la organización capaz de algo que antes no podía sostener. Estas son las tensiones que sabemos volver decisión." />
             <div className="ch-declist" style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 20 }}>
@@ -287,27 +316,27 @@ export default function Home() {
           </div>
         </section>
 
+        <EtherealDivider />
         {/* ═══ 09 · CÓMO SE TRABAJA CON CHANGE ═══ */}
-        <section style={{ borderTop: "1px solid var(--border-subtle)", background: "linear-gradient(180deg,#FFFFFF,var(--pure-white))" }}>
+        <section style={{ background: "var(--surface-page)" }}>
           <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(92px,11vw,168px) 0" }}>
             <div style={{ maxWidth: 820, marginBottom: "clamp(44px,6vw,64px)" }}>
               <Reveal style={{ display: "flex", alignItems: "center", gap: 11, marginBottom: 20 }}>
                 <span style={{ width: 7, height: 7, background: "var(--change-violet)" }} />
                 <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)" }}>Cómo se trabaja con Change</span>
               </Reveal>
-              <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(30px,4.2vw,58px)/1.0 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>No empezamos con una propuesta cerrada. Empezamos con una decisión.</Reveal>
+              <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(30px,4.2vw,58px)/1.0 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>No empezamos con una propuesta cerrada. Empezamos con una <span style={{ background: "var(--gradient-type-electric)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>decisión.</span></Reveal>
               <Reveal delay={120} as="p" style={{ margin: "22px 0 0", maxWidth: "60ch", font: "400 clamp(17px,1.4vw,20px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>Cada relación empieza con una decisión real que la organización necesita tomar. Desde ahí construimos, de forma acotada y progresiva.</Reveal>
             </div>
 
             <div className="ch-grid3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20, marginBottom: 36 }}>
               {COMO_TRABAJA.map((paso, i) => (
                 <Reveal key={paso.h} delay={i * 80} as="article" className="ch-card" style={{ background: "rgba(255,255,255,.85)", border: "1px solid var(--border-subtle)", padding: "32px 28px 36px", display: "flex", flexDirection: "column" }}>
-                  <span style={{ display: "block", font: "600 clamp(38px,4vw,54px)/1 var(--font-secondary)", letterSpacing: "-.04em", color: "var(--change-violet)", marginBottom: 20 }}>{paso.n}</span>
+                  <span style={{ display: "block", font: "300 clamp(38px,4vw,54px)/1 var(--font-accent)", letterSpacing: "-.04em", color: "var(--change-violet)", marginBottom: 20 }}>{paso.n}</span>
                   <h3 style={{ margin: "0 0 12px", font: "600 clamp(18px,1.6vw,22px)/1.15 var(--font-primary)", letterSpacing: "-.025em", color: "var(--ink-graphite)" }}>{paso.h}</h3>
                   <p style={{ margin: "0 0 24px", font: "400 14.5px/1.55 var(--font-primary)", color: "var(--text-muted)", flexGrow: 1 }}>{paso.p}</p>
-                  <span style={{ display: "inline-flex", alignItems: "center", gap: 7, font: "600 10.5px var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-muted)", borderTop: "1px solid var(--border-subtle)", paddingTop: 16 }}>
-                    <span aria-hidden="true" style={{ width: 5, height: 5, borderRadius: "50%", background: "var(--change-violet)" }} />
-                    {paso.label}
+                  <span style={{ display: "inline-flex", borderTop: "1px solid var(--border-subtle)", paddingTop: 16 }}>
+                    <Badge tone="violet">{paso.label}</Badge>
                   </span>
                 </Reveal>
               ))}
@@ -320,8 +349,9 @@ export default function Home() {
           </div>
         </section>
 
+        <EtherealDivider />
         {/* ═══ 10 · LO QUE EVITAMOS ═══ */}
-        <section style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-sky-pearl)" }}>
+        <section style={{ background: "var(--gradient-sky-pearl)" }}>
           <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(92px,11vw,168px) 0" }}>
             <div style={{ maxWidth: 820, marginBottom: "clamp(44px,6vw,64px)" }}>
               <Reveal style={{ display: "flex", alignItems: "center", gap: 11, marginBottom: 20 }}>
@@ -350,8 +380,9 @@ export default function Home() {
           </div>
         </section>
 
+        <EtherealDivider />
         {/* ═══ 11 · CREDIBILIDAD ═══ */}
-        <section style={{ borderTop: "1px solid var(--border-subtle)", background: "linear-gradient(180deg,#FFFFFF,var(--pure-white))" }}>
+        <section style={{ background: "var(--surface-page)" }}>
           <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(92px,11vw,168px) 0" }}>
             <div className="ch-teamstrip" style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(320px,480px)", gap: "clamp(44px,5vw,80px)", alignItems: "start" }}>
               <div>
@@ -382,8 +413,9 @@ export default function Home() {
           </div>
         </section>
 
+        <EtherealDivider />
         {/* ═══ 12 · EQUIPO ═══ */}
-        <section style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-sky-pearl)" }}>
+        <section style={{ background: "var(--surface-soft)" }}>
           <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(92px,11vw,168px) 0" }}>
             <div className="ch-teamstrip" style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(330px,460px)", gap: "clamp(44px,5vw,80px)", alignItems: "start" }}>
               <div>
@@ -418,8 +450,9 @@ export default function Home() {
           </div>
         </section>
 
+        <EtherealDivider />
         {/* ═══ 13 · FIELD NOTES ═══ */}
-        <section style={{ borderTop: "1px solid var(--border-subtle)", background: "linear-gradient(180deg,#FFFFFF,var(--pure-white))" }}>
+        <section style={{ background: "var(--surface-page)" }}>
           <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(92px,11vw,168px) 0" }}>
             <SectionHead kicker="Field Notes" title="Pensamos en voz alta para mostrar cómo leemos cambio." lead="Cada nota toma una señal real y la recorre completa: de qué cambió a qué decisión abre. Pocas notas, ninguna de relleno." />
             <Reveal className="ch-card" style={{ border: "1px solid var(--border-subtle)", background: "rgba(255,255,255,.7)", padding: "clamp(32px,4vw,48px)" }}>
@@ -447,8 +480,9 @@ export default function Home() {
           </div>
         </section>
 
+        <div aria-hidden="true" style={{ height: "clamp(80px,8vw,120px)", background: "linear-gradient(180deg, var(--surface-page) 0%, var(--surface-dark) 100%)" }} />
         {/* ═══ 14 · CONTACTO EN HOME ═══ */}
-        <section className="change-dark" style={{ position: "relative", overflow: "hidden", background: "radial-gradient(circle at 18% 30%,rgba(89,184,217,.14) 0%,rgba(10,14,21,0) 44%),radial-gradient(circle at 80% 70%,rgba(109,59,255,.18) 0%,rgba(10,14,21,0) 42%),linear-gradient(180deg,var(--surface-dark) 0%,var(--surface-dark-secondary) 100%)" }}>
+        <section className="change-dark" style={{ position: "relative", overflow: "hidden", background: "var(--gradient-dark-pearl)" }}>
           <div style={{ position: "relative", width: WRAP, margin: "0 auto", padding: "clamp(92px,11vw,168px) 0" }}>
             <div className="ch-teamstrip" style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(320px,480px)", gap: "clamp(44px,5vw,80px)", alignItems: "center" }}>
               <div>
@@ -504,7 +538,7 @@ export default function Home() {
                     { n: "03", h: "Decide si avanzar", p: "Si la lectura te sirve, puedes enviar tu caso para trabajarlo con Change." },
                   ].map((s, i) => (
                     <div key={s.n} style={{ padding: "22px 24px", border: "1px solid rgba(255,255,255,.1)", background: "rgba(255,255,255,.04)", display: "flex", gap: 18, alignItems: "flex-start" }}>
-                      <span style={{ font: "600 13px var(--font-mono)", letterSpacing: ".08em", color: i === 2 ? "var(--signal-cyan)" : "rgba(255,255,255,.35)", flexShrink: 0, marginTop: 2 }}>{s.n}</span>
+                      <span style={{ font: "300 24px/1 var(--font-accent)", letterSpacing: "-.02em", color: i === 2 ? "var(--signal-cyan)" : "rgba(255,255,255,.55)", flexShrink: 0, marginTop: 2 }}>{s.n}</span>
                       <div>
                         <strong style={{ display: "block", font: "600 15px/1.2 var(--font-primary)", color: "#fff", marginBottom: 6 }}>{s.h}</strong>
                         <p style={{ margin: 0, font: "400 13.5px/1.5 var(--font-primary)", color: "rgba(255,255,255,.65)" }}>{s.p}</p>
@@ -517,8 +551,9 @@ export default function Home() {
           </div>
         </section>
 
+        <EtherealDivider dark />
         {/* ═══ 15 · CTA FINAL (dark) ═══ */}
-        <section style={{ position: "relative", overflow: "hidden", background: "radial-gradient(circle at 50% -10%,color-mix(in srgb, var(--change-violet) 24%, transparent),transparent 52%),var(--surface-dark-secondary)" }}>
+        <section className="change-dark" style={{ position: "relative", overflow: "hidden", background: "var(--gradient-violet-atmosphere), var(--surface-dark-secondary)" }}>
           <div style={{ position: "relative", width: WRAP, margin: "0 auto", padding: "clamp(96px,12vw,176px) 0", textAlign: "center" }}>
             <Reveal style={{ display: "inline-flex", alignItems: "center", gap: 11, marginBottom: 26 }}>
               <span data-pulse style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--signal-cyan)" }} />
@@ -533,6 +568,8 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Transición dark continua hacia Footer (Footer pasa a --gradient-dark-pearl en Fase 5). */}
+        <div aria-hidden="true" style={{ height: "clamp(60px,6vw,90px)", background: "var(--surface-dark-secondary)" }} />
       </main>
       <Footer />
 

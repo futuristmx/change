@@ -2,21 +2,26 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import PageScaffold from "@/components/PageScaffold";
 import Reveal from "@/components/Reveal";
+import { Glyph, type GlyphName } from "@/components/ds";
 
 export const metadata: Metadata = {
   title: "Field Notes: lecturas para decidir antes que la urgencia",
   description:
     "Notas breves sobre lo que está cambiando y lo que ese cambio te obliga a decidir. No comentamos la noticia: la convertimos en una decisión que tu organización todavía puede tomar a tiempo.",
+  openGraph: {
+    images: [{ url: "/assets/og-default.png", width: 1200, height: 630, alt: "Field Notes: lecturas para decidir antes que la urgencia" }],
+  },
+  twitter: { images: ["/assets/og-default.png"] },
 };
 
 const WRAP = "min(1340px, calc(100% - clamp(40px,8vw,128px)))";
 
-const CONTRATO = [
-  { v: "Leer", h: "Señal", p: "Lo que cambió y dónde lo vimos. Un hecho concreto, fechado y rastreable, no una impresión.", c: "var(--signal-cyan)" },
-  { v: "Interpretar", h: "Tensión sistémica", p: "Qué fuerzas se mueven en sentido contrario debajo de esa señal. El conflicto de fondo que la señal apenas asoma.", c: "var(--soft-violet)" },
-  { v: "Decidir", h: "Pregunta estratégica", p: "La pregunta que tu organización tendría que poder responder si esa tensión la alcanza. El nombre exacto del problema, antes de que sea problema.", c: "var(--change-violet)" },
-  { v: "Diseñar", h: "Implicación", p: "Qué se mueve para tu sector, tu modelo o tu tablero si la señal madura. Dónde te toca, en concreto.", c: "var(--change-violet)" },
-  { v: "Sostener", h: "Decisión que abre", p: "La decisión que todavía está disponible hoy y que se encarece si esperas. No una recomendación genérica: una opción con fecha de caducidad.", c: "var(--ink-graphite)" },
+const CONTRATO: Array<{ v: string; h: string; p: string; c: string; g: GlyphName }> = [
+  { v: "Leer", h: "Señal", p: "Lo que cambió y dónde lo vimos. Un hecho concreto, fechado y rastreable, no una impresión.", c: "var(--signal-cyan)", g: "insight" },
+  { v: "Interpretar", h: "Tensión sistémica", p: "Qué fuerzas se mueven en sentido contrario debajo de esa señal. El conflicto de fondo que la señal apenas asoma.", c: "var(--soft-violet)", g: "risk" },
+  { v: "Decidir", h: "Pregunta estratégica", p: "La pregunta que tu organización tendría que poder responder si esa tensión la alcanza. El nombre exacto del problema, antes de que sea problema.", c: "var(--change-violet)", g: "decision" },
+  { v: "Diseñar", h: "Implicación", p: "Qué se mueve para tu sector, tu modelo o tu tablero si la señal madura. Dónde te toca, en concreto.", c: "var(--change-violet)", g: "project" },
+  { v: "Sostener", h: "Decisión que abre", p: "La decisión que todavía está disponible hoy y que se encarece si esperas. No una recomendación genérica: una opción con fecha de caducidad.", c: "var(--ink-graphite)", g: "status" },
 ];
 
 const TIPOS = [
@@ -75,13 +80,33 @@ export default function FieldNotesPage() {
           </Reveal>
           <Reveal delay={60} as="h2" style={{ margin: "0 0 16px", maxWidth: "20ch", font: "600 clamp(30px,4.2vw,56px)/.99 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>Cómo se construye cada Field Note.</Reveal>
           <Reveal delay={100} as="p" style={{ margin: "0 0 clamp(40px,5vw,56px)", maxWidth: "56ch", font: "400 clamp(16px,1.3vw,19px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>Toda nota recorre la misma estructura, en orden. Es la misma lógica con la que leemos el entorno de un cliente: de la señal suelta a la decisión que abre.</Reveal>
+          {/* Desktop: horizontal line-and-node */}
           <div className="fn-flow" style={{ display: "grid", gridTemplateColumns: "repeat(5,1fr)", gap: 16 }}>
-            {CONTRATO.map((s, i, arr) => (
+            {CONTRATO.map((s, i) => (
               <Reveal key={s.h} delay={i * 80} style={{ position: "relative", paddingTop: 20, borderTop: "2px solid var(--border-subtle)" }}>
                 <span aria-hidden="true" style={{ position: "absolute", top: -6, left: 0, width: 9, height: 9, borderRadius: "50%", background: s.c }} />
+                <span aria-hidden="true" style={{ display: "inline-flex", marginBottom: 6, color: s.c }}>
+                  <Glyph name={s.g} size={14} />
+                </span>
                 <span style={{ display: "block", marginBottom: 8, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--text-faint)" }}>{s.v}</span>
                 <strong style={{ display: "block", font: "600 16px var(--font-primary)", letterSpacing: "-.02em", color: "var(--ink-graphite)" }}>{s.h}</strong>
                 <span style={{ display: "block", marginTop: 8, font: "400 13.5px/1.5 var(--font-primary)", color: "var(--text-muted)" }}>{s.p}</span>
+              </Reveal>
+            ))}
+          </div>
+          {/* Mobile (≤768px): vertical rail + nodes */}
+          <div className="fn-vflow" style={{ display: "none", position: "relative", flexDirection: "column", gap: 24, paddingLeft: 8 }}>
+            <span aria-hidden="true" style={{ position: "absolute", left: 14, top: 8, bottom: 8, width: 2, background: "var(--line-gradient-relation)" }} />
+            {CONTRATO.map((s, i) => (
+              <Reveal key={s.h} delay={i * 80} style={{ position: "relative", display: "grid", gridTemplateColumns: "40px 1fr", gap: 14, alignItems: "start" }}>
+                <span aria-hidden="true" style={{ position: "relative", width: 26, height: 26, borderRadius: "50%", background: s.c, display: "inline-flex", alignItems: "center", justifyContent: "center", color: "#fff", boxShadow: `0 0 0 4px var(--surface-page)` }}>
+                  <Glyph name={s.g} size={12} />
+                </span>
+                <div>
+                  <span style={{ display: "block", marginBottom: 4, font: "600 12px var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--text-faint)" }}>{s.v}</span>
+                  <strong style={{ display: "block", font: "600 16px var(--font-primary)", letterSpacing: "-.02em", color: "var(--ink-graphite)" }}>{s.h}</strong>
+                  <span style={{ display: "block", marginTop: 6, font: "400 14px/1.5 var(--font-primary)", color: "var(--text-muted)" }}>{s.p}</span>
+                </div>
               </Reveal>
             ))}
           </div>
@@ -148,8 +173,9 @@ export default function FieldNotesPage() {
           .fn-head, .fn-types { grid-template-columns: 1fr !important; }
           .fn-flow { grid-template-columns: 1fr 1fr !important; }
         }
-        @media (max-width: 560px) {
-          .fn-flow { grid-template-columns: 1fr !important; }
+        @media (max-width: 768px) {
+          .fn-flow { display: none !important; }
+          .fn-vflow { display: flex !important; }
         }
       `}</style>
     </PageScaffold>
