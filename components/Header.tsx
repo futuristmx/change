@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -14,6 +15,7 @@ const NAV = [
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <>
@@ -48,19 +50,28 @@ export default function Header() {
               padding: 5, border: "1px solid var(--border-subtle)", background: "rgba(255,255,255,.5)",
             }}
           >
-            {NAV.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                style={{
-                  display: "inline-flex", alignItems: "center", gap: 6, height: 44, padding: "0 15px",
-                  color: "var(--text-muted)", font: "500 13.5px var(--font-primary)", letterSpacing: "-0.01em",
-                }}
-              >
-                <span style={{ font: "600 11px var(--font-mono)", letterSpacing: "0.04em", color: "var(--soft-stone-gray)" }}>{item.idx}</span>
-                {item.label}
-              </Link>
-            ))}
+            {NAV.map((item) => {
+              const active = pathname === item.href || pathname.startsWith(item.href + "/");
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  aria-current={active ? "page" : undefined}
+                  style={{
+                    display: "inline-flex", alignItems: "center", gap: 6, height: 44, padding: "0 15px",
+                    color: active ? "var(--ink-graphite)" : "var(--text-muted)",
+                    font: active ? "600 13.5px var(--font-primary)" : "500 13.5px var(--font-primary)",
+                    letterSpacing: "-0.01em",
+                    borderBottom: active ? "2px solid var(--change-violet)" : "2px solid transparent",
+                    marginBottom: -1,
+                    transition: "color .15s ease, border-color .15s ease",
+                  }}
+                >
+                  <span style={{ font: "600 11px var(--font-mono)", letterSpacing: "0.04em", color: active ? "var(--change-violet)" : "var(--soft-stone-gray)" }}>{item.idx}</span>
+                  {item.label}
+                </Link>
+              );
+            })}
           </div>
 
           <div style={{ justifySelf: "end", display: "flex", alignItems: "center", gap: 12 }}>
@@ -86,19 +97,25 @@ export default function Header() {
       {open && (
         <div style={{ position: "sticky", top: 80, zIndex: 55, background: "var(--surface-card)", borderBottom: "1px solid var(--border-subtle)", padding: "8px 0" }}>
           <div style={{ width: "min(1340px, calc(100% - clamp(40px,8vw,128px)))", margin: "0 auto", display: "flex", flexDirection: "column" }}>
-            {NAV.map((item, i) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() => setOpen(false)}
-                style={{
-                  padding: "13px 4px", font: "500 16px var(--font-primary)", color: "var(--ink-graphite)",
-                  borderBottom: i < NAV.length - 1 ? "1px solid var(--border-subtle)" : "none",
-                }}
-              >
-                {item.label}
-              </Link>
-            ))}
+            {NAV.map((item, i) => {
+              const active = pathname === item.href || pathname.startsWith(item.href + "/");
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  aria-current={active ? "page" : undefined}
+                  onClick={() => setOpen(false)}
+                  style={{
+                    padding: "13px 4px",
+                    font: active ? "600 16px var(--font-primary)" : "500 16px var(--font-primary)",
+                    color: active ? "var(--change-violet)" : "var(--ink-graphite)",
+                    borderBottom: i < NAV.length - 1 ? "1px solid var(--border-subtle)" : "none",
+                  }}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
           </div>
         </div>
       )}

@@ -36,7 +36,7 @@ export default function FieldNotesPage() {
     <PageScaffold
       kicker="Field Notes"
       title="Lecturas para decidir antes de que la urgencia cierre opciones."
-      lead="Notas breves sobre lo que está cambiando y lo que ese cambio te obliga a decidir. No comentamos la noticia: la convertimos en una pregunta que tu organización todavía puede contestar a tiempo."
+      lead="Pocas notas, ninguna de relleno. Primera serie en preparación — las Field Notes existen cuando una señal merece convertirse en decisión, no antes."
     >
       {/* ═══ POR QUÉ EXISTE ═══ */}
       <section style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-sky-pearl)" }}>
