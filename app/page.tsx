@@ -103,7 +103,7 @@ export default function Home() {
                 <Reveal key={c.h} delay={i * 120} as="article" className="ch-card" style={{ background: "rgba(255,255,255,.82)", border: "1px solid var(--border-subtle)", padding: 36, minHeight: 248, display: "flex", flexDirection: "column" }}>
                   <h3 style={{ margin: 0, font: "600 clamp(24px,2.1vw,32px)/1 var(--font-primary)", letterSpacing: "-.04em", color: "var(--ink-graphite)" }}>{c.h}</h3>
                   <p style={{ margin: "18px 0 0", font: "400 15.5px/1.55 var(--font-primary)", color: "var(--text-muted)" }}>{c.p}</p>
-                  <span style={{ marginTop: "auto", paddingTop: 24, font: "600 11px var(--font-mono)", letterSpacing: ".13em", textTransform: "uppercase", color: "var(--opportunity-orange)" }}>{c.r}</span>
+                  <span style={{ marginTop: "auto", paddingTop: 24, display: "inline-flex", alignItems: "center", gap: 8, font: "600 11px var(--font-mono)", letterSpacing: ".13em", textTransform: "uppercase", color: "var(--ink-graphite)" }}><span aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--opportunity-orange)" }} />{c.r}</span>
                 </Reveal>
               ))}
             </div>
@@ -123,7 +123,7 @@ export default function Home() {
               ].map((s, i) => (
                 <Reveal key={s.n} delay={i * 100} className="ch-card" style={{ background: s.bg, border: "1px solid var(--border-subtle)", padding: "30px 26px 34px" }}>
                   <div style={{ height: 3, background: s.track, marginBottom: 26 }}><div style={{ width: s.w, height: "100%", background: s.bar }} /></div>
-                  <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: s.emph ? "var(--change-violet)" : "var(--text-faint)" }}>{s.n}</span>
+                  <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: s.emph ? "var(--ink-graphite)" : "var(--text-faint)" }}>{s.n}</span>
                   <h3 style={{ margin: "13px 0 8px", font: "600 22px var(--font-primary)", letterSpacing: "-.03em", color: "var(--ink-graphite)" }}>{s.h}</h3>
                   <p style={{ margin: 0, font: "400 14px/1.5 var(--font-primary)", color: s.emph ? "var(--deep-warm-gray)" : "var(--text-muted)" }}>{s.p}</p>
                 </Reveal>
@@ -232,7 +232,7 @@ export default function Home() {
                 { k: "Riesgo", c: "var(--warning)", h: "¿Qué se rompe primero bajo presión?", p: "Escenarios, vulnerabilidades y respuesta anticipatoria antes de que llegue la urgencia." },
               ].map((d, i) => (
                 <Reveal key={d.k} delay={i * 80} as="article" className="ch-card" style={{ background: "rgba(255,255,255,.82)", border: "1px solid var(--border-subtle)", padding: 36 }}>
-                  <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".13em", textTransform: "uppercase", color: d.c }}>{d.k}</span>
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: 8, font: "600 11px var(--font-mono)", letterSpacing: ".13em", textTransform: "uppercase", color: "var(--ink-graphite)" }}><span aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: d.c }} />{d.k}</span>
                   <h3 style={{ margin: "14px 0 8px", font: "600 clamp(22px,2vw,30px)/1.02 var(--font-primary)", letterSpacing: "-.03em", color: "var(--ink-graphite)" }}>{d.h}</h3>
                   <p style={{ margin: 0, font: "400 15px/1.55 var(--font-primary)", color: "var(--text-muted)" }}>{d.p}</p>
                 </Reveal>

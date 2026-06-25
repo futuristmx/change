@@ -110,7 +110,7 @@ export default function CapacidadesPage() {
             {CAPS.map((cap, i) => (
               <Reveal key={cap.n} delay={i * 100} as="article" className="ch-card" style={{ background: "rgba(255,255,255,.82)", border: "1px solid var(--border-subtle)", padding: "32px 28px 30px", display: "flex", flexDirection: "column", minHeight: 360 }}>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 22 }}>
-                  <span style={{ font: "300 clamp(34px,3.4vw,48px)/1 var(--font-secondary)", color: cap.c }}>{cap.n}</span>
+                  <span style={{ font: "300 clamp(34px,3.4vw,48px)/1 var(--font-secondary)", color: "var(--ink-graphite)" }}>{cap.n}</span>
                   <span style={{ width: 9, height: 9, borderRadius: "50%", background: cap.c }} />
                 </div>
                 <h3 style={{ margin: 0, font: "600 24px var(--font-primary)", letterSpacing: "-.03em", color: "var(--ink-graphite)" }}>{cap.name}</h3>
@@ -141,7 +141,7 @@ export default function CapacidadesPage() {
                   <span style={{ width: 7, height: 7, background: rung.c }} />
                   <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-faint)" }}>{rung.step}</span>
                 </div>
-                <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".13em", textTransform: "uppercase", color: rung.c }}>{rung.tag}</span>
+                <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".13em", textTransform: "uppercase", color: "var(--ink-graphite)" }}>{rung.tag}</span>
                 <h3 style={{ margin: "12px 0 0", font: "600 clamp(24px,2.1vw,30px)/1.02 var(--font-primary)", letterSpacing: "-.03em", color: "var(--ink-graphite)" }}>{rung.name}</h3>
                 <p style={{ margin: "14px 0 0", font: "400 15px/1.6 var(--font-primary)", color: "var(--text-muted)" }}>{rung.p}</p>
                 <p style={{ margin: "20px 0 0", font: "400 italic 16px/1.45 var(--font-primary)", color: "var(--deep-warm-gray)" }}>{rung.feel}</p>

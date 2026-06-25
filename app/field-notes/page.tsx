@@ -64,7 +64,7 @@ export default function FieldNotesPage() {
           <div className="fn-contract" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 16 }}>
             {CONTRATO.map((c, i) => (
               <Reveal key={c.n} delay={i * 90} as="article" className="ch-card" style={{ background: "rgba(255,255,255,.82)", border: "1px solid var(--border-subtle)", padding: "28px 24px 30px", minHeight: 196, display: "flex", flexDirection: "column" }}>
-                <span style={{ font: "300 clamp(30px,3vw,42px)/1 var(--font-secondary)", color: i === CONTRATO.length - 1 ? "var(--change-violet)" : "var(--soft-violet)" }}>{c.n}</span>
+                <span style={{ font: "300 clamp(30px,3vw,42px)/1 var(--font-secondary)", color: "var(--change-violet)" }}>{c.n}</span>
                 <h3 style={{ margin: "16px 0 0", font: "600 18px var(--font-primary)", letterSpacing: "-.02em", color: "var(--ink-graphite)" }}>{c.h}</h3>
                 <p style={{ margin: "10px 0 0", font: "400 14px/1.5 var(--font-primary)", color: "var(--text-muted)" }}>{c.p}</p>
               </Reveal>
@@ -84,7 +84,7 @@ export default function FieldNotesPage() {
           <div className="fn-types" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
             {TIPOS.map((t, i) => (
               <Reveal key={t.k} delay={i * 110} as="article" className="ch-card" style={{ background: "rgba(255,255,255,.85)", border: "1px solid var(--border-subtle)", padding: 34, display: "flex", flexDirection: "column", minHeight: 250 }}>
-                <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".13em", textTransform: "uppercase", color: t.c }}>{t.k}</span>
+                <span style={{ display: "inline-flex", alignItems: "center", gap: 8, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".13em", textTransform: "uppercase", color: "var(--ink-graphite)" }}><span aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: t.c }} />{t.k}</span>
                 <h3 style={{ margin: "14px 0 0", font: "600 clamp(21px,1.9vw,26px)/1.08 var(--font-primary)", letterSpacing: "-.03em", color: "var(--ink-graphite)" }}>{t.h}</h3>
                 <p style={{ margin: "14px 0 0", font: "400 15px/1.55 var(--font-primary)", color: "var(--text-muted)" }}>{t.p}</p>
               </Reveal>
@@ -97,7 +97,7 @@ export default function FieldNotesPage() {
       <section style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-sky-pearl)" }}>
         <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(80px,10vw,140px) 0" }}>
           <Reveal className="ch-card" style={{ border: "1px solid var(--border-subtle)", background: "rgba(255,255,255,.7)", padding: "clamp(40px,6vw,72px)", textAlign: "center" }}>
-            <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--change-violet)" }}>Cadencia comprometida</span>
+            <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--ink-graphite)" }}>Cadencia comprometida</span>
             <h2 style={{ margin: "16px auto 0", maxWidth: "26ch", font: "600 clamp(26px,3.2vw,44px)/1.06 var(--font-primary)", letterSpacing: "-.04em", color: "var(--ink-graphite)", textWrap: "balance" }}>Pocas notas. Pero las que llegan, valen la pena.</h2>
             <p style={{ margin: "16px auto 32px", maxWidth: "50ch", font: "400 16px/1.6 var(--font-primary)", color: "var(--text-muted)" }}>
               Preferimos una señal al mes que sostenemos en serio, antes que un feed que se apaga en marzo. El archivo abre con una cadencia que podemos cumplir — mientras tanto, la mejor lectura es una conversación sobre la decisión que traes.

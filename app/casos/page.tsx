@@ -85,7 +85,7 @@ export default function CasosPage() {
           <div className="cs-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 20 }}>
             {DECISIONES.map((d, i) => (
               <Reveal key={d.k} delay={i * 90} as="article" className="ch-card" style={{ background: "rgba(255,255,255,.85)", border: "1px solid var(--border-subtle)", padding: "36px 34px", display: "flex", flexDirection: "column" }}>
-                <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".13em", textTransform: "uppercase", color: d.c }}>{d.k}</span>
+                <span style={{ display: "inline-flex", alignItems: "center", gap: 8, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".13em", textTransform: "uppercase", color: "var(--ink-graphite)" }}><span aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: d.c }} />{d.k}</span>
                 <h3 style={{ margin: "14px 0 0", font: "600 clamp(22px,2.1vw,30px)/1.04 var(--font-primary)", letterSpacing: "-.03em", color: "var(--ink-graphite)" }}>{d.q}</h3>
                 <p style={{ margin: "14px 0 0", font: "400 15px/1.55 var(--font-primary)", color: "var(--text-muted)" }}>{d.tension}</p>
                 <div style={{ marginTop: 24, paddingTop: 22, borderTop: "1px solid var(--border-subtle)", display: "flex", flexDirection: "column", gap: 14 }}>
