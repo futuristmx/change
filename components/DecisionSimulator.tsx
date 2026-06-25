@@ -45,6 +45,8 @@ const FIELD_STYLE: React.CSSProperties = {
   borderRadius: 0,
 };
 
+const STEP_LABELS = ["Contexto", "Decisión", "Riesgo", "Actores", "Horizonte"];
+
 /* ── Chip de respuesta ── */
 function Chip({
   text, selected, onClick,
@@ -54,15 +56,16 @@ function Chip({
       type="button"
       onClick={onClick}
       style={{
-        display: "inline-block",
-        padding: "10px 16px",
+        display: "block",
+        width: "100%",
+        padding: "9px 13px",
         border: `1px solid ${selected ? "var(--change-violet)" : "var(--border-subtle)"}`,
         background: selected ? "color-mix(in srgb, var(--change-violet) 7%, var(--pure-white))" : "var(--pure-white)",
-        color: "var(--ink-graphite)",
-        font: "400 14px/1.4 var(--font-primary)",
+        color: selected ? "var(--ink-graphite)" : "var(--text-muted)",
+        font: `${selected ? "500" : "400"} 13.5px/1.35 var(--font-primary)`,
         cursor: "pointer",
         textAlign: "left",
-        transition: "border-color .15s, background .15s",
+        transition: "border-color .12s, background .12s, color .12s",
       }}
     >
       {text}
@@ -114,41 +117,37 @@ function ReadingPanel({ answers }: { answers: StepAnswer[] }) {
 
   return (
     <div style={{
-      position: "sticky",
-      top: 32,
-      background: "var(--surface-card)",
-      border: "1px solid var(--border-subtle)",
-      padding: "28px 26px",
-      minHeight: 260,
+      background: "color-mix(in srgb, var(--change-violet) 3%, var(--surface-card))",
+      padding: "24px 20px",
     }}>
       <div style={{
         display: "flex",
         alignItems: "center",
         gap: 9,
-        marginBottom: 20,
-        paddingBottom: 16,
+        marginBottom: 18,
+        paddingBottom: 14,
         borderBottom: "1px solid var(--border-subtle)",
       }}>
         <span data-pulse aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--signal-cyan)", flexShrink: 0 }} />
-        <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-muted)" }}>
+        <span style={{ font: "600 10px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-muted)" }}>
           Lectura del board
         </span>
       </div>
 
       {items.length === 0 ? (
-        <p style={{ font: "400 14px/1.6 var(--font-primary)", color: "var(--text-faint)", margin: 0 }}>
-          Tu lectura aparecerá aquí conforme avances.
+        <p style={{ font: "400 13px/1.6 var(--font-primary)", color: "var(--text-faint)", margin: 0 }}>
+          Tu lectura aparece aquí conforme avanzas.
         </p>
       ) : (
-        <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
           {items.map((item, i) => (
-            <div key={i} style={{ display: "flex", gap: 12 }}>
-              <span aria-hidden="true" style={{ flexShrink: 0, marginTop: 7, width: 6, height: 6, borderRadius: "50%", background: item.color }} />
+            <div key={i} style={{ display: "flex", gap: 10 }}>
+              <span aria-hidden="true" style={{ flexShrink: 0, marginTop: 6, width: 5, height: 5, borderRadius: "50%", background: item.color }} />
               <div>
-                <span style={{ display: "block", font: "600 11px var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--text-faint)", marginBottom: 4 }}>
+                <span style={{ display: "block", font: "600 10px var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--text-faint)", marginBottom: 3 }}>
                   {item.label}
                 </span>
-                <span style={{ font: "400 13.5px/1.55 var(--font-primary)", color: "var(--text-muted)" }}>
+                <span style={{ font: "400 12.5px/1.5 var(--font-primary)", color: "var(--text-muted)" }}>
                   {item.text}
                 </span>
               </div>
@@ -288,7 +287,6 @@ export default function DecisionSimulator() {
     }).catch(() => {/* ignore */});
   }
 
-  /* foco al textarea cuando avanza el paso */
   useEffect(() => {
     if (phase === "quiz") {
       setTimeout(() => textareaRef.current?.focus(), 80);
@@ -312,7 +310,6 @@ export default function DecisionSimulator() {
     setSelectedScenario(scenario);
     setCurrentText(scenario.answers[0]);
     setCurrentChipDim(scenario.chipDims[0]);
-    /* seleccionar chip que coincida con Q1 del escenario */
     const chipIdx = CHIPS[0].findIndex((c) => c.text === scenario.answers[0]);
     setCurrentChipIdx(chipIdx >= 0 ? chipIdx : null);
     setPhase("quiz");
@@ -337,7 +334,6 @@ export default function DecisionSimulator() {
 
   function handleTextChange(text: string) {
     setCurrentText(text);
-    /* si el usuario edita, deseleccionar el chip */
     if (currentChipIdx !== null) {
       const chip = CHIPS[step][currentChipIdx];
       if (text !== chip.text) {
@@ -348,14 +344,25 @@ export default function DecisionSimulator() {
     track("simulator_answer_edited", { step });
   }
 
+  /* avanza con la respuesta actual */
   function advanceStep() {
     const newAnswer: StepAnswer = { text: currentText.trim(), chipDim: currentChipDim };
-    const newAnswers = [...completedAnswers, newAnswer];
+    commitStep(newAnswer);
+  }
+
+  /* salta el paso sin guardar respuesta */
+  function skipStep() {
+    const emptyAnswer: StepAnswer = { text: "", chipDim: null };
+    commitStep(emptyAnswer);
+    track("simulator_step_skipped", { step });
+  }
+
+  function commitStep(answer: StepAnswer) {
+    const newAnswers = [...completedAnswers, answer];
     setCompletedAnswers(newAnswers);
     track("simulator_step_completed", { step });
 
     if (step < 4) {
-      /* pre-rellenar siguiente paso con escenario si aplica */
       const nextStep = step + 1;
       if (selectedScenario) {
         setCurrentText(selectedScenario.answers[nextStep]);
@@ -369,7 +376,6 @@ export default function DecisionSimulator() {
       }
       setStep(nextStep);
     } else {
-      /* todas las preguntas contestadas → calcular lectura completa */
       const fullReading = buildFullReading(newAnswers);
       setReading(fullReading);
       setPhase("result");
@@ -449,8 +455,8 @@ export default function DecisionSimulator() {
   if (phase === "intro") {
     return (
       <section style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-sky-pearl)" }}>
-        <div style={{ ...WRAP, padding: "clamp(72px,9vw,120px) 0" }}>
-          <div style={{ maxWidth: "52ch", marginBottom: "clamp(44px,6vw,64px)" }}>
+        <div style={{ ...WRAP, padding: "clamp(56px,7vw,88px) 0" }}>
+          <div style={{ maxWidth: "52ch", marginBottom: "clamp(36px,5vw,52px)" }}>
             <span style={{ display: "block", font: "600 11px var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 16 }}>
               Simulador de decisiones
             </span>
@@ -462,7 +468,6 @@ export default function DecisionSimulator() {
             </p>
           </div>
 
-          {/* grid de escenarios */}
           <div className="sim-intro-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 16, marginBottom: 36 }}>
             {SCENARIOS.map((sc) => (
               <button
@@ -492,7 +497,6 @@ export default function DecisionSimulator() {
             ))}
           </div>
 
-          {/* separador */}
           <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 28 }}>
             <div style={{ flex: 1, height: 1, background: "var(--border-subtle)" }} />
             <span style={{ font: "400 13px var(--font-primary)", color: "var(--text-faint)" }}>o</span>
@@ -517,79 +521,103 @@ export default function DecisionSimulator() {
     const q = QUESTIONS[step];
     const chips = CHIPS[step];
     const canAdvance = currentText.trim().length >= 3;
-    const partial = buildPartialReading(completedAnswers);
 
     return (
       <section style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-sky-pearl)" }}>
-        <div style={{ ...WRAP, padding: "clamp(60px,8vw,100px) 0" }}>
+        <div style={{ ...WRAP, padding: "clamp(32px,4vw,44px) 0" }}>
 
-          {/* barra de progreso */}
-          <div style={{ display: "flex", alignItems: "center", gap: "clamp(12px,2vw,24px)", marginBottom: "clamp(36px,5vw,52px)" }}>
-            <button
-              type="button"
-              onClick={handleRetry}
-              style={{ background: "none", border: "none", padding: 0, cursor: "pointer", font: "400 13px var(--font-primary)", color: "var(--text-muted)", display: "flex", alignItems: "center", gap: 6 }}
-            >
-              <span aria-hidden="true" style={{ fontSize: 16 }}>←</span>
-              {selectedScenario ? "Cambiar escenario" : "Volver"}
-            </button>
-            <div style={{ flex: 1, display: "flex", gap: 6 }}>
-              {[0, 1, 2, 3, 4].map((i) => (
-                <div
-                  key={i}
-                  style={{
-                    flex: 1,
-                    height: 3,
-                    background: i < completedAnswers.length
-                      ? "var(--change-violet)"
-                      : i === step
-                        ? "color-mix(in srgb, var(--change-violet) 35%, var(--border-subtle))"
-                        : "var(--border-subtle)",
-                    transition: "background .3s",
-                  }}
-                />
-              ))}
-            </div>
-            <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--text-muted)", whiteSpace: "nowrap" }}>
-              {step + 1} de 5
-            </span>
-          </div>
+          {/* ── Widget card ── */}
+          <div className="sim-quiz-card" style={{ display: "grid", gridTemplateColumns: "1fr 252px", border: "1px solid var(--border-subtle)", background: "var(--surface-card)" }}>
 
-          <div className="sim-quiz-grid" style={{ display: "grid", gridTemplateColumns: "1fr minmax(280px,380px)", gap: "clamp(44px,6vw,80px)", alignItems: "start" }}>
-            {/* columna pregunta */}
-            <div>
+            {/* columna izquierda — pregunta */}
+            <div style={{ padding: "clamp(22px,3vw,32px)", borderRight: "1px solid var(--border-subtle)" }}>
+
+              {/* header: back + step counter */}
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 18 }}>
+                <button
+                  type="button"
+                  onClick={handleRetry}
+                  style={{ background: "none", border: "none", padding: 0, cursor: "pointer", font: "400 13px var(--font-primary)", color: "var(--text-muted)", display: "flex", alignItems: "center", gap: 5 }}
+                >
+                  <span aria-hidden="true" style={{ fontSize: 14 }}>←</span>
+                  {selectedScenario ? "Cambiar escenario" : "Volver"}
+                </button>
+                <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".08em", color: "var(--text-faint)" }}>
+                  {step + 1} de 5
+                </span>
+              </div>
+
+              {/* ── stepper breadcrumb ── */}
+              <div style={{ display: "flex", alignItems: "flex-start", marginBottom: 26 }}>
+                {STEP_LABELS.map((label, i) => (
+                  <div key={i} style={{ display: "contents" }}>
+                    {i > 0 && (
+                      <div style={{
+                        flex: 1,
+                        height: 2,
+                        marginTop: 7,
+                        background: i <= completedAnswers.length ? "var(--change-violet)" : "var(--border-subtle)",
+                        transition: "background .25s",
+                      }} />
+                    )}
+                    <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 5, flexShrink: 0 }}>
+                      <div style={{
+                        width: 16, height: 16, borderRadius: "50%", flexShrink: 0,
+                        background: i < completedAnswers.length ? "var(--change-violet)" : "var(--surface-card)",
+                        border: `2px solid ${i < completedAnswers.length ? "var(--change-violet)" : i === step ? "var(--change-violet)" : "var(--border-subtle)"}`,
+                        transition: "background .25s, border-color .25s",
+                        boxShadow: i === step ? "0 0 0 3px color-mix(in srgb, var(--change-violet) 15%, transparent)" : "none",
+                      }} />
+                      <span style={{
+                        font: "600 9px var(--font-mono)",
+                        letterSpacing: ".05em",
+                        textTransform: "uppercase",
+                        color: i === step ? "var(--change-violet)" : i < completedAnswers.length ? "var(--text-muted)" : "var(--text-faint)",
+                        whiteSpace: "nowrap",
+                        transition: "color .25s",
+                      }}>
+                        {label}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* scenario badge */}
               {selectedScenario && (
-                <div style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 16, padding: "6px 12px", background: "color-mix(in srgb, var(--change-violet) 8%, var(--pure-white))", border: "1px solid color-mix(in srgb, var(--change-violet) 20%, var(--border-subtle))" }}>
+                <div style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 14, padding: "5px 10px", background: "color-mix(in srgb, var(--change-violet) 6%, var(--pure-white))", border: "1px solid color-mix(in srgb, var(--change-violet) 18%, var(--border-subtle))" }}>
                   <span aria-hidden="true" style={{ width: 6, height: 6, borderRadius: "50%", background: DIM_COLOR[selectedScenario.primaryDim] }} />
-                  <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--ink-graphite)" }}>
+                  <span style={{ font: "600 10.5px var(--font-mono)", letterSpacing: ".09em", textTransform: "uppercase", color: "var(--ink-graphite)" }}>
                     Escenario: {selectedScenario.label}
                   </span>
                 </div>
               )}
 
-              <h2 style={{ margin: "0 0 10px", font: "600 clamp(22px,2.8vw,38px)/1.08 var(--font-primary)", letterSpacing: "-.04em", color: "var(--ink-graphite)", textWrap: "balance" }}>
+              {/* pregunta */}
+              <h2 style={{ margin: "0 0 7px", font: "600 clamp(18px,1.9vw,24px)/1.12 var(--font-primary)", letterSpacing: "-.03em", color: "var(--ink-graphite)", textWrap: "balance" }}>
                 {q.label}
               </h2>
-              <p style={{ margin: "0 0 24px", font: "400 15px/1.6 var(--font-primary)", color: "var(--text-muted)", maxWidth: "44ch" }}>
+              <p style={{ margin: "0 0 16px", font: "400 13.5px/1.55 var(--font-primary)", color: "var(--text-muted)", maxWidth: "44ch" }}>
                 {q.micro}
               </p>
 
-              {/* chips */}
-              <div style={{ display: "flex", flexWrap: "wrap", gap: 10, marginBottom: 20 }}>
+              {/* chips — dos por fila */}
+              <div className="sim-chips" style={{ display: "flex", flexWrap: "wrap", gap: 8, marginBottom: 14 }}>
                 {chips.map((chip, i) => (
-                  <Chip
-                    key={i}
-                    text={chip.text}
-                    selected={currentChipIdx === i}
-                    onClick={() => selectChip(i)}
-                  />
+                  <div key={i} style={{ flex: "1 0 calc(50% - 4px)", minWidth: 0 }}>
+                    <Chip
+                      text={chip.text}
+                      selected={currentChipIdx === i}
+                      onClick={() => selectChip(i)}
+                    />
+                  </div>
                 ))}
               </div>
 
               {/* textarea */}
               <textarea
                 ref={textareaRef}
-                rows={3}
+                rows={2}
                 value={currentText}
                 onChange={(e) => handleTextChange(e.target.value)}
                 placeholder={q.placeholder}
@@ -599,22 +627,23 @@ export default function DecisionSimulator() {
                   border: "1px solid var(--field-outline)",
                   boxShadow: "var(--field-shadow)",
                   color: "var(--field-text)",
-                  font: "400 16px/1.5 var(--font-primary)",
-                  padding: "13px 15px",
+                  font: "400 15px/1.5 var(--font-primary)",
+                  padding: "11px 13px",
                   outline: "none",
                   borderRadius: 0,
-                  resize: "vertical",
+                  resize: "none",
                   boxSizing: "border-box",
                 }}
               />
-              <p style={{ margin: "8px 0 0", font: "400 12.5px/1.4 var(--font-primary)", color: "var(--text-faint)" }}>
+              <p style={{ margin: "6px 0 0", font: "400 11.5px/1.4 var(--font-primary)", color: "var(--text-faint)" }}>
                 {q.example}
               </p>
 
-              <div style={{ display: "flex", alignItems: "center", gap: 16, marginTop: 24 }}>
+              {/* botones */}
+              <div style={{ display: "flex", alignItems: "center", gap: 14, marginTop: 18 }}>
                 <button
                   type="button"
-                  className="btn btn-primary"
+                  className="btn btn-primary btn-sm"
                   onClick={advanceStep}
                   disabled={!canAdvance}
                   style={{ opacity: canAdvance ? 1 : 0.45 }}
@@ -624,12 +653,7 @@ export default function DecisionSimulator() {
                 {step < 4 && (
                   <button
                     type="button"
-                    onClick={() => {
-                      setCurrentText("");
-                      setCurrentChipIdx(null);
-                      setCurrentChipDim(null);
-                      advanceStep();
-                    }}
+                    onClick={skipStep}
                     style={{ background: "none", border: "none", padding: 0, cursor: "pointer", font: "400 13px var(--font-primary)", color: "var(--text-faint)" }}
                   >
                     Saltar
@@ -638,21 +662,19 @@ export default function DecisionSimulator() {
               </div>
             </div>
 
-            {/* panel de lectura */}
+            {/* columna derecha — lectura parcial */}
             <ReadingPanel answers={completedAnswers} />
           </div>
-
-          {partial.isComplete && (
-            <div style={{ marginTop: 24, textAlign: "right" }}>
-              <button type="button" className="btn btn-secondary" onClick={advanceStep}>
-                Ver lectura completa →
-              </button>
-            </div>
-          )}
         </div>
 
         <style>{`
-          @media (max-width: 860px) { .sim-quiz-grid { grid-template-columns: 1fr !important; } }
+          @media (max-width: 760px) {
+            .sim-quiz-card { grid-template-columns: 1fr !important; }
+            .sim-quiz-card > div:last-child { border-top: 1px solid var(--border-subtle); border-right: none !important; }
+          }
+          @media (max-width: 540px) {
+            .sim-chips > div { flex: 1 0 100% !important; }
+          }
         `}</style>
       </section>
     );
@@ -662,8 +684,8 @@ export default function DecisionSimulator() {
   if (phase === "result" && reading) {
     return (
       <section style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-sky-pearl)" }}>
-        <div style={{ ...WRAP, padding: "clamp(72px,9vw,120px) 0" }}>
-          <div style={{ maxWidth: 680, marginBottom: "clamp(36px,5vw,52px)" }}>
+        <div style={{ ...WRAP, padding: "clamp(56px,7vw,88px) 0" }}>
+          <div style={{ maxWidth: 680, marginBottom: "clamp(32px,4vw,48px)" }}>
             <span style={{ display: "block", font: "600 11px var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 14 }}>
               Resultado del simulador
             </span>
@@ -677,7 +699,6 @@ export default function DecisionSimulator() {
           <div className="sim-result-grid" style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(0,1fr)", gap: "clamp(28px,4vw,48px)", alignItems: "start", marginBottom: "clamp(40px,5vw,60px)" }}>
             <ResultCard reading={reading} />
 
-            {/* resumen de respuestas */}
             <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
               <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-muted)" }}>
                 Lo que describiste
@@ -698,7 +719,6 @@ export default function DecisionSimulator() {
             </div>
           </div>
 
-          {/* CTAs */}
           <div style={{ display: "flex", flexWrap: "wrap", gap: 14, borderTop: "1px solid var(--border-subtle)", paddingTop: 32 }}>
             <button type="button" className="btn btn-primary" onClick={handleStartContact}>
               Trabajar esta decisión con Change
@@ -730,9 +750,8 @@ export default function DecisionSimulator() {
   if (phase === "contact") {
     return (
       <section style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-sky-pearl)" }}>
-        <div style={{ ...WRAP, padding: "clamp(72px,9vw,120px) 0" }}>
+        <div style={{ ...WRAP, padding: "clamp(56px,7vw,88px) 0" }}>
           <div className="sim-contact-grid" style={{ display: "grid", gridTemplateColumns: "minmax(0,.9fr) minmax(0,1.1fr)", gap: "clamp(44px,6vw,88px)", alignItems: "start" }}>
-            {/* columna contexto */}
             <div>
               <span style={{ display: "block", font: "600 11px var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 14 }}>
                 El siguiente paso
@@ -768,68 +787,28 @@ export default function DecisionSimulator() {
               </button>
             </div>
 
-            {/* columna formulario */}
             <form onSubmit={handleSubmit} noValidate style={{ display: "flex", flexDirection: "column", gap: 20, border: "1px solid var(--border-subtle)", background: "var(--surface-card)", padding: "clamp(28px,4vw,40px)" }}>
               <div>
                 <label htmlFor="sim-nombre" style={LABEL_STYLE}>Nombre</label>
-                <input
-                  id="sim-nombre"
-                  type="text"
-                  autoComplete="name"
-                  required
-                  value={contact.nombre}
-                  onChange={(e) => setContact((c) => ({ ...c, nombre: e.target.value }))}
-                  placeholder="Cómo te llamas"
-                  style={FIELD_STYLE}
-                />
+                <input id="sim-nombre" type="text" autoComplete="name" required value={contact.nombre} onChange={(e) => setContact((c) => ({ ...c, nombre: e.target.value }))} placeholder="Cómo te llamas" style={FIELD_STYLE} />
               </div>
               <div>
                 <label htmlFor="sim-rol" style={LABEL_STYLE}>Rol</label>
-                <input
-                  id="sim-rol"
-                  type="text"
-                  value={contact.rol}
-                  onChange={(e) => setContact((c) => ({ ...c, rol: e.target.value }))}
-                  placeholder="Tu rol o posición"
-                  style={FIELD_STYLE}
-                />
+                <input id="sim-rol" type="text" value={contact.rol} onChange={(e) => setContact((c) => ({ ...c, rol: e.target.value }))} placeholder="Tu rol o posición" style={FIELD_STYLE} />
               </div>
               <div>
                 <label htmlFor="sim-org" style={LABEL_STYLE}>Organización</label>
-                <input
-                  id="sim-org"
-                  type="text"
-                  autoComplete="organization"
-                  value={contact.organizacion}
-                  onChange={(e) => setContact((c) => ({ ...c, organizacion: e.target.value }))}
-                  placeholder="Tu empresa"
-                  style={FIELD_STYLE}
-                />
+                <input id="sim-org" type="text" autoComplete="organization" value={contact.organizacion} onChange={(e) => setContact((c) => ({ ...c, organizacion: e.target.value }))} placeholder="Tu empresa" style={FIELD_STYLE} />
               </div>
               <div>
                 <label htmlFor="sim-correo" style={LABEL_STYLE}>Correo</label>
-                <input
-                  id="sim-correo"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  value={contact.correo}
-                  onChange={(e) => setContact((c) => ({ ...c, correo: e.target.value }))}
-                  placeholder="tu@empresa.com"
-                  style={FIELD_STYLE}
-                />
+                <input id="sim-correo" type="email" autoComplete="email" required value={contact.correo} onChange={(e) => setContact((c) => ({ ...c, correo: e.target.value }))} placeholder="tu@empresa.com" style={FIELD_STYLE} />
               </div>
 
-              {/* honeypot */}
               <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }} />
 
               <div style={{ paddingTop: 4, display: "flex", flexWrap: "wrap", alignItems: "center", gap: 14 }}>
-                <button
-                  type="submit"
-                  className="btn btn-primary"
-                  disabled={submitStatus === "submitting"}
-                  style={{ opacity: submitStatus === "submitting" ? 0.7 : 1 }}
-                >
+                <button type="submit" className="btn btn-primary" disabled={submitStatus === "submitting"} style={{ opacity: submitStatus === "submitting" ? 0.7 : 1 }}>
                   {submitStatus === "submitting" ? "Enviando…" : "Enviar mi caso"}
                 </button>
                 {submitStatus === "error" && (
