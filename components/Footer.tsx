@@ -10,6 +10,7 @@ const COL_A = [
 const COL_B = [
   { label: "Equipo", href: "/equipo" },
   { label: "Field Notes", href: "/field-notes" },
+  { label: "Futuro", href: "/futuro" },
 ];
 
 const SOCIAL = [

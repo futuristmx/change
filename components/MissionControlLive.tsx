@@ -73,23 +73,23 @@ export default function MissionControlLive() {
     <div
       ref={ref}
       style={{
-        border: "1px solid rgba(255,255,255,.1)",
-        background: "var(--gradient-dark-card-sweep, linear-gradient(160deg,#1C2233,#12141F))",
-        boxShadow: "0 30px 80px rgba(0,0,0,.5)",
+        border: "1px solid rgba(255,255,255,.06)",
+        background: "var(--gradient-dark-card-slate, linear-gradient(160deg,#161D2A,#0F1420))",
+        boxShadow: "0 24px 60px rgba(0,0,0,.42)",
       }}
     >
       {/* barra superior — latido vivo */}
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, flexWrap: "wrap", padding: "16px 22px", borderBottom: "1px solid rgba(255,255,255,.09)" }}>
-        <span style={{ display: "inline-flex", alignItems: "center", gap: 9, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "rgba(255,255,255,.82)" }}>
+        <span style={{ display: "inline-flex", alignItems: "center", gap: 9, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "rgba(255,255,255,.7)" }}>
           <span data-pulse style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--signal-cyan)" }} />Mission Control · memoria viva
         </span>
         <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "rgba(255,255,255,.8)" }}>Demo · datos de ejemplo</span>
       </div>
 
-      <div className="mcl-body" style={{ display: "grid", gridTemplateColumns: "minmax(0,1.5fr) minmax(0,1fr)", gap: 1, background: "rgba(255,255,255,.07)" }}>
+      <div className="mcl-body" style={{ display: "grid", gridTemplateColumns: "minmax(0,1.5fr) minmax(0,1fr)", gap: 1, background: "rgba(255,255,255,.04)" }}>
         {/* ── columna A: la traza de una decisión ── */}
         <div style={{ background: "var(--surface-dark-tertiary)", padding: "26px 24px" }}>
-          <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "rgba(217,210,255,.85)" }}>Trazabilidad de una decisión</span>
+          <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "rgba(217,210,255,.6)" }}>Trazabilidad de una decisión</span>
           <p style={{ margin: "8px 0 22px", font: "400 13px/1.5 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>Toca cada paso: así viaja una señal hasta volverse aprendizaje que se queda.</p>
 
           {/* cadena de nodos */}
@@ -103,7 +103,7 @@ export default function MissionControlLive() {
                   <button key={s.k} onClick={() => select(i)} aria-pressed={on} aria-label={`${s.k}, paso ${i + 1} de ${TRACE.length}`}
                     className="mcl-node-btn"
                     style={{ border: 0, background: "transparent", cursor: "pointer", padding: 0, textAlign: "center", fontFamily: "var(--font-primary)" }}>
-                    <span data-pulse={on ? "" : undefined} style={{ display: "block", width: on ? 16 : 11, height: on ? 16 : 11, borderRadius: "50%", margin: "0 auto 9px", background: s.color, boxShadow: on ? `0 0 0 4px var(--surface-dark-tertiary), 0 0 14px ${s.color}` : "0 0 0 4px var(--surface-dark-tertiary)", transition: "all .3s var(--ease-premium)" }} />
+                    <span data-pulse={on ? "" : undefined} style={{ display: "block", width: on ? 14 : 10, height: on ? 14 : 10, borderRadius: "50%", margin: "0 auto 9px", background: s.color, boxShadow: on ? `0 0 0 4px var(--surface-dark-tertiary), 0 0 8px ${s.color}` : "0 0 0 4px var(--surface-dark-tertiary)", transition: "all .3s var(--ease-premium)" }} />
                     <span className="mcl-nlabel" style={{ display: "block", font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".04em", textTransform: "uppercase", color: on ? "#fff" : "rgba(255,255,255,.8)", transition: "color .3s" }}>{s.k}</span>
                   </button>
                 );
@@ -121,9 +121,9 @@ export default function MissionControlLive() {
                 </span>
                 {stage.k}
               </span>
-              <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".08em", textTransform: "uppercase", color: "rgba(217,210,255,.85)" }}>{stage.artefacto}</span>
+              <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".08em", textTransform: "uppercase", color: "rgba(217,210,255,.6)" }}>{stage.artefacto}</span>
             </div>
-            <p key={stage.k} style={{ margin: 0, font: "400 14.5px/1.6 var(--font-primary)", color: "rgba(255,255,255,.82)" }}>{stage.body}</p>
+            <p key={stage.k} style={{ margin: 0, font: "400 14.5px/1.6 var(--font-primary)", color: "rgba(255,255,255,.7)" }}>{stage.body}</p>
           </div>
         </div>
 
@@ -132,10 +132,11 @@ export default function MissionControlLive() {
           <div>
             <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "rgba(255,255,255,.8)" }}>Señales activas</span>
             <div style={{ marginTop: 14, display: "flex", flexDirection: "column", gap: 12 }}>
-              {SIGNALS.map((s) => (
+              {SIGNALS.map((s, idx) => (
                 <div key={s.t} style={{ display: "flex", gap: 11, alignItems: "flex-start" }}>
-                  <span data-pulse style={{ flexShrink: 0, marginTop: 5, width: 7, height: 7, borderRadius: "50%", background: s.c }} />
-                  <span style={{ font: "400 13.5px/1.45 var(--font-primary)", color: "rgba(255,255,255,.82)" }}>{s.t}</span>
+                  {/* Solo el primer signal hace pulse — el resto es estático para reducir saturación. */}
+                  <span data-pulse={idx === 0 ? "" : undefined} style={{ flexShrink: 0, marginTop: 5, width: 7, height: 7, borderRadius: "50%", background: s.c, opacity: idx === 0 ? 1 : 0.75 }} />
+                  <span style={{ font: "400 13.5px/1.45 var(--font-primary)", color: "rgba(255,255,255,.7)" }}>{s.t}</span>
                 </div>
               ))}
             </div>

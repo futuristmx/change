@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
@@ -11,11 +11,49 @@ const NAV = [
   { idx: "03", label: "Casos", href: "/casos" },
   { idx: "04", label: "Equipo", href: "/equipo" },
   { idx: "05", label: "Field Notes", href: "/field-notes" },
+  { idx: "06", label: "Futuro", href: "/futuro" },
 ];
+
+// Pulse del logo — secuencia variable:
+// pulse a los 15s, 30s, 45s, 60s, 75s, 95s, 120s; luego cada 45s.
+// Es una serie de DELAYS entre pulsos (intervalos consecutivos).
+const PULSE_DELAYS_MS = [15000, 15000, 15000, 15000, 15000, 20000, 25000];
+const PULSE_RECURRING_MS = 45000;
+const PULSE_VISIBLE_MS = 1200;
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const [pulsing, setPulsing] = useState(false);
   const pathname = usePathname();
+  const timersRef = useRef<ReturnType<typeof setTimeout>[]>([]);
+
+  useEffect(() => {
+    const reduce =
+      typeof window !== "undefined" &&
+      window.matchMedia?.("(prefers-reduced-motion:reduce)").matches;
+    if (reduce) return;
+    const timers = timersRef.current;
+    let acc = 0;
+    const flash = () => {
+      setPulsing(true);
+      const off = setTimeout(() => setPulsing(false), PULSE_VISIBLE_MS);
+      timers.push(off);
+    };
+    // Secuencia fija
+    PULSE_DELAYS_MS.forEach((d) => {
+      acc += d;
+      const t = setTimeout(flash, acc);
+      timers.push(t);
+    });
+    // Recurrencia: después de la última marca, cada 45s
+    const recur = setInterval(flash, PULSE_RECURRING_MS);
+    timers.push(recur as unknown as ReturnType<typeof setTimeout>);
+    return () => {
+      timers.forEach((t) => clearTimeout(t as unknown as number));
+      clearInterval(recur);
+      timersRef.current = [];
+    };
+  }, []);
 
   return (
     <>
@@ -39,7 +77,7 @@ export default function Header() {
             alignItems: "center", gap: 28,
           }}
         >
-          <Link href="/" aria-label="Change" className="ch-logo" style={{ display: "block" }}>
+          <Link href="/" aria-label="Change" className="ch-logo" data-pulsing={pulsing ? "true" : undefined} style={{ display: "block" }}>
             <Image src="/assets/change_logo_graphite.svg" alt="Change" width={161} height={39} style={{ height: 39, width: "auto", display: "block" }} priority />
           </Link>
 
@@ -129,18 +167,17 @@ export default function Header() {
           .ch-burger { display: inline-flex !important; }
           .ch-cta { display: none !important; }
         }
-        /* Pulse de color ocasional sobre el logo — graphite → violeta vibrante → graphite.
-           Cada 30s, con la coloración solo durante ~4% del ciclo (~1.2s). */
-        @keyframes ch-logo-pulse {
-          0%, 92%, 100% { filter: none; }
-          94%, 96%      { filter: brightness(0) saturate(100%) invert(28%) sepia(94%) saturate(3200%) hue-rotate(248deg) brightness(100%) contrast(101%); }
-        }
+        /* Pulse del logo — driven por React state (data-pulsing).
+           Disparos: 15s, 30s, 45s, 60s, 75s, 95s, 120s, luego cada 45s.
+           El filter vira a violet vibrante durante ~1.2s por pulso. */
         .ch-logo img {
-          animation: ch-logo-pulse 30s var(--ease-premium) infinite;
           transition: filter var(--duration-premium) var(--ease-premium);
         }
+        .ch-logo[data-pulsing="true"] img {
+          filter: brightness(0) saturate(100%) invert(28%) sepia(94%) saturate(3200%) hue-rotate(248deg) brightness(100%) contrast(101%);
+        }
         @media (prefers-reduced-motion: reduce) {
-          .ch-logo img { animation: none !important; }
+          .ch-logo[data-pulsing="true"] img { filter: none; }
         }
       `}</style>
     </>

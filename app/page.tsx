@@ -307,21 +307,32 @@ export default function Home() {
             <SectionHead kicker="Field Notes" title="Lecturas cortas sobre lo que cambia — y la decisión que abre." lead="Cada nota toma una señal real del entorno y la recorre completa: de qué cambió a qué decisión queda en tus manos. Pocas notas, ninguna de relleno." />
             <Reveal className="ch-card" style={{ border: "1px solid var(--border-subtle)", background: "rgba(255,255,255,.7)", padding: "clamp(32px,4vw,48px)" }}>
               <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-muted)" }}>El recorrido de cada nota</span>
-              <div className="ch-fnflow" style={{ display: "grid", gridTemplateColumns: "repeat(5,1fr)", gap: 16, margin: "24px 0 28px" }}>
-                {[
-                  ["Señal", "qué cambió en el entorno"],
-                  ["Tensión sistémica", "qué fuerza de fondo revela"],
-                  ["Pregunta estratégica", "qué obliga a preguntarse"],
-                  ["Implicación", "qué deja de ser cierto"],
-                  ["Decisión que abre", "qué empieza a poder decidirse"],
-                ].map(([t, p], i, arr) => (
-                  <div key={t} style={{ position: "relative", paddingTop: 18, borderTop: "2px solid var(--border-subtle)" }}>
-                    <span aria-hidden="true" style={{ position: "absolute", top: -5, left: 0, width: 8, height: 8, borderRadius: "50%", background: i === arr.length - 1 ? "var(--change-violet)" : "var(--soft-violet)" }} />
-                    <strong style={{ display: "block", font: "600 14.5px var(--font-primary)", letterSpacing: "-.01em", color: "var(--ink-graphite)" }}>{t}</strong>
-                    <span style={{ display: "block", marginTop: 5, font: "400 13px/1.45 var(--font-primary)", color: "var(--text-muted)" }}>{p}</span>
+
+              {/* Flow vivo: rail con gradient animado fluyendo + nodos con glifo y pulse stagger */}
+              <div className="ch-fnflow" style={{ position: "relative", display: "grid", gridTemplateColumns: "repeat(5,1fr)", gap: 16, margin: "44px 0 28px" }}>
+                {/* Rail estructural base */}
+                <div aria-hidden="true" style={{ position: "absolute", left: "10%", right: "10%", top: 16, height: 2, background: "var(--line-structural)", opacity: 0.4 }} />
+                {/* Rail vivo — gradient que fluye horizontal */}
+                <div aria-hidden="true" className="ch-fnflow-flow" style={{ position: "absolute", left: "10%", right: "10%", top: 16, height: 2, backgroundImage: "linear-gradient(90deg, transparent 0%, rgba(109,59,255,0.35) 30%, rgba(89,184,217,0.4) 50%, rgba(138,108,255,0.45) 70%, transparent 100%)", backgroundSize: "200% 100%", backgroundRepeat: "no-repeat" }} />
+
+                {([
+                  { t: "Señal", p: "qué cambió en el entorno", g: "insight" as GlyphName, c: "var(--signal-cyan)" },
+                  { t: "Tensión sistémica", p: "qué fuerza de fondo revela", g: "risk" as GlyphName, c: "var(--soft-violet)" },
+                  { t: "Pregunta estratégica", p: "qué obliga a preguntarse", g: "decision" as GlyphName, c: "var(--change-violet)" },
+                  { t: "Implicación", p: "qué deja de ser cierto", g: "project" as GlyphName, c: "var(--change-violet)" },
+                  { t: "Decisión que abre", p: "qué empieza a poder decidirse", g: "status" as GlyphName, c: "var(--ink-graphite)" },
+                ]).map((s, i) => (
+                  <div key={s.t} className="ch-fnflow-node" style={{ position: "relative", paddingTop: 50, textAlign: "left" }}>
+                    {/* Nodo circular con glifo dentro — pulse stagger */}
+                    <span aria-hidden="true" className="ch-fnflow-dot" style={{ position: "absolute", top: 0, left: 0, width: 34, height: 34, borderRadius: "50%", background: "var(--surface-card)", border: `1.5px solid ${s.c}`, color: s.c, display: "inline-flex", alignItems: "center", justifyContent: "center", boxShadow: "0 0 0 4px rgba(255,255,255,.8)", animationDelay: `${i * 0.4}s` }}>
+                      <Glyph name={s.g} size={16} />
+                    </span>
+                    <strong style={{ display: "block", font: "600 14.5px var(--font-primary)", letterSpacing: "-.01em", color: "var(--ink-graphite)" }}>{s.t}</strong>
+                    <span style={{ display: "block", marginTop: 5, font: "400 13px/1.45 var(--font-primary)", color: "var(--text-muted)" }}>{s.p}</span>
                   </div>
                 ))}
               </div>
+
               <div style={{ display: "flex", gap: 16, alignItems: "center", flexWrap: "wrap" }}>
                 <Link href="/field-notes" className="btn btn-secondary btn-sm">Ver las Field Notes</Link>
                 <span style={{ font: "400 13px var(--font-primary)", color: "var(--text-muted)" }}>Las Field Notes existen cuando una señal merece convertirse en decisión.</span>
