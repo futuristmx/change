@@ -757,10 +757,10 @@ export default function DecisionSimulator() {
                 El siguiente paso
               </span>
               <h2 style={{ margin: "0 0 16px", font: "600 clamp(24px,2.8vw,40px)/1.06 var(--font-primary)", letterSpacing: "-.04em", color: "var(--ink-graphite)", textWrap: "balance" }}>
-                El board lee tu caso antes de buscarte.
+                El board senior lee tu caso antes de buscarte.
               </h2>
-              <p style={{ margin: "0 0 28px", font: "400 15.5px/1.6 var(--font-primary)", color: "var(--text-muted)", maxWidth: "40ch" }}>
-                Andrés Valencia y Miguel Cadena leen cada caso que entra. Te buscamos en un máximo de dos días hábiles con una primera lectura y el siguiente paso posible.
+              <p style={{ margin: "0 0 28px", font: "400 15.5px/1.6 var(--font-primary)", color: "var(--text-muted)", maxWidth: "44ch" }}>
+                Tu caso llega al board senior de Change. Si hay una tensión real que podamos trabajar, te respondemos con una primera lectura y un siguiente paso posible.
               </p>
 
               <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>

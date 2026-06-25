@@ -13,7 +13,8 @@ export default function StickyCta() {
   const [footerVisible, setFooterVisible] = useState(false);
 
   useEffect(() => {
-    const footer = document.querySelector("footer");
+    const footers = document.querySelectorAll("footer");
+    const footer = footers[footers.length - 1];
     if (!footer) return;
     const io = new IntersectionObserver(
       (entries) => {
@@ -35,7 +36,7 @@ export default function StickyCta() {
         left: 0,
         right: 0,
         bottom: 0,
-        zIndex: "var(--z-sticky)" as unknown as number,
+        zIndex: 100,
         background: "rgba(255,255,255,.96)",
         backdropFilter: "blur(18px)",
         WebkitBackdropFilter: "blur(18px)",

@@ -53,7 +53,7 @@ export default function ScrollProgress() {
         left: 0,
         right: 0,
         height: 2,
-        zIndex: "var(--z-sticky)" as unknown as number,
+        zIndex: 100,
         pointerEvents: "none",
         background: "transparent",
       }}
