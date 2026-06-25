@@ -5,27 +5,66 @@ import { useState } from "react";
 interface Node {
   title: string;
   micro: string;
-  copy: string;
   color: string;
   halo: string;
+  q: string;
+  riesgo: string;
+  artefacto: string;
+  decision: string;
+  mc: string;
 }
 
+/* Arco del método — Capacidad de Futuro (5 movimientos) */
 const NODES: Node[] = [
-  { title: "Señal", micro: "qué cambia", color: "var(--signal-cyan)", halo: "rgba(89,184,217,.22)", copy: "Lo que empieza a moverse afuera: mercado, usuario, tecnología, regulación o competencia. Una señal no es urgente todavía — pero ignorarla tiene costo." },
-  { title: "Escenario", micro: "qué podría pasar", color: "var(--soft-violet)", halo: "rgba(109,59,255,.14)", copy: "La señal se vuelve posibilidad estratégica. Qué puede pasar, con qué ritmo y bajo qué condiciones. Sin escenarios, solo hay reacción." },
-  { title: "Criterio", micro: "qué importa", color: "var(--change-violet)", halo: "rgba(109,59,255,.18)", copy: "El equipo explicita qué debe pesar más: margen, velocidad, control, marca, aprendizaje o resiliencia. El criterio es la decisión antes de la decisión." },
-  { title: "Decisión", micro: "qué se elige", color: "var(--change-violet)", halo: "rgba(109,59,255,.18)", copy: "La conversación deja de ser opinión dispersa y se vuelve una elección con trade-offs visibles y razonamiento trazable." },
-  { title: "Proyecto", micro: "qué se mueve", color: "var(--change-violet)", halo: "rgba(109,59,255,.18)", copy: "La decisión baja a iniciativas, responsables, ritmo e hitos concretos. El criterio se vuelve movimiento." },
-  { title: "Sistema", micro: "qué sostiene", color: "var(--ink-graphite)", halo: "rgba(46,46,51,.12)", copy: "El criterio queda vivo: trazable, revisable, gobernable en el tiempo. Mission Control es donde vive el sistema." },
+  {
+    title: "Leer", micro: "qué cambia", color: "var(--signal-cyan)", halo: "rgba(89,184,217,.22)",
+    q: "¿Qué está cambiando que todavía no aparece en los números?",
+    riesgo: "Enterarte tarde, cuando el cambio ya es urgencia.",
+    artefacto: "Radar de señales",
+    decision: "Dónde poner atención antes de que sea urgente.",
+    mc: "Las señales quedan vivas y vigiladas, no en una presentación que se archiva.",
+  },
+  {
+    title: "Interpretar", micro: "qué significa", color: "var(--soft-violet)", halo: "rgba(138,108,255,.16)",
+    q: "¿Qué significan estas señales para nosotros, no para el mercado en general?",
+    riesgo: "Confundir movimiento del entorno con ruido, o reaccionar a la señal equivocada.",
+    artefacto: "Mapa de tensiones",
+    decision: "Qué tensión enfrentar primero.",
+    mc: "Las tensiones se vuelven el marco compartido con el que el equipo lee el contexto.",
+  },
+  {
+    title: "Decidir", micro: "qué importa", color: "var(--change-violet)", halo: "rgba(109,59,255,.18)",
+    q: "¿Qué importa de verdad, qué se sacrifica y por qué?",
+    riesgo: "Decidir por inercia o por la voz más fuerte de la junta.",
+    artefacto: "Matriz de trade-offs",
+    decision: "La apuesta, con su costo explícito.",
+    mc: "La decisión queda registrada con su criterio, no solo con su resultado.",
+  },
+  {
+    title: "Diseñar", micro: "qué forma toma", color: "var(--change-violet)", halo: "rgba(109,59,255,.18)",
+    q: "¿Qué forma concreta toma esto para que el equipo lo ejecute?",
+    riesgo: "Que la buena decisión se quede en intención.",
+    artefacto: "Roadmap vivo",
+    decision: "Qué se hace primero, quién y con qué secuencia.",
+    mc: "El roadmap se mantiene vivo, no congelado en un documento.",
+  },
+  {
+    title: "Sostener", micro: "qué se aprende", color: "var(--ink-graphite)", halo: "rgba(46,46,51,.12)",
+    q: "¿Cómo seguimos aprendiendo cuando cambie el contexto otra vez?",
+    riesgo: "Reinventar el rumbo en cada coyuntura y perder lo aprendido.",
+    artefacto: "Mission Control",
+    decision: "Ajustar con memoria, no desde cero.",
+    mc: "Aquí cierra el ciclo: la próxima coyuntura no empieza de cero, empieza con memoria.",
+  },
 ];
 
 const LAST = NODES.length - 1;
-const LINE_INSET = 100 / 12; // % — alinea con el centro del primer/último nodo (6 columnas)
+const LINE_INSET = 100 / (2 * NODES.length); // % — alinea con el centro del primer/último nodo
 
 export default function DecisionCartography() {
   const [active, setActive] = useState(0);
   const node = NODES[active];
-  const fillWidth = (active / LAST) * (100 - 2 * LINE_INSET); // % del tramo iluminado
+  const fillWidth = (active / LAST) * (100 - 2 * LINE_INSET);
 
   return (
     <div
@@ -38,7 +77,7 @@ export default function DecisionCartography() {
       }}
     >
       <div style={{ display: "flex", justifyContent: "space-between", gap: 16, alignItems: "center", padding: "20px 26px", borderBottom: "1px solid var(--border-subtle)" }}>
-        <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-muted)" }}>Cartografía de decisión</span>
+        <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-muted)" }}>El arco del método</span>
         <span style={{ display: "inline-flex", alignItems: "center", gap: 7, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-muted)" }}>
           <span data-pulse style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--signal-cyan)" }} />
           Interactivo
@@ -46,11 +85,10 @@ export default function DecisionCartography() {
       </div>
 
       <div style={{ position: "relative", padding: "44px 32px 36px" }}>
-        {/* traceline base + relleno progresivo */}
         <div className="ch-traceline" style={{ position: "absolute", left: `${LINE_INSET}%`, right: `${LINE_INSET}%`, top: 52, height: 2, background: "var(--line-structural)", opacity: 0.5 }} />
         <div className="ch-traceline" style={{ position: "absolute", left: `${LINE_INSET}%`, top: 52, height: 2, width: `${fillWidth}%`, background: "linear-gradient(90deg,var(--signal-cyan),var(--change-violet))", transition: "width .4s var(--ease-premium)" }} />
 
-        <div className="ch-tracenodes" style={{ position: "relative", display: "grid", gridTemplateColumns: "repeat(6,1fr)", gap: 8 }}>
+        <div className="ch-tracenodes" style={{ position: "relative", display: "grid", gridTemplateColumns: `repeat(${NODES.length},1fr)`, gap: 8 }}>
           {NODES.map((n, i) => {
             const on = i === active;
             return (
@@ -72,29 +110,46 @@ export default function DecisionCartography() {
                     transition: "transform .3s var(--ease-premium), box-shadow .3s var(--ease-premium)",
                   }}
                 />
-                <strong style={{ display: "block", font: "500 14px var(--font-primary)", letterSpacing: "-.01em", color: on ? "var(--change-violet)" : "var(--ink-graphite)", transition: "color .3s" }}>{n.title}</strong>
-                <span style={{ display: "block", marginTop: 5, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".08em", textTransform: "uppercase", color: "var(--text-faint)" }}>{n.micro}</span>
+                <strong style={{ display: "block", font: "500 14px var(--font-primary)", letterSpacing: "-.01em", color: "var(--ink-graphite)", opacity: on ? 1 : 0.6, transition: "opacity .3s" }}>{n.title}</strong>
+                <span className="ch-node-micro" style={{ display: "block", marginTop: 5, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".08em", textTransform: "uppercase", color: "var(--text-faint)" }}>{n.micro}</span>
               </button>
             );
           })}
         </div>
 
-        {/* cadena lineal — solo mobile (<768px), reemplaza al traceline */}
         <div className="ch-chain-linear" style={{ display: "none", marginTop: 24, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".06em", color: "var(--text-muted)", textAlign: "center" }}>
-          Señal · Escenario · Criterio · Decisión · Proyecto · Sistema
+          Leer · Interpretar · Decidir · Diseñar · Sostener
         </div>
 
-        <div style={{ margin: "34px 0 0", padding: "26px 28px", border: "1px solid var(--border-subtle)", borderLeft: `3px solid ${node.color}`, background: "#fff", transition: "border-color .3s var(--ease-premium)" }}>
-          <h3 style={{ margin: 0, font: "600 21px var(--font-primary)", letterSpacing: "-.02em", color: "var(--ink-graphite)" }}>{node.title}</h3>
-          <p style={{ margin: "10px 0 0", font: "400 15.5px/1.6 var(--font-primary)", color: "var(--text-muted)" }}>{node.copy}</p>
+        <div style={{ margin: "34px 0 0", padding: "28px 30px", border: "1px solid var(--border-subtle)", borderLeft: `3px solid ${node.color}`, background: "#fff", transition: "border-color .3s var(--ease-premium)" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 6 }}>
+            <span aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: node.color }} />
+            <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--ink-graphite)" }}>{node.title}</span>
+          </div>
+          <h3 style={{ margin: "0 0 22px", font: "600 clamp(19px,1.7vw,23px)/1.3 var(--font-primary)", letterSpacing: "-.02em", color: "var(--ink-graphite)", textWrap: "balance" }}>{node.q}</h3>
+          <div className="ch-node-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "18px 28px" }}>
+            {[
+              ["Riesgo que reduce", node.riesgo],
+              ["Decisión que habilita", node.decision],
+              ["Artefacto", node.artefacto],
+              ["En Mission Control", node.mc],
+            ].map(([label, text]) => (
+              <div key={label}>
+                <span style={{ display: "block", marginBottom: 5, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--text-faint)" }}>{label}</span>
+                <span style={{ display: "block", font: "400 14.5px/1.5 var(--font-primary)", color: "var(--text-muted)" }}>{text}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
       <style>{`
         @media (max-width: 768px) {
           .ch-traceline { display: none; }
-          .ch-tracenodes { grid-template-columns: repeat(3,1fr) !important; row-gap: 28px !important; }
+          .ch-tracenodes { grid-template-columns: repeat(3,1fr) !important; row-gap: 26px !important; }
+          .ch-node-micro { display: none !important; }
           .ch-chain-linear { display: block !important; }
+          .ch-node-grid { grid-template-columns: 1fr !important; }
         }
       `}</style>
     </div>
