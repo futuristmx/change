@@ -39,8 +39,8 @@ export default function Header() {
             alignItems: "center", gap: 28,
           }}
         >
-          <Link href="/" aria-label="Change" style={{ display: "block" }}>
-            <Image src="/assets/change_logo_graphite.svg" alt="Change" width={140} height={34} style={{ height: 34, width: "auto", display: "block" }} priority />
+          <Link href="/" aria-label="Change" className="ch-logo" style={{ display: "block" }}>
+            <Image src="/assets/change_logo_graphite.svg" alt="Change" width={161} height={39} style={{ height: 39, width: "auto", display: "block" }} priority />
           </Link>
 
           <div
@@ -128,6 +128,19 @@ export default function Header() {
           .ch-command { display: none !important; }
           .ch-burger { display: inline-flex !important; }
           .ch-cta { display: none !important; }
+        }
+        /* Pulse de color ocasional sobre el logo — graphite → violeta vibrante → graphite.
+           Aproximadamente cada 14s, con la coloración solo durante ~6% del ciclo. */
+        @keyframes ch-logo-pulse {
+          0%, 88%, 100% { filter: none; }
+          90%, 94%      { filter: brightness(0) saturate(100%) invert(28%) sepia(94%) saturate(3200%) hue-rotate(248deg) brightness(100%) contrast(101%); }
+        }
+        .ch-logo img {
+          animation: ch-logo-pulse 14s var(--ease-premium) infinite;
+          transition: filter var(--duration-premium) var(--ease-premium);
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .ch-logo img { animation: none !important; }
         }
       `}</style>
     </>

@@ -38,7 +38,7 @@ const ARCO: Array<{ t: string; c: string; g: GlyphName }> = [
 const ARTEFACTOS = [
   { h: "Radar de señales", p: "Lo que está cambiando alrededor, ordenado por relevancia y no por volumen de ruido.", k: "Leer", c: "var(--signal-cyan)" },
   { h: "Mapa de tensiones", p: "Las fuerzas que se contradicen dentro de la organización, nombradas para poder trabajarlas.", k: "Interpretar", c: "var(--soft-violet)" },
-  { h: "Matriz de trade-offs", p: "Qué se gana y qué se sacrifica en cada opción, con el costo a la vista.", k: "Decidir", c: "var(--change-violet)" },
+  { h: "Matriz de decisión", p: "Qué se gana y qué se sacrifica en cada opción, con el costo a la vista.", k: "Decidir", c: "var(--change-violet)" },
   { h: "Roadmap vivo", p: "La decisión convertida en secuencia de movimientos, que se actualiza cuando cambia el terreno.", k: "Diseñar", c: "var(--change-violet)" },
   { h: "Reporte ejecutivo", p: "La lectura completa en lenguaje de dirección, lista para llevar al board que decide.", k: "Síntesis", c: "var(--opportunity-orange)" },
   { h: "Mission Control", p: "Donde señales, decisiones, proyectos y reportes se mantienen vivos y conectados.", k: "Sostener", c: "var(--ink-graphite)" },
@@ -48,7 +48,7 @@ const ARTEFACTOS = [
 
 const TENSIONES = [
   { k: "Crecer sin diluir identidad", c: "var(--opportunity-orange)", p: "El negocio se expande y la esencia que lo hizo valioso empieza a perderse. Instalamos la regla para crecer sabiendo qué es innegociable y qué puede cambiar." },
-  { k: "Priorizar apuestas cuando no alcanza", c: "var(--change-violet)", p: "Hay más oportunidades buenas que recursos para perseguirlas. Instalamos la matriz de trade-offs que vuelve defendible decir que no." },
+  { k: "Priorizar apuestas cuando no alcanza", c: "var(--change-violet)", p: "Hay más oportunidades buenas que recursos para perseguirlas. Instalamos la matriz de decisión que vuelve defendible decir que no." },
   { k: "Transferir criterio entre generaciones y equipos", c: "var(--human-pink)", p: "El juicio vive en una o pocas cabezas y no se hereda. Lo hacemos explícito y transferible, para que el rumbo no dependa de quién esté en la sala." },
   { k: "Anticipar qué se rompe bajo presión", c: "var(--warning)", p: "La organización funciona hasta que el contexto la exige de más. Mapeamos los puntos de quiebre antes de que el estrés los encuentre." },
   { k: "Rediseñar la experiencia cuando el usuario ya cambió", c: "var(--signal-cyan)", p: "Lo que funcionaba dejó de corresponder con quien ahora decide y compra. Releemos al usuario real y rediseñamos desde ahí, no desde la inercia." },
@@ -97,7 +97,8 @@ export default function Home() {
             </Reveal>
 
             <Reveal delay={60} as="h1" style={{ margin: "0 auto", maxWidth: "17ch", font: "600 clamp(42px,7vw,104px)/.94 var(--font-primary)", letterSpacing: "-.055em", color: "var(--ink-graphite)" }}>
-              La certeza dejó de ser <span style={{ background: "var(--gradient-type-electric)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>condición para actuar.</span>
+              <span style={{ background: "var(--gradient-type-neutral-pulse)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>La certeza dejó de ser</span>{" "}
+              <span style={{ background: "var(--gradient-type-dark-future)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>condición para actuar.</span>
             </Reveal>
 
             <Reveal delay={120} as="p" style={{ margin: "clamp(28px,4vw,40px) auto 0", maxWidth: 620, font: "400 clamp(18px,1.6vw,22px)/1.5 var(--font-primary)", letterSpacing: "-.01em", color: "var(--ink-graphite)" }}>
@@ -114,7 +115,7 @@ export default function Home() {
                   <span key={n.t} style={{ display: "inline-flex", alignItems: "center", gap: 10 }}>
                     <span style={{ display: "inline-flex", flexDirection: "column", alignItems: "center", gap: 4 }}>
                       <span aria-hidden="true" style={{ color: n.c, display: "inline-flex" }}>
-                        <Glyph name={n.g} size={14} />
+                        <Glyph name={n.g} size={22} />
                       </span>
                       <span style={{ display: "inline-flex", alignItems: "center", gap: 7 }}>
                         <span style={{ width: 8, height: 8, borderRadius: 999, background: n.c }} />
@@ -166,7 +167,7 @@ export default function Home() {
               El futuro se vuelve <span style={{ background: "var(--gradient-type-electric)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>interpretable, decidible y accionable.</span>
             </Reveal>
             <Reveal delay={120} as="p" style={{ margin: "26px auto 0", maxWidth: 680, font: "400 clamp(17px,1.5vw,21px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>
-              Trabajamos justo donde la información es incompleta, las tensiones no son evidentes y las decisiones no pueden esperar. Ahí convertimos señales del entorno, comportamiento humano, estrategia y diseño en instrumentos que se pueden usar: para decidir, actuar y aprender.
+              Trabajamos justo donde la información es incompleta, las tensiones no son evidentes y las decisiones no pueden esperar. Ahí convertimos señales emergentes, comportamiento humano, estrategia, cultura y tecnología en instrumentos que se pueden usar para decidir, actuar y aprender.
             </Reveal>
           </div>
         </section>
@@ -263,29 +264,7 @@ export default function Home() {
           </div>
         </section>
 
-        <div aria-hidden="true" style={{ height: "clamp(80px,8vw,120px)", background: "linear-gradient(180deg, var(--surface-dark-secondary) 0%, var(--surface-soft) 100%)" }} />
-        {/* ═══ 08 · CAPACIDADES INSTALADAS / DECISIONES ═══ */}
-        <section style={{ background: "var(--surface-soft)" }}>
-          <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(92px,11vw,168px) 0" }}>
-            <SectionHead kicker="Capacidades instaladas" title="No mostramos proyectos. Mostramos capacidades instaladas." lead="Cada trabajo de Change deja a la organización capaz de algo que antes no podía sostener. Estas son las tensiones que sabemos volver decisión." />
-            <div className="ch-declist" style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 20 }}>
-              {TENSIONES.map((d, i) => (
-                <Reveal key={d.k} delay={(i % 2) * 80} as="article" className="ch-card" style={{ background: "rgba(255,255,255,.82)", border: "1px solid var(--border-subtle)", padding: 36 }}>
-                  <span style={{ display: "inline-flex", alignItems: "center", gap: 9, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--ink-graphite)" }}>
-                    <span aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: d.c }} />Tensión {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <h3 style={{ margin: "14px 0 10px", font: "600 clamp(21px,1.9vw,27px)/1.1 var(--font-primary)", letterSpacing: "-.03em", color: "var(--ink-graphite)" }}>{d.k}</h3>
-                  <p style={{ margin: 0, font: "400 15px/1.55 var(--font-primary)", color: "var(--text-muted)" }}>{d.p}</p>
-                </Reveal>
-              ))}
-            </div>
-            <Reveal delay={120} style={{ marginTop: 32, display: "flex", justifyContent: "center" }}>
-              <Link href="/casos" className="btn btn-secondary">Ver casos por tensión</Link>
-            </Reveal>
-          </div>
-        </section>
-
-        <EtherealDivider />
+        <div aria-hidden="true" style={{ height: "clamp(80px,8vw,120px)", background: "linear-gradient(180deg, var(--surface-dark-secondary) 0%, var(--surface-page) 100%)" }} />
         {/* ═══ 09 · CÓMO SE TRABAJA CON CHANGE ═══ */}
         <section style={{ background: "var(--surface-page)" }}>
           <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(92px,11vw,168px) 0" }}>
@@ -364,8 +343,6 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Transición dark continua hacia Footer (Footer pasa a --gradient-dark-pearl en Fase 5). */}
-        <div aria-hidden="true" style={{ height: "clamp(60px,6vw,90px)", background: "var(--surface-dark-secondary)" }} />
       </main>
       <Footer />
 

@@ -1,6 +1,16 @@
 "use client";
 
 import { useState } from "react";
+import { Glyph, type GlyphName } from "@/components/ds";
+
+const GLYPH_K: Record<string, GlyphName> = {
+  "Leer": "insight",
+  "Interpretar": "risk",
+  "Decidir": "decision",
+  "Diseñar": "project",
+  "Sostener": "status",
+  "Transversal": "nav",
+};
 
 interface Artifact {
   h: string;
@@ -35,13 +45,13 @@ const ARTIFACTS: Artifact[] = [
     method: "Activa Interpretar: convierte señales dispersas en sentido accionable para la organización.",
   },
   {
-    h: "Matriz de trade-offs",
+    h: "Matriz de decisión",
     k: "Decidir",
     c: "var(--change-violet)",
     p: "Los criterios y sacrificios de cada camino, explícitos sobre la mesa.",
     pregunta: "¿Qué ganamos, qué sacrificamos y por qué — antes de comprometer recursos?",
     cuando: "Cuando hay opciones válidas pero no hay criterios explícitos para elegir entre ellas.",
-    deja: "Los criterios documentados, los trade-offs visibles y la elección defendible ante cualquier interlocutor.",
+    deja: "Los criterios documentados, los criterios y sacrificios visibles y la elección defendible ante cualquier interlocutor.",
     method: "Activa Decidir: hace el criterio explícito y sostenible para la próxima vez.",
   },
   {
@@ -61,7 +71,7 @@ const ARTIFACTS: Artifact[] = [
     p: "La síntesis que lleva la decisión al lenguaje del consejo y de quien firma.",
     pregunta: "¿Cómo lleva la lectura al lenguaje de quien tiene que aprobar y de quien tiene que implementar?",
     cuando: "Cuando la decisión está tomada pero necesita ser comunicada y defendida hacia el board o la dirección.",
-    deja: "Una síntesis ejecutiva con los criterios y trade-offs visibles, lista para presentar.",
+    deja: "Una síntesis ejecutiva con los criterios y sacrificios visibles, lista para presentar.",
     method: "Activa Diseñar en modo comunicación: la decisión en el formato que mueve.",
   },
   {
@@ -133,6 +143,7 @@ export default function ArtifactGallery() {
               aria-expanded={active}
               aria-controls={`art-detail-${i}`}
               onClick={() => toggle(i)}
+              className="art-card"
               style={{
                 all: "unset",
                 display: "flex",
@@ -142,15 +153,18 @@ export default function ArtifactGallery() {
                 background: active ? "rgba(255,255,255,1)" : "rgba(255,255,255,.75)",
                 border: `1px solid ${active ? art.c : "var(--border-subtle)"}`,
                 borderTop: `3px solid ${art.c}`,
-                transition: "border-color .18s ease, box-shadow .18s ease, background .18s ease",
-                boxShadow: active ? "0 4px 24px rgba(0,0,0,.07)" : "none",
+                transition: "transform var(--duration-standard) var(--ease-premium), border-color var(--duration-standard) var(--ease-premium), box-shadow var(--duration-standard) var(--ease-premium), background var(--duration-standard) var(--ease-premium)",
+                boxShadow: active ? `0 14px 36px ${art.c.replace('var(', 'color-mix(in srgb, var(').replace(')', ') 24%, transparent)')}` : "none",
                 outline: "none",
                 textAlign: "left",
-                minHeight: 190,
+                minHeight: 210,
               }}
               onFocus={e => { (e.currentTarget as HTMLButtonElement).style.boxShadow = "0 0 0 3px var(--change-violet)"; }}
-              onBlur={e => { (e.currentTarget as HTMLButtonElement).style.boxShadow = active ? "0 4px 24px rgba(0,0,0,.07)" : "none"; }}
+              onBlur={e => { (e.currentTarget as HTMLButtonElement).style.boxShadow = active ? `0 14px 36px ${art.c.replace('var(', 'color-mix(in srgb, var(').replace(')', ') 24%, transparent)')}` : "none"; }}
             >
+              <span aria-hidden="true" style={{ display: "inline-flex", marginBottom: 12, color: art.c, opacity: active ? 1 : 0.7, transition: "opacity var(--duration-standard)" }}>
+                <Glyph name={GLYPH_K[art.k] ?? "nav"} size={26} />
+              </span>
               <span style={{
                 display: "inline-flex",
                 alignItems: "center",

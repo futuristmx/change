@@ -44,7 +44,7 @@ const NODES: Node[] = [
     title: "Decidir", micro: "qué importa", color: "var(--change-violet)", halo: "rgba(109,59,255,.18)",
     q: "¿Qué importa de verdad, qué se sacrifica y por qué?",
     riesgo: "Decidir por inercia o por la voz más fuerte de la junta.",
-    artefacto: "Matriz de trade-offs",
+    artefacto: "Matriz de decisión",
     decision: "La apuesta, con su costo explícito.",
     mc: "La decisión queda registrada con su criterio, no solo con su resultado.",
   },

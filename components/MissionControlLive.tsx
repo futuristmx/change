@@ -22,7 +22,7 @@ interface Stage {
 const TRACE: Stage[] = [
   { k: "Señal", artefacto: "Radar de señales", color: "var(--signal-cyan)", body: "Tres clientes industriales preguntaron por capacidad de nearshoring en menos de 60 días. Lo que parecía un caso aislado empezó a repetirse." },
   { k: "Tensión", artefacto: "Mapa de tensiones", color: "var(--soft-violet)", body: "Crecer rápido sin comprometer la calidad que nos ganó a esos clientes. Velocidad y estándar empujando en direcciones opuestas." },
-  { k: "Decisión", artefacto: "Matriz de trade-offs", color: "var(--change-violet)", body: "Abrir una segunda línea acotada antes de comprometer la planta completa. Criterio explícito: la calidad pesa más que la velocidad de captura." },
+  { k: "Decisión", artefacto: "Matriz de decisión", color: "var(--change-violet)", body: "Abrir una segunda línea acotada antes de comprometer la planta completa. Criterio explícito: la calidad pesa más que la velocidad de captura." },
   { k: "Proyecto", artefacto: "Roadmap vivo", color: "var(--change-violet)", body: "Piloto Línea B a 90 días. La métrica de calidad es el gate de continuidad: si no se sostiene, no se escala." },
   { k: "Aprendizaje", artefacto: "Memoria estratégica", color: "var(--lavender-mist)", body: "La calidad aguanta hasta ~70% de carga; arriba de eso se degrada. Criterio instalado para evaluar la próxima apertura sin volver a discutirlo desde cero." },
 ];

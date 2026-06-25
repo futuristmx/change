@@ -27,7 +27,7 @@ const CONTRATO: Array<{ v: string; h: string; p: string; c: string; g: GlyphName
 const TIPOS = [
   { k: "Señal → decisión", c: "var(--signal-cyan)", h: "Lectura de señal", p: "Tomamos un movimiento concreto del entorno mexicano —regulatorio, tecnológico, cultural, de mercado— y mostramos la tensión que esconde y a quién obliga a decidir." },
   { k: "Fuerzas en conflicto", c: "var(--soft-violet)", h: "Mapa de tensión", p: "Un solo conflicto de fondo que atraviesa varios sectores a la vez, desplegado como mapa de tensiones para verlo completo, no por pedazos." },
-  { k: "El instrumento por dentro", c: "var(--change-violet)", h: "Nota de método", p: "Cómo se ve por dentro un instrumento de decisión —un radar de señales, una matriz de trade-offs, un roadmap vivo— usando un caso real desidentificado." },
+  { k: "El instrumento por dentro", c: "var(--change-violet)", h: "Nota de método", p: "Cómo se ve por dentro un instrumento de decisión —un radar de señales, una matriz de decisión, un roadmap vivo— usando un caso real desidentificado." },
 ];
 
 const RITMO = [
