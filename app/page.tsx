@@ -4,6 +4,7 @@ import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
 import MethodFlow from "@/components/MethodFlow";
 import SystemicDescent from "@/components/SystemicDescent";
+import CapacityScore from "@/components/CapacityScore";
 import MissionControlLive from "@/components/MissionControlLive";
 
 const WRAP = "min(1340px, calc(100% - clamp(40px,8vw,128px)))";
@@ -253,6 +254,21 @@ export default function Home() {
               </div>
               <Link href="/field-notes" className="btn btn-secondary btn-sm">Leer las Field Notes</Link>
             </Reveal>
+          </div>
+        </section>
+
+        {/* ═══ 10.5 · SCORE DE CAPACIDAD DE FUTURO ═══ */}
+        <section style={{ borderTop: "1px solid var(--border-subtle)", background: "linear-gradient(180deg,#FFFFFF,var(--pure-white))" }}>
+          <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(92px,11vw,168px) 0" }}>
+            <div style={{ maxWidth: 720, margin: "0 auto clamp(40px,5vw,56px)", textAlign: "center" }}>
+              <Reveal style={{ display: "inline-flex", alignItems: "center", gap: 11, marginBottom: 20 }}>
+                <span style={{ width: 7, height: 7, background: "var(--change-violet)" }} />
+                <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)" }}>Instrumento</span>
+              </Reveal>
+              <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(30px,4.2vw,58px)/.99 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>Antes de leer más, léete a ti mismo.</Reveal>
+              <Reveal delay={120} as="p" style={{ margin: "20px auto 0", maxWidth: "52ch", font: "400 clamp(17px,1.4vw,20px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>Una lectura parcial pero real de tu capacidad para actuar sin certeza. Dos minutos, cinco preguntas, un primer movimiento concreto.</Reveal>
+            </div>
+            <Reveal delay={160}><CapacityScore /></Reveal>
           </div>
         </section>
 
