@@ -104,7 +104,7 @@ export default function CapacityScore() {
           ¿Qué tan lista está tu organización para actuar cuando no hay certeza?
         </h3>
         <p style={{ margin: "16px 0 28px", maxWidth: "54ch", font: "400 16px/1.6 var(--font-primary)", color: "var(--text-muted)" }}>
-          Cinco preguntas sobre las cinco capacidades del método: leer, interpretar, decidir, diseñar y sostener. No es un diagnóstico absoluto — es una lectura parcial, útil, en dos minutos. Sin datos personales hasta que tú decidas.
+          Cinco preguntas sobre las cinco capacidades del método: leer, interpretar, decidir, diseñar y sostener. Una lectura parcial pero útil en dos minutos. Sin datos personales hasta que tú decidas.
         </p>
         <button onClick={start} className="btn btn-primary">Empezar la lectura</button>
       </Shell>

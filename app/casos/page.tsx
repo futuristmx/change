@@ -7,7 +7,7 @@ import CasoCard from "@/components/CasoCard";
 export const metadata: Metadata = {
   title: "Decisiones que se convirtieron en capacidad",
   description:
-    "No mostramos proyectos terminados. Mostramos seis tensiones reales, la decisión que cada una hizo posible y el sistema que dejó instalado. Casos anonimizados por tensión y sector.",
+    "Seis tensiones reales, la decisión que cada una hizo posible y el sistema que dejó instalado. Casos anonimizados por tensión y sector.",
   openGraph: {
     images: [{ url: "/assets/og-default.png", width: 1200, height: 630, alt: "Decisiones que se convirtieron en capacidad" }],
   },
@@ -102,7 +102,7 @@ export default function CasosPage() {
     <PageScaffold
       kicker="Casos por tensión"
       title="Decisiones que se convirtieron en capacidad."
-      lead="No mostramos proyectos terminados. Mostramos seis tensiones reales, la decisión que cada una hizo posible y el sistema que dejó instalado — la capacidad de futuro de volver a decidir sin nosotros. Casos anonimizados por tensión y sector."
+      lead="Seis tensiones reales, la decisión que cada una hizo posible y el sistema que dejó instalado — la capacidad de futuro de volver a decidir sin Change en la sala. Casos anonimizados por tensión y sector."
     >
       {/* ═══ LOS 6 CASOS ═══ */}
       {CASOS.map((caso, idx) => (
@@ -119,7 +119,7 @@ export default function CasosPage() {
         <div style={{ position: "relative", width: WRAP, margin: "0 auto", padding: "clamp(88px,11vw,160px) 0" }}>
           <Reveal style={{ display: "flex", alignItems: "center", gap: 11, marginBottom: 20 }}>
             <span data-pulse style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--signal-cyan)" }} />
-            <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "rgba(255,255,255,.8)" }}>El patrón detrás de los seis</span>
+            <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "rgba(255,255,255,.8)" }}>Lo que tienen en común</span>
           </Reveal>
           <Reveal delay={60} as="h2" style={{ margin: "0 0 16px", maxWidth: "20ch", font: "600 clamp(30px,4.2vw,58px)/.99 var(--font-primary)", letterSpacing: "-.05em", color: "#fff", textWrap: "balance" }}>Distintas tensiones. La misma capacidad.</Reveal>
           <Reveal delay={100} as="p" style={{ margin: "0 0 clamp(40px,5vw,56px)", maxWidth: "62ch", font: "400 clamp(16px,1.3vw,19px)/1.55 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>Seis retos sin nada en común — y exactamente el mismo recorrido: leer lo que cambia, interpretar qué significa, decidir con criterio explícito, diseñar la respuesta y dejar instalado un sistema que la sostiene. Lo que entregamos no es el caso. Es la capacidad de volver a hacerlo.</Reveal>

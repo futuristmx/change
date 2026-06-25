@@ -53,7 +53,7 @@ const ARTE = [
 const ESCALERA = [
   { n: "Mapa de Claridad", tag: "Entrada", c: "var(--ink-graphite)", p: "El punto de partida. Tomamos la decisión que tienes enfrente y la ponemos en orden: qué cambia, qué tensiona, qué está en juego. Sales con una lectura que tu equipo no tenía y con la primera versión de tus artefactos." },
   { n: "Sprint de Rumbo", tag: "Acotado", c: "var(--soft-violet)", p: "Un trabajo enfocado sobre un reto definido. Recorremos las cinco capacidades sobre tu caso real y aterrizamos la decisión en instrumentos. Sales con una respuesta diseñada, no con un diagnóstico." },
-  { n: "Mission Control", tag: "Sistema vivo", c: "var(--change-violet)", p: "Cuando la organización necesita sostener la capacidad en el tiempo, instalamos la infraestructura de memoria estratégica que mantiene viva cada decisión y avisa cuando el entorno se mueve. No es un punto de entrada: es a donde llega quien ya construyó músculo." },
+  { n: "Mission Control", tag: "Sistema vivo", c: "var(--change-violet)", p: "Cuando la organización necesita sostener la capacidad en el tiempo, instalamos la infraestructura de memoria estratégica que mantiene viva cada decisión y avisa cuando el entorno se mueve. El destino de quien ya construyó músculo, no el punto de entrada." },
 ];
 
 const MESA = [
@@ -66,18 +66,18 @@ export default function CapacidadesPage() {
   return (
     <PageScaffold
       kicker="Capacidades · Método"
-      title="No compras una capacidad suelta. Construyes capacidad de futuro."
-      lead="La mayoría de las organizaciones contrata respuestas a problemas que ya tienen nombre. Nosotros construimos la capacidad de responder a los que todavía no lo tienen."
+      title="Capacidad de futuro: la habilidad de responder antes de que el problema tenga nombre."
+      lead="Mientras la mayoría contrata respuestas a problemas ya nombrados, Change construye la capacidad de responder a los que todavía no lo tienen."
     >
       {/* ═══ QUÉ ES ═══ */}
       <section style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-sky-pearl)" }}>
         <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(88px,11vw,160px) 0" }}>
-          <Head kicker="Qué es" title="Saber qué hacer antes de que la urgencia decida por ti." lead="Es la habilidad de una organización para interpretar el cambio, decidir, diseñar respuestas y sostener el aprendizaje antes de que el entorno la obligue a reaccionar. No es un pronóstico ni una herramienta: es una forma de operar." />
+          <Head kicker="Qué es" title="Saber qué hacer antes de que la urgencia decida por ti." lead="La habilidad de una organización para interpretar el cambio, decidir, diseñar respuestas y sostener el aprendizaje antes de que el entorno la obligue a reaccionar. Una forma de operar, instalada en la organización." />
           <div className="cap-grid3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
             {[
-              { h: "Se ancla en una tensión real", p: "No partimos de tendencias generales. Partimos de la decisión específica que tu organización tiene enfrente y que aún no encuentra forma." },
-              { h: "Se prueba en una decisión", p: "No se mide en presentaciones. Se mide en si la siguiente decisión difícil se toma mejor, más rápido y con menos dependencia de una sola cabeza." },
-              { h: "Se ve en un artefacto", p: "Cada avance deja un instrumento concreto: un radar, un mapa, una matriz. La capacidad deja de ser discurso y se vuelve algo que tu equipo puede leer y usar." },
+              { h: "Se ancla en una tensión real", p: "Cada arco de trabajo parte de la decisión específica que tu organización tiene enfrente y que aún no encuentra forma." },
+              { h: "Se prueba en una decisión", p: "Se mide en si la siguiente decisión difícil se toma mejor, más rápido y con menos dependencia de una sola cabeza." },
+              { h: "Se ve en un artefacto", p: "Cada avance deja un instrumento concreto: un radar, un mapa, una matriz. La capacidad se vuelve algo que tu equipo puede leer y usar." },
             ].map((c, i) => (
               <Reveal key={c.h} delay={i * 110} as="article" className="ch-card" style={{ background: "rgba(255,255,255,.82)", border: "1px solid var(--border-subtle)", padding: 32, minHeight: 210, display: "flex", flexDirection: "column" }}>
                 <h3 style={{ margin: 0, font: "600 clamp(20px,1.8vw,24px)/1.1 var(--font-primary)", letterSpacing: "-.03em", color: "var(--ink-graphite)" }}>{c.h}</h3>
@@ -116,7 +116,7 @@ export default function CapacidadesPage() {
       {/* ═══ ARTEFACTOS ═══ */}
       <section style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-sky-pearl)" }}>
         <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(88px,11vw,160px) 0" }}>
-          <Head kicker="La capacidad se ve" title="Cada capacidad deja un instrumento, no una opinión." lead="No facilitamos talleres. Construimos instrumentos de decisión: artefactos con los que el pensamiento se vuelve algo que tu equipo puede leer, usar y defender." />
+          <Head kicker="La capacidad se ve" title="Cada capacidad deja un instrumento." lead="Construimos instrumentos de decisión: artefactos con los que el pensamiento se vuelve algo que tu equipo puede leer, usar y defender." />
           <ArtifactGallery />
         </div>
       </section>
@@ -172,7 +172,7 @@ export default function CapacidadesPage() {
       <section style={{ position: "relative", overflow: "hidden", background: "radial-gradient(circle at 50% -10%,color-mix(in srgb, var(--change-violet) 24%, transparent),transparent 52%),var(--surface-dark-secondary)" }}>
         <div style={{ position: "relative", width: WRAP, margin: "0 auto", padding: "clamp(88px,12vw,168px) 0", textAlign: "center" }}>
           <Reveal as="h2" style={{ margin: "0 auto", maxWidth: "20ch", font: "600 clamp(32px,5vw,68px)/1.02 var(--font-primary)", letterSpacing: "-.05em", color: "#fff", textWrap: "balance" }}>El mejor momento para construir capacidad es antes de necesitarla.</Reveal>
-          <Reveal delay={100} as="p" style={{ margin: "24px auto 0", maxWidth: 560, font: "400 clamp(16px,1.4vw,19px)/1.6 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>No empezamos con un diagnóstico genérico. Empezamos con la decisión que ya tienes enfrente. Trae una y la trabajamos juntos.</Reveal>
+          <Reveal delay={100} as="p" style={{ margin: "24px auto 0", maxWidth: 560, font: "400 clamp(16px,1.4vw,19px)/1.6 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>Cada relación arranca con la decisión que ya tienes enfrente. Trae una y la trabajamos juntos.</Reveal>
           <Reveal delay={160} style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12, marginTop: 38 }}>
             <Link href="/contacto" className="btn btn-light">Trabajar una decisión</Link>
             <Link href="/casos" className="btn btn-dghost">Ver capacidades instaladas</Link>

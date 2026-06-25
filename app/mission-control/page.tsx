@@ -9,7 +9,7 @@ import { Glyph, type GlyphName } from "@/components/ds";
 export const metadata: Metadata = {
   title: "Mission Control: donde la capacidad de futuro se sostiene",
   description:
-    "No es un tablero de métricas. Es memoria estratégica: la infraestructura de continuidad donde señales, decisiones y rumbo se mantienen vivos en lugar de perderse entre juntas.",
+    "Memoria estratégica viva: la infraestructura de continuidad donde señales, decisiones y rumbo se mantienen conectados — el porqué de cada decisión sigue disponible cuando cambia el contexto.",
   openGraph: {
     images: [{ url: "/assets/og-default.png", width: 1200, height: 630, alt: "Mission Control: donde la capacidad de futuro se sostiene" }],
   },
@@ -45,10 +45,10 @@ export default function MissionControlPage() {
         <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(80px,10vw,150px) 0" }}>
           <Reveal style={{ display: "flex", alignItems: "center", gap: 11, marginBottom: 20 }}>
             <span data-pulse style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--signal-cyan)" }} />
-            <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "rgba(255,255,255,.8)" }}>Qué es, qué no es</span>
+            <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "rgba(255,255,255,.8)" }}>Qué es</span>
           </Reveal>
-          <Reveal delay={60} as="h2" style={{ margin: "0 0 8px", maxWidth: "22ch", font: "600 clamp(30px,4.2vw,58px)/.99 var(--font-primary)", letterSpacing: "-.05em", color: "#fff", textWrap: "balance" }}>No es un tablero de métricas. Es memoria estratégica.</Reveal>
-          <Reveal delay={100} as="p" style={{ margin: "0 0 clamp(40px,5vw,56px)", maxWidth: "60ch", font: "400 clamp(16px,1.3vw,19px)/1.55 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>Un tablero de métricas muestra números y mira hacia atrás. Mission Control sostiene el porqué: por qué se decidió lo que se decidió, qué cambió desde entonces y hacia dónde apunta el rumbo.</Reveal>
+          <Reveal delay={60} as="h2" style={{ margin: "0 0 8px", maxWidth: "22ch", font: "600 clamp(30px,4.2vw,58px)/.99 var(--font-primary)", letterSpacing: "-.05em", color: "#fff", textWrap: "balance" }}>Memoria estratégica viva, no un tablero más.</Reveal>
+          <Reveal delay={100} as="p" style={{ margin: "0 0 clamp(40px,5vw,56px)", maxWidth: "60ch", font: "400 clamp(16px,1.3vw,19px)/1.55 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>Mission Control sostiene el porqué de cada decisión: con qué criterio se tomó, qué cambió desde entonces y hacia dónde apunta el rumbo. Donde un tablero archiva, Mission Control conserva trazabilidad.</Reveal>
           <div className="mc-vs" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
             <Reveal className="ch-card" style={{ border: "1px solid rgba(255,255,255,.1)", background: "var(--gradient-dark-card-slate)", padding: "32px 30px" }}>
               <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".13em", textTransform: "uppercase", color: "rgba(255,255,255,.8)" }}>Lo que evitamos</span>
