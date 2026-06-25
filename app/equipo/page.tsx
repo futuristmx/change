@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import PageScaffold from "@/components/PageScaffold";
+import PageScaffold, { GradientTitle } from "@/components/PageScaffold";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
@@ -43,7 +43,7 @@ export default function EquipoPage() {
   return (
     <PageScaffold
       kicker="Board"
-      title="La capacidad de futuro se construye con un board senior."
+      title={<GradientTitle pre="La capacidad de futuro se construye" accent="con un board senior." accentGradient="var(--gradient-type-dark-graphite)" />}
       lead="Interpretar el cambio, decidir bajo ambigüedad y sostener el rumbo no caben en una sola cabeza. Change reúne las formas de pensar que una decisión difícil necesita al mismo tiempo."
     >
       {/* ═══ POR QUÉ UNA MESA ═══ */}

@@ -261,6 +261,7 @@ export default function DecisionSimulator() {
   const [copied, setCopied] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const containerRef = useRef<HTMLElement>(null);
+  const [headerH, setHeaderH] = useState(80);
 
   function handleCopyReading() {
     if (!reading) return;
@@ -294,10 +295,21 @@ export default function DecisionSimulator() {
     }
   }, [phase, step]);
 
+  // Mide la altura real del header sticky para que la barra de progreso
+  // se ancle justo debajo (sin solaparse) y el scroll-into-view deje el
+  // simulador a la altura correcta.
+  useEffect(() => {
+    function measure() {
+      const h = document.querySelector("header")?.offsetHeight;
+      if (h && h > 0) setHeaderH(h);
+    }
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
+
   // Scroll-into-view al cambiar de fase: evita que el usuario abra el quiz/
   // resultado/contacto a mitad de scroll. Honra prefers-reduced-motion.
-  // Calcula posición absoluta del section y resta header sticky (~80px)
-  // para que el inicio del simulador quede justo bajo la nav.
   useEffect(() => {
     if (phase === "intro") return;
     const reduce =
@@ -306,13 +318,13 @@ export default function DecisionSimulator() {
     requestAnimationFrame(() => {
       const el = containerRef.current;
       if (!el) return;
-      const top = el.getBoundingClientRect().top + window.scrollY - 80;
+      const top = el.getBoundingClientRect().top + window.scrollY - headerH;
       window.scrollTo({
         top: Math.max(0, top),
         behavior: reduce ? "auto" : "smooth",
       });
     });
-  }, [phase]);
+  }, [phase, headerH]);
 
   function resetQuiz() {
     setStep(0);
@@ -547,18 +559,20 @@ export default function DecisionSimulator() {
       <section ref={containerRef} style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-sky-pearl)", scrollMarginTop: 80 }}>
         <div style={{ ...WRAP, padding: "clamp(32px,4vw,44px) 0" }}>
 
-          {/* Barra global de progreso — fija bajo el header sticky.
-              Gradient violeta, se rellena por step. */}
+          {/* Barra global de progreso — fija JUSTO debajo del header sticky.
+              Mide headerH dinámicamente para evitar solape. zIndex 55 (debajo
+              del header z:60) garantiza que nunca quede encima del menú; al
+              usar top=headerH la barra cae siempre 0px debajo. */}
           <div
             aria-hidden="true"
             style={{
               position: "fixed",
-              top: 80,
+              top: headerH,
               left: 0,
               right: 0,
               height: 4,
               background: "var(--track-graphite)",
-              zIndex: 90,
+              zIndex: 55,
             }}
           >
             <div

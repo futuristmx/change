@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import PageScaffold from "@/components/PageScaffold";
+import PageScaffold, { GradientTitle } from "@/components/PageScaffold";
 import Reveal from "@/components/Reveal";
 import CasoCard from "@/components/CasoCard";
 
@@ -101,7 +101,7 @@ export default function CasosPage() {
   return (
     <PageScaffold
       kicker="Casos por tensión · Nuestro trabajo"
-      title="Decisiones que se convirtieron en capacidad."
+      title={<GradientTitle pre="Decisiones que se convirtieron en" accent="capacidad." accentGradient="var(--gradient-type-dark-warm)" />}
       lead="Seis tensiones reales que Change ha trabajado: la decisión que cada una hizo posible y el sistema que dejó instalado — la capacidad de futuro de volver a decidir sin Change en la sala. Casos reales con nombre y sector anonimizados por confidencialidad estratégica de cada cliente."
     >
       {/* ═══ DISCLAIMER DE CREDIBILIDAD — destacado ═══ */}

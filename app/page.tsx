@@ -164,7 +164,8 @@ export default function Home() {
               <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)" }}>La tesis de Change</span>
             </Reveal>
             <Reveal delay={60} as="h2" style={{ margin: "0 auto", maxWidth: "20ch", font: "600 clamp(30px,4.4vw,62px)/1.02 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>
-              El futuro se vuelve <span style={{ background: "var(--gradient-type-electric)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>interpretable, decidible y accionable.</span>
+              <span style={{ background: "var(--gradient-type-neutral-pulse)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>El futuro se vuelve</span>{" "}
+              <span style={{ background: "var(--gradient-type-dark-rose)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>interpretable, decidible y accionable.</span>
             </Reveal>
             <Reveal delay={120} as="p" style={{ margin: "26px auto 0", maxWidth: 680, font: "400 clamp(17px,1.5vw,21px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>
               Trabajamos justo donde la información es incompleta, las tensiones no son evidentes y las decisiones no pueden esperar. Ahí convertimos señales emergentes, comportamiento humano, estrategia, cultura y tecnología en instrumentos que se pueden usar para decidir, actuar y aprender.
@@ -273,7 +274,10 @@ export default function Home() {
                 <span style={{ width: 7, height: 7, background: "var(--change-violet)" }} />
                 <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)" }}>Cómo se trabaja con Change</span>
               </Reveal>
-              <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(30px,4.2vw,58px)/1.0 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>Toda relación con Change empieza con una <span style={{ background: "var(--gradient-type-electric)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>decisión real.</span></Reveal>
+              <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(30px,4.2vw,58px)/1.0 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>
+                <span style={{ background: "var(--gradient-type-neutral-pulse)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>Toda relación con Change empieza con una</span>{" "}
+                <span style={{ background: "var(--gradient-type-dark-ember)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>decisión real.</span>
+              </Reveal>
               <Reveal delay={120} as="p" style={{ margin: "22px 0 0", maxWidth: "60ch", font: "400 clamp(17px,1.4vw,20px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>Cada relación empieza con una decisión real que la organización necesita tomar. Desde ahí construimos, de forma acotada y progresiva.</Reveal>
             </div>
 

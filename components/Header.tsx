@@ -130,13 +130,13 @@ export default function Header() {
           .ch-cta { display: none !important; }
         }
         /* Pulse de color ocasional sobre el logo — graphite → violeta vibrante → graphite.
-           Aproximadamente cada 14s, con la coloración solo durante ~6% del ciclo. */
+           Cada 30s, con la coloración solo durante ~4% del ciclo (~1.2s). */
         @keyframes ch-logo-pulse {
-          0%, 88%, 100% { filter: none; }
-          90%, 94%      { filter: brightness(0) saturate(100%) invert(28%) sepia(94%) saturate(3200%) hue-rotate(248deg) brightness(100%) contrast(101%); }
+          0%, 92%, 100% { filter: none; }
+          94%, 96%      { filter: brightness(0) saturate(100%) invert(28%) sepia(94%) saturate(3200%) hue-rotate(248deg) brightness(100%) contrast(101%); }
         }
         .ch-logo img {
-          animation: ch-logo-pulse 14s var(--ease-premium) infinite;
+          animation: ch-logo-pulse 30s var(--ease-premium) infinite;
           transition: filter var(--duration-premium) var(--ease-premium);
         }
         @media (prefers-reduced-motion: reduce) {
