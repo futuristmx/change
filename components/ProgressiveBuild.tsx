@@ -28,7 +28,7 @@ export default function ProgressiveBuild({ stages }: { stages: BuildStage[] }) {
     if (reduce) { setInView(true); return; }
     const io = new IntersectionObserver(
       (entries) => entries.forEach((e) => { if (e.isIntersecting) { setInView(true); io.unobserve(el); } }),
-      { threshold: 0.3 }
+      { threshold: 0.2, rootMargin: "0px 0px -18% 0px" }
     );
     io.observe(el);
     return () => io.disconnect();
@@ -37,9 +37,9 @@ export default function ProgressiveBuild({ stages }: { stages: BuildStage[] }) {
   return (
     <div ref={ref} className={inView ? "pb-wrap pb-in" : "pb-wrap"}>
       <div className="pb-stages" style={{ position: "relative", display: "grid", gridTemplateColumns: `repeat(${stages.length},1fr)`, gap: "clamp(20px,2.6vw,44px)" }}>
-        {/* rail conector */}
-        <div aria-hidden="true" className="pb-rail-track" style={{ position: "absolute", left: "16%", right: "16%", top: 33, height: 2, background: "var(--line-structural)", opacity: 0.35 }} />
-        <div aria-hidden="true" className="pb-rail-fill" style={{ position: "absolute", left: "16%", right: "16%", top: 33, height: 2, background: "var(--line-gradient-relation)" }} />
+        {/* rail conector (detrás de los nodos) */}
+        <div aria-hidden="true" className="pb-rail-track" style={{ position: "absolute", left: "16%", right: "16%", top: 33, height: 2, background: "var(--line-structural)", opacity: 0.35, zIndex: 0 }} />
+        <div aria-hidden="true" className="pb-rail-fill" style={{ position: "absolute", left: "16%", right: "16%", top: 33, height: 2, background: "var(--line-gradient-relation)", zIndex: 0 }} />
 
         {stages.map((s, i) => {
           const focused = hovered === i;
@@ -51,7 +51,7 @@ export default function ProgressiveBuild({ stages }: { stages: BuildStage[] }) {
               className="pb-stage"
               onMouseEnter={() => setHovered(i)}
               onMouseLeave={() => setHovered(null)}
-              style={{ position: "relative", textAlign: "center", opacity: dim ? 0.5 : 1, transform: focused ? "translateY(-6px)" : "none", transition: "opacity .35s var(--ease-premium), transform .35s var(--ease-premium)" }}
+              style={{ position: "relative", zIndex: 1, textAlign: "center", opacity: dim ? 0.5 : 1, transform: focused ? "translateY(-6px)" : "none", transition: "opacity .35s var(--ease-premium), transform .35s var(--ease-premium)" }}
             >
               {/* anillo de progreso + nodo */}
               <div style={{ position: "relative", width: 66, height: 66, margin: "0 auto 18px" }}>
@@ -61,7 +61,7 @@ export default function ProgressiveBuild({ stages }: { stages: BuildStage[] }) {
                 </svg>
                 <span aria-hidden="true" style={{ position: "absolute", inset: 0, display: "grid", placeItems: "center" }}>
                   <span style={{ width: 46, height: 46, borderRadius: "50%", display: "grid", placeItems: "center", background: "var(--surface-card)", border: `1.5px solid ${s.c}`, color: s.c, transition: "transform .35s var(--ease-premium), box-shadow .35s var(--ease-premium)", transform: focused ? "scale(1.08)" : "scale(1)", boxShadow: focused ? `0 0 0 5px var(--surface-card), 0 10px 28px color-mix(in srgb, ${s.c} 32%, transparent)` : "none" }}>
-                    <Glyph name={s.g} size={20} />
+                    <Glyph name={s.g} size={24} strokeWidth={1.7} />
                   </span>
                 </span>
               </div>
