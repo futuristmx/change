@@ -42,8 +42,6 @@ const ARTEFACTOS = [
   { h: "Roadmap vivo", p: "La decisión convertida en secuencia de movimientos, que se actualiza cuando cambia el terreno.", k: "Diseñar", c: "var(--change-violet)" },
   { h: "Reporte ejecutivo", p: "El diagnóstico completo en lenguaje de dirección, lista para llevar al board que decide.", k: "Síntesis", c: "var(--opportunity-orange)" },
   { h: "Mission Control", p: "Donde señales, decisiones, proyectos y reportes se mantienen vivos y conectados.", k: "Sostener", c: "var(--ink-graphite)" },
-  { h: "Field Note", p: "Una nota corta y pública de un cambio real: de la señal a la decisión que abre.", k: "Pensamiento", c: "var(--signal-cyan)" },
-  { h: "Workshop instrumentado", p: "Una sesión que no produce post-its, sino instrumentos de decisión para llevarse.", k: "Trabajo", c: "var(--human-pink)" },
 ];
 
 const TENSIONES = [
@@ -156,25 +154,7 @@ export default function Home() {
         </section>
 
         <EtherealDivider />
-        {/* ═══ 04 · TESIS ═══ */}
-        <section style={{ background: "var(--gradient-sky-pearl)" }}>
-          <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(96px,12vw,176px) 0", textAlign: "center" }}>
-            <Reveal style={{ display: "inline-flex", alignItems: "center", gap: 11, marginBottom: 26 }}>
-              <span style={{ width: 7, height: 7, background: "var(--change-violet)" }} />
-              <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)" }}>La tesis de Change</span>
-            </Reveal>
-            <Reveal delay={60} as="h2" style={{ margin: "0 auto", maxWidth: "20ch", font: "600 clamp(30px,4.4vw,62px)/1.02 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>
-              <span style={{ background: "var(--gradient-type-neutral-pulse)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>El futuro se vuelve</span>{" "}
-              <span style={{ background: "var(--gradient-type-dark-rose)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>interpretable, decidible y accionable.</span>
-            </Reveal>
-            <Reveal delay={120} as="p" style={{ margin: "26px auto 0", maxWidth: 680, font: "400 clamp(17px,1.5vw,21px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>
-              Trabajamos justo donde la información es incompleta, las tensiones no son evidentes y las decisiones no pueden esperar. Ahí convertimos señales emergentes, comportamiento humano, estrategia, cultura y tecnología en instrumentos que se pueden usar para decidir, actuar y aprender.
-            </Reveal>
-          </div>
-        </section>
-
-        <EtherealDivider />
-        {/* ═══ 04.5 · MANIFIESTO DE CAPACIDAD DE FUTURO ═══ */}
+        {/* ═══ 04 · MANIFIESTO DE CAPACIDAD DE FUTURO ═══ */}
         <section style={{ background: "var(--gradient-violet-whisper)" }}>
           <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(92px,11vw,168px) 0" }}>
             <div style={{ maxWidth: 880, marginBottom: "clamp(40px,5vw,56px)" }}>
@@ -184,7 +164,7 @@ export default function Home() {
               </Reveal>
               <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(30px,4.2vw,58px)/1.0 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>La habilidad organizacional de actuar cuando todavía no hay certeza.</Reveal>
               <Reveal delay={120} as="p" style={{ margin: "22px 0 0", maxWidth: "62ch", font: "400 clamp(17px,1.4vw,20px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>
-                Capacidad de futuro es una forma de operar, instalada en la organización: leer señales débiles, interpretar tensiones de fondo, decidir con criterio explícito y sostener aprendizaje cuando el contexto vuelve a moverse.
+Una forma de operar instalada en la organización: leer señales débiles, decidir con criterio explícito y sostener el aprendizaje cuando el contexto vuelve a moverse.
               </Reveal>
             </div>
 
@@ -227,11 +207,11 @@ export default function Home() {
         <EtherealDivider />
         {/* ═══ 06 · ARTEFACTOS ═══ */}
         <section style={{ background: "var(--gradient-violet-whisper)" }}>
-          <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(92px,11vw,168px) 0" }}>
-            <SectionHead kicker="Artefactos" title="La capacidad de futuro se ve." lead="Instrumentos concretos que se pueden leer, discutir y usar para decidir. Esto es lo que produce el método." />
-            <div className="ch-grid4" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 16 }}>
+          <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(68px,8vw,116px) 0" }}>
+            <SectionHead kicker="Artefactos" title="La capacidad de futuro se ve." lead="Instrumentos concretos que se leen, se discuten y se usan para decidir." />
+            <div className="ch-grid4" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 16 }}>
               {ARTEFACTOS.map((a, i) => (
-                <Reveal key={a.h} delay={(i % 4) * 80} as="article" className="ch-card" style={{ background: "rgba(255,255,255,.85)", border: "1px solid var(--border-subtle)", padding: "28px 26px 30px", display: "flex", flexDirection: "column", minHeight: 220 }}>
+                <Reveal key={a.h} delay={(i % 3) * 80} as="article" className="ch-card" style={{ background: "rgba(255,255,255,.85)", border: "1px solid var(--border-subtle)", borderTop: `3px solid ${a.c}`, padding: "28px 26px 30px", display: "flex", flexDirection: "column", minHeight: 200 }}>
                   <span style={{ display: "inline-flex" }}>
                     <Badge tone={mapTone(a.c)}>{a.k}</Badge>
                   </span>
@@ -254,7 +234,7 @@ export default function Home() {
                   <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "rgba(255,255,255,.8)" }}>Memoria estratégica</span>
                 </Reveal>
                 <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(34px,4.4vw,64px)/.98 var(--font-primary)", letterSpacing: "-.05em", color: "#fff", textWrap: "balance" }}>La estrategia necesita memoria.</Reveal>
-                <Reveal delay={120} as="p" style={{ margin: "24px 0 0", maxWidth: 500, font: "400 clamp(17px,1.5vw,21px)/1.5 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>Mission Control sostiene señales, decisiones, proyectos y reportes vivos, para que la organización no tenga que reinventar el rumbo cada vez que cambia el contexto. Es la infraestructura donde el aprendizaje se queda instalado.</Reveal>
+                <Reveal delay={120} as="p" style={{ margin: "24px 0 0", maxWidth: 500, font: "400 clamp(17px,1.5vw,21px)/1.5 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>Sostiene señales, decisiones y reportes vivos para que la organización no reinvente el rumbo cada vez que el contexto cambia. La infraestructura donde el aprendizaje se queda instalado.</Reveal>
                 <Reveal delay={180} style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 36 }}>
                   <Link href="/mission-control" className="btn btn-light">Ver Mission Control</Link>
                   <Link href="/capacidades" className="btn btn-dghost">Ver el método</Link>
@@ -278,7 +258,7 @@ export default function Home() {
                 <span style={{ background: "var(--gradient-type-neutral-pulse)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>Toda relación con Change empieza con una</span>{" "}
                 <span style={{ background: "var(--gradient-type-dark-ember)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>decisión real.</span>
               </Reveal>
-              <Reveal delay={120} as="p" style={{ margin: "22px 0 0", maxWidth: "60ch", font: "400 clamp(17px,1.4vw,20px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>Cada relación empieza con una decisión real que la organización necesita tomar. Desde ahí construimos, de forma acotada y progresiva.</Reveal>
+              <Reveal delay={120} as="p" style={{ margin: "22px 0 0", maxWidth: "60ch", font: "400 clamp(17px,1.4vw,20px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>Desde ahí construimos, de forma acotada y progresiva — sin retainer abierto ni alcance difuso.</Reveal>
             </div>
 
             <div className="ch-grid3" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20, marginBottom: 36 }}>
@@ -303,7 +283,7 @@ export default function Home() {
         <EtherealDivider />
         {/* ═══ 13 · FIELD NOTES ═══ */}
         <section style={{ background: "var(--surface-page)" }}>
-          <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(92px,11vw,168px) 0" }}>
+          <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(68px,8vw,116px) 0" }}>
             <SectionHead kicker="Field Notes" title="Notas cortas sobre lo que cambia — y la decisión que abre." lead="Cada nota toma una señal real del entorno y la recorre completa: de qué cambió a qué decisión queda en tus manos. Pocas notas, ninguna de relleno." />
             <Reveal className="ch-card" style={{ border: "1px solid var(--border-subtle)", background: "rgba(255,255,255,.7)", padding: "clamp(32px,4vw,48px)" }}>
               <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-muted)" }}>El recorrido de cada nota</span>
@@ -350,7 +330,7 @@ export default function Home() {
               <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "rgba(255,255,255,.8)" }}>El primer movimiento</span>
             </Reveal>
             <Reveal delay={60} as="h2" style={{ margin: "0 auto", maxWidth: "18ch", font: "600 clamp(36px,5vw,76px)/1.0 var(--font-primary)", letterSpacing: "-.05em", color: "#fff", textWrap: "balance" }}>Empieza por una decisión. Construye capacidad desde ahí.</Reveal>
-            <Reveal delay={120} as="p" style={{ margin: "26px auto 0", maxWidth: 600, font: "400 clamp(16px,1.4vw,19px)/1.6 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>La primera conversación no vende una solución cerrada. Identifica qué tensión enfrentas, qué decisión necesita estructura y qué capacidad debe empezar a construirse. De ahí sale el primer paso, acotado y concreto.</Reveal>
+            <Reveal delay={120} as="p" style={{ margin: "26px auto 0", maxWidth: 600, font: "400 clamp(16px,1.4vw,19px)/1.6 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>La primera conversación no vende nada cerrado: identifica qué tensión enfrentas y cuál es el primer paso, acotado y concreto.</Reveal>
             <Reveal delay={180} style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12, marginTop: 40 }}>
               <Link href="/contacto" className="btn btn-light">Trabajar una decisión</Link>
               <Link href="/capacidades" className="btn btn-dghost">Conocer el método</Link>

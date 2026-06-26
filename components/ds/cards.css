@@ -41,3 +41,48 @@
   display: grid;
   gap: var(--density-card-gap, 16px);
 }
+
+/* ── Profundidad e interacción consistente de TODAS las cards (.ch-card) ──
+   Antes eran planas/estériles; ahora todas reaccionan igual: lift sutil +
+   sombra contenida + borde que se afirma. Un solo lugar = consistencia. */
+.ch-card {
+  transition:
+    transform var(--duration-standard, .22s) var(--ease-premium, ease),
+    box-shadow var(--duration-standard, .22s) var(--ease-premium, ease),
+    border-color var(--duration-standard, .22s) var(--ease-premium, ease);
+  will-change: transform;
+}
+.ch-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(46, 46, 51, .09);
+  border-color: color-mix(in srgb, var(--ink-graphite) 20%, transparent);
+}
+.change-dark .ch-card:hover {
+  box-shadow: 0 14px 38px rgba(0, 0, 0, .42);
+  border-color: rgba(255, 255, 255, .22);
+}
+@media (prefers-reduced-motion: reduce) {
+  .ch-card { transition: none; }
+  .ch-card:hover { transform: none; }
+}
+
+/* ── EtherealDivider con un punto de luz que lo recorre (respiro entre secciones) ── */
+.ch-etherdiv { position: relative; overflow: hidden; }
+.ch-etherdiv::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 26%;
+  background: linear-gradient(90deg, transparent, rgba(109, 59, 255, .55), rgba(89, 184, 217, .4), transparent);
+  animation: ether-sweep 7s var(--ease-premium, ease) infinite;
+}
+@keyframes ether-sweep {
+  0%   { transform: translateX(-120%); }
+  60%  { transform: translateX(420%); }
+  100% { transform: translateX(420%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ch-etherdiv::after { animation: none; display: none; }
+}
