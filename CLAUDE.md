@@ -21,8 +21,9 @@ No redefinas. No es negociable.
 - **Board visible:** Andrés Valencia + Miguel Cadena + Red de especialistas
 - **Voz:** sobria, ejecutiva, premium, es-MX. Sin emojis.
 - **Cliente:** organizaciones y líderes que deciden bajo ambigüedad
-- **CTA global:** "Simular una decisión" — nunca "Trabajar una decisión" como botón principal
-- **CTA post-resultado:** "Trabajar esta decisión con Change" — solo después de que el usuario recibió una lectura
+- **CTA global:** "Trabajar una decisión" (decisión de Andrés, 2026-06-25). NO usar "Simular una decisión": suena a inventado, no da certeza
+- **CTA post-resultado:** "Trabajar esta decisión con Change" — solo después de que el usuario recibió un diagnóstico/resultado del simulador
+- **Vocabulario:** evitar "lectura" como entregable (se malinterpreta como tarot) → usar "diagnóstico" / "interpretación". El verbo "Leer" del método se mantiene
 - No parecer agencia, SaaS, trend lab ni consultora de decks
 
 ---
@@ -182,7 +183,7 @@ Toda card estratégica considera estos slots (solo container + header son obliga
 | `SystemicDescent` | Descenso Época→Contexto→Organización→Decisión |
 | `MissionControlLive` | Demo de memoria estratégica viva |
 | `CapacityScore` | Instrumento de medición de capacidad de futuro |
-| `DecisionSimulator` | Simulador de decisiones — experiencia principal de /contacto |
+| `DecisionSimulator` | "Estructura tu decisión" — experiencia principal de /contacto |
 | `ArtifactGallery` | Galería de 8 artefactos del método (Card System 2.4) |
 | `CasoCard` | Card expansible de cada caso por tensión (line-and-node) |
 | `Header` | Nav sticky con pulso del logo |
@@ -206,9 +207,9 @@ Toda card estratégica considera estos slots (solo container + header son obliga
 9. No usar captchas
 10. No usar IA generativa pública como feature
 11. No convertir Mission Control en dashboard SaaS
-12. No usar "Trabajar una decisión" como CTA global de botón
-13. El CTA global correcto es **"Simular una decisión"**
-14. "Trabajar esta decisión con Change" se reserva para DESPUÉS de que el usuario recibió una lectura o resultado del simulador
+12. El CTA global de botón es **"Trabajar una decisión"** (Andrés, 2026-06-25)
+13. NO usar "Simular una decisión" ni "simulador" como nombre público (suena a inventado); la herramienta de /contacto se llama "Estructura tu decisión"
+14. "Trabajar esta decisión con Change" se reserva para DESPUÉS de que el usuario recibió un diagnóstico o resultado del simulador
 15. Toda implementación debe pasar `npm run build`, TypeScript strict, AAA, cero hex crudos y revisión visual
 
 ### Flujo de deploy

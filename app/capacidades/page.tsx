@@ -40,17 +40,6 @@ const CAPS = [
   { v: "Sostener", q: "¿Cómo se mantiene vivo?", c: "var(--ink-graphite)", art: "Mission Control", p: "Lo difícil no es decidir bien una vez. Es no perder el rumbo cuando el entorno se mueve otra vez. Instalamos la memoria estratégica que mantiene viva la decisión, registra lo aprendido y avisa cuando las condiciones cambian." },
 ];
 
-const ARTE = [
-  { h: "Radar de señales", p: "El mapa de lo que se mueve en tu entorno y todavía no es evidente.", k: "Leer", c: "var(--signal-cyan)" },
-  { h: "Mapa de tensiones", p: "Las fuerzas en contradicción que definen el campo donde vas a decidir.", k: "Interpretar", c: "var(--soft-violet)" },
-  { h: "Matriz de decisión", p: "Los criterios y sacrificios de cada camino, explícitos sobre la mesa.", k: "Decidir", c: "var(--change-violet)" },
-  { h: "Roadmap vivo", p: "La secuencia de movimientos que se actualiza conforme cambian las condiciones.", k: "Diseñar", c: "var(--change-violet)" },
-  { h: "Reporte ejecutivo", p: "La síntesis que lleva la decisión al lenguaje del consejo y de quien firma.", k: "Diseñar", c: "var(--opportunity-orange)" },
-  { h: "Field Note", p: "El registro corto de lo aprendido en el camino, para que el juicio no se pierda.", k: "Sostener", c: "var(--signal-cyan)" },
-  { h: "Workshop instrumentado", p: "Una sesión que no termina en post-its: termina en un artefacto que decide.", k: "Transversal", c: "var(--human-pink)" },
-  { h: "Mission Control", p: "La infraestructura de memoria estratégica donde la capacidad permanece viva entre decisiones.", k: "Sostener", c: "var(--ink-graphite)" },
-];
-
 const ESCALERA: Array<{ n: string; tag: string; c: string; p: string; g: GlyphName; duration: string }> = [
   { n: "Mapa de Claridad", tag: "Entrada", c: "var(--signal-cyan)", g: "insight", duration: "2–3 SEMANAS", p: "El punto de partida. Tomamos la decisión que tienes enfrente y la ponemos en orden: qué cambia, qué tensiona, qué está en juego. Sales con un diagnóstico que tu equipo no tenía y con la primera versión de tus artefactos." },
   { n: "Sprint de Rumbo", tag: "Acotado", c: "var(--soft-violet)", g: "decision", duration: "6–10 SEMANAS", p: "Un trabajo enfocado sobre un reto definido. Recorremos las cinco capacidades sobre tu caso real y aterrizamos la decisión en instrumentos. Sales con una respuesta diseñada, lista para ejecutar." },
