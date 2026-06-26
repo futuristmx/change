@@ -21,126 +21,179 @@ const DECISION = {
   p: "La pregunta deja de ser «¿qué está pasando en el mundo?» y se vuelve «¿qué hacemos el lunes?». Ahí es donde Change trabaja: en el punto exacto donde una tensión amplia se vuelve una decisión concreta.",
 };
 
-/* ── Figura del descenso — minimalista y serena ──
-   Anillos concéntricos = niveles de contención (macro contiene contexto contiene
-   organización contiene la decisión). Un marcador DESCIENDE por el eje vertical
-   de lo macro (borde) a lo propio (centro). El eje lleva un gradiente de evolución
-   de color (cyan → violeta). Sin zoom: estable, sin glitches. */
-const RING = [
-  { r: 128, color: "var(--signal-cyan)" },
-  { r: 84, color: "var(--soft-violet)" },
-  { r: 46, color: "var(--change-violet)" },
-];
-const DESCEND = [0, 44, 82, 128];
+/* ── Radar de tensiones — scope vectorial vivo ──
+   Anillos de contención (macro → propio) con malla de instrumento, barrido vivo,
+   contactos que titilan y un área de spread con relleno gradiente que se contrae
+   al descender hacia el centro: la decisión concreta. Instrumento, no adorno. */
+const CX = 200, CY = 200;
+const polar = (deg: number, r: number): [number, number] => {
+  const a = (deg - 90) * Math.PI / 180;
+  return [CX + r * Math.cos(a), CY + r * Math.sin(a)];
+};
+const fmt = ([x, y]: [number, number]) => `${x.toFixed(1)} ${y.toFixed(1)}`;
 
-/* convergencia de consolidación — orígenes que viajan al núcleo (estado decisión) */
-const CONVERGE: Array<[number, number]> = [
-  [160, 40], [250, 96], [252, 224], [160, 280], [68, 224], [70, 96],
+const RINGS = [150, 112, 74, 36];
+const SPOKES = Array.from({ length: 6 }, (_, i) => i * 60);
+const TICKS = Array.from({ length: 72 }, (_, i) => i * 5);
+const HEX = Array.from({ length: 6 }, (_, i) => polar(i * 60, 100).map((n) => n.toFixed(1)).join(",")).join(" ");
+const FOCUS = [1.42, 1.04, 0.64, 0.18];
+const COLORS = ["var(--signal-cyan)", "var(--soft-violet)", "var(--change-violet)", "var(--success)"];
+const META = [
+  { scale: "MACRO", name: "Época · lo macro" },
+  { scale: "COMPETITIVO", name: "Contexto · lo competitivo" },
+  { scale: "INTERNO", name: "Organización · lo interno" },
+  { scale: "DECISIÓN", name: "La decisión que te toca" },
 ];
-
-/* radar vivo — micro-nodos y conexiones que titilan/se trazan con timing variado */
-const SPARKS: Array<[number, number]> = [
-  [112, 118], [206, 112], [208, 206], [116, 202], [160, 96], [238, 160], [160, 224], [84, 160], [196, 70],
-];
-const SPARK_PATHS: Array<[number, number, number, number]> = [
-  [112, 118, 160, 96], [206, 112, 238, 160], [208, 206, 160, 224], [116, 202, 84, 160],
-];
+/* contactos del scope [ángulo°, radio] y enlaces entre ellos */
+const CONTACTS: Array<[number, number]> = [[25, 118], [82, 88], [150, 134], [212, 66], [268, 104], [320, 92], [122, 150]];
+const LINKS: Array<[number, number]> = [[0, 2], [1, 4], [3, 5]];
 
 function DescentFigure({ active }: { active: number }) {
-  const descend = DESCEND[active] ?? 0;
   const consolidated = active === 3;
-  const dotColor = consolidated ? "var(--success)" : (RING[active]?.color ?? "var(--signal-cyan)");
+  const meta = META[active] ?? META[0]!;
+  const areaColor = COLORS[active] ?? "var(--signal-cyan)";
+  const focus = FOCUS[active] ?? 1;
 
   return (
-    <div className="sd-figure" style={{ width: "100%", maxWidth: 360, margin: "0 auto", aspectRatio: "1 / 1" }}>
-      <svg viewBox="0 0 320 320" width="100%" height="100%" aria-hidden="true" style={{ display: "block", overflow: "visible" }}>
+    <div className="sd-figure" style={{ position: "relative", width: "100%", maxWidth: 480, margin: "0 auto", aspectRatio: "1 / 1" }}>
+      <svg viewBox="0 0 400 400" width="100%" height="100%" aria-hidden="true" style={{ display: "block", overflow: "visible" }}>
         <defs>
-          <linearGradient id="sd-axis" x1="0" y1="0" x2="0" y2="1">
+          <radialGradient id="sd-area" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="var(--change-violet)" stopOpacity="0.34" />
+            <stop offset="55%" stopColor="var(--soft-violet)" stopOpacity="0.14" />
+            <stop offset="100%" stopColor="var(--signal-cyan)" stopOpacity="0" />
+          </radialGradient>
+          <linearGradient id="sd-sweep" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="var(--change-violet)" stopOpacity="0.26" />
+            <stop offset="100%" stopColor="var(--change-violet)" stopOpacity="0" />
+          </linearGradient>
+          <linearGradient id="sd-beam" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="var(--change-violet)" stopOpacity="0" />
+            <stop offset="100%" stopColor="var(--change-violet)" stopOpacity="0.85" />
+          </linearGradient>
+          <linearGradient id="sd-ringgrad" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%" stopColor="var(--signal-cyan)" />
-            <stop offset="55%" stopColor="var(--soft-violet)" />
             <stop offset="100%" stopColor="var(--change-violet)" />
           </linearGradient>
           <radialGradient id="sd-core-g" cx="50%" cy="50%" r="50%">
             <stop offset="0%" stopColor="var(--change-violet-300)" />
             <stop offset="100%" stopColor="var(--change-violet)" />
           </radialGradient>
-          <linearGradient id="sd-converge" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="var(--signal-cyan)" />
-            <stop offset="100%" stopColor="var(--success)" />
-          </linearGradient>
           <radialGradient id="sd-core-validated" cx="50%" cy="50%" r="50%">
             <stop offset="0%" stopColor="color-mix(in srgb, var(--success) 55%, white)" />
             <stop offset="100%" stopColor="var(--success)" />
           </radialGradient>
         </defs>
 
-        {/* eje del descenso — gradiente de evolución macro → propio */}
-        <line x1="160" y1="32" x2="160" y2="160" stroke="url(#sd-axis)" strokeWidth="1.5" strokeOpacity="0.45" />
+        {/* HUD — corchetes de esquina */}
+        <g stroke="var(--soft-stone-gray)" strokeWidth="1.2" fill="none" opacity="0.7">
+          <path d="M12 38 V12 H38" /><path d="M362 12 H388 V38" />
+          <path d="M388 362 V388 H362" /><path d="M38 388 H12 V362" />
+        </g>
 
-        {/* anillos de contención */}
-        {RING.map((ring, i) => {
+        {/* ticks de perímetro */}
+        <g stroke="var(--soft-stone-gray)">
+          {TICKS.map((deg) => {
+            const major = deg % 30 === 0;
+            const [x1, y1] = polar(deg, 150);
+            const [x2, y2] = polar(deg, major ? 162 : 156);
+            return <line key={deg} x1={x1} y1={y1} x2={x2} y2={y2} strokeWidth={major ? 1.3 : 0.8} opacity={major ? 0.55 : 0.28} />;
+          })}
+        </g>
+
+        {/* radios */}
+        <g stroke="var(--soft-stone-gray)" strokeWidth="0.8" opacity="0.2">
+          {SPOKES.map((deg) => { const [x, y] = polar(deg, 150); return <line key={deg} x1={CX} y1={CY} x2={x} y2={y} />; })}
+        </g>
+
+        {/* anillos de contención — el activo se enciende con gradiente */}
+        {RINGS.map((r, i) => {
           const on = i === active;
           return (
-            <circle key={i} cx="160" cy="160" r={ring.r} fill="none"
-              stroke={on ? ring.color : "var(--soft-stone-gray)"}
-              strokeWidth={on ? 1.6 : 1}
-              style={{ opacity: on ? 1 : 0.26, transition: "opacity .55s var(--ease-premium), stroke .55s var(--ease-premium)" }} />
+            <circle key={i} cx={CX} cy={CY} r={r} fill="none"
+              stroke={on ? "url(#sd-ringgrad)" : "var(--soft-stone-gray)"}
+              strokeWidth={on ? 1.8 : 1}
+              style={{ opacity: on ? 1 : 0.22, transition: "opacity .55s var(--ease-premium)" }} />
           );
         })}
 
-        {/* radar vivo — conexiones que se trazan y micro-nodos que titilan */}
-        <g>
-          {SPARK_PATHS.map(([x1, y1, x2, y2], i) => (
-            <line key={`sp-${i}`} x1={x1} y1={y1} x2={x2} y2={y2} stroke={i % 2 ? "var(--soft-violet)" : "var(--signal-cyan)"} strokeWidth="1" pathLength={1} className="sd-sparkline" style={{ animationDelay: `${(i * 1.6).toFixed(1)}s`, animationDuration: `${5 + i * 1.3}s` }} />
-          ))}
-          {SPARKS.map(([x, y], i) => (
-            <circle key={`sk-${i}`} cx={x} cy={y} r={i % 3 === 0 ? 2.4 : 1.7} fill={i % 2 ? "var(--signal-cyan)" : "var(--soft-violet)"} className="sd-spark" style={{ animationDelay: `${(i * 0.83).toFixed(1)}s`, animationDuration: `${3.2 + (i % 4) * 1.1}s` }} />
-          ))}
+        {/* barrido vivo — sector con relleno gradiente + haz líder */}
+        <g className="sd-sweep">
+          <path d={`M${CX} ${CY} L${fmt(polar(0, 150))} A150 150 0 0 1 ${fmt(polar(54, 150))} Z`} fill="url(#sd-sweep)" />
+          <line x1={CX} y1={CY} x2={polar(0, 150)[0]} y2={polar(0, 150)[1]} stroke="url(#sd-beam)" strokeWidth="1.6" />
         </g>
+
+        {/* contactos del scope + enlaces */}
+        <g>
+          {LINKS.map(([a, b], i) => {
+            const ca = CONTACTS[a], cb = CONTACTS[b];
+            if (!ca || !cb) return null;
+            const [x1, y1] = polar(ca[0], ca[1]);
+            const [x2, y2] = polar(cb[0], cb[1]);
+            return <line key={`l-${i}`} x1={x1} y1={y1} x2={x2} y2={y2} stroke={i % 2 ? "var(--soft-violet)" : "var(--signal-cyan)"} strokeWidth="0.9" className="sd-link" style={{ animationDelay: `${(i * 1.9).toFixed(1)}s` }} />;
+          })}
+          {CONTACTS.map(([deg, r], i) => {
+            const [x, y] = polar(deg, r);
+            return <circle key={`c-${i}`} cx={x} cy={y} r={i % 3 === 0 ? 2.6 : 1.8} fill={i % 2 ? "var(--signal-cyan)" : "var(--soft-violet)"} className="sd-contact" style={{ animationDelay: `${(i * 0.7).toFixed(1)}s`, animationDuration: `${3.4 + (i % 4) * 1.1}s` }} />;
+          })}
+        </g>
+
+        {/* área de spread — relleno gradiente que se contrae al descender */}
+        <polygon className="sd-area" points={HEX} fill="url(#sd-area)" stroke={areaColor} strokeWidth="1.4" strokeOpacity="0.65"
+          style={{ transform: `scale(${focus})`, transition: "transform .6s var(--ease-premium), stroke .5s var(--ease-premium)" }} />
 
         {/* núcleo — la decisión; se ilumina al llegar a lo interno */}
-        <circle cx="160" cy="160" r="7" fill="url(#sd-core-g)"
-          style={{ opacity: consolidated ? 0 : (active === 2 ? 1 : 0.32), transition: "opacity .55s var(--ease-premium)" }} />
+        <circle cx={CX} cy={CY} r="7" fill="url(#sd-core-g)"
+          style={{ opacity: consolidated ? 0 : (active === 2 ? 1 : 0.4), transition: "opacity .55s var(--ease-premium)" }} />
 
-        {/* consolidación — la decisión se valida: convergencia + sonar + núcleo verde */}
+        {/* consolidación — la decisión se valida: sonar + núcleo verde */}
         {consolidated && (
           <g className="sd-consol">
-            {CONVERGE.map(([x, y], i) => (
-              <line key={`cv-${i}`} x1={x} y1={y} x2="160" y2="160" stroke="url(#sd-converge)" strokeWidth="1.3" pathLength={1}
-                className="sd-converge" style={{ animationDelay: `${(i * 0.45).toFixed(2)}s`, animationDuration: `${3.2 + (i % 3) * 0.9}s` }} />
-            ))}
-            <circle cx="160" cy="160" r="18" fill="none" stroke="var(--success)" strokeWidth="1.5" className="sd-sonar" />
-            <circle cx="160" cy="160" r="18" fill="none" stroke="var(--success)" strokeWidth="1.4" className="sd-sonar" style={{ animationDelay: "1.3s" }} />
-            <circle cx="160" cy="160" r="9" fill="url(#sd-core-validated)" className="sd-core-val" />
+            <circle cx={CX} cy={CY} r="20" fill="none" stroke="var(--success)" strokeWidth="1.5" className="sd-sonar" />
+            <circle cx={CX} cy={CY} r="20" fill="none" stroke="var(--success)" strokeWidth="1.4" className="sd-sonar" style={{ animationDelay: "1.3s" }} />
+            <circle cx={CX} cy={CY} r="10" fill="url(#sd-core-validated)" className="sd-core-val" />
           </g>
         )}
-
-        {/* marcador de foco que desciende por el eje */}
-        <g style={{ transform: `translateY(${descend}px)`, transition: "transform .6s var(--ease-premium)" }}>
-          <circle className="sd-focus" cx="160" cy="32" r="13" fill="none" stroke={dotColor} strokeWidth="1" opacity="0.5" style={{ transition: "stroke .55s var(--ease-premium)" }} />
-          <circle cx="160" cy="32" r="6.5" fill={dotColor} style={{ transition: "fill .55s var(--ease-premium)" }} />
-        </g>
       </svg>
 
+      {/* HUD — lectura tipo instrumento */}
+      <div className="sd-hud" aria-hidden="true">
+        <span className="sd-hud-tl"><span className="sd-hud-dot" />RADAR · TENSIÓN</span>
+        <span className="sd-hud-tr">0{active + 1} / 04</span>
+        <span className="sd-hud-bl"><strong style={{ color: consolidated ? "var(--success)" : "var(--ink-graphite)" }}>{meta.scale}</strong><em>{meta.name}</em></span>
+        <span className="sd-hud-br"><span className="sd-hud-live" />EN VIVO</span>
+      </div>
+
       <style>{`
-        .sd-focus { animation: sd-focuspulse 3.8s var(--ease-premium) infinite; }
-        @keyframes sd-focuspulse { 0%,100% { opacity: .5; } 50% { opacity: .16; } }
-        .sd-spark { opacity: 0.2; animation-name: sd-spark; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
-        @keyframes sd-spark { 0%,100% { opacity: 0.1; } 50% { opacity: 0.72; } }
-        .sd-sparkline { stroke-dasharray: 1; stroke-dashoffset: 1; opacity: 0; animation-name: sd-sparkline; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
-        @keyframes sd-sparkline { 0% { stroke-dashoffset: 1; opacity: 0; } 38% { opacity: 0.32; } 68% { stroke-dashoffset: 0; opacity: 0.2; } 100% { stroke-dashoffset: 0; opacity: 0; } }
+        .sd-area { transform-box: view-box; transform-origin: 200px 200px; }
+        .sd-sweep { transform-box: view-box; transform-origin: 200px 200px; animation: sd-rotate 7s linear infinite; }
+        @keyframes sd-rotate { to { transform: rotate(360deg); } }
+        .sd-contact { opacity: .2; animation-name: sd-contact; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
+        @keyframes sd-contact { 0%,100% { opacity: .12; } 50% { opacity: .85; } }
+        .sd-link { opacity: .1; animation: sd-link 6.5s ease-in-out infinite; }
+        @keyframes sd-link { 0%,100% { opacity: .06; } 50% { opacity: .34; } }
         .sd-consol { animation: sd-consol-in .5s var(--ease-premium); }
         @keyframes sd-consol-in { from { opacity: 0; } to { opacity: 1; } }
-        .sd-converge { stroke-dasharray: 1; stroke-dashoffset: 1; opacity: 0; animation-name: sd-converge; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
-        @keyframes sd-converge { 0% { stroke-dashoffset: 1; opacity: 0; } 40% { opacity: 0.6; } 72% { stroke-dashoffset: 0; opacity: 0.45; } 100% { stroke-dashoffset: 0; opacity: 0; } }
-        .sd-sonar { transform-box: view-box; transform-origin: 160px 160px; animation: sd-sonar 2.8s ease-out infinite; }
-        @keyframes sd-sonar { 0% { transform: scale(.5); opacity: .65; } 100% { transform: scale(2); opacity: 0; } }
+        .sd-sonar { transform-box: view-box; transform-origin: 200px 200px; animation: sd-sonar 2.8s ease-out infinite; }
+        @keyframes sd-sonar { 0% { transform: scale(.5); opacity: .65; } 100% { transform: scale(2.2); opacity: 0; } }
         .sd-core-val { animation: sd-coreval 2.8s var(--ease-premium) infinite; }
         @keyframes sd-coreval { 0%,100% { opacity: .85; } 50% { opacity: 1; } }
+
+        .sd-hud { position: absolute; inset: 0; pointer-events: none; }
+        .sd-hud span { position: absolute; font-family: var(--font-mono); }
+        .sd-hud-tl { top: 2px; left: 4px; display: inline-flex; align-items: center; gap: 7px; font: 600 11px var(--font-mono); letter-spacing: .14em; color: var(--text-muted); }
+        .sd-hud-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--signal-cyan); animation: sd-live 2.4s ease-in-out infinite; }
+        .sd-hud-tr { top: 2px; right: 4px; font: 600 11px var(--font-mono); letter-spacing: .12em; color: var(--ink-graphite); }
+        .sd-hud-bl { bottom: 0; left: 4px; display: flex; flex-direction: column; gap: 3px; }
+        .sd-hud-bl strong { font: 700 13px var(--font-mono); letter-spacing: .16em; transition: color .5s var(--ease-premium); }
+        .sd-hud-bl em { font: 600 11px var(--font-mono); font-style: normal; letter-spacing: .05em; color: var(--text-faint); }
+        .sd-hud-br { bottom: 4px; right: 4px; display: inline-flex; align-items: center; gap: 7px; font: 600 11px var(--font-mono); letter-spacing: .14em; color: var(--text-muted); }
+        .sd-hud-live { width: 6px; height: 6px; border-radius: 50%; background: var(--success); animation: sd-live 2s ease-in-out infinite; }
+        @keyframes sd-live { 0%,100% { opacity: 1; } 50% { opacity: .3; } }
+
         @media (prefers-reduced-motion: reduce) {
-          .sd-focus, .sd-spark, .sd-sparkline, .sd-converge, .sd-sonar, .sd-core-val { animation: none !important; }
-          .sd-sparkline { display: none; } .sd-spark { opacity: 0.3; }
-          .sd-converge { stroke-dashoffset: 0; opacity: .4; } .sd-sonar { display: none; } .sd-core-val { opacity: 1; }
+          .sd-sweep, .sd-contact, .sd-link, .sd-sonar, .sd-core-val, .sd-hud-dot, .sd-hud-live { animation: none !important; }
+          .sd-contact { opacity: .4; } .sd-link { opacity: .2; } .sd-sonar { display: none; } .sd-core-val { opacity: 1; }
         }
       `}</style>
     </div>
@@ -166,7 +219,7 @@ export default function SystemicDescent() {
   }, []);
 
   return (
-    <div ref={ref} className="sd-wrap" style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(300px,420px)", gap: "clamp(32px,5vw,72px)", alignItems: "center", maxWidth: 1120, margin: "0 auto" }}>
+    <div ref={ref} className="sd-wrap" style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(340px,500px)", gap: "clamp(32px,5vw,72px)", alignItems: "center", maxWidth: 1180, margin: "0 auto" }}>
       <div className="sd-stack" style={{ position: "relative", display: "flex", flexDirection: "column", gap: 14 }}>
         {/* rail vertical animado */}
         <div aria-hidden="true" className="sd-rail" style={{ position: "absolute", left: 21, top: 26, bottom: 92, width: 2, background: "var(--line-structural)", opacity: 0.4 }} />
@@ -227,7 +280,7 @@ export default function SystemicDescent() {
         @media (max-width: 920px) {
           .sd-wrap { grid-template-columns: 1fr !important; gap: 36px !important; }
           .sd-figcol { position: static !important; order: -1; }
-          .sd-figure { max-width: 260px !important; }
+          .sd-figure { max-width: 360px !important; }
           .sd-level, .sd-decision { width: 100% !important; }
         }
       `}</style>
