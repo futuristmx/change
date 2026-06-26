@@ -24,13 +24,13 @@ export default function ContactoPage() {
     >
       <DecisionSimulator />
 
-      {/* Forma alternativa — mensaje breve */}
+      {/* Forma alternativa — mensaje directo */}
       <section style={{ borderTop: "1px solid var(--border-subtle)", background: "linear-gradient(180deg,#FFFFFF,var(--pure-white))" }}>
         <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(64px,8vw,112px) 0" }}>
           <div style={{ maxWidth: 640 }}>
-            <p style={{ margin: "0 0 6px", font: "600 11.5px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-muted)" }}>Alternativa</p>
-            <h2 style={{ margin: "0 0 14px", font: "600 clamp(22px,2.6vw,32px)/1.1 var(--font-primary)", letterSpacing: "-.035em", color: "var(--ink-graphite)" }}>Prefiero escribir un mensaje breve.</h2>
-            <p style={{ margin: "0 0 36px", font: "400 15px/1.6 var(--font-primary)", color: "var(--text-muted)" }}>Si el simulador no es el formato que buscas, puedes escribirnos directamente. Tu caso llega al board senior de Change. Si hay una tensión real que podamos trabajar, te respondemos con una primera lectura y un siguiente paso posible.</p>
+            <p style={{ margin: "0 0 6px", font: "600 11.5px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-muted)" }}>Sin simulador</p>
+            <h2 style={{ margin: "0 0 14px", font: "600 clamp(22px,2.6vw,32px)/1.1 var(--font-primary)", letterSpacing: "-.035em", color: "var(--ink-graphite)" }}>Escríbenos la decisión como la dirías en voz alta.</h2>
+            <p style={{ margin: "0 0 36px", font: "400 15px/1.6 var(--font-primary)", color: "var(--text-muted)" }}>Sin estructura, sin formato. El board senior de Change la lee directamente. Si hay una tensión real que pueda trabajarse con el método, te respondemos en menos de dos días hábiles con una primera lectura y un paso posible.</p>
             <ContactFormSimple />
           </div>
         </div>

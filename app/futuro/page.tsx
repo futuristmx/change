@@ -96,8 +96,7 @@ export default function FuturoPage() {
               <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)" }}>Tesis</span>
             </Reveal>
             <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(30px,4.2vw,58px)/1.02 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>
-              <span style={{ background: "var(--gradient-type-neutral-pulse)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>El futuro se vuelve</span>{" "}
-              <span style={{ background: "var(--gradient-type-dark-rose)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>interpretable, decidible y accionable.</span>
+              El futuro se vuelve interpretable, decidible y accionable.
             </Reveal>
           </div>
 
