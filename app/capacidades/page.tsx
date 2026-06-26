@@ -34,7 +34,7 @@ function Head({ kicker, title, lead }: { kicker: string; title: string; lead: st
 
 const CAPS = [
   { v: "Leer", q: "¿Qué está cambiando?", c: "var(--signal-cyan)", art: "Radar de señales", p: "Separamos el ruido de la señal. Identificamos los movimientos del entorno que sí importan para tu decisión, antes de que se vuelvan obvios para todos." },
-  { v: "Interpretar", q: "¿Qué significa para nosotros?", c: "var(--soft-violet)", art: "Mapa de tensiones", p: "Una señal sin lectura es un dato suelto. Conectamos lo que cambia con lo que tensiona a tu organización: dónde se contradicen las fuerzas, qué presión se acumula, qué está en juego. Es la capa que casi nadie da, y la que cambia la conversación." },
+  { v: "Interpretar", q: "¿Qué significa para nosotros?", c: "var(--soft-violet)", art: "Mapa de tensiones", p: "Una señal sin interpretación es un dato suelto. Conectamos lo que cambia con lo que tensiona a tu organización: dónde se contradicen las fuerzas, qué presión se acumula, qué está en juego. Es la capa que casi nadie da, y la que cambia la conversación." },
   { v: "Decidir", q: "¿Qué importa y qué se sacrifica?", c: "var(--change-violet)", art: "Matriz de decisión", p: "Toda decisión real implica renunciar a algo. Hacemos explícitos los criterios, los criterios y sacrificios y lo que cada camino cuesta, para que la decisión deje de depender de quién habla más fuerte y empiece a depender de qué pesa más." },
   { v: "Diseñar", q: "¿Qué forma toma?", c: "var(--change-violet)", art: "Roadmap vivo", p: "Una decisión sin forma no se ejecuta. Le damos cuerpo: la secuencia de movimientos, el prototipo que prueba la apuesta, la narrativa que alinea al equipo. La estrategia deja de ser intención y se vuelve algo que se puede empezar el lunes." },
   { v: "Sostener", q: "¿Cómo se mantiene vivo?", c: "var(--ink-graphite)", art: "Mission Control", p: "Lo difícil no es decidir bien una vez. Es no perder el rumbo cuando el entorno se mueve otra vez. Instalamos la memoria estratégica que mantiene viva la decisión, registra lo aprendido y avisa cuando las condiciones cambian." },
@@ -52,7 +52,7 @@ const ARTE = [
 ];
 
 const ESCALERA: Array<{ n: string; tag: string; c: string; p: string; g: GlyphName; duration: string }> = [
-  { n: "Mapa de Claridad", tag: "Entrada", c: "var(--signal-cyan)", g: "insight", duration: "2–3 SEMANAS", p: "El punto de partida. Tomamos la decisión que tienes enfrente y la ponemos en orden: qué cambia, qué tensiona, qué está en juego. Sales con una lectura que tu equipo no tenía y con la primera versión de tus artefactos." },
+  { n: "Mapa de Claridad", tag: "Entrada", c: "var(--signal-cyan)", g: "insight", duration: "2–3 SEMANAS", p: "El punto de partida. Tomamos la decisión que tienes enfrente y la ponemos en orden: qué cambia, qué tensiona, qué está en juego. Sales con un diagnóstico que tu equipo no tenía y con la primera versión de tus artefactos." },
   { n: "Sprint de Rumbo", tag: "Acotado", c: "var(--soft-violet)", g: "decision", duration: "6–10 SEMANAS", p: "Un trabajo enfocado sobre un reto definido. Recorremos las cinco capacidades sobre tu caso real y aterrizamos la decisión en instrumentos. Sales con una respuesta diseñada, lista para ejecutar." },
   { n: "Mission Control", tag: "Sistema vivo", c: "var(--change-violet)", g: "status", duration: "CONTINUO", p: "La infraestructura de memoria estratégica que mantiene viva cada decisión y avisa cuando el entorno se mueve. El destino de quien ya construyó músculo, no el punto de entrada." },
 ];
@@ -149,7 +149,7 @@ export default function CapacidadesPage() {
           <Reveal as="h2" style={{ margin: "0 auto", maxWidth: "20ch", font: "600 clamp(32px,5vw,68px)/1.02 var(--font-primary)", letterSpacing: "-.05em", color: "#fff", textWrap: "balance" }}>El mejor momento para construir capacidad es antes de necesitarla.</Reveal>
           <Reveal delay={100} as="p" style={{ margin: "24px auto 0", maxWidth: 560, font: "400 clamp(16px,1.4vw,19px)/1.6 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>Cada relación arranca con la decisión que ya tienes enfrente. Trae una y la trabajamos juntos.</Reveal>
           <Reveal delay={160} style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12, marginTop: 38 }}>
-            <Link href="/contacto" className="btn btn-light">Simular una decisión</Link>
+            <Link href="/contacto" className="btn btn-light">Trabajar una decisión</Link>
             <Link href="/casos" className="btn btn-dghost">Ver capacidades instaladas</Link>
           </Reveal>
         </div>

@@ -54,7 +54,6 @@ export default function MissionControlPage() {
               <span aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--signal-cyan)" }} data-pulse />
               Acceso a Mission Control
             </Link>
-            <span style={{ alignSelf: "center", font: "600 11px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(255,255,255,.5)" }}>Solo clientes · Autenticación 2FA</span>
           </Reveal>
           <div className="mc-vs" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
             <Reveal className="ch-card" style={{ border: "1px solid rgba(255,255,255,.1)", background: "var(--gradient-dark-card-slate)", padding: "32px 30px" }}>

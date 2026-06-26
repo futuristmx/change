@@ -32,13 +32,13 @@ const SOCIOS = [
     domain: "Estrategia, propiedad intelectual y modelos de negocio",
     c: "var(--change-violet)",
     tagline: "Convierte lo intangible en rentabilidad.",
-    story: "Asesoró a empresas transnacionales en propiedad intelectual y modelos de negocio, y lo enseña en licenciatura y posgrado. Su convicción es simple: una decisión solo vale cuando sus costos están sobre la mesa y alguien puede defenderla frente al consejo. En Change convierte la lectura en apuestas con criterio explícito — las que se sostienen solas cuando llega la presión.",
+    story: "Asesoró a empresas transnacionales en propiedad intelectual y modelos de negocio, y lo enseña en licenciatura y posgrado. Su convicción es simple: una decisión solo vale cuando sus costos están sobre la mesa y alguien puede defenderla frente al consejo. En Change convierte el diagnóstico en apuestas con criterio explícito — las que se sostienen solas cuando llega la presión.",
   },
 ];
 
 const ESCALERA = [
-  { n: "Mapa de Claridad", tag: "Entrada", c: "var(--ink-graphite)", p: "Una primera lectura de la decisión y sus tensiones. El punto donde se ve si vale la pena ir más a fondo." },
-  { n: "Sprint de Rumbo", tag: "Acotado", c: "var(--soft-violet)", p: "Un tramo de trabajo con alcance definido para llevar una decisión de la lectura al diseño, con artefactos al final." },
+  { n: "Mapa de Claridad", tag: "Entrada", c: "var(--ink-graphite)", p: "Un primer diagnóstico de la decisión y sus tensiones. El punto donde se ve si vale la pena ir más a fondo." },
+  { n: "Sprint de Rumbo", tag: "Acotado", c: "var(--soft-violet)", p: "Un tramo de trabajo con alcance definido para llevar una decisión del diagnóstico al diseño, con artefactos al final." },
   { n: "Mission Control", tag: "Sistema vivo", c: "var(--change-violet)", p: "La infraestructura que sostiene el aprendizaje en el tiempo. Llega cuando ya hay una relación de trabajo, nunca en frío." },
 ];
 
@@ -121,7 +121,7 @@ export default function EquipoPage() {
           <Reveal as="h2" style={{ margin: "0 auto", maxWidth: "18ch", font: "600 clamp(34px,5vw,72px)/1.0 var(--font-primary)", letterSpacing: "-.05em", color: "#fff", textWrap: "balance" }}>Trae la decisión que más te pesa hoy.</Reveal>
           <Reveal delay={100} as="p" style={{ margin: "24px auto 0", maxWidth: 560, font: "400 clamp(16px,1.4vw,19px)/1.6 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>No necesitas tener claro el problema ni el camino. Eso es justo lo que el board hace contigo.</Reveal>
           <Reveal delay={160} style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12, marginTop: 38 }}>
-            <Link href="/contacto" className="btn btn-light">Simular una decisión</Link>
+            <Link href="/contacto" className="btn btn-light">Trabajar una decisión</Link>
             <Link href="/capacidades" className="btn btn-dghost">Ver el método</Link>
           </Reveal>
         </div>

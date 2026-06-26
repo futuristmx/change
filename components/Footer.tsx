@@ -97,10 +97,10 @@ export default function Footer() {
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div style={COL_HEADER}>Decisión</div>
             <p style={{ margin: "0 0 16px", font: "400 13px/1.5 var(--font-primary)", color: "rgba(240,244,255,.65)" }}>
-              Trae una tensión real. Sal con una primera lectura.
+              Trae una tensión real. Sal con un primer diagnóstico.
             </p>
             <Link href="/contacto" className="ch-foot-link" style={{ ...COL_LINK, font: "600 13px var(--font-primary)" }}>
-              Simular una decisión →
+              Trabajar una decisión →
             </Link>
           </div>
         </div>
