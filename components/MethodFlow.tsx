@@ -71,6 +71,7 @@ const INSET = 100 / (2 * NODES.length);
 
 export default function MethodFlow() {
   const [active, setActive] = useState(0);
+  const [auto, setAuto] = useState(true);
   const [inView, setInView] = useState(false);
   const ref = useRef<HTMLDivElement | null>(null);
   const node = NODES[active];
@@ -89,13 +90,23 @@ export default function MethodFlow() {
     return () => io.disconnect();
   }, []);
 
+  // Auto-avance del arco (pausable, respeta reduced-motion)
+  useEffect(() => {
+    if (!auto || !inView) return;
+    const reduce = typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion:reduce)").matches;
+    if (reduce) return;
+    const id = window.setInterval(() => setActive((a) => (a + 1) % NODES.length), 2800);
+    return () => window.clearInterval(id);
+  }, [auto, inView]);
+
   return (
     <div ref={ref} style={{ maxWidth: 1020, margin: "0 auto", background: "linear-gradient(155deg,rgba(255,255,255,.94),rgba(244,242,250,.62))", border: "1px solid var(--border-subtle)", boxShadow: "0 30px 90px rgba(31,17,72,.08)" }}>
       <div style={{ display: "flex", justifyContent: "space-between", gap: 16, alignItems: "center", padding: "20px 28px", borderBottom: "1px solid var(--border-subtle)" }}>
         <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-muted)" }}>El arco del método</span>
-        <span style={{ display: "inline-flex", alignItems: "center", gap: 7, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-muted)" }}>
-          <span data-pulse style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--signal-cyan)" }} />Interactivo
-        </span>
+        <button type="button" onClick={() => setAuto((a) => !a)} aria-pressed={auto} style={{ all: "unset", display: "inline-flex", alignItems: "center", gap: 8, cursor: "pointer", font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-muted)" }}>
+          <span {...(auto ? { "data-pulse": "" } : {})} aria-hidden="true" style={{ width: 6, height: 6, borderRadius: "50%", background: auto ? "var(--signal-cyan)" : "var(--soft-stone-gray)" }} />
+          {auto ? "Avance automático" : "En pausa"}
+        </button>
       </div>
 
       <div style={{ position: "relative", padding: "64px 36px 52px" }}>
@@ -113,7 +124,7 @@ export default function MethodFlow() {
               <button
                 key={n.title}
                 className="mf-node-btn"
-                onClick={() => setActive(i)}
+                onClick={() => { setActive(i); setAuto(false); }}
                 aria-pressed={on}
                 aria-label={`${n.title}, paso ${i + 1} de ${NODES.length}`}
                 style={{ border: 0, background: "transparent", padding: 0, textAlign: "center", cursor: "pointer", fontFamily: "var(--font-primary)", color: "inherit", opacity: inView ? 1 : 0, transform: inView ? "translateY(0)" : "translateY(8px)", transition: `opacity .5s ${120 + i * 90}ms, transform .5s ${120 + i * 90}ms var(--ease-premium)` }}
@@ -154,6 +165,20 @@ export default function MethodFlow() {
           })}
         </div>
 
+        {/* Slider de evolución — auto-avanza y se arrastra; gris → color */}
+        <div className="mf-slider" style={{ margin: "34px 0 0", display: "flex", alignItems: "center", gap: 18 }}>
+          <span aria-hidden="true" style={{ flexShrink: 0, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-faint)" }}>Evolución</span>
+          <input
+            type="range" min={0} max={LAST} step={1} value={active}
+            aria-label="Avance del arco del método"
+            onChange={(e) => { setActive(Number(e.currentTarget.value)); setAuto(false); }}
+            onPointerDown={() => setAuto(false)}
+            className="mf-range"
+            style={{ flex: 1, ["--mf-pct" as string]: `${(active / LAST) * 100}%`, ["--mf-thumb" as string]: node.color }}
+          />
+          <span style={{ flexShrink: 0, minWidth: 52, textAlign: "right", font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".06em", color: "var(--ink-graphite)" }}>{active + 1} / {NODES.length}</span>
+        </div>
+
         <div className="mf-chain" style={{ display: "none", marginTop: 24, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".06em", color: "var(--text-muted)", textAlign: "center" }}>
           Leer · Interpretar · Decidir · Diseñar · Sostener
         </div>
@@ -185,6 +210,17 @@ export default function MethodFlow() {
       </div>
 
       <style>{`
+        /* Slider de evolución: gris (neutro) → gradiente de acentos del DS */
+        .mf-range { -webkit-appearance: none; appearance: none; height: 6px; background: transparent; cursor: pointer; }
+        .mf-range::-webkit-slider-runnable-track { height: 6px; background:
+          linear-gradient(90deg, transparent 0 var(--mf-pct,0%), var(--soft-stone-gray) var(--mf-pct,0%) 100%),
+          linear-gradient(90deg, var(--signal-cyan) 0%, var(--soft-violet) 52%, var(--change-violet) 100%); }
+        .mf-range::-moz-range-track { height: 6px; background:
+          linear-gradient(90deg, transparent 0 var(--mf-pct,0%), var(--soft-stone-gray) var(--mf-pct,0%) 100%),
+          linear-gradient(90deg, var(--signal-cyan) 0%, var(--soft-violet) 52%, var(--change-violet) 100%); }
+        .mf-range::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--mf-thumb, var(--change-violet)); border: 2px solid var(--surface-card); box-shadow: 0 2px 10px rgba(31,17,72,.3); margin-top: -6px; transition: background .3s var(--ease-premium); }
+        .mf-range::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--mf-thumb, var(--change-violet)); border: 2px solid var(--surface-card); box-shadow: 0 2px 10px rgba(31,17,72,.3); }
+        .mf-range:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px color-mix(in srgb, var(--change-violet) 30%, transparent); }
         .mf-comet { left: ${INSET}%; animation: mf-comet 6s var(--ease-premium) infinite alternate; }
         @keyframes mf-comet { from { left: ${INSET}%; } to { left: ${100 - INSET}%; } }
         .mf-node-glow { animation: mf-nodeglow 3.4s var(--ease-premium) infinite; }
