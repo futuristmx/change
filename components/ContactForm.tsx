@@ -178,7 +178,7 @@ export default function ContactForm() {
 
       <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 16, marginTop: 4 }}>
         <button type="submit" className="btn btn-primary" disabled={status === "submitting"} style={{ opacity: status === "submitting" ? 0.7 : 1 }}>
-          {status === "submitting" ? "Enviando…" : "Trabajar una decisión"}
+          {status === "submitting" ? "Enviando…" : "Enviar mensaje"}
         </button>
         {status === "error" && (
           <span style={{ font: "400 13.5px var(--font-primary)", color: "var(--status-error-fg)" }}>

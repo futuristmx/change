@@ -11,32 +11,66 @@ const STAGE_GLYPH: Record<string, GlyphName> = {
   "Aprendizaje": "status",
 };
 
-/* ── Demo ficticio plausible: UNA decisión trazada de extremo a extremo ── */
+/* Evolution ramp — color = madurez de la señal (DS 2.4) */
+const EVO_COLOR: Record<string, string> = {
+  "Señal":      "var(--evo-analysis)",   /* en monitoreo */
+  "Tensión":    "var(--evo-analysis)",   /* interpretación */
+  "Decisión":   "var(--evo-focus)",      /* en foco — la decisión */
+  "Proyecto":   "var(--evo-focus)",      /* ejecutando */
+  "Aprendizaje":"var(--evo-validated)",  /* validado / cerrado */
+};
+
 interface Stage {
   k: string;
   artefacto: string;
-  color: string;
+  evo: string;
   body: string;
 }
 
 const TRACE: Stage[] = [
-  { k: "Señal", artefacto: "Radar de señales", color: "var(--signal-cyan)", body: "Tres clientes industriales preguntaron por capacidad de nearshoring en menos de 60 días. Lo que parecía un caso aislado empezó a repetirse." },
-  { k: "Tensión", artefacto: "Mapa de tensiones", color: "var(--soft-violet)", body: "Crecer rápido sin comprometer la calidad que nos ganó a esos clientes. Velocidad y estándar empujando en direcciones opuestas." },
-  { k: "Decisión", artefacto: "Matriz de decisión", color: "var(--change-violet)", body: "Abrir una segunda línea acotada antes de comprometer la planta completa. Criterio explícito: la calidad pesa más que la velocidad de captura." },
-  { k: "Proyecto", artefacto: "Roadmap vivo", color: "var(--change-violet)", body: "Piloto Línea B a 90 días. La métrica de calidad es el gate de continuidad: si no se sostiene, no se escala." },
-  { k: "Aprendizaje", artefacto: "Memoria estratégica", color: "var(--lavender-mist)", body: "La calidad aguanta hasta ~70% de carga; arriba de eso se degrada. Criterio instalado para evaluar la próxima apertura sin volver a discutirlo desde cero." },
+  {
+    k: "Señal",
+    artefacto: "Radar de señales",
+    evo: "En análisis",
+    body: "Tres clientes industriales preguntaron por capacidad de nearshoring en menos de 60 días. Lo que parecía un caso aislado empezó a repetirse.",
+  },
+  {
+    k: "Tensión",
+    artefacto: "Mapa de tensiones",
+    evo: "En análisis",
+    body: "Crecer rápido sin comprometer la calidad que nos ganó a esos clientes. Velocidad y estándar empujando en direcciones opuestas.",
+  },
+  {
+    k: "Decisión",
+    artefacto: "Matriz de decisión",
+    evo: "En foco",
+    body: "Abrir una segunda línea acotada antes de comprometer la planta completa. Criterio explícito: la calidad pesa más que la velocidad de captura.",
+  },
+  {
+    k: "Proyecto",
+    artefacto: "Roadmap vivo",
+    evo: "En foco",
+    body: "Piloto Línea B a 90 días. La métrica de calidad es el gate de continuidad: si no se sostiene, no se escala.",
+  },
+  {
+    k: "Aprendizaje",
+    artefacto: "Memoria estratégica",
+    evo: "Validado",
+    body: "La calidad aguanta hasta ~70% de carga; arriba de eso se degrada. Criterio instalado para evaluar la próxima apertura sin volver a discutirlo desde cero.",
+  },
 ];
 
 const SIGNALS = [
-  { t: "Regulación de etiquetado entra en consulta pública", c: "var(--signal-cyan)" },
-  { t: "Un competidor bajó precios 12% en el canal mayorista", c: "var(--opportunity-orange)" },
-  { t: "La rotación del equipo comercial subió dos trimestres seguidos", c: "var(--warning)" },
+  { t: "Regulación de etiquetado entra en consulta pública", c: "var(--evo-analysis)", evo: "En radar" },
+  { t: "Un competidor bajó precios 12% en el canal mayorista", c: "var(--data-opportunity)", evo: "En análisis" },
+  { t: "La rotación del equipo comercial subió dos trimestres seguidos", c: "var(--data-risk)", evo: "En foco" },
 ];
 
-const STATS = [
-  { v: "3", label: "Proyectos vivos", c: "#fff" },
-  { v: "7", label: "Señales activas", c: "var(--signal-cyan)" },
-  { v: "12", label: "Decisiones trazadas", c: "var(--lavender-mist)" },
+/* Metric cards — scorecard DS 2.4 */
+const METRICS = [
+  { v: "3", label: "Proyectos vivos", c: "var(--evo-focus)", delta: "+1 este mes" },
+  { v: "7", label: "Señales activas", c: "var(--evo-analysis)", delta: "3 en revisión" },
+  { v: "12", label: "Decisiones trazadas", c: "var(--evo-validated)", delta: "4 cerradas" },
 ];
 
 const LAST = TRACE.length - 1;
@@ -47,6 +81,8 @@ export default function MissionControlLive() {
   const [inView, setInView] = useState(false);
   const ref = useRef<HTMLDivElement | null>(null);
   const stage = TRACE[active];
+  const stageColor = EVO_COLOR[stage.k];
+  const fillPct = (active / LAST) * 100;
 
   useEffect(() => {
     const el = ref.current;
@@ -67,99 +103,173 @@ export default function MissionControlLive() {
   }, [auto, inView]);
 
   const select = (i: number) => { setActive(i); setAuto(false); };
-  const fill = (active / LAST) * 100;
 
   return (
     <div
       ref={ref}
+      className="change-dark"
       style={{
         border: "1px solid rgba(255,255,255,.06)",
         background: "var(--gradient-dark-card-slate, linear-gradient(160deg,#161D2A,#0F1420))",
         boxShadow: "0 24px 60px rgba(0,0,0,.42)",
       }}
     >
-      {/* barra superior — latido vivo */}
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, flexWrap: "wrap", padding: "16px 22px", borderBottom: "1px solid rgba(255,255,255,.09)" }}>
+      {/* ── Barra superior — latido + label demo ── */}
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, flexWrap: "wrap", padding: "14px 22px", borderBottom: "1px solid rgba(255,255,255,.08)" }}>
         <span style={{ display: "inline-flex", alignItems: "center", gap: 9, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "rgba(255,255,255,.7)" }}>
-          <span data-pulse style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--signal-cyan)" }} />Mission Control · memoria viva
+          <span data-pulse style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--evo-analysis)" }} />
+          Mission Control · memoria viva
         </span>
-        <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "rgba(255,255,255,.8)" }}>Demo · datos de ejemplo</span>
+        <span style={{ font: "700 10px var(--font-secondary)", letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(255,255,255,.35)" }}>Demo · datos de ejemplo</span>
       </div>
 
       <div className="mcl-body" style={{ display: "grid", gridTemplateColumns: "minmax(0,1.5fr) minmax(0,1fr)", gap: 1, background: "rgba(255,255,255,.04)" }}>
-        {/* ── columna A: la traza de una decisión ── */}
-        <div style={{ background: "var(--surface-dark-tertiary)", padding: "26px 24px" }}>
-          <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "rgba(217,210,255,.6)" }}>Trazabilidad de una decisión</span>
-          <p style={{ margin: "8px 0 22px", font: "400 13px/1.5 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>Toca cada paso: así viaja una señal hasta volverse aprendizaje que se queda.</p>
 
-          {/* cadena de nodos */}
-          <div style={{ position: "relative", marginBottom: 22 }}>
-            <div style={{ position: "absolute", left: "8%", right: "8%", top: 9, height: 2, background: "rgba(255,255,255,.12)" }} />
-            <div style={{ position: "absolute", left: "8%", top: 9, height: 2, width: `calc(${fill}% * 0.84)`, background: "var(--line-gradient-relation)", transition: "width var(--duration-premium) var(--ease-premium)" }} />
+        {/* ── Columna A: trazabilidad de la decisión ── */}
+        <div style={{ background: "var(--surface-dark-tertiary)", padding: "26px 24px" }}>
+          <span style={{ font: "700 10px var(--font-secondary)", letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(217,210,255,.5)" }}>Trazabilidad de una decisión</span>
+          <p style={{ margin: "8px 0 24px", font: "400 13px/1.5 var(--font-primary)", color: "rgba(255,255,255,.65)" }}>
+            Toca cada paso: así viaja una señal hasta volverse aprendizaje que se queda.
+          </p>
+
+          {/* Cadena de nodos con Evolution Ramp */}
+          <div style={{ position: "relative", marginBottom: 24 }}>
+            {/* Track de fondo */}
+            <div style={{ position: "absolute", left: "8%", right: "8%", top: 9, height: 2, background: "var(--chart-track)" }} />
+            {/* Relleno de progreso — evolution line gradient */}
+            <div style={{
+              position: "absolute", left: "8%", top: 9, height: 2,
+              width: `calc(${fillPct}% * 0.84)`,
+              background: "var(--gradient-evolution-line)",
+              transition: "width var(--duration-premium) var(--ease-premium)",
+            }} />
+            {/* Nodos */}
             <div style={{ position: "relative", display: "grid", gridTemplateColumns: `repeat(${TRACE.length},1fr)`, gap: 4 }}>
               {TRACE.map((s, i) => {
                 const on = i === active;
+                const nodeColor = EVO_COLOR[s.k];
                 return (
-                  <button key={s.k} onClick={() => select(i)} aria-pressed={on} aria-label={`${s.k}, paso ${i + 1} de ${TRACE.length}`}
+                  <button
+                    key={s.k}
+                    onClick={() => select(i)}
+                    aria-pressed={on}
+                    aria-label={`${s.k}, paso ${i + 1} de ${TRACE.length}`}
                     className="mcl-node-btn"
-                    style={{ border: 0, background: "transparent", cursor: "pointer", padding: 0, textAlign: "center", fontFamily: "var(--font-primary)" }}>
-                    <span data-pulse={on ? "" : undefined} style={{ display: "block", width: on ? 14 : 10, height: on ? 14 : 10, borderRadius: "50%", margin: "0 auto 9px", background: s.color, boxShadow: on ? `0 0 0 4px var(--surface-dark-tertiary), 0 0 8px ${s.color}` : "0 0 0 4px var(--surface-dark-tertiary)", transition: "all .3s var(--ease-premium)" }} />
-                    <span className="mcl-nlabel" style={{ display: "block", font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".04em", textTransform: "uppercase", color: on ? "#fff" : "rgba(255,255,255,.8)", transition: "color .3s" }}>{s.k}</span>
+                    style={{ border: 0, background: "transparent", cursor: "pointer", padding: 0, textAlign: "center", fontFamily: "var(--font-primary)" }}
+                  >
+                    <span
+                      data-pulse={on ? "" : undefined}
+                      style={{
+                        display: "block",
+                        width: on ? 14 : 9,
+                        height: on ? 14 : 9,
+                        borderRadius: "50%",
+                        margin: "0 auto 9px",
+                        background: on ? nodeColor : "var(--evo-noise)",
+                        boxShadow: on ? `0 0 0 4px var(--surface-dark-tertiary), 0 0 10px ${nodeColor}` : "0 0 0 3px var(--surface-dark-tertiary)",
+                        transition: "all .3s var(--ease-premium)",
+                        opacity: i <= active ? 1 : 0.45,
+                      }}
+                    />
+                    <span
+                      className="mcl-nlabel"
+                      style={{
+                        display: "block",
+                        font: "700 10px var(--font-secondary)",
+                        letterSpacing: ".06em",
+                        textTransform: "uppercase",
+                        color: on ? "rgba(255,255,255,.9)" : "rgba(255,255,255,.45)",
+                        transition: "color .3s",
+                      }}
+                    >
+                      {s.k}
+                    </span>
                   </button>
                 );
               })}
             </div>
           </div>
 
-          {/* detalle del paso activo */}
-          <div style={{ border: "1px solid rgba(255,255,255,.1)", borderLeft: `3px solid ${stage.color}`, background: "rgba(255,255,255,.03)", padding: "20px 22px", minHeight: 156 }}>
+          {/* Panel del paso activo */}
+          <div style={{ border: "1px solid rgba(255,255,255,.1)", borderLeft: `3px solid ${stageColor}`, background: "rgba(255,255,255,.03)", padding: "20px 22px", minHeight: 156 }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, flexWrap: "wrap", marginBottom: 12 }}>
               <span style={{ display: "inline-flex", alignItems: "center", gap: 8, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "#fff" }}>
-                <span aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: stage.color }} />
-                <span aria-hidden="true" style={{ display: "inline-flex", color: stage.color }}>
+                <span aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: stageColor }} />
+                <span aria-hidden="true" style={{ display: "inline-flex", color: stageColor }}>
                   <Glyph name={STAGE_GLYPH[stage.k] ?? "nav"} size={18} />
                 </span>
                 {stage.k}
               </span>
-              <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".08em", textTransform: "uppercase", color: "rgba(217,210,255,.6)" }}>{stage.artefacto}</span>
+              {/* Estado en ramp */}
+              <span style={{ display: "inline-flex", alignItems: "center", gap: 6, font: "700 10px var(--font-secondary)", letterSpacing: ".12em", textTransform: "uppercase", color: stageColor }}>
+                <span aria-hidden="true" style={{ width: 5, height: 5, borderRadius: "50%", background: stageColor }} />
+                {stage.evo}
+              </span>
+            </div>
+            <div style={{ font: "700 10px var(--font-secondary)", letterSpacing: ".1em", textTransform: "uppercase", color: "rgba(217,210,255,.45)", marginBottom: 8 }}>
+              {stage.artefacto}
             </div>
             <p key={stage.k} style={{ margin: 0, font: "400 14.5px/1.6 var(--font-primary)", color: "rgba(255,255,255,.7)" }}>{stage.body}</p>
           </div>
         </div>
 
-        {/* ── columna B: señales vivas + aprendizaje ── */}
+        {/* ── Columna B: señales + aprendizaje ── */}
         <div style={{ background: "var(--surface-dark-secondary)", padding: "26px 24px", display: "flex", flexDirection: "column", gap: 22 }}>
           <div>
-            <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "rgba(255,255,255,.8)" }}>Señales activas</span>
-            <div style={{ marginTop: 14, display: "flex", flexDirection: "column", gap: 12 }}>
+            <span style={{ font: "700 10px var(--font-secondary)", letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(255,255,255,.5)" }}>Señales activas</span>
+            <div style={{ marginTop: 14, display: "flex", flexDirection: "column", gap: 13 }}>
               {SIGNALS.map((s, idx) => (
-                <div key={s.t} style={{ display: "flex", gap: 11, alignItems: "flex-start" }}>
-                  {/* Solo el primer signal hace pulse — el resto es estático para reducir saturación. */}
-                  <span data-pulse={idx === 0 ? "" : undefined} style={{ flexShrink: 0, marginTop: 5, width: 7, height: 7, borderRadius: "50%", background: s.c, opacity: idx === 0 ? 1 : 0.75 }} />
-                  <span style={{ font: "400 13.5px/1.45 var(--font-primary)", color: "rgba(255,255,255,.7)" }}>{s.t}</span>
+                <div key={s.t} style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
+                  <span
+                    data-pulse={idx === 0 ? "" : undefined}
+                    style={{ flexShrink: 0, marginTop: 5, width: 7, height: 7, borderRadius: "50%", background: s.c, opacity: idx === 0 ? 1 : 0.8 }}
+                  />
+                  <div>
+                    <span style={{ display: "block", font: "400 13px/1.45 var(--font-primary)", color: "rgba(255,255,255,.7)" }}>{s.t}</span>
+                    <span style={{ display: "block", marginTop: 3, font: "700 9px var(--font-secondary)", letterSpacing: ".12em", textTransform: "uppercase", color: s.c, opacity: .8 }}>{s.evo}</span>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
 
-          <div style={{ paddingTop: 20, borderTop: "1px solid rgba(255,255,255,.1)" }}>
-            <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "rgba(255,255,255,.8)" }}>Estado de aprendizaje</span>
+          <div style={{ paddingTop: 20, borderTop: "1px solid rgba(255,255,255,.08)" }}>
+            <span style={{ font: "700 10px var(--font-secondary)", letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(255,255,255,.5)" }}>Estado de aprendizaje</span>
             <div style={{ marginTop: 12, display: "flex", alignItems: "center", gap: 10 }}>
-              <span data-pulse style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--success)" }} />
+              <span data-pulse style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--evo-validated)" }} />
               <strong style={{ font: "600 15px var(--font-primary)", color: "#fff" }}>Sostenido</strong>
             </div>
-            <p style={{ margin: "8px 0 0", font: "400 13px/1.5 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>El criterio de cada decisión queda registrado. La próxima coyuntura no empieza de cero.</p>
+            <p style={{ margin: "8px 0 0", font: "400 13px/1.5 var(--font-primary)", color: "rgba(255,255,255,.65)" }}>
+              El criterio de cada decisión queda registrado. La próxima coyuntura no empieza de cero.
+            </p>
           </div>
         </div>
       </div>
 
-      {/* stats inferiores */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 1, background: "rgba(255,255,255,.07)", borderTop: "1px solid rgba(255,255,255,.07)" }}>
-        {STATS.map((s) => (
-          <div key={s.label} style={{ background: "var(--surface-dark-tertiary)", padding: "18px 22px" }}>
-            <div style={{ font: "300 clamp(26px,3vw,36px)/1 var(--font-secondary)", color: s.c }}>{s.v}</div>
-            <div style={{ marginTop: 7, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".08em", textTransform: "uppercase", color: "rgba(255,255,255,.8)" }}>{s.label}</div>
+      {/* ── Metric cards — Evolution Ramp DS 2.4 ── */}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 1, background: "rgba(255,255,255,.06)", borderTop: "1px solid rgba(255,255,255,.06)" }}>
+        {METRICS.map((m) => (
+          <div key={m.label} style={{ background: "var(--surface-dark-tertiary)", padding: "18px 22px" }}>
+            <div style={{ font: "300 clamp(28px,3vw,38px)/1 var(--font-secondary)", color: m.c, letterSpacing: "-.02em" }}>{m.v}</div>
+            <div style={{ marginTop: 6, font: "700 10px var(--font-secondary)", letterSpacing: ".1em", textTransform: "uppercase", color: "rgba(255,255,255,.5)" }}>{m.label}</div>
+            <div style={{ marginTop: 4, font: "400 11.5px var(--font-primary)", color: m.c, opacity: .75 }}>{m.delta}</div>
           </div>
+        ))}
+      </div>
+
+      {/* ── Evolution ramp legend ── */}
+      <div style={{ padding: "14px 22px", borderTop: "1px solid rgba(255,255,255,.06)", display: "flex", alignItems: "center", gap: 20, flexWrap: "wrap" }}>
+        <span style={{ font: "700 9px var(--font-secondary)", letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(255,255,255,.3)" }}>Estado</span>
+        {[
+          { l: "Señal débil", c: "var(--evo-noise)" },
+          { l: "En análisis", c: "var(--evo-analysis)" },
+          { l: "En foco", c: "var(--evo-focus)" },
+          { l: "Validado", c: "var(--evo-validated)" },
+        ].map((r) => (
+          <span key={r.l} style={{ display: "inline-flex", alignItems: "center", gap: 6, font: "700 9px var(--font-secondary)", letterSpacing: ".1em", textTransform: "uppercase", color: r.c }}>
+            <span aria-hidden="true" style={{ width: 6, height: 6, borderRadius: "50%", background: r.c }} />
+            {r.l}
+          </span>
         ))}
       </div>
 

@@ -15,21 +15,30 @@ export const metadata: Metadata = {
 
 const WRAP = "min(1340px, calc(100% - clamp(40px,8vw,128px)))";
 
-const MESA = [
+const BOARD = [
   {
-    n: "Andrés Valencia", arc: "Foresight and Business Innovation", disc: "Futuros, Innovación, Estrategia", c: "var(--signal-cyan)",
-    p: "Lee el entorno antes de que el cambio se vuelva urgente y convierte las señales emergentes en lectura estratégica accionable. Qué está cambiando, qué tensión revela y qué decisión abre para tu organización.",
+    n: "Andrés Valencia",
+    arc: "Leer · Interpretar",
+    disc: "Radar de señales · Mapa de tensiones",
+    c: "var(--signal-cyan)",
+    p: "Convierte señales dispersas en lectura estratégica. Ve qué está cambiando en el entorno antes de que se vuelva urgente y nombra la tensión que la organización todavía no puede articular.",
     ev: "",
   },
   {
-    n: "Miguel Cadena", arc: "Propiedad Intelectual e Innovación Estratégica", disc: "PI, Modelos de negocio, Estrategia", c: "var(--change-violet)",
-    p: "Convierte la lectura en estrategia ejecutable. Define cómo se protege lo que importa, cómo escala el negocio y qué modelo lo sostiene en el tiempo.",
+    n: "Miguel Cadena",
+    arc: "Decidir · Aterrizar",
+    disc: "Matriz de decisión · Reporte ejecutivo",
+    c: "var(--change-violet)",
+    p: "Convierte la lectura en apuestas con costos explícitos y crecimiento sostenible. Define qué se protege, qué se sacrifica y cómo el criterio se defiende ante el board o la dirección.",
     ev: "",
   },
   {
-    n: "Red de especialistas", arc: "Profundidad por reto", disc: "expertos convocados según el caso", c: "var(--soft-stone-gray)",
-    p: "Cuando un reto exige conocimiento de un dominio específico — cultura organizacional, tecnología, finanzas, operación — sumamos al especialista correcto al board, sin inflar la estructura. El board crece por la pregunta, no por el organigrama.",
-    ev: "El dominio que el reto exige",
+    n: "Red de especialistas",
+    arc: "Profundidad por reto",
+    disc: "Dominio específico",
+    c: "var(--soft-stone-gray)",
+    p: "Entra cuando el reto lo exige — cultura organizacional, tecnología, finanzas, operación. Sin diluir el método. El board crece por la pregunta, no por el organigrama.",
+    ev: "",
   },
 ];
 
@@ -71,20 +80,17 @@ export default function EquipoPage() {
             <span style={{ width: 7, height: 7, background: "var(--change-violet)" }} />
             <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)" }}>Cómo trabaja el board</span>
           </Reveal>
-          <Reveal delay={60} as="h2" style={{ margin: "0 0 16px", maxWidth: "22ch", font: "600 clamp(30px,4.2vw,56px)/.99 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>Cada perfil cubre un tramo del arco de una decisión.</Reveal>
-          <Reveal delay={100} as="p" style={{ margin: "0 0 clamp(40px,5vw,60px)", maxWidth: "56ch", font: "400 clamp(16px,1.3vw,19px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>No repartimos un proyecto en tareas. Repartimos una decisión en capacidades, y cada capacidad deja un artefacto que puedes ver.</Reveal>
+          <Reveal delay={60} as="h2" style={{ margin: "0 0 16px", maxWidth: "22ch", font: "600 clamp(30px,4.2vw,56px)/.99 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>El board sostiene el criterio. La red aporta profundidad cuando el reto lo exige.</Reveal>
+          <Reveal delay={100} as="p" style={{ margin: "0 0 clamp(40px,5vw,60px)", maxWidth: "56ch", font: "400 clamp(16px,1.3vw,19px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>No repartimos un proyecto en tareas. Repartimos una decisión en capacidades. Cada capacidad deja un artefacto que puedes ver. El método no se delega: se gobierna desde Change.</Reveal>
           <div className="eq-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 20 }}>
-            {MESA.map((m, i) => (
-              <Reveal key={m.n} delay={(i % 2) * 90} as="article" className="ch-card" style={{ background: "rgba(255,255,255,.85)", border: "1px solid var(--border-subtle)", padding: "32px 30px", display: "flex", flexDirection: "column" }}>
-                <span style={{ display: "inline-flex", alignItems: "center", gap: 8, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--ink-graphite)" }}>
+            {BOARD.map((m, i) => (
+              <Reveal key={m.n} delay={(i % 2) * 90} as="article" className="ch-card" style={{ background: "rgba(255,255,255,.85)", border: "1px solid var(--border-subtle)", borderTop: `3px solid ${m.c}`, padding: "32px 30px", display: "flex", flexDirection: "column" }}>
+                <span style={{ display: "inline-flex", alignItems: "center", gap: 8, font: "700 11px var(--font-secondary)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--ink-graphite)" }}>
                   <span aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: m.c }} />{m.arc}
                 </span>
-                <h3 style={{ margin: "13px 0 2px", font: "600 22px var(--font-primary)", letterSpacing: "-.02em", color: "var(--ink-graphite)" }}>{m.n}</h3>
-                <span style={{ font: "400 13px var(--font-primary)", color: "var(--text-muted)" }}>{m.disc}</span>
+                <h3 style={{ margin: "14px 0 4px", font: "600 22px var(--font-primary)", letterSpacing: "-.02em", color: "var(--ink-graphite)" }}>{m.n}</h3>
+                <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".08em", textTransform: "uppercase", color: "var(--text-muted)" }}>{m.disc}</span>
                 <p style={{ margin: "16px 0 0", font: "400 14.5px/1.6 var(--font-primary)", color: "var(--text-muted)" }}>{m.p}</p>
-                {m.ev && (
-                  <span style={{ marginTop: "auto", paddingTop: 20, marginBlockStart: 20, borderTop: "1px solid var(--border-subtle)", font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".08em", textTransform: "uppercase", color: "var(--text-faint)" }}>Deja como evidencia · {m.ev}</span>
-                )}
               </Reveal>
             ))}
           </div>
@@ -119,7 +125,7 @@ export default function EquipoPage() {
           <Reveal as="h2" style={{ margin: "0 auto", maxWidth: "18ch", font: "600 clamp(34px,5vw,72px)/1.0 var(--font-primary)", letterSpacing: "-.05em", color: "#fff", textWrap: "balance" }}>Trae la decisión que más te pesa hoy.</Reveal>
           <Reveal delay={100} as="p" style={{ margin: "24px auto 0", maxWidth: 560, font: "400 clamp(16px,1.4vw,19px)/1.6 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>No necesitas tener claro el problema ni el camino. Eso es justo lo que el board hace contigo.</Reveal>
           <Reveal delay={160} style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12, marginTop: 38 }}>
-            <Link href="/contacto" className="btn btn-light">Trabajar una decisión</Link>
+            <Link href="/contacto" className="btn btn-light">Simular una decisión</Link>
             <Link href="/capacidades" className="btn btn-dghost">Ver el método</Link>
           </Reveal>
         </div>
