@@ -21,101 +21,66 @@ const DECISION = {
   p: "La pregunta deja de ser «¿qué está pasando en el mundo?» y se vuelve «¿qué hacemos el lunes?». Ahí es donde Change trabaja: en el punto exacto donde una tensión amplia se vuelve una decisión concreta.",
 };
 
-/* ── Figura del descenso — se deconstruye/enfoca según la fase activa ──
-   Época: campo orbital amplio (cyan). Contexto: se contrae + emergen las
-   fuerzas en tensión (rosa/naranja). Organización: solo el núcleo (violeta). */
-const C = 180;
-const polar = (r: number, deg: number): [number, number] => {
-  const a = ((deg - 90) * Math.PI) / 180;
-  return [C + r * Math.cos(a), C + r * Math.sin(a)];
-};
-
-const RINGS = [
-  { r: 146, color: "var(--signal-cyan)", dash: "2 6", nodes: [18, 92, 164, 236, 308], op: [1, 0.25, 0.08] },
-  { r: 100, color: "var(--soft-violet)", dash: "none", nodes: [50, 140, 230, 320], op: [0.45, 1, 0.22] },
-  { r: 56, color: "var(--change-violet)", dash: "none", nodes: [0, 120, 240], op: [0.4, 0.65, 1] },
+/* ── Figura del descenso — minimalista y serena ──
+   Anillos concéntricos = niveles de contención (macro contiene contexto contiene
+   organización contiene la decisión). Un marcador DESCIENDE por el eje vertical
+   de lo macro (borde) a lo propio (centro). El eje lleva un gradiente de evolución
+   de color (cyan → violeta). Sin zoom: estable, sin glitches. */
+const RING = [
+  { r: 128, color: "var(--signal-cyan)" },
+  { r: 84, color: "var(--soft-violet)" },
+  { r: 46, color: "var(--change-violet)" },
 ];
-
-const TENSION = [
-  { r: 146, deg: 330, color: "var(--opportunity-orange)" },
-  { r: 100, deg: 196, color: "var(--human-pink)" },
-];
-const TENSION_OP = [0.18, 1, 0.42];
+const DESCEND = [0, 44, 82];
 
 function DescentFigure({ active }: { active: number }) {
-  const scale = [1, 1.08, 1.18][active] ?? 1;
-  const coreR = [15, 21, 29][active] ?? 15;
-  const radialOp = [0.22, 0.4, 0.7][active] ?? 0.4;
-  const inner = RINGS[2];
+  const descend = DESCEND[active] ?? 0;
+  const dotColor = RING[active]?.color ?? "var(--signal-cyan)";
 
   return (
-    <div className="sd-figure" style={{ width: "100%", maxWidth: 420, margin: "0 auto", aspectRatio: "1 / 1" }}>
-      <svg viewBox="0 0 360 360" width="100%" height="100%" aria-hidden="true" style={{ display: "block", overflow: "visible" }}>
+    <div className="sd-figure" style={{ width: "100%", maxWidth: 360, margin: "0 auto", aspectRatio: "1 / 1" }}>
+      <svg viewBox="0 0 320 320" width="100%" height="100%" aria-hidden="true" style={{ display: "block", overflow: "visible" }}>
         <defs>
-          <radialGradient id="sd-core" cx="50%" cy="42%" r="62%">
-            <stop offset="0%" stopColor="var(--change-violet-300)" />
-            <stop offset="62%" stopColor="var(--change-violet)" />
-            <stop offset="100%" stopColor="var(--change-violet-700)" />
-          </radialGradient>
-          <linearGradient id="sd-radial-line" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="var(--change-violet)" />
-            <stop offset="100%" stopColor="var(--signal-cyan)" />
+          <linearGradient id="sd-axis" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="var(--signal-cyan)" />
+            <stop offset="55%" stopColor="var(--soft-violet)" />
+            <stop offset="100%" stopColor="var(--change-violet)" />
           </linearGradient>
+          <radialGradient id="sd-core-g" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="var(--change-violet-300)" />
+            <stop offset="100%" stopColor="var(--change-violet)" />
+          </radialGradient>
         </defs>
 
-        {/* halo de fondo que respira */}
-        <circle className="sd-halo" cx="180" cy="180" r="150" fill="url(#sd-core)" opacity="0.06" />
+        {/* eje del descenso — gradiente de evolución macro → propio */}
+        <line x1="160" y1="32" x2="160" y2="160" stroke="url(#sd-axis)" strokeWidth="1.5" strokeOpacity="0.45" />
 
-        {/* sistema que enfoca (zoom) según la fase */}
-        <g style={{ transformBox: "view-box", transformOrigin: "180px 180px", transform: `scale(${scale})`, transition: "transform .7s var(--ease-premium)" }}>
+        {/* anillos de contención */}
+        {RING.map((ring, i) => {
+          const on = i === active;
+          return (
+            <circle key={i} cx="160" cy="160" r={ring.r} fill="none"
+              stroke={on ? ring.color : "var(--soft-stone-gray)"}
+              strokeWidth={on ? 1.6 : 1}
+              style={{ opacity: on ? 1 : 0.26, transition: "opacity .55s var(--ease-premium), stroke .55s var(--ease-premium)" }} />
+          );
+        })}
 
-          {/* líneas radiales núcleo → nodos internos */}
-          {inner.nodes.map((deg, i) => {
-            const [x, y] = polar(inner.r, deg);
-            return (
-              <line key={`rl-${i}`} x1="180" y1="180" x2={x} y2={y} stroke="url(#sd-radial-line)" strokeWidth="1"
-                style={{ opacity: radialOp, transition: "opacity .6s var(--ease-premium)" }} />
-            );
-          })}
+        {/* núcleo — la decisión; se ilumina al llegar a lo interno */}
+        <circle cx="160" cy="160" r="7" fill="url(#sd-core-g)"
+          style={{ opacity: active === 2 ? 1 : 0.32, transition: "opacity .55s var(--ease-premium)" }} />
 
-          {/* anillos + sus nodos, con opacidad por fase */}
-          {RINGS.map((ring, ri) => (
-            <g key={ri} style={{ opacity: ring.op[active] ?? 1, transition: "opacity .6s var(--ease-premium)" }}>
-              <circle cx="180" cy="180" r={ring.r} fill="none" stroke={ring.color} strokeWidth="1" strokeOpacity="0.45" strokeDasharray={ring.dash} />
-              {ring.nodes.map((deg, ni) => {
-                const [x, y] = polar(ring.r, deg);
-                return <circle key={ni} cx={x} cy={y} r={ri === 2 ? 5 : 4} fill={ring.color} />;
-              })}
-            </g>
-          ))}
-
-          {/* fuerzas en tensión — acentos terciarios, emergen en "Contexto" */}
-          {TENSION.map((t, i) => {
-            const [x, y] = polar(t.r, t.deg);
-            return (
-              <g key={`t-${i}`} style={{ opacity: TENSION_OP[active] ?? 0.3, transition: "opacity .6s var(--ease-premium)" }}>
-                <circle className="sd-tnode" cx={x} cy={y} r="9" fill="none" stroke={t.color} strokeWidth="1" opacity="0.5" style={{ animationDelay: `${i * 0.7}s` }} />
-                <circle cx={x} cy={y} r="5" fill={t.color} />
-              </g>
-            );
-          })}
-
-          {/* núcleo — la decisión concreta */}
-          <circle className="sd-corehalo" cx="180" cy="180" r={coreR + 8} fill="none" stroke="var(--change-violet)" strokeWidth="1" opacity="0.4" style={{ transition: "r .6s var(--ease-premium)" }} />
-          <circle cx="180" cy="180" r={coreR} fill="url(#sd-core)" style={{ transition: "r .6s var(--ease-premium)" }} />
+        {/* marcador de foco que desciende por el eje */}
+        <g style={{ transform: `translateY(${descend}px)`, transition: "transform .6s var(--ease-premium)" }}>
+          <circle className="sd-focus" cx="160" cy="32" r="13" fill="none" stroke={dotColor} strokeWidth="1" opacity="0.5" style={{ transition: "stroke .55s var(--ease-premium)" }} />
+          <circle cx="160" cy="32" r="6.5" fill={dotColor} style={{ transition: "fill .55s var(--ease-premium)" }} />
         </g>
       </svg>
 
       <style>{`
-        .sd-halo { animation: sd-breathe 7s var(--ease-premium) infinite; transform-box: view-box; transform-origin: 180px 180px; }
-        @keyframes sd-breathe { 0%,100% { transform: scale(1); opacity: .06; } 50% { transform: scale(1.04); opacity: .1; } }
-        .sd-corehalo { animation: sd-pulse 3.4s var(--ease-premium) infinite; transform-box: view-box; transform-origin: 180px 180px; }
-        @keyframes sd-pulse { 0%,100% { opacity: .4; } 50% { opacity: .12; } }
-        .sd-tnode { animation: sd-tpulse 2.8s var(--ease-premium) infinite; transform-box: view-box; transform-origin: center; }
-        @keyframes sd-tpulse { 0%,100% { opacity: .5; } 50% { opacity: .15; } }
-        @media (prefers-reduced-motion: reduce) {
-          .sd-halo, .sd-corehalo, .sd-tnode { animation: none !important; }
-        }
+        .sd-focus { animation: sd-focuspulse 3.8s var(--ease-premium) infinite; }
+        @keyframes sd-focuspulse { 0%,100% { opacity: .5; } 50% { opacity: .16; } }
+        @media (prefers-reduced-motion: reduce) { .sd-focus { animation: none !important; } }
       `}</style>
     </div>
   );
@@ -160,7 +125,7 @@ export default function SystemicDescent() {
                 borderLeft: `3px solid ${on ? lv.color : "var(--border-subtle)"}`,
                 background: on ? "#fff" : "rgba(255,255,255,.7)", cursor: "pointer", padding: "22px 26px 22px 52px",
                 opacity: inView ? 1 : 0, transform: inView ? "translateX(0)" : "translateX(-10px)",
-                transition: `opacity .5s ${i * 130}ms, transform .5s ${i * 130}ms var(--ease-premium), border-color .3s, background .3s, width .4s var(--ease-premium)`,
+                transition: `opacity .5s ${i * 130}ms, transform .5s ${i * 130}ms var(--ease-premium), border-color .3s, background .3s, width .4s var(--ease-premium), box-shadow .2s var(--ease-premium)`,
                 fontFamily: "var(--font-primary)",
               }}
             >
@@ -189,10 +154,11 @@ export default function SystemicDescent() {
       </div>
 
       <style>{`
+        .sd-level:hover { box-shadow: 0 8px 24px rgba(46,46,51,.09); border-color: color-mix(in srgb, var(--ink-graphite) 16%, transparent); }
         @media (max-width: 920px) {
           .sd-wrap { grid-template-columns: 1fr !important; gap: 36px !important; }
           .sd-figcol { position: static !important; order: -1; }
-          .sd-figure { max-width: 280px !important; }
+          .sd-figure { max-width: 260px !important; }
           .sd-level, .sd-decision { width: 100% !important; }
         }
       `}</style>
