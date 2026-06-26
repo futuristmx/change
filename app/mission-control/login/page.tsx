@@ -4,6 +4,7 @@ import type { ReactNode, FormEvent } from "react";
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import Header from "@/components/Header";
 
 type Status = "idle" | "submitting" | "info";
 
@@ -46,6 +47,7 @@ export default function MissionControlLoginPage() {
 
   return (
     <div className="change-dark" style={{ minHeight: "100vh", display: "flex", flexDirection: "column", background: "var(--surface-dark)" }}>
+      <Header />
       <main
         id="main-content"
         style={{
