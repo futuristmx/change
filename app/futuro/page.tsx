@@ -31,7 +31,7 @@ const VALORES: Array<{ k: string; h: string; p: string; g: GlyphName; c: string 
     h: "Tensión sobre certeza",
     p: "Trabajamos donde las decisiones todavía no tienen forma. Nombrar la tensión vale más que prometer certeza falsa.",
     g: "risk",
-    c: "var(--soft-violet)",
+    c: "var(--human-pink)",
   },
   {
     k: "03",
@@ -45,21 +45,21 @@ const VALORES: Array<{ k: string; h: string; p: string; g: GlyphName; c: string 
     h: "Instrumentos, no opiniones",
     p: "Cada intervención deja un artefacto — radar, mapa, matriz, roadmap, memoria. Lo que el equipo puede leer, discutir y usar.",
     g: "project",
-    c: "var(--change-violet)",
+    c: "var(--opportunity-orange)",
   },
   {
     k: "05",
     h: "Memoria del porqué",
     p: "El aprendizaje queda vivo. La próxima coyuntura no empieza de cero — empieza donde la anterior dejó criterio instalado.",
     g: "status",
-    c: "var(--ink-graphite)",
+    c: "var(--success)",
   },
   {
     k: "06",
     h: "Confidencialidad como base",
     p: "Las decisiones que acompañamos casi nunca pueden hacerse públicas. Protegemos el contexto estratégico antes de usarlo como credencial.",
     g: "lock",
-    c: "var(--opportunity-orange)",
+    c: "var(--warning)",
   },
 ];
 
@@ -72,7 +72,7 @@ const HORIZONTES = [
   },
   {
     k: "Visión",
-    c: "var(--soft-violet)",
+    c: "var(--human-pink)",
     h: "Organizaciones que construyen futuro con imaginación, criterio y responsabilidad.",
     p: "Imaginamos un entorno donde decidir el rumbo deje de ser reactivo. Donde las organizaciones no enfrenten el futuro desde la urgencia, la inercia o la moda, sino desde capacidades vivas que evolucionan con ellas: leer la señal, disputar su sentido, decidir con criterio compartido y sostener lo aprendido. Capacidades que permanecen — para que la próxima coyuntura no empiece de cero ni dependa de alguien externo.",
   },
