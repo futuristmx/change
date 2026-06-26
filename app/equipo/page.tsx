@@ -37,6 +37,16 @@ const SOCIOS = [
     tagline: "Convierte lo intangible en rentabilidad.",
     story: "Asesoró a empresas transnacionales en propiedad intelectual y modelos de negocio, y lo enseña en licenciatura y posgrado. Su convicción es simple: una decisión solo vale cuando sus costos están sobre la mesa y alguien puede defenderla frente al consejo. En Change convierte el diagnóstico en apuestas con criterio explícito — las que se sostienen solas cuando llega la presión.",
   },
+  {
+    n: "Andrés + Miguel",
+    role: "Co-fundadores",
+    arc: "Un mismo método",
+    domain: "Lectura y aterrizaje, sin costuras",
+    c: "var(--success)",
+    photo: "/assets/founders-together.jpg",
+    tagline: "Dos disciplinas, un mismo método.",
+    story: "Andrés lee el futuro mientras todavía es señal; Miguel lo vuelve decisión con costos explícitos. Fundaron Change para que ninguna mitad trabaje sola: el diagnóstico sin aterrizaje se queda en intuición, y la ejecución sin diagnóstico se queda en inercia.",
+  },
 ];
 
 const ESCALERA = [
@@ -79,23 +89,8 @@ export default function EquipoPage() {
           </Reveal>
           <Reveal delay={60} as="h2" style={{ margin: "0 0 16px", maxWidth: "24ch", font: "600 clamp(30px,4.2vw,56px)/.99 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>Change nació de dos obsesiones complementarias: leer el cambio a tiempo y volverlo decisión que se sostiene.</Reveal>
           <Reveal delay={100} as="p" style={{ margin: "0 0 clamp(40px,5vw,60px)", maxWidth: "58ch", font: "400 clamp(16px,1.3vw,19px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>Dos fundadores, dos disciplinas, un mismo método. No repartimos un proyecto en tareas: repartimos una decisión en capacidades. Y el método no se delega — se gobierna desde aquí.</Reveal>
-          {/* Co-fundadores — paneles dinámicos expandibles (foto + label vertical + historia) */}
+          {/* Co-fundadores — paneles dinámicos expandibles (Andrés · Miguel · ambos) */}
           <Reveal delay={120}><FoundersPanels founders={SOCIOS} /></Reveal>
-
-          {/* Banda editorial — los dos fundadores juntos */}
-          <Reveal delay={180} as="figure" style={{ margin: "clamp(14px,1.6vw,20px) 0 0", position: "relative", overflow: "hidden", border: "1px solid var(--border-subtle)", borderTop: "3px solid var(--change-violet)", background: "var(--surface-dark-secondary)" }}>
-            <div style={{ position: "relative", height: "clamp(300px,36vw,460px)" }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/assets/founders-together.jpg" alt="Andrés Valencia y Miguel Cadena, co-fundadores de Change" loading="lazy" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 30%", display: "block" }} />
-              <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(10,14,21,.12) 0%, rgba(10,14,21,0) 38%, rgba(10,14,21,.42) 72%, rgba(10,14,21,.78) 100%)" }} />
-              <figcaption style={{ position: "absolute", left: 0, bottom: 0, padding: "clamp(20px,2.4vw,36px)" }}>
-                <span style={{ display: "inline-flex", alignItems: "center", gap: 8, font: "700 10.5px var(--font-secondary)", letterSpacing: ".16em", textTransform: "uppercase", color: "rgba(255,255,255,.72)" }}>
-                  <span aria-hidden="true" style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--change-violet)" }} />Andrés Valencia + Miguel Cadena
-                </span>
-                <p style={{ margin: "8px 0 0", font: "600 clamp(17px,1.7vw,24px)/1.18 var(--font-primary)", letterSpacing: "-.025em", color: "#fff", maxWidth: "26ch" }}>Dos disciplinas, un mismo método.</p>
-              </figcaption>
-            </div>
-          </Reveal>
         </div>
       </section>
 
