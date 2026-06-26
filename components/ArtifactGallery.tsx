@@ -228,9 +228,11 @@ function ArtCard({ art, i, active, onToggle }: ArtCardProps) {
   );
 }
 
-/* ── Diagrama vectorial del instrumento — minimalista, grafito neutro ── */
-const DIA = { fill: "none", stroke: "var(--ink-graphite)", strokeWidth: 1.4, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
+/* ── Diagrama vectorial del instrumento — esquema técnico grafito, dos tonos ──
+   Estructura en gris claro (--soft-stone-gray), foco en grafito pleno. Grosores
+   coherentes: estructura 1.3 · forma 1.8 · énfasis 3. viewBox 160 + geometricPrecision. */
 const INK = "var(--ink-graphite)";
+const FAINT = "var(--soft-stone-gray)";
 
 function InstrumentDiagram({ name }: { name: string }) {
   const body = (() => {
@@ -238,85 +240,87 @@ function InstrumentDiagram({ name }: { name: string }) {
       case "Radar de señales":
         return (
           <>
-            <g opacity="0.3"><circle cx="60" cy="60" r="44" /><circle cx="60" cy="60" r="29" /><circle cx="60" cy="60" r="14" /></g>
-            <g opacity="0.22"><line x1="14" y1="60" x2="106" y2="60" /><line x1="60" y1="14" x2="60" y2="106" /></g>
-            <g fill={INK} stroke="none"><circle cx="82" cy="44" r="3.4" /><circle cx="45" cy="74" r="2.6" /><circle cx="70" cy="83" r="2.2" /><circle cx="43" cy="48" r="2" /></g>
-            <circle cx="82" cy="44" r="8" fill="none" strokeWidth="1.1" opacity="0.5" />
+            <g stroke={FAINT} strokeWidth="1.3"><circle cx="80" cy="80" r="58" /><circle cx="80" cy="80" r="38" /><circle cx="80" cy="80" r="19" /></g>
+            <g stroke={FAINT} strokeWidth="1.1" strokeDasharray="1.5 6" opacity="0.7"><line x1="14" y1="80" x2="146" y2="80" /><line x1="80" y1="14" x2="80" y2="146" /></g>
+            <g fill={FAINT} stroke="none"><circle cx="58" cy="104" r="3.4" /><circle cx="104" cy="112" r="3" /><circle cx="56" cy="58" r="2.8" /></g>
+            <circle cx="110" cy="56" r="13" fill="none" stroke={INK} strokeWidth="1.3" opacity="0.55" />
+            <circle cx="110" cy="56" r="5" fill={INK} stroke="none" />
           </>
         );
       case "Mapa de tensiones":
         return (
           <>
-            <g opacity="0.25"><line x1="60" y1="22" x2="60" y2="98" /><line x1="22" y1="60" x2="98" y2="60" /></g>
-            <path d="M24 60 H42 M35 53 L42 60 L35 67" />
-            <path d="M96 60 H78 M85 53 L78 60 L85 67" />
-            <circle cx="60" cy="60" r="11" fill="none" opacity="0.4" />
-            <circle cx="60" cy="60" r="5.5" fill={INK} stroke="none" />
+            <g stroke={FAINT} strokeWidth="1.3" opacity="0.8"><line x1="80" y1="26" x2="80" y2="134" /><line x1="26" y1="80" x2="134" y2="80" /></g>
+            <path d="M30 80 H64 M52 70 L64 80 L52 90" stroke={INK} strokeWidth="1.8" />
+            <path d="M130 80 H96 M108 70 L96 80 L108 90" stroke={INK} strokeWidth="1.8" />
+            <circle cx="80" cy="80" r="15" fill="none" stroke={FAINT} strokeWidth="1.3" />
+            <circle cx="80" cy="80" r="7" fill={INK} stroke="none" />
           </>
         );
       case "Matriz de decisión":
         return (
           <>
-            <rect x="26" y="26" width="68" height="68" opacity="0.5" />
-            <g opacity="0.5"><line x1="60" y1="26" x2="60" y2="94" /><line x1="26" y1="60" x2="94" y2="60" /></g>
-            <g fill={INK} stroke="none" opacity="0.32"><circle cx="43" cy="43" r="2.4" /><circle cx="43" cy="77" r="2.4" /><circle cx="77" cy="77" r="2.4" /></g>
-            <circle cx="77" cy="43" r="9" fill="none" opacity="0.45" />
-            <circle cx="77" cy="43" r="5" fill={INK} stroke="none" />
+            <rect x="34" y="34" width="92" height="92" stroke={FAINT} strokeWidth="1.3" />
+            <g stroke={FAINT} strokeWidth="1.3"><line x1="80" y1="34" x2="80" y2="126" /><line x1="34" y1="80" x2="126" y2="80" /></g>
+            <g fill={FAINT} stroke="none"><circle cx="57" cy="103" r="3" /><circle cx="57" cy="57" r="3" /><circle cx="103" cy="103" r="3" /></g>
+            <circle cx="103" cy="57" r="12" fill="none" stroke={INK} strokeWidth="1.4" opacity="0.6" />
+            <circle cx="103" cy="57" r="6" fill={INK} stroke="none" />
           </>
         );
       case "Roadmap vivo":
         return (
           <>
-            <line x1="20" y1="66" x2="100" y2="66" opacity="0.4" />
-            <g fill={INK} stroke="none"><circle cx="28" cy="66" r="4" /><circle cx="52" cy="66" r="4" /></g>
-            <g fill="none"><circle cx="76" cy="66" r="4" /><circle cx="100" cy="66" r="4" /></g>
-            <path d="M76 66 L92 46" opacity="0.5" /><circle cx="92" cy="46" r="3.4" fill="none" />
+            <line x1="26" y1="92" x2="134" y2="92" stroke={FAINT} strokeWidth="1.3" />
+            <g fill={INK} stroke="none"><circle cx="38" cy="92" r="5" /><circle cx="70" cy="92" r="5" /></g>
+            <g fill="none" stroke={INK} strokeWidth="1.8"><circle cx="102" cy="92" r="5" /><circle cx="134" cy="92" r="5" /></g>
+            <path d="M102 92 L122 64" stroke={FAINT} strokeWidth="1.4" />
+            <circle cx="122" cy="64" r="4.5" fill="none" stroke={FAINT} strokeWidth="1.4" />
           </>
         );
       case "Reporte ejecutivo":
         return (
           <>
-            <rect x="34" y="22" width="52" height="76" opacity="0.55" />
-            <rect x="42" y="32" width="36" height="8" rx="0" fill={INK} stroke="none" opacity="0.55" />
-            <g opacity="0.42"><line x1="42" y1="52" x2="78" y2="52" /><line x1="42" y1="62" x2="78" y2="62" /><line x1="42" y1="72" x2="66" y2="72" /></g>
-            <line x1="42" y1="84" x2="58" y2="84" strokeWidth="2.4" />
+            <rect x="46" y="26" width="68" height="108" stroke={INK} strokeWidth="1.8" />
+            <rect x="58" y="40" width="44" height="11" fill={INK} stroke="none" />
+            <g stroke={FAINT} strokeWidth="1.5"><line x1="58" y1="68" x2="102" y2="68" /><line x1="58" y1="82" x2="102" y2="82" /><line x1="58" y1="96" x2="86" y2="96" /></g>
+            <line x1="58" y1="114" x2="84" y2="114" stroke={INK} strokeWidth="3.2" />
           </>
         );
       case "Field Note":
         return (
           <>
-            <path d="M40 28 H72 L84 40 V92 H40 Z" opacity="0.55" />
-            <path d="M72 28 V40 H84" opacity="0.55" />
-            <g opacity="0.42"><line x1="48" y1="58" x2="76" y2="58" /><line x1="48" y1="68" x2="76" y2="68" /><line x1="48" y1="78" x2="64" y2="78" /></g>
-            <circle cx="49" cy="48" r="2.6" fill={INK} stroke="none" />
+            <path d="M50 32 H96 L114 50 V128 H50 Z" stroke={INK} strokeWidth="1.8" />
+            <path d="M96 32 V50 H114" stroke={INK} strokeWidth="1.5" />
+            <g stroke={FAINT} strokeWidth="1.5"><line x1="62" y1="76" x2="102" y2="76" /><line x1="62" y1="90" x2="102" y2="90" /><line x1="62" y1="104" x2="86" y2="104" /></g>
+            <circle cx="64" cy="62" r="3.2" fill={INK} stroke="none" />
           </>
         );
       case "Workshop instrumentado":
         return (
           <>
-            <g opacity="0.45"><line x1="30" y1="34" x2="60" y2="60" /><line x1="92" y1="34" x2="60" y2="60" /><line x1="26" y1="76" x2="60" y2="60" /><line x1="94" y1="80" x2="60" y2="60" /></g>
-            <g fill={INK} stroke="none" opacity="0.65"><circle cx="30" cy="34" r="3" /><circle cx="92" cy="34" r="3" /><circle cx="26" cy="76" r="3" /><circle cx="94" cy="80" r="3" /></g>
-            <circle cx="60" cy="60" r="12" fill="none" opacity="0.4" />
-            <circle cx="60" cy="60" r="6.5" fill={INK} stroke="none" />
+            <g stroke={FAINT} strokeWidth="1.3"><line x1="42" y1="46" x2="80" y2="80" /><line x1="118" y1="46" x2="80" y2="80" /><line x1="38" y1="106" x2="80" y2="80" /><line x1="122" y1="110" x2="80" y2="80" /></g>
+            <g fill={FAINT} stroke="none"><circle cx="42" cy="46" r="3.6" /><circle cx="118" cy="46" r="3.6" /><circle cx="38" cy="106" r="3.6" /><circle cx="122" cy="110" r="3.6" /></g>
+            <circle cx="80" cy="80" r="16" fill="none" stroke={INK} strokeWidth="1.3" opacity="0.55" />
+            <circle cx="80" cy="80" r="8" fill={INK} stroke="none" />
           </>
         );
       case "Mission Control":
         return (
           <>
-            <g opacity="0.38"><line x1="60" y1="60" x2="32" y2="36" /><line x1="60" y1="60" x2="90" y2="40" /><line x1="60" y1="60" x2="34" y2="84" /><line x1="60" y1="60" x2="86" y2="86" /><line x1="32" y1="36" x2="90" y2="40" /><line x1="34" y1="84" x2="86" y2="86" /></g>
-            <g fill={INK} stroke="none"><circle cx="32" cy="36" r="3" /><circle cx="90" cy="40" r="3" /><circle cx="34" cy="84" r="3" /><circle cx="86" cy="86" r="3" /></g>
-            <circle cx="60" cy="60" r="8" fill="none" strokeWidth="1.4" />
-            <circle cx="60" cy="60" r="3.2" fill={INK} stroke="none" />
+            <g stroke={FAINT} strokeWidth="1.3"><line x1="80" y1="80" x2="44" y2="50" /><line x1="80" y1="80" x2="118" y2="54" /><line x1="80" y1="80" x2="46" y2="112" /><line x1="80" y1="80" x2="114" y2="114" /><line x1="44" y1="50" x2="118" y2="54" /><line x1="46" y1="112" x2="114" y2="114" /></g>
+            <g fill={FAINT} stroke="none"><circle cx="44" cy="50" r="3.6" /><circle cx="118" cy="54" r="3.6" /><circle cx="46" cy="112" r="3.6" /><circle cx="114" cy="114" r="3.6" /></g>
+            <circle cx="80" cy="80" r="11" fill="none" stroke={INK} strokeWidth="1.8" />
+            <circle cx="80" cy="80" r="4" fill={INK} stroke="none" />
           </>
         );
       default:
-        return <><circle cx="60" cy="60" r="30" opacity="0.4" /><circle cx="60" cy="60" r="5" fill={INK} stroke="none" /></>;
+        return <><circle cx="80" cy="80" r="40" stroke={FAINT} strokeWidth="1.3" /><circle cx="80" cy="80" r="6" fill={INK} stroke="none" /></>;
     }
   })();
 
   return (
-    <svg viewBox="0 0 120 120" width="100%" height="100%" aria-hidden="true" style={{ display: "block", maxWidth: 188, margin: "0 auto" }}>
-      <g {...DIA}>{body}</g>
+    <svg viewBox="0 0 160 160" width="100%" height="auto" aria-hidden="true" shapeRendering="geometricPrecision" style={{ display: "block", width: "100%", maxWidth: 220, margin: "0 auto" }}>
+      <g fill="none" strokeLinecap="round" strokeLinejoin="round">{body}</g>
     </svg>
   );
 }
