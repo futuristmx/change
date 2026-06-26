@@ -24,11 +24,67 @@ const PULSE_DELAYS_MS = [15000, 15000, 15000, 15000, 15000, 20000, 25000];
 const PULSE_RECURRING_MS = 45000;
 const PULSE_VISIBLE_MS = 1200;
 
-export default function Header() {
+interface HeaderProps {
+  /** "dark" → variante glass oscura (para superficies dark como el login) */
+  variant?: "light" | "dark";
+}
+
+export default function Header({ variant = "light" }: HeaderProps) {
   const [open, setOpen] = useState(false);
   const [pulsing, setPulsing] = useState(false);
   const pathname = usePathname();
   const timersRef = useRef<ReturnType<typeof setTimeout>[]>([]);
+
+  const dark = variant === "dark";
+
+  // Paleta por variante — premium en ambos casos
+  const c = dark
+    ? {
+        headerBg: "linear-gradient(180deg, rgba(26,22,38,.74) 0%, rgba(14,13,19,.46) 100%)",
+        headerBorder: "1px solid rgba(255,255,255,.08)",
+        headerShadow: "0 10px 44px rgba(0,0,0,.42)",
+        blur: "blur(26px)",
+        divider: "var(--divider-ethereal-dark)",
+        logo: "/assets/change_logo_white.svg",
+        cmdBorder: "1px solid rgba(255,255,255,.12)",
+        cmdBg: "rgba(255,255,255,.045)",
+        cmdShadow: "inset 0 1px 0 rgba(255,255,255,.07), 0 6px 24px rgba(0,0,0,.28)",
+        itemActive: "#fff",
+        itemIdle: "rgba(240,244,255,.62)",
+        idxActive: "var(--change-violet-300)",
+        idxIdle: "rgba(255,255,255,.4)",
+        activeBorder: "var(--soft-violet)",
+        burgerBorder: "1px solid rgba(255,255,255,.16)",
+        burgerColor: "#fff",
+        mobileBg: "rgba(16,15,22,.97)",
+        mobileBorder: "1px solid rgba(255,255,255,.1)",
+        mobileSep: "1px solid rgba(255,255,255,.08)",
+        mobileItemActive: "var(--change-violet-300)",
+        mobileItemIdle: "rgba(240,244,255,.92)",
+      }
+    : {
+        headerBg: "rgba(248,247,242,.82)",
+        headerBorder: "1px solid var(--border-subtle)",
+        headerShadow: "none",
+        blur: "blur(18px)",
+        divider: "var(--divider-ethereal)",
+        logo: "/assets/change_logo_graphite.svg",
+        cmdBorder: "1px solid var(--border-subtle)",
+        cmdBg: "rgba(255,255,255,.5)",
+        cmdShadow: "none",
+        itemActive: "var(--ink-graphite)",
+        itemIdle: "var(--text-muted)",
+        idxActive: "var(--change-violet)",
+        idxIdle: "var(--soft-stone-gray)",
+        activeBorder: "var(--change-violet)",
+        burgerBorder: "1px solid var(--border-subtle)",
+        burgerColor: "var(--ink-graphite)",
+        mobileBg: "var(--surface-card)",
+        mobileBorder: "1px solid var(--border-subtle)",
+        mobileSep: "1px solid var(--border-subtle)",
+        mobileItemActive: "var(--change-violet)",
+        mobileItemIdle: "var(--ink-graphite)",
+      };
 
   useEffect(() => {
     const reduce =
@@ -64,14 +120,16 @@ export default function Header() {
         style={{
           position: "sticky", top: 0, zIndex: 60, height: 80,
           display: "flex", alignItems: "center",
-          background: "rgba(248,247,242,.82)",
-          backdropFilter: "blur(18px)", WebkitBackdropFilter: "blur(18px)",
-          borderBottom: "1px solid var(--border-subtle)",
+          background: c.headerBg,
+          backdropFilter: c.blur, WebkitBackdropFilter: c.blur,
+          borderBottom: c.headerBorder,
+          boxShadow: c.headerShadow,
         }}
       >
-        <div style={{ position: "absolute", left: 0, right: 0, bottom: -1, height: 1, background: "var(--divider-ethereal)", opacity: 0.7 }} />
+        <div style={{ position: "absolute", left: 0, right: 0, bottom: -1, height: 1, background: c.divider, opacity: dark ? 0.9 : 0.7 }} />
         <nav
           className="ch-nav"
+          data-variant={variant}
           style={{
             position: "relative",
             width: "min(1340px, calc(100% - clamp(40px,8vw,128px)))",
@@ -81,14 +139,14 @@ export default function Header() {
           }}
         >
           <Link href="/" aria-label="Change" className="ch-logo" data-pulsing={pulsing ? "true" : undefined} style={{ display: "block" }}>
-            <Image src="/assets/change_logo_graphite.svg" alt="Change" width={161} height={39} style={{ height: 39, width: "auto", display: "block" }} priority />
+            <Image src={c.logo} alt="Change" width={161} height={39} style={{ height: 39, width: "auto", display: "block" }} priority />
           </Link>
 
           <div
             className="ch-command"
             style={{
               justifySelf: "center", display: "flex", alignItems: "center", gap: 2,
-              padding: 5, border: "1px solid var(--border-subtle)", background: "rgba(255,255,255,.5)",
+              padding: 5, border: c.cmdBorder, background: c.cmdBg, boxShadow: c.cmdShadow,
             }}
           >
             {NAV.map((item) => {
@@ -97,7 +155,7 @@ export default function Header() {
               return (
                 <Fragment key={item.href}>
                   {isAcceso && (
-                    <span aria-hidden="true" style={{ width: 1, height: 22, background: "var(--border-subtle)", margin: "0 6px" }} />
+                    <span aria-hidden="true" style={{ width: 1, height: 22, background: dark ? "rgba(255,255,255,.14)" : "var(--border-subtle)", margin: "0 6px" }} />
                   )}
                   <Link
                     href={item.href}
@@ -107,15 +165,15 @@ export default function Header() {
                     className="ch-navlink"
                     style={{
                       display: "inline-flex", alignItems: "center", gap: 6, height: 44, padding: "0 12px",
-                      color: active ? "var(--ink-graphite)" : "var(--text-muted)",
+                      color: active ? c.itemActive : c.itemIdle,
                       font: active ? "600 13.5px var(--font-primary)" : "500 13.5px var(--font-primary)",
                       letterSpacing: "-0.01em",
-                      borderBottom: active ? "2px solid var(--change-violet)" : "2px solid transparent",
+                      borderBottom: active ? `2px solid ${c.activeBorder}` : "2px solid transparent",
                       marginBottom: -1,
                       transition: "color .15s ease, background-color .15s ease, border-color .15s ease",
                     }}
                   >
-                    <span className="ch-navidx" style={{ font: "600 11px var(--font-mono)", letterSpacing: "0.04em", color: active ? "var(--change-violet)" : "var(--soft-stone-gray)" }}>{item.idx}</span>
+                    <span className="ch-navidx" style={{ font: "600 11px var(--font-mono)", letterSpacing: "0.04em", color: active ? c.idxActive : c.idxIdle }}>{item.idx}</span>
                     {item.label}
                   </Link>
                 </Fragment>
@@ -132,7 +190,7 @@ export default function Header() {
               style={{
                 display: "none", alignItems: "center", justifyContent: "center",
                 width: 44, height: 44, background: "transparent",
-                border: "1px solid var(--border-subtle)", cursor: "pointer", color: "var(--ink-graphite)",
+                border: c.burgerBorder, cursor: "pointer", color: c.burgerColor,
               }}
             >
               <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.4">
@@ -144,7 +202,7 @@ export default function Header() {
       </header>
 
       {open && (
-        <div style={{ position: "sticky", top: 80, zIndex: 55, background: "var(--surface-card)", borderBottom: "1px solid var(--border-subtle)", padding: "8px 0" }}>
+        <div style={{ position: "sticky", top: 80, zIndex: 55, background: c.mobileBg, backdropFilter: c.blur, WebkitBackdropFilter: c.blur, borderBottom: c.mobileBorder, padding: "8px 0" }}>
           <div style={{ width: "min(1340px, calc(100% - clamp(40px,8vw,128px)))", margin: "0 auto", display: "flex", flexDirection: "column" }}>
             {NAV.map((item, i) => {
               const active = pathname === item.href || pathname.startsWith(item.href + "/");
@@ -163,8 +221,8 @@ export default function Header() {
                     display: "flex",
                     alignItems: "center",
                     font: active ? "600 16px var(--font-primary)" : "500 16px var(--font-primary)",
-                    color: active ? "var(--change-violet)" : "var(--ink-graphite)",
-                    borderBottom: i < NAV.length - 1 ? "1px solid var(--border-subtle)" : "none",
+                    color: active ? c.mobileItemActive : c.mobileItemIdle,
+                    borderBottom: i < NAV.length - 1 ? c.mobileSep : "none",
                   }}
                 >
                   {item.label}
@@ -176,9 +234,11 @@ export default function Header() {
       )}
 
       <style>{`
-        /* Hover de items del nav — neutral, sin violeta */
-        .ch-navlink:hover { color: var(--ink-graphite) !important; background: color-mix(in srgb, var(--ink-graphite) 5%, transparent); }
-        .ch-navlink:hover .ch-navidx { color: var(--ink-graphite) !important; }
+        /* Hover de items del nav — neutral, por variante */
+        .ch-nav[data-variant="light"] .ch-navlink:hover { color: var(--ink-graphite) !important; background: color-mix(in srgb, var(--ink-graphite) 5%, transparent); }
+        .ch-nav[data-variant="light"] .ch-navlink:hover .ch-navidx { color: var(--ink-graphite) !important; }
+        .ch-nav[data-variant="dark"] .ch-navlink:hover { color: #fff !important; background: rgba(255,255,255,.07); }
+        .ch-nav[data-variant="dark"] .ch-navlink:hover .ch-navidx { color: #fff !important; }
         @media (max-width: 1200px) {
           .ch-command { display: none !important; }
           .ch-burger { display: inline-flex !important; }

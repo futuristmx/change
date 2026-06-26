@@ -47,7 +47,7 @@ export default function MissionControlLoginPage() {
 
   return (
     <div className="change-dark" style={{ minHeight: "100vh", display: "flex", flexDirection: "column", background: "var(--surface-dark)" }}>
-      <Header />
+      <Header variant="dark" />
       <main
         id="main-content"
         style={{
