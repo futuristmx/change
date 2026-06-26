@@ -65,18 +65,18 @@ const VALORES: Array<{ k: string; h: string; p: string; g: GlyphName; c: string 
 const HORIZONTES = [
   {
     k: "Propósito",
-    h: "Que las organizaciones puedan decidir antes de que la urgencia decida por ellas.",
-    p: "Existimos para que el rumbo deje de ser una conversación reactiva. Para que las organizaciones — sus líderes, sus equipos, sus consejos — tengan los instrumentos para leer el cambio mientras aún hay opciones disponibles.",
+    h: "Transformar la relación de las organizaciones con el futuro.",
+    p: "El futuro deja de ser una amenaza que se padece o una apuesta que se adivina. Se vuelve algo que se puede leer, interpretar y trabajar con método — mientras todavía hay margen para decidir. Ese cambio de relación es nuestra razón de existir.",
   },
   {
     k: "Visión",
-    h: "Capacidad de futuro como una habilidad instalada en cada cliente.",
-    p: "Imaginamos organizaciones que ya no dependen de un consultor para tomar la decisión difícil. Que tienen su radar de señales vivo, su mapa de tensiones legible y su memoria estratégica accesible. Que pueden volver a decidir sin Change en la sala — porque la capacidad quedó dentro.",
+    h: "El futuro convertido en capacidad instalada, no en servicio contratado.",
+    p: "Imaginamos organizaciones que leen señales, interpretan tensiones, deciden con criterio y sostienen el aprendizaje por cuenta propia. Que pueden volver a decidir sin Change en la sala — porque la capacidad quedó operando dentro.",
   },
   {
     k: "Misión",
-    h: "Convertir incertidumbre en instrumentos de decisión.",
-    p: "Acompañamos al board, a la dirección o al consejo en el momento exacto donde la información es incompleta y la decisión no puede esperar. Llevamos señales emergentes, comportamiento humano, estrategia, cultura y tecnología a artefactos que se pueden leer y usar para decidir, actuar y aprender.",
+    h: "Instalar Change OS: el sistema que convierte incertidumbre en capacidad.",
+    p: "Operamos el método —leer, interpretar, decidir, diseñar y sostener— como una forma de trabajar que deja prueba: artefactos, reportes vivos y un Mission Control donde el criterio permanece. No entregamos un deck; instalamos rutinas y capacidades que siguen funcionando cuando nos vamos.",
   },
 ];
 
