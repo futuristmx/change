@@ -191,11 +191,11 @@ img, svg { display: block; max-width: 100%; }
 
 /* ── Field Notes flow — gradient que fluye + dot pulse stagger ── */
 @keyframes ch-fnflow-pan {
-  0%   { background-position: -100% 0; }
-  100% { background-position:  200% 0; }
+  0%   { background-position: -60% 0; }
+  100% { background-position:  160% 0; }
 }
 .ch-fnflow-flow {
-  animation: ch-fnflow-pan 6s linear infinite;
+  animation: ch-fnflow-pan 7.5s var(--ease-premium) infinite alternate;
 }
 @keyframes ch-fnflow-dot-pulse {
   0%, 100% { box-shadow: 0 0 0 4px rgba(255,255,255,.8), 0 0 0 0 rgba(109,59,255,0); }

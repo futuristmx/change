@@ -33,6 +33,14 @@ const RING = [
 ];
 const DESCEND = [0, 44, 82];
 
+/* radar vivo — micro-nodos y conexiones que titilan/se trazan con timing variado */
+const SPARKS: Array<[number, number]> = [
+  [112, 118], [206, 112], [208, 206], [116, 202], [160, 96], [238, 160], [160, 224], [84, 160], [196, 70],
+];
+const SPARK_PATHS: Array<[number, number, number, number]> = [
+  [112, 118, 160, 96], [206, 112, 238, 160], [208, 206, 160, 224], [116, 202, 84, 160],
+];
+
 function DescentFigure({ active }: { active: number }) {
   const descend = DESCEND[active] ?? 0;
   const dotColor = RING[active]?.color ?? "var(--signal-cyan)";
@@ -66,6 +74,16 @@ function DescentFigure({ active }: { active: number }) {
           );
         })}
 
+        {/* radar vivo — conexiones que se trazan y micro-nodos que titilan */}
+        <g>
+          {SPARK_PATHS.map(([x1, y1, x2, y2], i) => (
+            <line key={`sp-${i}`} x1={x1} y1={y1} x2={x2} y2={y2} stroke={i % 2 ? "var(--soft-violet)" : "var(--signal-cyan)"} strokeWidth="1" pathLength={1} className="sd-sparkline" style={{ animationDelay: `${(i * 1.6).toFixed(1)}s`, animationDuration: `${5 + i * 1.3}s` }} />
+          ))}
+          {SPARKS.map(([x, y], i) => (
+            <circle key={`sk-${i}`} cx={x} cy={y} r={i % 3 === 0 ? 2.4 : 1.7} fill={i % 2 ? "var(--signal-cyan)" : "var(--soft-violet)"} className="sd-spark" style={{ animationDelay: `${(i * 0.83).toFixed(1)}s`, animationDuration: `${3.2 + (i % 4) * 1.1}s` }} />
+          ))}
+        </g>
+
         {/* núcleo — la decisión; se ilumina al llegar a lo interno */}
         <circle cx="160" cy="160" r="7" fill="url(#sd-core-g)"
           style={{ opacity: active === 2 ? 1 : 0.32, transition: "opacity .55s var(--ease-premium)" }} />
@@ -80,7 +98,11 @@ function DescentFigure({ active }: { active: number }) {
       <style>{`
         .sd-focus { animation: sd-focuspulse 3.8s var(--ease-premium) infinite; }
         @keyframes sd-focuspulse { 0%,100% { opacity: .5; } 50% { opacity: .16; } }
-        @media (prefers-reduced-motion: reduce) { .sd-focus { animation: none !important; } }
+        .sd-spark { opacity: 0.2; animation-name: sd-spark; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
+        @keyframes sd-spark { 0%,100% { opacity: 0.1; } 50% { opacity: 0.72; } }
+        .sd-sparkline { stroke-dasharray: 1; stroke-dashoffset: 1; opacity: 0; animation-name: sd-sparkline; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
+        @keyframes sd-sparkline { 0% { stroke-dashoffset: 1; opacity: 0; } 38% { opacity: 0.32; } 68% { stroke-dashoffset: 0; opacity: 0.2; } 100% { stroke-dashoffset: 0; opacity: 0; } }
+        @media (prefers-reduced-motion: reduce) { .sd-focus, .sd-spark, .sd-sparkline { animation: none !important; } .sd-sparkline { display: none; } .sd-spark { opacity: 0.3; } }
       `}</style>
     </div>
   );
@@ -134,7 +156,7 @@ export default function SystemicDescent() {
                 <h3 style={{ margin: 0, font: "600 clamp(20px,2vw,28px) var(--font-primary)", letterSpacing: "-.03em", color: "var(--ink-graphite)" }}>{lv.k}</h3>
                 <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--text-faint)" }}>{lv.scale}</span>
               </div>
-              <p style={{ margin: "10px 0 0", font: "400 14.5px/1.55 var(--font-primary)", color: "var(--text-muted)", maxHeight: on ? 200 : 0, opacity: on ? 1 : 0, overflow: "hidden", transition: "max-height .4s var(--ease-premium), opacity .35s, margin .3s" }}>{lv.p}</p>
+              <p style={{ margin: "10px 0 0", font: "400 14.5px/1.55 var(--font-primary)", color: on ? "var(--text-muted)" : "var(--text-faint)", transition: "color .3s var(--ease-premium)" }}>{lv.p}</p>
             </button>
           );
         })}

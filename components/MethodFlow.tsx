@@ -103,6 +103,7 @@ export default function MethodFlow() {
             Top alineado al centro del círculo del nodo (52px de top del btn + 24px nodo radius = 76). */}
         <div className="mf-line" style={{ position: "absolute", left: `${INSET}%`, right: `${INSET}%`, top: 116, height: 2, background: "var(--line-structural)", opacity: 0.45, transformOrigin: "left center", transform: inView ? "scaleX(1)" : "scaleX(0)", transition: "transform var(--duration-line) var(--ease-premium)" }} />
         <div className="mf-line" style={{ position: "absolute", left: `${INSET}%`, top: 116, height: 2, width: `${fill}%`, background: "var(--line-gradient-relation)", transformOrigin: "left center", transform: inView ? "scaleX(1)" : "scaleX(0)", transition: "width var(--duration-standard) var(--ease-premium), transform var(--duration-line) var(--ease-premium)" }} />
+        {inView && <div aria-hidden="true" className="mf-comet" style={{ position: "absolute", top: 113, width: 48, height: 8, borderRadius: 8, background: "radial-gradient(closest-side, rgba(138,108,255,.6), rgba(89,184,217,.18), transparent)", pointerEvents: "none" }} />}
 
         <div className="mf-nodes" style={{ position: "relative", display: "grid", gridTemplateColumns: `repeat(${NODES.length},1fr)`, gap: 16 }}>
           {NODES.map((n, i) => {
@@ -127,7 +128,9 @@ export default function MethodFlow() {
                     sin tapar nada porque el glifo vive DENTRO del círculo. */}
                 <span
                   aria-hidden="true"
+                  className={on ? "mf-node-glow" : undefined}
                   style={{
+                    ["--mf-halo" as string]: n.halo,
                     display: "inline-flex", justifyContent: "center", alignItems: "center",
                     width: 44, height: 44, borderRadius: "50%",
                     margin: "0 auto 24px",
@@ -182,8 +185,16 @@ export default function MethodFlow() {
       </div>
 
       <style>{`
+        .mf-comet { left: ${INSET}%; animation: mf-comet 6s var(--ease-premium) infinite alternate; }
+        @keyframes mf-comet { from { left: ${INSET}%; } to { left: ${100 - INSET}%; } }
+        .mf-node-glow { animation: mf-nodeglow 3.4s var(--ease-premium) infinite; }
+        @keyframes mf-nodeglow { 0%,100% { filter: drop-shadow(0 0 0 transparent); } 50% { filter: drop-shadow(0 0 7px var(--mf-halo, transparent)); } }
+        @media (prefers-reduced-motion: reduce) {
+          .mf-comet, .mf-node-glow { animation: none !important; }
+          .mf-comet { display: none; }
+        }
         @media (max-width: 768px) {
-          .mf-line { display: none; }
+          .mf-line, .mf-comet { display: none; }
           .mf-nodes { grid-template-columns: repeat(3,1fr) !important; row-gap: 24px !important; }
           .mf-micro { display: none !important; }
           .mf-chain { display: block !important; }
