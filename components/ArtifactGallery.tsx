@@ -170,7 +170,6 @@ function ArtCard({ art, i, active, onToggle }: ArtCardProps) {
   return (
     <button
       type="button"
-      role="listitem"
       aria-expanded={active}
       aria-controls={`art-detail-${i}`}
       onClick={() => onToggle(i)}
@@ -287,7 +286,6 @@ export default function ArtifactGallery() {
           <div
             className="art-grid"
             style={{ display: "grid", gridTemplateColumns: `repeat(${cols},1fr)`, gap: 12 }}
-            role="list"
           >
             {row.map((art, colIdx) => {
               const globalI = rowIdx * cols + colIdx;

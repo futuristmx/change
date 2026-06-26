@@ -65,14 +65,12 @@ export default function RootLayout({
       <body>
         <script
           type="application/ld+json"
-          // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
               name: "Change",
               url: SITE_URL,
-              email: "andres@change.live",
               description:
                 "Change diseña capacidad de futuro: la habilidad de una organización para leer cambio, interpretar tensiones, decidir con criterio, diseñar respuestas y sostener aprendizaje antes de que la urgencia la obligue.",
               areaServed: { "@type": "Country", name: "México" },

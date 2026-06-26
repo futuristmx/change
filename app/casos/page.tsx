@@ -143,7 +143,7 @@ export default function CasosPage() {
               ["Decidir", "Una matriz de decisión que hace el criterio explícito y defendible.", "var(--change-violet)"],
               ["Diseñar", "Un roadmap vivo que le da forma ejecutable a la decisión.", "var(--change-violet)"],
               ["Sostener", "Mission Control: la memoria estratégica donde la capacidad se queda viva.", "var(--lavender-mist)"],
-            ].map(([v, p, c], i, arr) => (
+            ].map(([v, p, c], i) => (
               <Reveal key={v} delay={i * 70} style={{ position: "relative", paddingTop: 20, borderTop: "2px solid rgba(255,255,255,.14)" }}>
                 <span aria-hidden="true" style={{ position: "absolute", top: -6, left: 0, width: 9, height: 9, borderRadius: "50%", background: c }} />
                 <strong style={{ display: "block", font: "600 16px var(--font-primary)", letterSpacing: "-.02em", color: "#fff" }}>{v}</strong>

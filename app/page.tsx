@@ -44,15 +44,6 @@ const ARTEFACTOS = [
   { h: "Mission Control", p: "Donde señales, decisiones, proyectos y reportes se mantienen vivos y conectados.", k: "Sostener", c: "var(--ink-graphite)" },
 ];
 
-const TENSIONES = [
-  { k: "Crecer sin diluir identidad", c: "var(--opportunity-orange)", p: "El negocio se expande y la esencia que lo hizo valioso empieza a perderse. Instalamos la regla para crecer sabiendo qué es innegociable y qué puede cambiar." },
-  { k: "Priorizar apuestas cuando no alcanza", c: "var(--change-violet)", p: "Hay más oportunidades buenas que recursos para perseguirlas. Instalamos la matriz de decisión que vuelve defendible decir que no." },
-  { k: "Transferir criterio entre generaciones y equipos", c: "var(--human-pink)", p: "El juicio vive en una o pocas cabezas y no se hereda. Lo hacemos explícito y transferible, para que el rumbo no dependa de quién esté en la sala." },
-  { k: "Anticipar qué se rompe bajo presión", c: "var(--warning)", p: "La organización funciona hasta que el contexto la exige de más. Mapeamos los puntos de quiebre antes de que el estrés los encuentre." },
-  { k: "Rediseñar la experiencia cuando el usuario ya cambió", c: "var(--signal-cyan)", p: "Lo que funcionaba dejó de corresponder con quien ahora decide y compra. Releemos al usuario real y rediseñamos desde ahí, no desde la inercia." },
-  { k: "Convertir visión en roadmap gobernable", c: "var(--change-violet)", p: "Hay una visión clara que no logra bajar a movimientos concretos. La volvemos secuencia accionable y sostenible en el tiempo." },
-];
-
 const MANIFIESTO = [
   { k: "Se ancla en lo que está cambiando", p: "Cada arco de trabajo arranca en una señal real del entorno y una decisión específica que la organización tiene enfrente." },
   { k: "Se entrena en decisiones reales", p: "Cada reto instala músculo. La capacidad se hace ejercitándola sobre casos concretos, no aprendiéndola en abstracto." },

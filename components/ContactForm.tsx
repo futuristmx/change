@@ -182,7 +182,7 @@ export default function ContactForm() {
         </button>
         {status === "error" && (
           <span style={{ font: "400 13.5px var(--font-primary)", color: "var(--status-error-fg)" }}>
-            Algo falló al enviar. Intenta de nuevo o escríbenos a andres@change.live.
+            Algo falló al enviar. Intenta de nuevo en un momento.
           </span>
         )}
       </div>

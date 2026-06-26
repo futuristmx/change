@@ -222,8 +222,8 @@ export default function MissionControlLoginPage() {
                   }}
                 >
                   <strong style={{ display: "block", marginBottom: 4, font: "600 12.5px var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--lavender-mist)" }}>Acceso restringido</strong>
-                  El sistema está en transición a SSO empresarial. Para tu acceso temporal, contacta al board en{" "}
-                  <a href="mailto:board@change.live" style={{ color: "#fff", textDecoration: "underline", textUnderlineOffset: 3 }}>board@change.live</a>.
+                  El sistema está en transición a SSO empresarial. Para tu acceso temporal, escríbenos desde la{" "}
+                  <Link href="/contacto" style={{ color: "#fff", textDecoration: "underline", textUnderlineOffset: 3 }}>página de contacto</Link>.
                 </div>
               )}
             </div>
