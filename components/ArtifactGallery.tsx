@@ -135,11 +135,9 @@ const ARTIFACTS: Artifact[] = [
 
 const DETAIL_COLS = [
   { key: "pregunta" as const,  label: "Pregunta que responde" },
-  { key: "cuando" as const,    label: "Cuándo se usa" },
+  { key: "deja" as const,      label: "Qué deja" },
   { key: "riesgo" as const,    label: "Riesgo que reduce" },
   { key: "decision" as const,  label: "Decisión que habilita" },
-  { key: "deja" as const,      label: "Qué deja" },
-  { key: "method" as const,    label: "Conexión con el método" },
 ];
 
 function useResponsiveCols() {
@@ -230,6 +228,99 @@ function ArtCard({ art, i, active, onToggle }: ArtCardProps) {
   );
 }
 
+/* ── Diagrama vectorial del instrumento — minimalista, grafito neutro ── */
+const DIA = { fill: "none", stroke: "var(--ink-graphite)", strokeWidth: 1.4, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
+const INK = "var(--ink-graphite)";
+
+function InstrumentDiagram({ name }: { name: string }) {
+  const body = (() => {
+    switch (name) {
+      case "Radar de señales":
+        return (
+          <>
+            <g opacity="0.3"><circle cx="60" cy="60" r="44" /><circle cx="60" cy="60" r="29" /><circle cx="60" cy="60" r="14" /></g>
+            <g opacity="0.22"><line x1="14" y1="60" x2="106" y2="60" /><line x1="60" y1="14" x2="60" y2="106" /></g>
+            <g fill={INK} stroke="none"><circle cx="82" cy="44" r="3.4" /><circle cx="45" cy="74" r="2.6" /><circle cx="70" cy="83" r="2.2" /><circle cx="43" cy="48" r="2" /></g>
+            <circle cx="82" cy="44" r="8" fill="none" strokeWidth="1.1" opacity="0.5" />
+          </>
+        );
+      case "Mapa de tensiones":
+        return (
+          <>
+            <g opacity="0.25"><line x1="60" y1="22" x2="60" y2="98" /><line x1="22" y1="60" x2="98" y2="60" /></g>
+            <path d="M24 60 H42 M35 53 L42 60 L35 67" />
+            <path d="M96 60 H78 M85 53 L78 60 L85 67" />
+            <circle cx="60" cy="60" r="11" fill="none" opacity="0.4" />
+            <circle cx="60" cy="60" r="5.5" fill={INK} stroke="none" />
+          </>
+        );
+      case "Matriz de decisión":
+        return (
+          <>
+            <rect x="26" y="26" width="68" height="68" opacity="0.5" />
+            <g opacity="0.5"><line x1="60" y1="26" x2="60" y2="94" /><line x1="26" y1="60" x2="94" y2="60" /></g>
+            <g fill={INK} stroke="none" opacity="0.32"><circle cx="43" cy="43" r="2.4" /><circle cx="43" cy="77" r="2.4" /><circle cx="77" cy="77" r="2.4" /></g>
+            <circle cx="77" cy="43" r="9" fill="none" opacity="0.45" />
+            <circle cx="77" cy="43" r="5" fill={INK} stroke="none" />
+          </>
+        );
+      case "Roadmap vivo":
+        return (
+          <>
+            <line x1="20" y1="66" x2="100" y2="66" opacity="0.4" />
+            <g fill={INK} stroke="none"><circle cx="28" cy="66" r="4" /><circle cx="52" cy="66" r="4" /></g>
+            <g fill="none"><circle cx="76" cy="66" r="4" /><circle cx="100" cy="66" r="4" /></g>
+            <path d="M76 66 L92 46" opacity="0.5" /><circle cx="92" cy="46" r="3.4" fill="none" />
+          </>
+        );
+      case "Reporte ejecutivo":
+        return (
+          <>
+            <rect x="34" y="22" width="52" height="76" opacity="0.55" />
+            <rect x="42" y="32" width="36" height="8" rx="0" fill={INK} stroke="none" opacity="0.55" />
+            <g opacity="0.42"><line x1="42" y1="52" x2="78" y2="52" /><line x1="42" y1="62" x2="78" y2="62" /><line x1="42" y1="72" x2="66" y2="72" /></g>
+            <line x1="42" y1="84" x2="58" y2="84" strokeWidth="2.4" />
+          </>
+        );
+      case "Field Note":
+        return (
+          <>
+            <path d="M40 28 H72 L84 40 V92 H40 Z" opacity="0.55" />
+            <path d="M72 28 V40 H84" opacity="0.55" />
+            <g opacity="0.42"><line x1="48" y1="58" x2="76" y2="58" /><line x1="48" y1="68" x2="76" y2="68" /><line x1="48" y1="78" x2="64" y2="78" /></g>
+            <circle cx="49" cy="48" r="2.6" fill={INK} stroke="none" />
+          </>
+        );
+      case "Workshop instrumentado":
+        return (
+          <>
+            <g opacity="0.45"><line x1="30" y1="34" x2="60" y2="60" /><line x1="92" y1="34" x2="60" y2="60" /><line x1="26" y1="76" x2="60" y2="60" /><line x1="94" y1="80" x2="60" y2="60" /></g>
+            <g fill={INK} stroke="none" opacity="0.65"><circle cx="30" cy="34" r="3" /><circle cx="92" cy="34" r="3" /><circle cx="26" cy="76" r="3" /><circle cx="94" cy="80" r="3" /></g>
+            <circle cx="60" cy="60" r="12" fill="none" opacity="0.4" />
+            <circle cx="60" cy="60" r="6.5" fill={INK} stroke="none" />
+          </>
+        );
+      case "Mission Control":
+        return (
+          <>
+            <g opacity="0.38"><line x1="60" y1="60" x2="32" y2="36" /><line x1="60" y1="60" x2="90" y2="40" /><line x1="60" y1="60" x2="34" y2="84" /><line x1="60" y1="60" x2="86" y2="86" /><line x1="32" y1="36" x2="90" y2="40" /><line x1="34" y1="84" x2="86" y2="86" /></g>
+            <g fill={INK} stroke="none"><circle cx="32" cy="36" r="3" /><circle cx="90" cy="40" r="3" /><circle cx="34" cy="84" r="3" /><circle cx="86" cy="86" r="3" /></g>
+            <circle cx="60" cy="60" r="8" fill="none" strokeWidth="1.4" />
+            <circle cx="60" cy="60" r="3.2" fill={INK} stroke="none" />
+          </>
+        );
+      default:
+        return <><circle cx="60" cy="60" r="30" opacity="0.4" /><circle cx="60" cy="60" r="5" fill={INK} stroke="none" /></>;
+    }
+  })();
+
+  return (
+    <svg viewBox="0 0 120 120" width="100%" height="100%" aria-hidden="true" style={{ display: "block", maxWidth: 188, margin: "0 auto" }}>
+      <g {...DIA}>{body}</g>
+    </svg>
+  );
+}
+
 function DetailPanel({ sel, selected }: { sel: Artifact; selected: number }) {
   return (
     <div
@@ -239,7 +330,7 @@ function DetailPanel({ sel, selected }: { sel: Artifact; selected: number }) {
       aria-live="polite"
       style={{ marginTop: 12, marginBottom: 12, overflow: "hidden", animation: "art-detail-in .28s var(--ease-premium)" }}
     >
-      <div style={{ padding: "36px 40px", border: `1px solid ${sel.c}`, borderTop: `3px solid ${sel.c}`, background: "rgba(255,255,255,.98)" }}>
+      <div style={{ padding: "clamp(28px,3.4vw,40px)", border: `1px solid ${sel.c}`, borderTop: `3px solid ${sel.c}`, background: "rgba(255,255,255,.98)" }}>
         {/* Encabezado del panel */}
         <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 28 }}>
           <span aria-hidden="true" style={{ width: 8, height: 8, borderRadius: "50%", background: sel.c, flexShrink: 0 }} />
@@ -247,16 +338,21 @@ function DetailPanel({ sel, selected }: { sel: Artifact; selected: number }) {
           <span style={{ font: "700 10px var(--font-secondary)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-muted)", marginLeft: 4 }}>· {sel.k}</span>
         </div>
 
-        {/* Slots 4–6 del sistema de cards 2.4: 6 columnas de detalle */}
-        <div className="art-detail-cols" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "28px 36px" }}>
-          {DETAIL_COLS.map((col) => (
-            <div key={col.key}>
-              <span style={{ display: "block", font: "700 10px var(--font-secondary)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-faint)", marginBottom: 10 }}>
-                {col.label}
-              </span>
-              <p style={{ margin: 0, font: "400 14px/1.65 var(--font-primary)", color: "var(--ink-graphite)" }}>{sel[col.key]}</p>
-            </div>
-          ))}
+        {/* Diagrama del instrumento + datos esenciales */}
+        <div className="art-detail-grid" style={{ display: "grid", gridTemplateColumns: "minmax(0,250px) minmax(0,1fr)", gap: "clamp(24px,3vw,48px)", alignItems: "start" }}>
+          <div style={{ background: "color-mix(in srgb, var(--ink-graphite) 3.5%, transparent)", border: "1px solid var(--border-subtle)", padding: "clamp(22px,2.6vw,32px)", display: "grid", placeItems: "center", aspectRatio: "1 / 1" }}>
+            <InstrumentDiagram name={sel.h} />
+          </div>
+          <div className="art-detail-cols" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "26px 32px" }}>
+            {DETAIL_COLS.map((col) => (
+              <div key={col.key}>
+                <span style={{ display: "block", font: "700 10px var(--font-secondary)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-faint)", marginBottom: 9 }}>
+                  {col.label}
+                </span>
+                <p style={{ margin: 0, font: "400 14px/1.6 var(--font-primary)", color: "var(--ink-graphite)" }}>{sel[col.key]}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
@@ -312,8 +408,8 @@ export default function ArtifactGallery() {
           .art-card { transition: none !important; }
           .art-card:hover { transform: none !important; }
         }
-        @media (max-width: 900px) {
-          .art-detail-cols { grid-template-columns: 1fr 1fr !important; }
+        @media (max-width: 820px) {
+          .art-detail-grid { grid-template-columns: 1fr !important; }
         }
         @media (max-width: 520px) {
           .art-detail-cols { grid-template-columns: 1fr !important; }
