@@ -111,7 +111,7 @@ export default function CasosPage() {
             <span aria-hidden="true" style={{ flexShrink: 0, marginTop: 6, width: 8, height: 8, borderRadius: "50%", background: "var(--change-violet)" }} />
             <div>
               <span style={{ display: "block", marginBottom: 6, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--change-violet)" }}>Sobre estos casos</span>
-              <p style={{ margin: 0, font: "500 15.5px/1.55 var(--font-primary)", color: "var(--ink-graphite)", maxWidth: "78ch" }}>Todos los proyectos que aquí aparecen son trabajos reales del board de Change. Los nombres de las organizaciones, el sector y los detalles operativos se omiten para proteger el contexto estratégico de cada cliente. La tensión, el método y el sistema instalado son tal cual ocurrieron.</p>
+              <p style={{ margin: 0, font: "500 15.5px/1.55 var(--font-primary)", color: "var(--ink-graphite)", maxWidth: "78ch" }}>Los nombres de las organizaciones, el sector y los detalles operativos se omiten para proteger el contexto estratégico de cada cliente. La tensión, el método y el sistema instalado son tal cual ocurrieron.</p>
             </div>
           </Reveal>
         </div>
