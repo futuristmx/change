@@ -18,6 +18,7 @@ export { default as Badge, type BadgeTone } from "./Badge";
 export { default as SignalField } from "./SignalField";
 export { default as Toast } from "./Toast";
 export { default as EmptyState } from "./EmptyState";
+export { default as InlineTooltip } from "./InlineTooltip";
 
 export * from "./charts";
 export * from "./tokens";

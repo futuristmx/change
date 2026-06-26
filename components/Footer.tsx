@@ -2,6 +2,7 @@ import type React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import EtherealDivider from "@/components/ds/EtherealDivider";
+import InlineTooltip from "@/components/ds/InlineTooltip";
 
 const COL_HEADER: React.CSSProperties = {
   font: "700 11px var(--font-secondary)",
@@ -53,7 +54,10 @@ export default function Footer() {
               />
             </Link>
             <p style={{ margin: "0 0 28px", font: "400 13.5px/1.55 var(--font-primary)", color: "rgba(240,244,255,.65)", maxWidth: "26ch" }}>
-              Inteligencia estratégica para capacidad de futuro
+              Inteligencia estratégica para{" "}
+              <InlineTooltip content="La capacidad de tomar mejores decisiones antes de que la certeza llegue. Es la condición para actuar cuando el entorno cambia.">
+                capacidad de futuro
+              </InlineTooltip>
             </p>
             <Link href="/contacto" className="btn btn-primary btn-sm" style={{ alignSelf: "flex-start" }}>
               Simular una decisión
@@ -103,7 +107,11 @@ export default function Footer() {
         </div>
 
         <div style={{ display: "flex", flexWrap: "wrap", gap: 16, justifyContent: "space-between", alignItems: "center", marginTop: "clamp(80px,9vw,120px)", paddingTop: 32, borderTop: "1px solid rgba(255,255,255,.08)" }}>
-          <span style={{ font: "400 12.5px var(--font-primary)", color: "rgba(240,244,255,.5)" }}>© 2026 Change · Inteligencia estratégica para capacidad de futuro</span>
+          <span style={{ font: "400 12.5px var(--font-primary)", color: "rgba(240,244,255,.5)" }}>© 2026 Change · Inteligencia estratégica para{" "}
+            <InlineTooltip content="La capacidad de tomar mejores decisiones antes de que la certeza llegue. Es la condición para actuar cuando el entorno cambia.">
+              capacidad de futuro
+            </InlineTooltip>
+          </span>
           <span style={{ font: "700 10px var(--font-secondary)", letterSpacing: ".16em", textTransform: "uppercase", color: "rgba(240,244,255,.35)" }}>México</span>
         </div>
       </div>

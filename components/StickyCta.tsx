@@ -2,15 +2,17 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 
 /**
  * StickyCta — barra inferior mobile (<=768px) con CTA primario.
- * Se oculta cuando el footer entra en viewport (no estorbar contacto principal).
+ * Se oculta cuando el footer entra en viewport (no estorbar contacto principal)
+ * y completamente en /contacto (el usuario ya está en la experiencia de CTA).
  * Respeta safe-area-inset-bottom (iOS).
- * La visibilidad mobile/desktop la maneja CSS; el JS solo oculta al ver footer.
  */
 export default function StickyCta() {
   const [footerVisible, setFooterVisible] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const footers = document.querySelectorAll("footer");
@@ -26,6 +28,9 @@ export default function StickyCta() {
     io.observe(footer);
     return () => io.disconnect();
   }, []);
+
+  // Oculto en /contacto — el usuario ya está en la experiencia principal de CTA
+  if (pathname === "/contacto") return null;
 
   return (
     <div
