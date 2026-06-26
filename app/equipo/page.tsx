@@ -18,39 +18,23 @@ const WRAP = "min(1340px, calc(100% - clamp(40px,8vw,128px)))";
 const SOCIOS = [
   {
     n: "Andrés Valencia",
+    role: "Co-fundador",
     arc: "Leer · Interpretar",
-    disc: "Radar de señales · Mapa de tensiones",
+    domain: "Foresight e innovación estratégica",
     c: "var(--signal-cyan)",
-    p: "Convierte señales dispersas en lectura estratégica. Ve qué está cambiando en el entorno antes de que se vuelva urgente y nombra la tensión que la organización todavía no puede articular.",
-    cred: [
-      "Experto generalista en foresight estratégico e innovación",
-      "Maestría en Business Innovation",
-      "Ex-miembro del board directivo de The Design Futures Initiative",
-      "Ex-presidente del Consejo Promotor de Innovación y Diseño de México",
-      "Miembro de la red latinoamericana de políticas públicas y diseño",
-    ],
+    tagline: "Ve la señal cuando todavía es débil.",
+    story: "Presidió el Consejo Promotor de Innovación y Diseño de México y formó parte del board de The Design Futures Initiative. Desde ahí entendió algo incómodo: las organizaciones rara vez fallan por falta de información — fallan por no leerla a tiempo. Fundó Change para cerrar esa brecha: leer el futuro mientras todavía es señal y nombrar la tensión que nadie en la sala se atreve a decir en voz alta.",
   },
   {
     n: "Miguel Cadena",
+    role: "Co-fundador",
     arc: "Decidir · Aterrizar",
-    disc: "Matriz de decisión · Reporte ejecutivo",
+    domain: "Estrategia, propiedad intelectual y modelos de negocio",
     c: "var(--change-violet)",
-    p: "Convierte la lectura en apuestas con costos explícitos y crecimiento sostenible. Define qué se protege, qué se sacrifica y cómo el criterio se defiende ante el board o la dirección.",
-    cred: [
-      "Experto generalista en propiedad intelectual e innovación estratégica",
-      "Estratega en innovación de modelos de negocio y monetización",
-      "Consultor de empresas transnacionales en estrategias basadas en activos intangibles",
-      "Profesor invitado en licenciatura y posgrado en diversas universidades",
-    ],
+    tagline: "Convierte lo intangible en valor defendible.",
+    story: "Asesoró a empresas transnacionales en propiedad intelectual y modelos de negocio, y lo enseña en licenciatura y posgrado. Su convicción es simple: una decisión solo vale cuando sus costos están sobre la mesa y alguien puede defenderla frente al consejo. En Change convierte la lectura en apuestas con criterio explícito — las que se sostienen solas cuando llega la presión.",
   },
 ];
-
-const RED = {
-  arc: "Profundidad por reto",
-  disc: "Dominio específico",
-  c: "var(--soft-stone-gray)",
-  p: "Entra cuando el reto lo exige — cultura organizacional, tecnología, finanzas, operación. Sin diluir el método. El board crece por la pregunta, no por el organigrama.",
-};
 
 const ESCALERA = [
   { n: "Mapa de Claridad", tag: "Entrada", c: "var(--ink-graphite)", p: "Una primera lectura de la decisión y sus tensiones. El punto donde se ve si vale la pena ir más a fondo." },
@@ -90,44 +74,22 @@ export default function EquipoPage() {
             <span style={{ width: 7, height: 7, background: "var(--change-violet)" }} />
             <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)" }}>Socios fundadores</span>
           </Reveal>
-          <Reveal delay={60} as="h2" style={{ margin: "0 0 16px", maxWidth: "22ch", font: "600 clamp(30px,4.2vw,56px)/.99 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>El board sostiene el criterio. La red aporta profundidad cuando el reto lo exige.</Reveal>
-          <Reveal delay={100} as="p" style={{ margin: "0 0 clamp(40px,5vw,60px)", maxWidth: "56ch", font: "400 clamp(16px,1.3vw,19px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>No repartimos un proyecto en tareas. Repartimos una decisión en capacidades. Cada capacidad deja un artefacto que puedes ver. El método no se delega: se gobierna desde Change.</Reveal>
-          {/* Socios fundadores — perfil con trayectoria real */}
-          <div className="eq-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 20 }}>
+          <Reveal delay={60} as="h2" style={{ margin: "0 0 16px", maxWidth: "24ch", font: "600 clamp(30px,4.2vw,56px)/.99 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>Change nació de dos obsesiones complementarias: leer el cambio a tiempo y volverlo decisión que se sostiene.</Reveal>
+          <Reveal delay={100} as="p" style={{ margin: "0 0 clamp(40px,5vw,60px)", maxWidth: "58ch", font: "400 clamp(16px,1.3vw,19px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>Dos fundadores, dos disciplinas, un mismo método. No repartimos un proyecto en tareas: repartimos una decisión en capacidades. Y el método no se delega — se gobierna desde aquí.</Reveal>
+          {/* Co-fundadores — storytelling, sin bullets */}
+          <div className="eq-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: "clamp(20px,2.4vw,28px)" }}>
             {SOCIOS.map((m, i) => (
-              <Reveal key={m.n} delay={(i % 2) * 90} as="article" className="ch-card" style={{ background: "rgba(255,255,255,.85)", border: "1px solid var(--border-subtle)", borderTop: `3px solid ${m.c}`, padding: "clamp(30px,3vw,40px) clamp(28px,2.6vw,36px)", display: "flex", flexDirection: "column" }}>
-                <span style={{ display: "inline-flex", alignItems: "center", gap: 8, font: "700 11px var(--font-secondary)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--ink-graphite)" }}>
-                  <span aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: m.c }} />{m.arc}
+              <Reveal key={m.n} delay={(i % 2) * 90} as="article" className="ch-card" style={{ background: "rgba(255,255,255,.9)", border: "1px solid var(--border-subtle)", borderTop: `3px solid ${m.c}`, padding: "clamp(34px,3.4vw,48px) clamp(30px,3vw,44px)", display: "flex", flexDirection: "column" }}>
+                <span style={{ display: "inline-flex", alignItems: "center", gap: 9, font: "700 12.5px var(--font-secondary)", letterSpacing: ".15em", textTransform: "uppercase", color: "var(--ink-graphite)" }}>
+                  <span aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: m.c }} />{m.role} · {m.arc}
                 </span>
-                <h3 style={{ margin: "14px 0 4px", font: "600 clamp(22px,2vw,26px) var(--font-primary)", letterSpacing: "-.02em", color: "var(--ink-graphite)" }}>{m.n}</h3>
-                <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".08em", textTransform: "uppercase", color: "var(--text-muted)" }}>{m.disc}</span>
-                <p style={{ margin: "16px 0 22px", font: "400 14.5px/1.6 var(--font-primary)", color: "var(--text-muted)" }}>{m.p}</p>
-                <div style={{ marginTop: "auto", paddingTop: 22, borderTop: "1px solid var(--border-subtle)" }}>
-                  <span style={{ display: "block", font: "700 10px var(--font-secondary)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-faint)", marginBottom: 14 }}>Trayectoria</span>
-                  <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 10 }}>
-                    {m.cred.map((cr) => (
-                      <li key={cr} style={{ display: "flex", gap: 11, font: "400 13.5px/1.5 var(--font-primary)", color: "var(--text-muted)" }}>
-                        <span aria-hidden="true" style={{ flexShrink: 0, marginTop: 8, width: 5, height: 5, borderRadius: "50%", background: m.c }} />
-                        <span>{cr}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                <h3 style={{ margin: "16px 0 6px", font: "600 clamp(26px,2.4vw,34px)/1.02 var(--font-primary)", letterSpacing: "-.03em", color: "var(--ink-graphite)" }}>{m.n}</h3>
+                <span style={{ display: "block", marginBottom: 22, font: "500 14px var(--font-mono)", letterSpacing: ".02em", color: "var(--text-muted)" }}>{m.domain}</span>
+                <p style={{ margin: "0 0 18px", font: "600 clamp(18px,1.6vw,21px)/1.32 var(--font-primary)", letterSpacing: "-.02em", color: "var(--ink-graphite)", textWrap: "balance" }}>{m.tagline}</p>
+                <p style={{ margin: 0, font: "400 clamp(15px,1.25vw,16.5px)/1.65 var(--font-primary)", color: "var(--text-muted)" }}>{m.story}</p>
               </Reveal>
             ))}
           </div>
-
-          {/* Red de especialistas — capa extensible, no es socio nombrado */}
-          <Reveal delay={120} as="article" className="ch-card eq-red" style={{ marginTop: 20, background: "rgba(255,255,255,.7)", border: "1px solid var(--border-subtle)", borderLeft: `3px solid ${RED.c}`, padding: "clamp(28px,3vw,38px) clamp(28px,2.6vw,40px)", display: "grid", gridTemplateColumns: "minmax(0,260px) minmax(0,1fr)", gap: "clamp(20px,4vw,56px)", alignItems: "center" }}>
-            <div>
-              <span style={{ display: "inline-flex", alignItems: "center", gap: 8, font: "700 11px var(--font-secondary)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--ink-graphite)" }}>
-                <span aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: RED.c }} />{RED.arc}
-              </span>
-              <h3 style={{ margin: "14px 0 4px", font: "600 clamp(20px,1.9vw,24px) var(--font-primary)", letterSpacing: "-.02em", color: "var(--ink-graphite)" }}>Red de especialistas</h3>
-              <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".08em", textTransform: "uppercase", color: "var(--text-muted)" }}>{RED.disc}</span>
-            </div>
-            <p style={{ margin: 0, font: "400 clamp(15px,1.3vw,17px)/1.6 var(--font-primary)", color: "var(--text-muted)" }}>{RED.p}</p>
-          </Reveal>
         </div>
       </section>
 
@@ -168,9 +130,6 @@ export default function EquipoPage() {
       <style>{`
         @media (max-width: 980px) {
           .eq-intro, .eq-grid, .eq-ladder { grid-template-columns: 1fr !important; }
-        }
-        @media (max-width: 720px) {
-          .eq-red { grid-template-columns: 1fr !important; gap: 18px !important; align-items: start !important; }
         }
       `}</style>
     </PageScaffold>

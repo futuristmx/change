@@ -1,9 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { Fragment, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+
+const ACCESO_HREF = "/mission-control/login";
 
 const NAV = [
   { idx: "01", label: "Método", href: "/capacidades" },
@@ -12,6 +14,7 @@ const NAV = [
   { idx: "04", label: "Equipo", href: "/equipo" },
   { idx: "05", label: "Field Notes", href: "/field-notes" },
   { idx: "06", label: "Futuro", href: "/futuro" },
+  { idx: "07", label: "Acceso Clientes", href: ACCESO_HREF },
 ];
 
 // Pulse del logo — secuencia variable:
@@ -90,24 +93,29 @@ export default function Header() {
           >
             {NAV.map((item) => {
               const active = pathname === item.href || pathname.startsWith(item.href + "/");
+              const isAcceso = item.href === ACCESO_HREF;
               return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  aria-current={active ? "page" : undefined}
-                  style={{
-                    display: "inline-flex", alignItems: "center", gap: 6, height: 44, padding: "0 15px",
-                    color: active ? "var(--ink-graphite)" : "var(--text-muted)",
-                    font: active ? "600 13.5px var(--font-primary)" : "500 13.5px var(--font-primary)",
-                    letterSpacing: "-0.01em",
-                    borderBottom: active ? "2px solid var(--change-violet)" : "2px solid transparent",
-                    marginBottom: -1,
-                    transition: "color .15s ease, border-color .15s ease",
-                  }}
-                >
-                  <span style={{ font: "600 11px var(--font-mono)", letterSpacing: "0.04em", color: active ? "var(--change-violet)" : "var(--soft-stone-gray)" }}>{item.idx}</span>
-                  {item.label}
-                </Link>
+                <Fragment key={item.href}>
+                  {isAcceso && (
+                    <span aria-hidden="true" style={{ width: 1, height: 22, background: "var(--border-subtle)", margin: "0 6px" }} />
+                  )}
+                  <Link
+                    href={item.href}
+                    aria-current={active ? "page" : undefined}
+                    style={{
+                      display: "inline-flex", alignItems: "center", gap: 6, height: 44, padding: "0 12px",
+                      color: active ? "var(--ink-graphite)" : "var(--text-muted)",
+                      font: active ? "600 13.5px var(--font-primary)" : "500 13.5px var(--font-primary)",
+                      letterSpacing: "-0.01em",
+                      borderBottom: active ? "2px solid var(--change-violet)" : "2px solid transparent",
+                      marginBottom: -1,
+                      transition: "color .15s ease, border-color .15s ease",
+                    }}
+                  >
+                    <span style={{ font: "600 11px var(--font-mono)", letterSpacing: "0.04em", color: active ? "var(--change-violet)" : "var(--soft-stone-gray)" }}>{item.idx}</span>
+                    {item.label}
+                  </Link>
+                </Fragment>
               );
             })}
           </div>
@@ -162,7 +170,7 @@ export default function Header() {
       )}
 
       <style>{`
-        @media (max-width: 980px) {
+        @media (max-width: 1200px) {
           .ch-command { display: none !important; }
           .ch-burger { display: inline-flex !important; }
           .ch-cta { display: none !important; }
