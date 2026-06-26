@@ -15,6 +15,7 @@ export default function EtherealDivider({ dark = false, style }: EtherealDivider
     <div
       role="separator"
       aria-hidden="true"
+      className="ch-etherdiv"
       style={{
         height: 1,
         width: "100%",
