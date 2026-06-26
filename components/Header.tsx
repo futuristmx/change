@@ -102,6 +102,7 @@ export default function Header() {
                   <Link
                     href={item.href}
                     aria-current={active ? "page" : undefined}
+                    className="ch-navlink"
                     style={{
                       display: "inline-flex", alignItems: "center", gap: 6, height: 44, padding: "0 12px",
                       color: active ? "var(--ink-graphite)" : "var(--text-muted)",
@@ -109,10 +110,10 @@ export default function Header() {
                       letterSpacing: "-0.01em",
                       borderBottom: active ? "2px solid var(--change-violet)" : "2px solid transparent",
                       marginBottom: -1,
-                      transition: "color .15s ease, border-color .15s ease",
+                      transition: "color .15s ease, background-color .15s ease, border-color .15s ease",
                     }}
                   >
-                    <span style={{ font: "600 11px var(--font-mono)", letterSpacing: "0.04em", color: active ? "var(--change-violet)" : "var(--soft-stone-gray)" }}>{item.idx}</span>
+                    <span className="ch-navidx" style={{ font: "600 11px var(--font-mono)", letterSpacing: "0.04em", color: active ? "var(--change-violet)" : "var(--soft-stone-gray)" }}>{item.idx}</span>
                     {item.label}
                   </Link>
                 </Fragment>
@@ -170,6 +171,9 @@ export default function Header() {
       )}
 
       <style>{`
+        /* Hover de items del nav — neutral, sin violeta */
+        .ch-navlink:hover { color: var(--ink-graphite) !important; background: color-mix(in srgb, var(--ink-graphite) 5%, transparent); }
+        .ch-navlink:hover .ch-navidx { color: var(--ink-graphite) !important; }
         @media (max-width: 1200px) {
           .ch-command { display: none !important; }
           .ch-burger { display: inline-flex !important; }
