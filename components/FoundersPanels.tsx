@@ -51,11 +51,11 @@ export default function FoundersPanels({ founders }: { founders: Founder[] }) {
                 background: "var(--surface-dark-secondary)",
               }}
             >
-              {/* base: gradiente dark del color del socio (respira a través de la foto) */}
-              <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: `linear-gradient(155deg, color-mix(in srgb, ${m.c} 36%, var(--surface-dark)) 0%, var(--surface-dark-secondary) 52%, var(--surface-dark) 100%)` }} />
-              {/* foto semi-transparente */}
+              {/* base: gradiente dark del color del socio (se funde con la foto) */}
+              <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: `linear-gradient(155deg, color-mix(in srgb, ${m.c} 46%, var(--surface-dark)) 0%, var(--surface-dark-secondary) 50%, var(--surface-dark) 100%)` }} />
+              {/* foto fundida (blend duotono con el color del socio) */}
               {m.photo && (
-                <div aria-hidden="true" className="fp-photo" style={{ position: "absolute", inset: 0, background: `url(${m.photo}) ${m.focus ?? "center 30%"} / cover no-repeat`, opacity: 0.8 }} />
+                <div aria-hidden="true" className="fp-photo" style={{ position: "absolute", inset: 0, background: `url(${m.photo}) ${m.focus ?? "center 30%"} / cover no-repeat`, opacity: 0.9, mixBlendMode: "luminosity" }} />
               )}
               {/* iniciales watermark (solo placeholder) */}
               {!m.photo && (
