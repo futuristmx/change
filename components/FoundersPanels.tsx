@@ -12,6 +12,8 @@ export interface Founder {
   story: string;
   /** ruta de la foto (cuando exista); si falta, se muestra placeholder con iniciales */
   photo?: string;
+  /** object-position de la foto para encuadrar la cara, ej "center 35%" */
+  focus?: string;
 }
 
 export default function FoundersPanels({ founders }: { founders: Founder[] }) {
@@ -56,10 +58,8 @@ export default function FoundersPanels({ founders }: { founders: Founder[] }) {
                 style={{
                   position: "absolute", inset: 0,
                   background: m.photo
-                    ? `url(${m.photo}) center top / cover no-repeat, linear-gradient(155deg, color-mix(in srgb, ${m.c} 28%, var(--surface-dark)) 0%, var(--surface-dark-secondary) 58%, var(--surface-dark) 100%)`
+                    ? `url(${m.photo}) ${m.focus ?? "center 30%"} / cover no-repeat, linear-gradient(155deg, color-mix(in srgb, ${m.c} 28%, var(--surface-dark)) 0%, var(--surface-dark-secondary) 58%, var(--surface-dark) 100%)`
                     : `linear-gradient(155deg, color-mix(in srgb, ${m.c} 28%, var(--surface-dark)) 0%, var(--surface-dark-secondary) 58%, var(--surface-dark) 100%)`,
-                  transition: "transform .6s var(--ease-premium)",
-                  transform: on ? "scale(1.02)" : "scale(1)",
                 }}
               />
               {/* iniciales watermark (solo placeholder) */}
