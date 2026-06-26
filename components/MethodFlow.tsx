@@ -183,28 +183,49 @@ export default function MethodFlow() {
           Leer · Interpretar · Decidir · Diseñar · Sostener
         </div>
 
-        {/* panel de detalle */}
-        <div style={{ margin: "36px 0 0", padding: "30px 32px", border: "1px solid var(--border-subtle)", borderLeft: `3px solid ${node.color}`, background: "var(--surface-card)", transition: "border-color var(--duration-standard) var(--ease-premium)" }}>
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, flexWrap: "wrap", marginBottom: 8 }}>
-            <span style={{ display: "inline-flex", alignItems: "center", gap: 10, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--ink-graphite)" }}>
-              <span aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: node.color }} />{node.title}
-            </span>
-            <span style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "7px 13px", border: `1px solid ${node.color}`, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".08em", textTransform: "uppercase", color: "var(--ink-graphite)" }}>
-              <span aria-hidden="true" style={{ width: 6, height: 6, borderRadius: "50%", background: node.color }} />{node.artefacto}
-            </span>
-          </div>
-          <h3 key={node.title} style={{ margin: "0 0 22px", font: "600 clamp(20px,1.9vw,26px)/1.28 var(--font-primary)", letterSpacing: "-.025em", color: "var(--ink-graphite)", textWrap: "balance" }}>{node.q}</h3>
-          <div className="mf-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "18px 28px" }}>
-            {[
-              ["Riesgo que reduce", node.riesgo],
-              ["Decisión que habilita", node.decision],
-              ["En Mission Control", node.mc],
-            ].map(([label, text]) => (
-              <div key={label}>
-                <span style={{ display: "block", marginBottom: 5, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--text-faint)" }}>{label}</span>
-                <span style={{ display: "block", font: "400 14.5px/1.5 var(--font-primary)", color: "var(--text-muted)" }}>{text}</span>
-              </div>
-            ))}
+        {/* panel de detalle — superficie con gradiente del paso + glow y sheen al activar */}
+        <div
+          key={node.title}
+          className="mf-panel"
+          style={{
+            ["--c" as string]: node.color,
+            margin: "36px 0 0", position: "relative", overflow: "hidden",
+            padding: "clamp(26px,3vw,34px)",
+            border: "1px solid var(--border-subtle)", borderLeft: `3px solid ${node.color}`,
+            background: `linear-gradient(152deg, color-mix(in srgb, ${node.color} 11%, var(--surface-card)) 0%, var(--surface-card) 58%)`,
+            boxShadow: `0 18px 50px color-mix(in srgb, ${node.color} 13%, transparent)`,
+            transition: "border-color var(--duration-standard) var(--ease-premium)",
+          }}
+        >
+          <span aria-hidden="true" className="mf-panel-glow" style={{ position: "absolute", top: -64, right: -44, width: 230, height: 230, borderRadius: "50%", background: `radial-gradient(circle, color-mix(in srgb, ${node.color} 24%, transparent), transparent 68%)`, pointerEvents: "none" }} />
+          <span aria-hidden="true" className="mf-sheen" />
+          <div style={{ position: "relative" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, flexWrap: "wrap", marginBottom: 10 }}>
+              <span style={{ display: "inline-flex", alignItems: "center", gap: 10, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--ink-graphite)" }}>
+                <span aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: node.color }} />{node.title}
+              </span>
+              <span style={{ display: "inline-flex", alignItems: "center", gap: 8, padding: "7px 13px", border: `1px solid ${node.color}`, background: `color-mix(in srgb, ${node.color} 8%, transparent)`, boxShadow: `0 4px 16px color-mix(in srgb, ${node.color} 18%, transparent)`, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".08em", textTransform: "uppercase", color: "var(--ink-graphite)" }}>
+                <span aria-hidden="true" style={{ width: 6, height: 6, borderRadius: "50%", background: node.color }} />{node.artefacto}
+              </span>
+            </div>
+            <h3 style={{ margin: "0 0 24px", font: "600 clamp(20px,1.9vw,26px)/1.28 var(--font-primary)", letterSpacing: "-.025em", color: "var(--ink-graphite)", textWrap: "balance" }}>{node.q}</h3>
+            <div className="mf-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "18px 28px" }}>
+              {[
+                ["Riesgo que reduce", node.riesgo],
+                ["Decisión que habilita", node.decision],
+              ].map(([label, text]) => (
+                <div key={label}>
+                  <span style={{ display: "inline-flex", alignItems: "center", gap: 7, marginBottom: 6, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--text-faint)" }}>
+                    <span aria-hidden="true" style={{ width: 5, height: 5, borderRadius: "50%", background: node.color }} />{label}
+                  </span>
+                  <span style={{ display: "block", font: "400 14.5px/1.5 var(--font-primary)", color: "var(--text-muted)" }}>{text}</span>
+                </div>
+              ))}
+            </div>
+            <div style={{ marginTop: 20, padding: "16px 18px", borderLeft: `2px solid color-mix(in srgb, ${node.color} 60%, transparent)`, background: `color-mix(in srgb, ${node.color} 6%, transparent)` }}>
+              <span style={{ display: "block", marginBottom: 5, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--text-faint)" }}>En Mission Control</span>
+              <span style={{ display: "block", font: "400 14.5px/1.55 var(--font-primary)", color: "var(--text-muted)" }}>{node.mc}</span>
+            </div>
           </div>
         </div>
       </div>
@@ -225,6 +246,18 @@ export default function MethodFlow() {
         @keyframes mf-comet { from { left: ${INSET}%; } to { left: ${100 - INSET}%; } }
         .mf-node-glow { animation: mf-nodeglow 3.4s var(--ease-premium) infinite; }
         @keyframes mf-nodeglow { 0%,100% { filter: drop-shadow(0 0 0 transparent); } 50% { filter: drop-shadow(0 0 7px var(--mf-halo, transparent)); } }
+        /* design-wink: la card remonta al cambiar de paso → el destello barre una vez */
+        .mf-panel { animation: mf-panel-in .5s var(--ease-premium) both; }
+        @keyframes mf-panel-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .mf-sheen { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(115deg, transparent 32%, color-mix(in srgb, var(--c) 22%, rgba(255,255,255,.55)) 48%, transparent 64%); transform: translateX(-130%); }
+        .mf-panel .mf-sheen { animation: mf-sheen 1.15s var(--ease-premium) .08s; }
+        @keyframes mf-sheen { to { transform: translateX(130%); } }
+        .mf-panel-glow { animation: mf-panel-glow 5s var(--ease-premium) infinite; }
+        @keyframes mf-panel-glow { 0%,100% { opacity: .75; } 50% { opacity: 1; } }
+        @media (prefers-reduced-motion: reduce) {
+          .mf-panel, .mf-sheen, .mf-panel-glow { animation: none !important; }
+          .mf-sheen { display: none; }
+        }
         @media (prefers-reduced-motion: reduce) {
           .mf-comet, .mf-node-glow { animation: none !important; }
           .mf-comet { display: none; }
