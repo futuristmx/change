@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Glyph, type GlyphName } from "@/components/ds";
 
 const GLYPH_MAP: Record<string, GlyphName> = {
-  Leer: "insight",
+  Leer: "read",
   Interpretar: "risk",
   Decidir: "decision",
   Diseñar: "project",

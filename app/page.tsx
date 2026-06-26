@@ -29,7 +29,7 @@ function SectionHead({ kicker, title, lead }: { kicker: string; title: string; l
 }
 
 const ARCO: Array<{ t: string; c: string; g: GlyphName }> = [
-  { t: "Leer", c: "var(--signal-cyan)", g: "insight" },
+  { t: "Leer", c: "var(--signal-cyan)", g: "read" },
   { t: "Interpretar", c: "var(--soft-violet)", g: "risk" },
   { t: "Decidir", c: "var(--change-violet)", g: "decision" },
   { t: "Diseñar", c: "var(--change-violet)", g: "project" },
