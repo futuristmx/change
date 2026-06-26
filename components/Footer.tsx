@@ -53,15 +53,12 @@ export default function Footer() {
                 style={{ height: "clamp(32px,3.5vw,38px)", width: "auto", display: "block" }}
               />
             </Link>
-            <p style={{ margin: "0 0 28px", font: "400 13.5px/1.55 var(--font-primary)", color: "rgba(240,244,255,.65)", maxWidth: "26ch" }}>
+            <p style={{ margin: 0, font: "400 13.5px/1.55 var(--font-primary)", color: "rgba(240,244,255,.65)", whiteSpace: "nowrap" }}>
               Inteligencia estratégica para{" "}
               <InlineTooltip content="La capacidad de tomar mejores decisiones antes de que la certeza llegue. Es la condición para actuar cuando el entorno cambia.">
                 capacidad de futuro
               </InlineTooltip>
             </p>
-            <Link href="/contacto" className="btn btn-primary btn-sm" style={{ alignSelf: "flex-start" }}>
-              Simular una decisión
-            </Link>
           </div>
 
           {/* Columna B — Explorar */}

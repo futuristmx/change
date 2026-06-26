@@ -82,7 +82,7 @@ export default function EquipoPage() {
           </Reveal>
           <Reveal delay={60} as="h2" style={{ margin: "0 0 16px", maxWidth: "22ch", font: "600 clamp(30px,4.2vw,56px)/.99 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>El board sostiene el criterio. La red aporta profundidad cuando el reto lo exige.</Reveal>
           <Reveal delay={100} as="p" style={{ margin: "0 0 clamp(40px,5vw,60px)", maxWidth: "56ch", font: "400 clamp(16px,1.3vw,19px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>No repartimos un proyecto en tareas. Repartimos una decisión en capacidades. Cada capacidad deja un artefacto que puedes ver. El método no se delega: se gobierna desde Change.</Reveal>
-          <div className="eq-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 20 }}>
+          <div className="eq-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
             {BOARD.map((m, i) => (
               <Reveal key={m.n} delay={(i % 2) * 90} as="article" className="ch-card" style={{ background: "rgba(255,255,255,.85)", border: "1px solid var(--border-subtle)", borderTop: `3px solid ${m.c}`, padding: "32px 30px", display: "flex", flexDirection: "column" }}>
                 <span style={{ display: "inline-flex", alignItems: "center", gap: 8, font: "700 11px var(--font-secondary)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--ink-graphite)" }}>
