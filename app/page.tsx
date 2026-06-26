@@ -7,6 +7,7 @@ import SystemicDescent from "@/components/SystemicDescent";
 import CapacityScore from "@/components/CapacityScore";
 import MissionControlLive from "@/components/MissionControlLive";
 import EtherealDivider from "@/components/ds/EtherealDivider";
+import ConstellationField from "@/components/ds/ConstellationField";
 import { Badge, SignalField, Glyph, type BadgeTone, type GlyphName } from "@/components/ds";
 
 const WRAP = "min(1340px, calc(100% - clamp(40px,8vw,128px)))";
@@ -217,6 +218,7 @@ Una forma de operar instalada en la organización: leer señales débiles, decid
         <div aria-hidden="true" style={{ height: "clamp(80px,8vw,120px)", background: "linear-gradient(180deg, var(--surface-soft) 0%, var(--surface-dark) 100%)" }} />
         {/* ═══ 07 · MISSION CONTROL (dark) ═══ */}
         <section className="change-dark" style={{ position: "relative", overflow: "hidden", background: "var(--gradient-dark-signal-field)" }}>
+          <ConstellationField />
           <div style={{ position: "relative", width: WRAP, margin: "0 auto", padding: "clamp(92px,11vw,168px) 0" }}>
             <div className="ch-missionshell" style={{ display: "grid", gridTemplateColumns: "minmax(0,.9fr) minmax(0,1.1fr)", gap: "clamp(44px,5vw,80px)", alignItems: "center" }}>
               <div>
@@ -315,6 +317,7 @@ Una forma de operar instalada en la organización: leer señales débiles, decid
         <div aria-hidden="true" style={{ height: "clamp(80px,8vw,120px)", background: "linear-gradient(180deg, var(--surface-page) 0%, var(--surface-dark-secondary) 100%)" }} />
         {/* ═══ 15 · CTA FINAL (dark) ═══ */}
         <section className="change-dark" style={{ position: "relative", overflow: "hidden", background: "var(--gradient-violet-atmosphere), var(--surface-dark-secondary)" }}>
+          <ConstellationField />
           <div style={{ position: "relative", width: WRAP, margin: "0 auto", padding: "clamp(96px,12vw,176px) 0", textAlign: "center" }}>
             <Reveal style={{ display: "inline-flex", alignItems: "center", gap: 11, marginBottom: 26 }}>
               <span data-pulse style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--signal-cyan)" }} />
