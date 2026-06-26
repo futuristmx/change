@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Glyph, type GlyphName } from "@/components/ds";
+import { Glyph, InlineTooltip, type GlyphName } from "@/components/ds";
 
 const GLYPH_K: Record<string, GlyphName> = {
   "Leer": "insight",
@@ -10,6 +10,15 @@ const GLYPH_K: Record<string, GlyphName> = {
   "Diseñar": "project",
   "Sostener": "status",
   "Transversal": "nav",
+};
+
+const METHOD_TIPS: Record<string, string> = {
+  "Leer":        "Detectar y nombrar lo que se mueve en el entorno antes de que se vuelva urgencia.",
+  "Interpretar": "Convertir señales dispersas en sentido accionable para esta organización.",
+  "Decidir":     "Hacer explícito el criterio de elección antes de comprometer recursos.",
+  "Diseñar":     "Convertir el criterio en movimientos concretos que el equipo puede ejecutar.",
+  "Sostener":    "Mantener la capacidad construida viva entre decisiones.",
+  "Transversal": "Activa varios movimientos del arco del método según el reto de la sesión.",
 };
 
 interface Artifact {
@@ -201,7 +210,11 @@ function ArtCard({ art, i, active, onToggle }: ArtCardProps) {
       {/* Slot 1 — meta eyebrow */}
       <span style={{ display: "inline-flex", alignItems: "center", gap: 7, font: "700 11px var(--font-secondary)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--ink-graphite)", marginBottom: 12 }}>
         <span aria-hidden="true" style={{ width: 6, height: 6, borderRadius: "50%", background: art.c, flexShrink: 0 }} />
-        {art.k}
+        {METHOD_TIPS[art.k] ? (
+          <InlineTooltip content={METHOD_TIPS[art.k]}>
+            {art.k}
+          </InlineTooltip>
+        ) : art.k}
       </span>
 
       {/* Slot 2 — header */}
