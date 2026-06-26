@@ -32,8 +32,8 @@ const ARCO: Array<{ t: string; c: string; g: GlyphName }> = [
   { t: "Leer", c: "var(--signal-cyan)", g: "read" },
   { t: "Interpretar", c: "var(--soft-violet)", g: "risk" },
   { t: "Decidir", c: "var(--change-violet)", g: "decision" },
-  { t: "Diseñar", c: "var(--change-violet)", g: "project" },
-  { t: "Sostener", c: "var(--ink-graphite)", g: "status" },
+  { t: "Diseñar", c: "var(--human-pink)", g: "project" },
+  { t: "Sostener", c: "var(--success)", g: "status" },
 ];
 
 const ARTEFACTOS = [
@@ -102,20 +102,32 @@ export default function Home() {
             <Reveal delay={280}>
               <div aria-hidden="true" className="ch-herochain" style={{ display: "flex", alignItems: "center", justifyContent: "center", flexWrap: "wrap", gap: 10, marginTop: "clamp(44px,6vw,68px)" }}>
                 {ARCO.map((n, i, arr) => (
-                  <span key={n.t} style={{ display: "inline-flex", alignItems: "center", gap: 10 }}>
-                    <span style={{ display: "inline-flex", flexDirection: "column", alignItems: "center", gap: 4 }}>
-                      <span aria-hidden="true" style={{ color: n.c, display: "inline-flex" }}>
-                        <Glyph name={n.g} size={22} />
+                  <span key={n.t} className="ch-arcitem" style={{ ["--ac" as string]: n.c, display: "inline-flex", alignItems: "center", gap: 10 }}>
+                    <span style={{ display: "inline-flex", flexDirection: "column", alignItems: "center", gap: 5 }}>
+                      <span aria-hidden="true" className="ch-arcglyph">
+                        <Glyph name={n.g} size={20} />
                       </span>
                       <span style={{ display: "inline-flex", alignItems: "center", gap: 7 }}>
-                        <span style={{ width: 8, height: 8, borderRadius: 999, background: n.c }} />
-                        <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".08em", textTransform: "uppercase", color: "var(--text-muted)" }}>{n.t}</span>
+                        <span className="ch-arcdot" />
+                        <span className="ch-arclabel">{n.t}</span>
                       </span>
                     </span>
-                    {i < arr.length - 1 && <span aria-hidden="true" style={{ width: 24, height: 1, background: "var(--line-gradient-relation)" }} />}
+                    {i < arr.length - 1 && <span aria-hidden="true" style={{ width: 24, height: 1, background: "var(--line-structural)", opacity: 0.5 }} />}
                   </span>
                 ))}
               </div>
+              <style>{`
+                .ch-arcglyph { display: inline-flex; color: var(--ink-graphite); opacity: .68; transition: color .3s var(--ease-premium), opacity .3s var(--ease-premium), transform .3s var(--ease-premium); }
+                .ch-arcdot { width: 8px; height: 8px; border-radius: 999px; background: var(--ink-graphite); opacity: .5; transition: background .3s var(--ease-premium), opacity .3s var(--ease-premium); }
+                .ch-arclabel { font: 600 var(--text-meta) var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); transition: color .3s var(--ease-premium); }
+                .ch-arcitem:hover .ch-arcglyph { color: var(--ac); opacity: 1; transform: translateY(-2px); }
+                .ch-arcitem:hover .ch-arcdot { background: var(--ac); opacity: 1; }
+                .ch-arcitem:hover .ch-arclabel { color: var(--ink-graphite); }
+                @media (prefers-reduced-motion: reduce) {
+                  .ch-arcglyph, .ch-arcdot, .ch-arclabel { transition: none; }
+                  .ch-arcitem:hover .ch-arcglyph { transform: none; }
+                }
+              `}</style>
             </Reveal>
           </div>
         </section>
