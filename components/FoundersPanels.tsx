@@ -56,7 +56,7 @@ export default function FoundersPanels({ founders }: { founders: Founder[] }) {
                 style={{
                   position: "absolute", inset: 0,
                   background: m.photo
-                    ? `center top / cover no-repeat url(${m.photo})`
+                    ? `url(${m.photo}) center top / cover no-repeat, linear-gradient(155deg, color-mix(in srgb, ${m.c} 28%, var(--surface-dark)) 0%, var(--surface-dark-secondary) 58%, var(--surface-dark) 100%)`
                     : `linear-gradient(155deg, color-mix(in srgb, ${m.c} 28%, var(--surface-dark)) 0%, var(--surface-dark-secondary) 58%, var(--surface-dark) 100%)`,
                   transition: "transform .6s var(--ease-premium)",
                   transform: on ? "scale(1.02)" : "scale(1)",

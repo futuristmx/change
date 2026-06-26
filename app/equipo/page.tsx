@@ -23,6 +23,7 @@ const SOCIOS = [
     arc: "Leer · Interpretar",
     domain: "Foresight e innovación estratégica",
     c: "var(--signal-cyan)",
+    photo: "/assets/founder-andres.jpg",
     tagline: "Ve la señal cuando todavía es débil.",
     story: "Presidió el Consejo Promotor de Innovación y Diseño de México y formó parte del board de The Design Futures Initiative. Desde ahí entendió algo incómodo: las organizaciones rara vez fallan por falta de información — fallan por no leerla a tiempo. Fundó Change para cerrar esa brecha: leer el futuro mientras todavía es señal y nombrar la tensión que nadie en la sala se atreve a decir en voz alta.",
   },
@@ -32,6 +33,7 @@ const SOCIOS = [
     arc: "Decidir · Aterrizar",
     domain: "Estrategia, propiedad intelectual y modelos de negocio",
     c: "var(--change-violet)",
+    photo: "/assets/founder-miguel.jpg",
     tagline: "Convierte lo intangible en rentabilidad.",
     story: "Asesoró a empresas transnacionales en propiedad intelectual y modelos de negocio, y lo enseña en licenciatura y posgrado. Su convicción es simple: una decisión solo vale cuando sus costos están sobre la mesa y alguien puede defenderla frente al consejo. En Change convierte el diagnóstico en apuestas con criterio explícito — las que se sostienen solas cuando llega la presión.",
   },
@@ -79,6 +81,21 @@ export default function EquipoPage() {
           <Reveal delay={100} as="p" style={{ margin: "0 0 clamp(40px,5vw,60px)", maxWidth: "58ch", font: "400 clamp(16px,1.3vw,19px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>Dos fundadores, dos disciplinas, un mismo método. No repartimos un proyecto en tareas: repartimos una decisión en capacidades. Y el método no se delega — se gobierna desde aquí.</Reveal>
           {/* Co-fundadores — paneles dinámicos expandibles (foto + label vertical + historia) */}
           <Reveal delay={120}><FoundersPanels founders={SOCIOS} /></Reveal>
+
+          {/* Banda editorial — los dos fundadores juntos */}
+          <Reveal delay={180} as="figure" style={{ margin: "clamp(14px,1.6vw,20px) 0 0", position: "relative", overflow: "hidden", border: "1px solid var(--border-subtle)", borderTop: "3px solid var(--change-violet)", background: "var(--surface-dark-secondary)" }}>
+            <div style={{ position: "relative", height: "clamp(300px,36vw,460px)" }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/assets/founders-together.jpg" alt="Andrés Valencia y Miguel Cadena, co-fundadores de Change" loading="lazy" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 30%", display: "block" }} />
+              <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(10,14,21,.12) 0%, rgba(10,14,21,0) 38%, rgba(10,14,21,.42) 72%, rgba(10,14,21,.78) 100%)" }} />
+              <figcaption style={{ position: "absolute", left: 0, bottom: 0, padding: "clamp(20px,2.4vw,36px)" }}>
+                <span style={{ display: "inline-flex", alignItems: "center", gap: 8, font: "700 10.5px var(--font-secondary)", letterSpacing: ".16em", textTransform: "uppercase", color: "rgba(255,255,255,.72)" }}>
+                  <span aria-hidden="true" style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--change-violet)" }} />Andrés Valencia + Miguel Cadena
+                </span>
+                <p style={{ margin: "8px 0 0", font: "600 clamp(17px,1.7vw,24px)/1.18 var(--font-primary)", letterSpacing: "-.025em", color: "#fff", maxWidth: "26ch" }}>Dos disciplinas, un mismo método.</p>
+              </figcaption>
+            </div>
+          </Reveal>
         </div>
       </section>
 
