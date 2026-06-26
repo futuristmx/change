@@ -42,9 +42,9 @@ const CAPS = [
 ];
 
 const ESCALERA: Array<{ n: string; tag: string; c: string; p: string; g: GlyphName; duration: string }> = [
-  { n: "Mapa de Claridad", tag: "Entrada", c: "var(--signal-cyan)", g: "insight", duration: "2–3 SEMANAS", p: "El punto de partida. Tomamos la decisión que tienes enfrente y la ponemos en orden: qué cambia, qué tensiona, qué está en juego. Sales con un diagnóstico que tu equipo no tenía y con la primera versión de tus artefactos." },
-  { n: "Sprint de Rumbo", tag: "Acotado", c: "var(--soft-violet)", g: "decision", duration: "6–10 SEMANAS", p: "Un trabajo enfocado sobre un reto definido. Recorremos las cinco capacidades sobre tu caso real y aterrizamos la decisión en instrumentos. Sales con una respuesta diseñada, lista para ejecutar." },
-  { n: "Mission Control", tag: "Sistema vivo", c: "var(--change-violet)", g: "status", duration: "CONTINUO", p: "La infraestructura de memoria estratégica que mantiene viva cada decisión y avisa cuando el entorno se mueve. El destino de quien ya construyó músculo, no el punto de entrada." },
+  { n: "Mapa de Claridad", tag: "Entrada", c: "var(--opportunity-orange)", g: "nav", duration: "2–3 SEMANAS", p: "El punto de partida. Tomamos la decisión que tienes enfrente y la ponemos en orden: qué cambia, qué tensiona, qué está en juego. Sales con un diagnóstico que tu equipo no tenía y con la primera versión de tus artefactos." },
+  { n: "Sprint de Rumbo", tag: "Acotado", c: "var(--change-violet)", g: "decision", duration: "6–10 SEMANAS", p: "Un trabajo enfocado sobre un reto definido. Recorremos las cinco capacidades sobre tu caso real y aterrizamos la decisión en instrumentos. Sales con una respuesta diseñada, lista para ejecutar." },
+  { n: "Mission Control", tag: "Sistema vivo", c: "var(--success)", g: "status", duration: "CONTINUO", p: "La infraestructura de memoria estratégica que mantiene viva cada decisión y avisa cuando el entorno se mueve. El destino de quien ya construyó músculo, no el punto de entrada." },
 ];
 
 export default function CapacidadesPage() {
