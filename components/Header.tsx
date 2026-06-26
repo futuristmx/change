@@ -27,9 +27,11 @@ const PULSE_VISIBLE_MS = 1200;
 interface HeaderProps {
   /** "dark" → variante glass oscura (para superficies dark como el login) */
   variant?: "light" | "dark";
+  /** false → oculta el CTA "Simular una decisión" (p. ej. en el login) */
+  showCta?: boolean;
 }
 
-export default function Header({ variant = "light" }: HeaderProps) {
+export default function Header({ variant = "light", showCta = true }: HeaderProps) {
   const [open, setOpen] = useState(false);
   const [pulsing, setPulsing] = useState(false);
   const pathname = usePathname();
@@ -182,7 +184,7 @@ export default function Header({ variant = "light" }: HeaderProps) {
           </div>
 
           <div style={{ justifySelf: "end", display: "flex", alignItems: "center", gap: 12 }}>
-            <Link href="/contacto" className="btn btn-primary btn-sm ch-cta">Simular una decisión</Link>
+            {showCta && <Link href="/contacto" className="btn btn-primary btn-sm ch-cta">Simular una decisión</Link>}
             <button
               onClick={() => setOpen((v) => !v)}
               aria-label="Menú" aria-expanded={open}
