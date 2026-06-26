@@ -31,7 +31,12 @@ const RING = [
   { r: 84, color: "var(--soft-violet)" },
   { r: 46, color: "var(--change-violet)" },
 ];
-const DESCEND = [0, 44, 82];
+const DESCEND = [0, 44, 82, 128];
+
+/* convergencia de consolidación — orígenes que viajan al núcleo (estado decisión) */
+const CONVERGE: Array<[number, number]> = [
+  [160, 40], [250, 96], [252, 224], [160, 280], [68, 224], [70, 96],
+];
 
 /* radar vivo — micro-nodos y conexiones que titilan/se trazan con timing variado */
 const SPARKS: Array<[number, number]> = [
@@ -43,7 +48,8 @@ const SPARK_PATHS: Array<[number, number, number, number]> = [
 
 function DescentFigure({ active }: { active: number }) {
   const descend = DESCEND[active] ?? 0;
-  const dotColor = RING[active]?.color ?? "var(--signal-cyan)";
+  const consolidated = active === 3;
+  const dotColor = consolidated ? "var(--success)" : (RING[active]?.color ?? "var(--signal-cyan)");
 
   return (
     <div className="sd-figure" style={{ width: "100%", maxWidth: 360, margin: "0 auto", aspectRatio: "1 / 1" }}>
@@ -57,6 +63,14 @@ function DescentFigure({ active }: { active: number }) {
           <radialGradient id="sd-core-g" cx="50%" cy="50%" r="50%">
             <stop offset="0%" stopColor="var(--change-violet-300)" />
             <stop offset="100%" stopColor="var(--change-violet)" />
+          </radialGradient>
+          <linearGradient id="sd-converge" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="var(--signal-cyan)" />
+            <stop offset="100%" stopColor="var(--success)" />
+          </linearGradient>
+          <radialGradient id="sd-core-validated" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="color-mix(in srgb, var(--success) 55%, white)" />
+            <stop offset="100%" stopColor="var(--success)" />
           </radialGradient>
         </defs>
 
@@ -86,7 +100,20 @@ function DescentFigure({ active }: { active: number }) {
 
         {/* núcleo — la decisión; se ilumina al llegar a lo interno */}
         <circle cx="160" cy="160" r="7" fill="url(#sd-core-g)"
-          style={{ opacity: active === 2 ? 1 : 0.32, transition: "opacity .55s var(--ease-premium)" }} />
+          style={{ opacity: consolidated ? 0 : (active === 2 ? 1 : 0.32), transition: "opacity .55s var(--ease-premium)" }} />
+
+        {/* consolidación — la decisión se valida: convergencia + sonar + núcleo verde */}
+        {consolidated && (
+          <g className="sd-consol">
+            {CONVERGE.map(([x, y], i) => (
+              <line key={`cv-${i}`} x1={x} y1={y} x2="160" y2="160" stroke="url(#sd-converge)" strokeWidth="1.3" pathLength={1}
+                className="sd-converge" style={{ animationDelay: `${(i * 0.45).toFixed(2)}s`, animationDuration: `${3.2 + (i % 3) * 0.9}s` }} />
+            ))}
+            <circle cx="160" cy="160" r="18" fill="none" stroke="var(--success)" strokeWidth="1.5" className="sd-sonar" />
+            <circle cx="160" cy="160" r="18" fill="none" stroke="var(--success)" strokeWidth="1.4" className="sd-sonar" style={{ animationDelay: "1.3s" }} />
+            <circle cx="160" cy="160" r="9" fill="url(#sd-core-validated)" className="sd-core-val" />
+          </g>
+        )}
 
         {/* marcador de foco que desciende por el eje */}
         <g style={{ transform: `translateY(${descend}px)`, transition: "transform .6s var(--ease-premium)" }}>
@@ -102,7 +129,19 @@ function DescentFigure({ active }: { active: number }) {
         @keyframes sd-spark { 0%,100% { opacity: 0.1; } 50% { opacity: 0.72; } }
         .sd-sparkline { stroke-dasharray: 1; stroke-dashoffset: 1; opacity: 0; animation-name: sd-sparkline; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
         @keyframes sd-sparkline { 0% { stroke-dashoffset: 1; opacity: 0; } 38% { opacity: 0.32; } 68% { stroke-dashoffset: 0; opacity: 0.2; } 100% { stroke-dashoffset: 0; opacity: 0; } }
-        @media (prefers-reduced-motion: reduce) { .sd-focus, .sd-spark, .sd-sparkline { animation: none !important; } .sd-sparkline { display: none; } .sd-spark { opacity: 0.3; } }
+        .sd-consol { animation: sd-consol-in .5s var(--ease-premium); }
+        @keyframes sd-consol-in { from { opacity: 0; } to { opacity: 1; } }
+        .sd-converge { stroke-dasharray: 1; stroke-dashoffset: 1; opacity: 0; animation-name: sd-converge; animation-timing-function: ease-in-out; animation-iteration-count: infinite; }
+        @keyframes sd-converge { 0% { stroke-dashoffset: 1; opacity: 0; } 40% { opacity: 0.6; } 72% { stroke-dashoffset: 0; opacity: 0.45; } 100% { stroke-dashoffset: 0; opacity: 0; } }
+        .sd-sonar { transform-box: view-box; transform-origin: 160px 160px; animation: sd-sonar 2.8s ease-out infinite; }
+        @keyframes sd-sonar { 0% { transform: scale(.5); opacity: .65; } 100% { transform: scale(2); opacity: 0; } }
+        .sd-core-val { animation: sd-coreval 2.8s var(--ease-premium) infinite; }
+        @keyframes sd-coreval { 0%,100% { opacity: .85; } 50% { opacity: 1; } }
+        @media (prefers-reduced-motion: reduce) {
+          .sd-focus, .sd-spark, .sd-sparkline, .sd-converge, .sd-sonar, .sd-core-val { animation: none !important; }
+          .sd-sparkline { display: none; } .sd-spark { opacity: 0.3; }
+          .sd-converge { stroke-dashoffset: 0; opacity: .4; } .sd-sonar { display: none; } .sd-core-val { opacity: 1; }
+        }
       `}</style>
     </div>
   );
@@ -162,7 +201,15 @@ export default function SystemicDescent() {
         })}
 
         {/* nodo terminal — la decisión concreta */}
-        <div className="sd-decision" style={{ position: "relative", width: "62%", minWidth: 300, marginTop: 12, border: "1px solid var(--change-violet)", borderLeft: "3px solid var(--change-violet)", background: "color-mix(in srgb, var(--change-violet) 5%, #fff)", padding: "24px 28px 26px 52px", opacity: inView ? 1 : 0, transition: "opacity .6s .5s, width .4s var(--ease-premium)" }}>
+        <div
+          className="sd-decision"
+          role="button"
+          tabIndex={0}
+          aria-pressed={active === 3}
+          onMouseEnter={() => setActive(3)}
+          onClick={() => setActive(3)}
+          onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setActive(3); } }}
+          style={{ position: "relative", width: "62%", minWidth: 300, marginTop: 12, cursor: "pointer", outline: "none", border: "1px solid var(--change-violet)", borderLeft: "3px solid var(--change-violet)", background: "color-mix(in srgb, var(--change-violet) 5%, #fff)", padding: "24px 28px 26px 52px", opacity: inView ? 1 : 0, boxShadow: active === 3 ? "0 0 0 1px var(--success), 0 10px 30px color-mix(in srgb, var(--success) 16%, transparent)" : "none", transition: "opacity .6s .5s, width .4s var(--ease-premium), box-shadow .4s var(--ease-premium)" }}>
           <span aria-hidden="true" style={{ position: "absolute", left: 11, top: 26, width: 20, height: 20, borderRadius: "50%", background: "var(--change-violet)", boxShadow: "0 0 0 5px #fff, 0 6px 18px rgba(109,59,255,.3)" }} />
           <span aria-hidden="true" style={{ position: "absolute", left: 19, top: -14, fontSize: 18, color: "var(--change-violet)" }}>↓</span>
           <span style={{ display: "inline-flex", alignItems: "center", gap: 8, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--ink-graphite)" }}><span aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--change-violet)" }} />{DECISION.k}</span>
