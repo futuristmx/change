@@ -23,7 +23,7 @@ export default function FoundersPanels({ founders }: { founders: Founder[] }) {
         className="fp-grid"
         style={{
           display: "grid",
-          gridTemplateColumns: active === 0 ? "1.55fr 0.82fr" : "0.82fr 1.55fr",
+          gridTemplateColumns: founders.map((_, i) => (i === active ? "1.6fr" : "0.78fr")).join(" "),
           gap: "clamp(14px,1.6vw,20px)",
           transition: "grid-template-columns .55s var(--ease-premium)",
         }}
