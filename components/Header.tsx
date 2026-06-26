@@ -102,6 +102,8 @@ export default function Header() {
                   <Link
                     href={item.href}
                     aria-current={active ? "page" : undefined}
+                    target={isAcceso ? "_blank" : undefined}
+                    rel={isAcceso ? "noopener noreferrer" : undefined}
                     className="ch-navlink"
                     style={{
                       display: "inline-flex", alignItems: "center", gap: 6, height: 44, padding: "0 12px",
@@ -146,11 +148,14 @@ export default function Header() {
           <div style={{ width: "min(1340px, calc(100% - clamp(40px,8vw,128px)))", margin: "0 auto", display: "flex", flexDirection: "column" }}>
             {NAV.map((item, i) => {
               const active = pathname === item.href || pathname.startsWith(item.href + "/");
+              const isAcceso = item.href === ACCESO_HREF;
               return (
                 <Link
                   key={item.href}
                   href={item.href}
                   aria-current={active ? "page" : undefined}
+                  target={isAcceso ? "_blank" : undefined}
+                  rel={isAcceso ? "noopener noreferrer" : undefined}
                   onClick={() => setOpen(false)}
                   style={{
                     padding: "14px 4px",
