@@ -20,6 +20,7 @@ const COL_LINK: React.CSSProperties = {
 };
 
 const COL_A = [
+  { label: "Inicio", href: "/" },
   { label: "Método", href: "/capacidades" },
   { label: "Mission Control", href: "/mission-control" },
   { label: "Casos", href: "/casos" },

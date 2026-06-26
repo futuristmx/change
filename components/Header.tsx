@@ -246,6 +246,9 @@ export default function Header({ variant = "light", showCta = true }: HeaderProp
           .ch-burger { display: inline-flex !important; }
           .ch-cta { display: none !important; }
         }
+        /* Hover del logo — feedback de que lleva al inicio */
+        .ch-logo { transition: opacity .18s var(--ease-premium); }
+        .ch-logo:hover { opacity: .66; }
         /* Pulse del logo — driven por React state (data-pulsing).
            Disparos: 15s, 30s, 45s, 60s, 75s, 95s, 120s, luego cada 45s.
            El filter vira a violet vibrante durante ~1.2s por pulso. */
