@@ -25,7 +25,7 @@ const TENSIONES = [
 ];
 
 const ESCALERA: Array<{ n: string; tag: string; p: string; g: GlyphName; c: string }> = [
-  { n: "Mapa de Claridad", tag: "empieza aquí", p: "El punto de entrada. Una decisión, leída e interpretada hasta volverse accionable.", g: "insight", c: "var(--signal-cyan)" },
+  { n: "Mapa de Claridad", tag: "empieza aquí", p: "El punto de entrada. Una decisión, leída e interpretada hasta volverse accionable.", g: "read", c: "var(--signal-cyan)" },
   { n: "Sprint de Rumbo", tag: "después", p: "Un reto acotado, trabajado de principio a fin con los instrumentos del método.", g: "decision", c: "var(--soft-violet)" },
   { n: "Mission Control", tag: "el sistema vivo", p: "El sistema vivo que sostiene el rumbo en el tiempo. Llega cuando hay capacidad que sostener.", g: "status", c: "var(--change-violet)" },
 ];

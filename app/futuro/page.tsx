@@ -23,7 +23,7 @@ const VALORES: Array<{ k: string; h: string; p: string; g: GlyphName; c: string 
     k: "01",
     h: "Interpretar primero",
     p: "Antes de proponer una respuesta, leemos. La urgencia no es excusa para saltarse el juicio. La velocidad importa, la dirección más.",
-    g: "insight",
+    g: "read",
     c: "var(--signal-cyan)",
   },
   {

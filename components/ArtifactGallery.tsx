@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Glyph, InlineTooltip, type GlyphName } from "@/components/ds";
 
 const GLYPH_K: Record<string, GlyphName> = {
-  "Leer": "insight",
+  "Leer": "read",
   "Interpretar": "risk",
   "Decidir": "decision",
   "Diseñar": "project",

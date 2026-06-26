@@ -6,7 +6,7 @@
 
 export type GlyphName =
   | "decision" | "insight" | "metric" | "risk"
-  | "project" | "status" | "nav" | "lock";
+  | "project" | "status" | "nav" | "lock" | "read";
 
 interface GlyphProps {
   name: GlyphName;
@@ -23,6 +23,13 @@ const PATHS: Record<GlyphName, React.ReactNode> = {
       <circle cx="19" cy="6" r="2" />
       <circle cx="19" cy="18" r="2" />
       <path d="M7 12 L17 6.8 M7 12 L17 17.2" />
+    </>
+  ),
+  // lente que observa — leer: detectar lo que cambia antes de que sea evidente
+  read: (
+    <>
+      <path d="M2.5 12 C6 7.5 18 7.5 21.5 12 C18 16.5 6 16.5 2.5 12 Z" />
+      <circle cx="12" cy="12" r="2.3" />
     </>
   ),
   // arcos concéntricos — señal/radar

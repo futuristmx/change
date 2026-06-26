@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 const WRAP = "min(1340px, calc(100% - clamp(40px,8vw,128px)))";
 
 const CONTRATO: Array<{ v: string; h: string; p: string; c: string; g: GlyphName }> = [
-  { v: "Leer", h: "Señal", p: "Lo que cambió y dónde lo vimos. Un hecho concreto, fechado y rastreable, no una impresión.", c: "var(--signal-cyan)", g: "insight" },
+  { v: "Leer", h: "Señal", p: "Lo que cambió y dónde lo vimos. Un hecho concreto, fechado y rastreable, no una impresión.", c: "var(--signal-cyan)", g: "read" },
   { v: "Interpretar", h: "Tensión sistémica", p: "Qué fuerzas se mueven en sentido contrario debajo de esa señal. El conflicto de fondo que la señal apenas asoma.", c: "var(--soft-violet)", g: "risk" },
   { v: "Decidir", h: "Pregunta estratégica", p: "La pregunta que tu organización tendría que poder responder si esa tensión la alcanza. El nombre exacto del problema, antes de que sea problema.", c: "var(--change-violet)", g: "decision" },
   { v: "Diseñar", h: "Implicación", p: "Qué se mueve para tu sector, tu modelo o tu tablero si la señal madura. Dónde te toca, en concreto.", c: "var(--change-violet)", g: "project" },
