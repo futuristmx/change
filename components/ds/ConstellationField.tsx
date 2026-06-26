@@ -58,7 +58,7 @@ export default function ConstellationField() {
             const s = STARS[i];
             return (
               <radialGradient key={i} id={`cf-halo-${i}`} cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stopColor={TONE[s.c]} stopOpacity="0.5" />
+                <stop offset="0%" stopColor={TONE[s.c]} stopOpacity="0.34" />
                 <stop offset="100%" stopColor={TONE[s.c]} stopOpacity="0" />
               </radialGradient>
             );
@@ -79,8 +79,9 @@ export default function ConstellationField() {
               {isFlow && (
                 <line
                   x1={sa.x} y1={sa.y} x2={sb.x} y2={sb.y}
-                  stroke={TONE[STARS[b].c]} strokeWidth="1.4" strokeLinecap="round"
-                  pathLength={1} className="cf-flow" style={{ animationDelay: `${1.4 + i * 0.5}s` }}
+                  stroke={TONE[STARS[b].c]} strokeWidth="1.2" strokeLinecap="round"
+                  pathLength={1} className="cf-flow"
+                  style={{ animationDuration: `${3 + (i % 3) * 1.3}s`, animationDelay: `${((i * 0.73) % 2.6).toFixed(2)}s`, animationDirection: i % 2 ? "reverse" : "normal" }}
                 />
               )}
             </g>
@@ -90,7 +91,7 @@ export default function ConstellationField() {
         {/* halos de estrellas focales */}
         {FOCAL.map((i) => {
           const s = STARS[i];
-          return <circle key={`h-${i}`} cx={s.x} cy={s.y} r="34" fill={`url(#cf-halo-${i})`} className="cf-halo" style={{ animationDelay: `${i * 0.6}s` }} />;
+          return <circle key={`h-${i}`} cx={s.x} cy={s.y} r="22" fill={`url(#cf-halo-${i})`} className="cf-halo" style={{ animationDelay: `${i * 0.9}s` }} />;
         })}
 
         {/* estrellas */}
@@ -101,13 +102,13 @@ export default function ConstellationField() {
 
       <style>{`
         .cf-line { stroke-dasharray: 1; stroke-dashoffset: 1; animation: cf-draw 1.6s var(--ease-premium, ease) forwards; }
-        .cf-flow { stroke-dasharray: 0.14 0.86; stroke-dashoffset: 1; opacity: 0.7; animation: cf-flow 4.2s linear infinite; }
+        .cf-flow { stroke-dasharray: 0.1 0.9; stroke-dashoffset: 1; opacity: 0.55; animation: cf-flow 4s linear infinite; }
         .cf-star { opacity: 0.55; animation: cf-twinkle 4s ease-in-out infinite; }
-        .cf-halo { opacity: 0.7; animation: cf-halopulse 5s ease-in-out infinite; }
+        .cf-halo { animation: cf-halopulse 6s ease-in-out infinite; }
         @keyframes cf-draw { to { stroke-dashoffset: 0; } }
         @keyframes cf-flow { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
-        @keyframes cf-twinkle { 0%,100% { opacity: 0.32; } 50% { opacity: 1; } }
-        @keyframes cf-halopulse { 0%,100% { opacity: 0.45; } 50% { opacity: 0.85; } }
+        @keyframes cf-twinkle { 0%,100% { opacity: 0.3; } 50% { opacity: 0.95; } }
+        @keyframes cf-halopulse { 0%,100% { opacity: 0.16; } 50% { opacity: 0.34; } }
         @media (prefers-reduced-motion: reduce) {
           .cf-line { stroke-dashoffset: 0; animation: none; }
           .cf-flow { display: none; }
