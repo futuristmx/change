@@ -79,14 +79,14 @@ export default function EquipoPage() {
           {/* Co-fundadores — storytelling, sin bullets */}
           <div className="eq-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: "clamp(20px,2.4vw,28px)" }}>
             {SOCIOS.map((m, i) => (
-              <Reveal key={m.n} delay={(i % 2) * 90} as="article" className="ch-card" style={{ background: "rgba(255,255,255,.9)", border: "1px solid var(--border-subtle)", borderTop: `3px solid ${m.c}`, padding: "clamp(34px,3.4vw,48px) clamp(30px,3vw,44px)", display: "flex", flexDirection: "column" }}>
-                <span style={{ display: "inline-flex", alignItems: "center", gap: 9, font: "700 12.5px var(--font-secondary)", letterSpacing: ".15em", textTransform: "uppercase", color: "var(--ink-graphite)" }}>
-                  <span aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: m.c }} />{m.role} · {m.arc}
+              <Reveal key={m.n} delay={(i % 2) * 90} as="article" className="ch-card" style={{ background: "rgba(255,255,255,.9)", border: "1px solid var(--border-subtle)", borderTop: `3px solid ${m.c}`, padding: "clamp(26px,2.4vw,36px) clamp(24px,2.2vw,32px)", display: "flex", flexDirection: "column" }}>
+                <span style={{ display: "inline-flex", alignItems: "center", gap: 8, font: "700 11px var(--font-secondary)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--ink-graphite)" }}>
+                  <span aria-hidden="true" style={{ width: 6, height: 6, borderRadius: "50%", background: m.c }} />{m.role} · {m.arc}
                 </span>
-                <h3 style={{ margin: "16px 0 6px", font: "600 clamp(26px,2.4vw,34px)/1.02 var(--font-primary)", letterSpacing: "-.03em", color: "var(--ink-graphite)" }}>{m.n}</h3>
-                <span style={{ display: "block", marginBottom: 22, font: "500 14px var(--font-mono)", letterSpacing: ".02em", color: "var(--text-muted)" }}>{m.domain}</span>
-                <p style={{ margin: "0 0 18px", font: "600 clamp(18px,1.6vw,21px)/1.32 var(--font-primary)", letterSpacing: "-.02em", color: "var(--ink-graphite)", textWrap: "balance" }}>{m.tagline}</p>
-                <p style={{ margin: 0, font: "400 clamp(15px,1.25vw,16.5px)/1.65 var(--font-primary)", color: "var(--text-muted)" }}>{m.story}</p>
+                <h3 style={{ margin: "13px 0 5px", font: "600 clamp(20px,1.8vw,25px)/1.04 var(--font-primary)", letterSpacing: "-.025em", color: "var(--ink-graphite)" }}>{m.n}</h3>
+                <span style={{ display: "block", marginBottom: 16, font: "500 12.5px var(--font-mono)", letterSpacing: ".02em", color: "var(--text-muted)" }}>{m.domain}</span>
+                <p style={{ margin: "0 0 14px", font: "600 clamp(15.5px,1.3vw,17.5px)/1.34 var(--font-primary)", letterSpacing: "-.015em", color: "var(--ink-graphite)" }}>{m.tagline}</p>
+                <p style={{ margin: 0, font: "400 14px/1.6 var(--font-primary)", color: "var(--text-muted)" }}>{m.story}</p>
               </Reveal>
             ))}
           </div>

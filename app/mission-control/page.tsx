@@ -141,11 +141,13 @@ export default function MissionControlPage() {
           <div className="mc-ladder" style={{ position: "relative", display: "flex", flexDirection: "column", gap: "clamp(24px,3vw,40px)", paddingLeft: 8 }}>
             {/* rail vertical */}
             <span aria-hidden="true" style={{ position: "absolute", left: 14, top: 6, bottom: 6, width: 2, background: "var(--line-gradient-relation)" }} />
-            {ESCALERA.map((r, i) => (
-              <Reveal key={r.n} delay={i * 110} as="article" className="mc-rung" style={{ position: "relative", display: "grid", gridTemplateColumns: "44px 1fr", gap: 18, alignItems: "start", paddingLeft: `clamp(0px, ${i * 2.4}vw, ${i * 36}px)` }}>
-                {/* nodo circular con glyph */}
-                <span aria-hidden="true" style={{ position: "relative", width: 30, height: 30, borderRadius: "50%", background: r.c, display: "inline-flex", alignItems: "center", justifyContent: "center", color: "#fff", boxShadow: `0 0 0 6px var(--surface-dark), 0 0 0 7px ${r.c}` }}>
-                  <Glyph name={r.g} size={14} />
+            {ESCALERA.map((r, i) => {
+              const isLast = i === ESCALERA.length - 1;
+              return (
+              <Reveal key={r.n} delay={i * 110} as="article" className="mc-rung" style={{ position: "relative", display: "grid", gridTemplateColumns: "44px 1fr", gap: 18, alignItems: "start" }}>
+                {/* nodo circular con glyph — alineado al rail; el último es la meta */}
+                <span aria-hidden="true" data-pulse={isLast ? "" : undefined} style={{ position: "relative", width: isLast ? 36 : 30, height: isLast ? 36 : 30, marginLeft: isLast ? -3 : 0, borderRadius: "50%", background: r.c, display: "inline-flex", alignItems: "center", justifyContent: "center", color: "#fff", boxShadow: isLast ? `0 0 0 6px var(--surface-dark), 0 0 0 7px ${r.c}, 0 0 28px ${r.c}` : `0 0 0 6px var(--surface-dark), 0 0 0 7px ${r.c}` }}>
+                  <Glyph name={r.g} size={isLast ? 17 : 14} />
                 </span>
                 <div>
                   <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: i === ESCALERA.length - 1 ? "var(--change-violet-300)" : "rgba(255,255,255,.8)" }}>{r.tag}</span>
@@ -153,7 +155,8 @@ export default function MissionControlPage() {
                   <p style={{ margin: "10px 0 0", maxWidth: "62ch", font: "400 14.5px/1.55 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>{r.p}</p>
                 </div>
               </Reveal>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
