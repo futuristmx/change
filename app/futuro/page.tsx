@@ -70,13 +70,13 @@ const HORIZONTES = [
   },
   {
     k: "Visión",
-    h: "El futuro convertido en capacidad instalada, no en servicio contratado.",
-    p: "Imaginamos organizaciones que leen señales, interpretan tensiones, deciden con criterio y sostienen el aprendizaje por cuenta propia. Que pueden volver a decidir sin Change en la sala — porque la capacidad quedó operando dentro.",
+    h: "Organizaciones que construyen futuro con imaginación, criterio y responsabilidad.",
+    p: "Imaginamos un entorno donde decidir el rumbo deje de ser reactivo. Donde las organizaciones no enfrenten el futuro desde la urgencia, la inercia o la moda, sino desde capacidades vivas que evolucionan con ellas: leer la señal, disputar su sentido, decidir con criterio compartido y sostener lo aprendido. Capacidades que permanecen — para que la próxima coyuntura no empiece de cero ni dependa de alguien externo.",
   },
   {
     k: "Misión",
-    h: "Instalar Change OS: el sistema que convierte incertidumbre en capacidad.",
-    p: "Operamos el método —leer, interpretar, decidir, diseñar y sostener— como una forma de trabajar que deja prueba: artefactos, reportes vivos y un Mission Control donde el criterio permanece. No entregamos un deck; instalamos rutinas y capacidades que siguen funcionando cuando nos vamos.",
+    h: "Convertir incertidumbre en capacidad viva.",
+    p: "Acompañamos a líderes y equipos a leer lo que cambia, interpretar la tensión que revela, decidir con criterio explícito, darle forma y sostenerla en el tiempo. No entregamos recomendaciones: diseñamos los procesos, narrativas y artefactos que instalan esa capacidad. Change OS opera detrás —el sistema que vuelve replicable el criterio—; Mission Control aparece delante, donde cada decisión deja memoria, trazabilidad y continuidad.",
   },
 ];
 
