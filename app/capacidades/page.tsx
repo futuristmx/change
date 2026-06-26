@@ -120,20 +120,23 @@ export default function CapacidadesPage() {
       <section style={{ borderTop: "1px solid var(--border-subtle)", background: "linear-gradient(180deg,#FFFFFF,var(--pure-white))" }}>
         <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(88px,11vw,160px) 0" }}>
           <Head kicker="Construcción progresiva" title="La capacidad no se entrega de golpe. Se construye por etapas." lead="Empiezas con una decisión y, si el sistema lo amerita, lo conviertes en una forma permanente de operar. Cada etapa deja valor por sí sola y prepara la siguiente." />
-          <div className="cap-ladder" style={{ position: "relative", display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 24 }}>
+          <div className="cap-ladder" style={{ position: "relative", display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: "clamp(20px,2.6vw,34px)" }}>
             {/* Rail conector con gradient relación */}
-            <div aria-hidden="true" className="cap-ladder-rail" style={{ position: "absolute", left: "16%", right: "16%", top: 36, height: 2, background: "var(--line-gradient-relation)", opacity: 0.5 }} />
+            <div aria-hidden="true" className="cap-ladder-rail" style={{ position: "absolute", left: "16%", right: "16%", top: 40, height: 2, background: "var(--line-gradient-relation)", opacity: 0.5 }} />
             {ESCALERA.map((r, i) => (
-              <Reveal key={r.n} delay={i * 140} as="article" className="ch-card cap-ladder-card" style={{ position: "relative", border: "1px solid var(--border-subtle)", background: "rgba(255,255,255,.94)", padding: "60px 30px 30px", display: "flex", flexDirection: "column", textAlign: "center" }}>
-                <span aria-hidden="true" style={{ position: "absolute", top: 24, left: "50%", transform: "translateX(-50%)", width: 26, height: 26, borderRadius: "50%", background: r.c, display: "inline-flex", alignItems: "center", justifyContent: "center", color: "#fff", boxShadow: `0 0 0 6px var(--surface-page), 0 8px 22px ${r.c}` }}>
+              <Reveal key={r.n} delay={i * 140} as="article" className="ch-card cap-ladder-card" style={{ position: "relative", border: "1px solid var(--border-subtle)", background: "rgba(255,255,255,.94)", padding: "clamp(58px,4.5vw,72px) clamp(30px,3vw,42px) clamp(34px,3.2vw,46px)", display: "flex", flexDirection: "column", textAlign: "center" }}>
+                <span aria-hidden="true" style={{ position: "absolute", top: 26, left: "50%", transform: "translateX(-50%)", width: 28, height: 28, borderRadius: "50%", background: r.c, display: "inline-flex", alignItems: "center", justifyContent: "center", color: "#fff", boxShadow: `0 0 0 6px var(--surface-page), 0 6px 16px color-mix(in srgb, ${r.c} 30%, transparent)` }}>
                   <Glyph name={r.g} size={14} />
                 </span>
-                <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 8 }}>
+                <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 12 }}>
                   Paso {String(i + 1).padStart(2, "0")} · {r.tag}
                 </span>
-                <h3 style={{ margin: "0 0 6px", font: "600 clamp(22px,2vw,28px)/1.04 var(--font-primary)", letterSpacing: "-.03em", color: "var(--ink-graphite)" }}>{r.n}</h3>
-                <span style={{ display: "inline-block", marginBottom: 14, font: "600 17px/1 var(--font-accent)", letterSpacing: ".08em", color: r.c }}>{r.duration}</span>
-                <p style={{ margin: 0, font: "400 14.5px/1.6 var(--font-primary)", color: "var(--text-muted)" }}>{r.p}</p>
+                <h3 style={{ margin: "0 0 14px", font: "600 clamp(22px,2vw,28px)/1.04 var(--font-primary)", letterSpacing: "-.03em", color: "var(--ink-graphite)" }}>{r.n}</h3>
+                <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8, marginBottom: 18, font: "600 11px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-muted)" }}>
+                  <span aria-hidden="true" style={{ width: 6, height: 6, borderRadius: "50%", background: r.c }} />
+                  {r.duration}
+                </span>
+                <p style={{ margin: "0 auto", maxWidth: "32ch", font: "400 14.5px/1.65 var(--font-primary)", color: "var(--text-muted)" }}>{r.p}</p>
               </Reveal>
             ))}
           </div>
@@ -146,7 +149,7 @@ export default function CapacidadesPage() {
           <Reveal as="h2" style={{ margin: "0 auto", maxWidth: "20ch", font: "600 clamp(32px,5vw,68px)/1.02 var(--font-primary)", letterSpacing: "-.05em", color: "#fff", textWrap: "balance" }}>El mejor momento para construir capacidad es antes de necesitarla.</Reveal>
           <Reveal delay={100} as="p" style={{ margin: "24px auto 0", maxWidth: 560, font: "400 clamp(16px,1.4vw,19px)/1.6 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>Cada relación arranca con la decisión que ya tienes enfrente. Trae una y la trabajamos juntos.</Reveal>
           <Reveal delay={160} style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12, marginTop: 38 }}>
-            <Link href="/contacto" className="btn btn-light">Trabajar una decisión</Link>
+            <Link href="/contacto" className="btn btn-light">Simular una decisión</Link>
             <Link href="/casos" className="btn btn-dghost">Ver capacidades instaladas</Link>
           </Reveal>
         </div>
