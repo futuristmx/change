@@ -31,7 +31,7 @@ const SOCIOS = [
     arc: "Decidir · Aterrizar",
     domain: "Estrategia, propiedad intelectual y modelos de negocio",
     c: "var(--change-violet)",
-    tagline: "Convierte lo intangible en valor defendible.",
+    tagline: "Convierte lo intangible en rentabilidad.",
     story: "Asesoró a empresas transnacionales en propiedad intelectual y modelos de negocio, y lo enseña en licenciatura y posgrado. Su convicción es simple: una decisión solo vale cuando sus costos están sobre la mesa y alguien puede defenderla frente al consejo. En Change convierte la lectura en apuestas con criterio explícito — las que se sostienen solas cuando llega la presión.",
   },
 ];
