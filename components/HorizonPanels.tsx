@@ -7,13 +7,15 @@ export interface Horizon {
   h: string;
   p: string;
   c: string;
+  /** numeral del watermark (si no, usa el índice) */
+  num?: string;
   /** ruta de la foto (opcional); si falta, placeholder con numeral + gradiente light */
   photo?: string;
   /** object-position de la foto, ej "center 35%" */
   focus?: string;
 }
 
-export default function HorizonPanels({ horizontes }: { horizontes: Horizon[] }) {
+export default function HorizonPanels({ horizontes, minH = "clamp(420px,42vw,540px)" }: { horizontes: Horizon[]; minH?: string }) {
   const [active, setActive] = useState(0);
 
   return (
@@ -43,7 +45,7 @@ export default function HorizonPanels({ horizontes }: { horizontes: Horizon[] })
               onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setActive(i); } }}
               style={{
                 position: "relative", overflow: "hidden", cursor: "pointer", outline: "none",
-                minHeight: "clamp(420px,42vw,540px)",
+                minHeight: minH,
                 border: "1px solid var(--border-subtle)", borderTop: `3px solid ${m.c}`,
                 background: "var(--surface-card)",
               }}
@@ -56,7 +58,7 @@ export default function HorizonPanels({ horizontes }: { horizontes: Horizon[] })
               )}
               {/* numeral watermark (solo placeholder) */}
               {!m.photo && (
-                <span aria-hidden="true" style={{ position: "absolute", top: "clamp(14px,2.6vw,30px)", right: "clamp(14px,2.4vw,26px)", font: "300 clamp(76px,11vw,150px)/1 var(--font-secondary)", color: `color-mix(in srgb, ${m.c} 16%, transparent)`, letterSpacing: "-.04em" }}>{numeral}</span>
+                <span aria-hidden="true" style={{ position: "absolute", top: "clamp(14px,2.6vw,30px)", right: "clamp(14px,2.4vw,26px)", font: "300 clamp(76px,11vw,150px)/1 var(--font-secondary)", color: `color-mix(in srgb, ${m.c} 16%, transparent)`, letterSpacing: "-.04em" }}>{m.num ?? numeral}</span>
               )}
               {/* overlay light inferior para legibilidad del texto grafito */}
               <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(255,255,255,0) 42%, color-mix(in srgb, var(--surface-card) 78%, transparent) 72%, var(--surface-card) 100%)" }} />

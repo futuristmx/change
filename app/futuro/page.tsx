@@ -4,7 +4,7 @@ import PageScaffold, { GradientTitle } from "@/components/PageScaffold";
 import Reveal from "@/components/Reveal";
 import HorizonPanels from "@/components/HorizonPanels";
 import EtherealDivider from "@/components/ds/EtherealDivider";
-import { Glyph, type GlyphName } from "@/components/ds";
+import type { GlyphName } from "@/components/ds";
 
 export const metadata: Metadata = {
   title: "Futuro: la tesis y el concepto de capacidad de futuro",
@@ -159,19 +159,10 @@ export default function FuturoPage() {
             <Reveal delay={120} as="p" style={{ margin: "22px 0 0", maxWidth: "60ch", font: "400 clamp(17px,1.4vw,20px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>Aplican al primer correo, al primer diagnóstico del board y a la última versión del artefacto. La capacidad se construye con disciplina; el método no se delega.</Reveal>
           </div>
 
-          <div className="fut-valores" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 16 }}>
-            {VALORES.map((v, i) => (
-              <Reveal key={v.k} delay={(i % 3) * 90} as="article" className="ch-card" style={{ border: "1px solid var(--border-subtle)", background: "rgba(255,255,255,.92)", padding: "28px 26px 30px", display: "flex", flexDirection: "column" }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 14 }}>
-                  <span aria-hidden="true" style={{ display: "inline-flex", justifyContent: "center", alignItems: "center", width: 38, height: 38, borderRadius: "50%", background: "var(--surface-card)", border: `1.5px solid ${v.c}`, color: v.c }}>
-                    <Glyph name={v.g} size={18} />
-                  </span>
-                  <span style={{ font: "300 clamp(22px,2vw,28px)/1 var(--font-accent)", letterSpacing: "-.02em", color: v.c }}>{v.k}</span>
-                </div>
-                <h3 style={{ margin: "0 0 10px", font: "600 17px/1.18 var(--font-primary)", letterSpacing: "-.02em", color: "var(--ink-graphite)" }}>{v.h}</h3>
-                <p style={{ margin: 0, font: "400 14px/1.55 var(--font-primary)", color: "var(--text-muted)" }}>{v.p}</p>
-              </Reveal>
-            ))}
+          {/* Paneles dinámicos expandibles (light) — 2 filas de 3 */}
+          <div style={{ display: "flex", flexDirection: "column", gap: "clamp(14px,1.6vw,20px)" }}>
+            <Reveal delay={110}><HorizonPanels horizontes={VALORES.slice(0, 3).map((v) => ({ k: v.k, num: v.k, h: v.h, p: v.p, c: v.c }))} minH="clamp(340px,32vw,420px)" /></Reveal>
+            <Reveal delay={150}><HorizonPanels horizontes={VALORES.slice(3, 6).map((v) => ({ k: v.k, num: v.k, h: v.h, p: v.p, c: v.c }))} minH="clamp(340px,32vw,420px)" /></Reveal>
           </div>
         </div>
       </section>
