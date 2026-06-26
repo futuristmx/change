@@ -51,17 +51,12 @@ export default function FoundersPanels({ founders }: { founders: Founder[] }) {
                 background: "var(--surface-dark-secondary)",
               }}
             >
-              {/* foto / placeholder */}
-              <div
-                aria-hidden="true"
-                className="fp-photo"
-                style={{
-                  position: "absolute", inset: 0,
-                  background: m.photo
-                    ? `url(${m.photo}) ${m.focus ?? "center 30%"} / cover no-repeat, linear-gradient(155deg, color-mix(in srgb, ${m.c} 28%, var(--surface-dark)) 0%, var(--surface-dark-secondary) 58%, var(--surface-dark) 100%)`
-                    : `linear-gradient(155deg, color-mix(in srgb, ${m.c} 28%, var(--surface-dark)) 0%, var(--surface-dark-secondary) 58%, var(--surface-dark) 100%)`,
-                }}
-              />
+              {/* base: gradiente dark del color del socio (respira a través de la foto) */}
+              <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: `linear-gradient(155deg, color-mix(in srgb, ${m.c} 36%, var(--surface-dark)) 0%, var(--surface-dark-secondary) 52%, var(--surface-dark) 100%)` }} />
+              {/* foto semi-transparente */}
+              {m.photo && (
+                <div aria-hidden="true" className="fp-photo" style={{ position: "absolute", inset: 0, background: `url(${m.photo}) ${m.focus ?? "center 30%"} / cover no-repeat`, opacity: 0.8 }} />
+              )}
               {/* iniciales watermark (solo placeholder) */}
               {!m.photo && (
                 <span aria-hidden="true" style={{ position: "absolute", top: "clamp(16px,3vw,34px)", right: "clamp(14px,2.4vw,26px)", font: "700 clamp(76px,11vw,150px)/1 var(--font-secondary)", color: "rgba(255,255,255,.055)", letterSpacing: "-.04em" }}>{initials}</span>
