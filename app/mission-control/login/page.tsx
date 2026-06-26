@@ -4,8 +4,6 @@ import type { ReactNode, FormEvent } from "react";
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 
 type Status = "idle" | "submitting" | "info";
 
@@ -48,7 +46,6 @@ export default function MissionControlLoginPage() {
 
   return (
     <div className="change-dark" style={{ minHeight: "100vh", display: "flex", flexDirection: "column", background: "var(--surface-dark)" }}>
-      <Header />
       <main
         id="main-content"
         style={{
@@ -61,7 +58,7 @@ export default function MissionControlLoginPage() {
             "linear-gradient(180deg, var(--surface-dark) 0%, var(--surface-dark-secondary) 100%)",
           display: "grid",
           placeItems: "center",
-          padding: "clamp(64px,9vw,120px) clamp(20px,4vw,48px)",
+          padding: "clamp(36px,5vw,72px) clamp(20px,4vw,48px) clamp(56px,6vw,84px)",
         }}
       >
         {/* Layout split: branding izquierda · form derecha */}
@@ -78,27 +75,27 @@ export default function MissionControlLoginPage() {
         >
           {/* ── Branding column ── */}
           <div>
-            <Link href="/mission-control" aria-label="Volver a Mission Control" style={{ display: "inline-block", marginBottom: 40 }}>
+            <Link href="/" aria-label="Change · Inicio" style={{ display: "block", width: "fit-content", marginBottom: 30 }}>
               <Image
-                src="/assets/change_logo_complete_white.svg"
+                src="/assets/change_icon_white.svg"
                 alt="Change"
-                width={220}
-                height={64}
+                width={56}
+                height={56}
                 priority
-                style={{ height: 64, width: "auto", display: "block" }}
+                style={{ height: 54, width: "auto", display: "block" }}
               />
             </Link>
 
-            <div style={{ display: "inline-flex", alignItems: "center", gap: 11, marginBottom: 24, padding: "7px 14px", border: "1px solid rgba(255,255,255,.16)", background: "rgba(255,255,255,.04)" }}>
+            <div style={{ display: "flex", width: "fit-content", alignItems: "center", gap: 11, marginBottom: 24, padding: "7px 14px", border: "1px solid rgba(255,255,255,.16)", background: "rgba(255,255,255,.04)" }}>
               <span data-pulse style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--signal-cyan)" }} />
               <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(255,255,255,.82)" }}>Mission Control · Memoria Viva</span>
             </div>
 
-            <h1 style={{ margin: "0 0 18px", maxWidth: "16ch", font: "600 clamp(34px,4.4vw,58px)/1.0 var(--font-primary)", letterSpacing: "-.045em", color: "#fff", textWrap: "balance" }}>
-              Acceso exclusivo a la plataforma de tu organización.
+            <h1 style={{ margin: "0 0 18px", maxWidth: "14ch", font: "600 clamp(34px,4.4vw,58px)/1.0 var(--font-primary)", letterSpacing: "-.045em", color: "#fff", textWrap: "balance" }}>
+              Acceso exclusivo a Mission Control
             </h1>
             <p style={{ margin: 0, maxWidth: "46ch", font: "400 clamp(15px,1.3vw,18px)/1.55 var(--font-primary)", color: "rgba(240,244,255,.72)" }}>
-              Mission Control sostiene el porqué de cada decisión que el board acompaña. Si tu organización es cliente de Change, tu acceso fue creado en el primer Mapa de Claridad.
+              Mission Control sostiene el porqué de cada decisión que el board acompaña. Si tu organización es cliente de Change, tu acceso fue entregado en la primera sesión de trabajo.
             </p>
 
             <ul style={{ margin: "32px 0 0", padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 12 }}>
@@ -240,7 +237,6 @@ export default function MissionControlLoginPage() {
           Cualquier intento de acceso no autorizado queda registrado · Change Intelligence
         </p>
       </main>
-      <Footer />
 
       <style>{`
         @media (max-width: 880px) {
