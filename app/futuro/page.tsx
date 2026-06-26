@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import PageScaffold, { GradientTitle } from "@/components/PageScaffold";
 import Reveal from "@/components/Reveal";
+import HorizonPanels from "@/components/HorizonPanels";
 import EtherealDivider from "@/components/ds/EtherealDivider";
 import { Glyph, type GlyphName } from "@/components/ds";
 
@@ -65,16 +66,19 @@ const VALORES: Array<{ k: string; h: string; p: string; g: GlyphName; c: string 
 const HORIZONTES = [
   {
     k: "Propósito",
+    c: "var(--signal-cyan)",
     h: "Transformar la relación de las organizaciones con el futuro.",
     p: "El futuro deja de ser una amenaza que se padece o una apuesta que se adivina. Se vuelve algo que se puede leer, interpretar y trabajar con método — mientras todavía hay margen para decidir. Ese cambio de relación es nuestra razón de existir.",
   },
   {
     k: "Visión",
+    c: "var(--soft-violet)",
     h: "Organizaciones que construyen futuro con imaginación, criterio y responsabilidad.",
     p: "Imaginamos un entorno donde decidir el rumbo deje de ser reactivo. Donde las organizaciones no enfrenten el futuro desde la urgencia, la inercia o la moda, sino desde capacidades vivas que evolucionan con ellas: leer la señal, disputar su sentido, decidir con criterio compartido y sostener lo aprendido. Capacidades que permanecen — para que la próxima coyuntura no empiece de cero ni dependa de alguien externo.",
   },
   {
     k: "Misión",
+    c: "var(--change-violet)",
     h: "Convertir incertidumbre en capacidad viva.",
     p: "Acompañamos a líderes y equipos a leer lo que cambia, interpretar la tensión que revela, decidir con criterio explícito, darle forma y sostenerla en el tiempo. No entregamos recomendaciones: diseñamos los procesos, narrativas y artefactos que instalan esa capacidad. Change OS opera detrás —el sistema que vuelve replicable el criterio—; Mission Control aparece delante, donde cada decisión deja memoria, trazabilidad y continuidad.",
   },
@@ -136,15 +140,8 @@ export default function FuturoPage() {
             <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(30px,4.2vw,58px)/1.0 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>Tres horizontes que sostienen cada decisión nuestra.</Reveal>
           </div>
 
-          <div className="fut-horizontes" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 24 }}>
-            {HORIZONTES.map((h, i) => (
-              <Reveal key={h.k} delay={i * 110} as="article" className="ch-card" style={{ border: "1px solid var(--border-subtle)", borderTop: "3px solid var(--change-violet)", background: "rgba(255,255,255,.94)", padding: "32px 28px 36px", display: "flex", flexDirection: "column" }}>
-                <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--change-violet)", marginBottom: 14 }}>{h.k}</span>
-                <h3 style={{ margin: "0 0 16px", font: "600 clamp(20px,1.8vw,24px)/1.15 var(--font-primary)", letterSpacing: "-.03em", color: "var(--ink-graphite)", textWrap: "balance" }}>{h.h}</h3>
-                <p style={{ margin: 0, font: "400 14.5px/1.6 var(--font-primary)", color: "var(--text-muted)", flexGrow: 1 }}>{h.p}</p>
-              </Reveal>
-            ))}
-          </div>
+          {/* Paneles dinámicos expandibles (variante light) */}
+          <Reveal delay={110}><HorizonPanels horizontes={HORIZONTES} /></Reveal>
         </div>
       </section>
 
