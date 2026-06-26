@@ -72,6 +72,16 @@
   --text-muted: #4B4F59;
   --text-faint: #4B4F59;
 }
+
+/* ── Tooltip (InlineTooltip) — superficie FIJA, no se invierte bajo .change-dark ──
+   El popover siempre es una tarjeta clara con texto grafito, legible sobre
+   cualquier fondo (incl. footer dark). Define hex aquí (permitido en tokens). */
+:root {
+  --tooltip-surface: #FFFFFF;
+  --tooltip-text:    #2E2E33;
+  --tooltip-outline: rgba(46,46,51,.12);
+  --tooltip-shadow:  0 10px 30px rgba(15,18,28,.20), 0 2px 6px rgba(15,18,28,.10);
+}
 .change-dark, [data-theme="dark"] {
   --surface-selected:   var(--surface-soft);
   --border-selected:    var(--border-strong);

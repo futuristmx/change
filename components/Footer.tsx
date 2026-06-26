@@ -23,6 +23,7 @@ const COL_A = [
   { label: "Método", href: "/capacidades" },
   { label: "Mission Control", href: "/mission-control" },
   { label: "Casos", href: "/casos" },
+  { label: "Contacto", href: "/contacto" },
 ];
 const COL_B = [
   { label: "Equipo", href: "/equipo" },
@@ -104,11 +105,7 @@ export default function Footer() {
         </div>
 
         <div style={{ display: "flex", flexWrap: "wrap", gap: 16, justifyContent: "space-between", alignItems: "center", marginTop: "clamp(80px,9vw,120px)", paddingTop: 32, borderTop: "1px solid rgba(255,255,255,.08)" }}>
-          <span style={{ font: "400 12.5px var(--font-primary)", color: "rgba(240,244,255,.5)" }}>© 2026 Change · Inteligencia estratégica para{" "}
-            <InlineTooltip content="La capacidad de tomar mejores decisiones antes de que la certeza llegue. Es la condición para actuar cuando el entorno cambia.">
-              capacidad de futuro
-            </InlineTooltip>
-          </span>
+          <span style={{ font: "400 12.5px var(--font-primary)", color: "rgba(240,244,255,.5)" }}>© 2026 Change · Inteligencia estratégica para capacidad de futuro</span>
           <span style={{ font: "700 10px var(--font-secondary)", letterSpacing: ".16em", textTransform: "uppercase", color: "rgba(240,244,255,.35)" }}>México</span>
         </div>
       </div>
