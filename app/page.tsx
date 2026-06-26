@@ -40,9 +40,9 @@ const ARTEFACTOS = [
   { h: "Mapa de tensiones", p: "Las fuerzas que se contradicen dentro de la organización, nombradas para poder trabajarlas.", k: "Interpretar", c: "var(--soft-violet)" },
   { h: "Matriz de decisión", p: "Qué se gana y qué se sacrifica en cada opción, con el costo a la vista.", k: "Decidir", c: "var(--change-violet)" },
   { h: "Roadmap vivo", p: "La decisión convertida en secuencia de movimientos, que se actualiza cuando cambia el terreno.", k: "Diseñar", c: "var(--change-violet)" },
-  { h: "Reporte ejecutivo", p: "La lectura completa en lenguaje de dirección, lista para llevar al board que decide.", k: "Síntesis", c: "var(--opportunity-orange)" },
+  { h: "Reporte ejecutivo", p: "El diagnóstico completo en lenguaje de dirección, lista para llevar al board que decide.", k: "Síntesis", c: "var(--opportunity-orange)" },
   { h: "Mission Control", p: "Donde señales, decisiones, proyectos y reportes se mantienen vivos y conectados.", k: "Sostener", c: "var(--ink-graphite)" },
-  { h: "Field Note", p: "Una lectura corta y pública de un cambio real: de la señal a la decisión que abre.", k: "Pensamiento", c: "var(--signal-cyan)" },
+  { h: "Field Note", p: "Una nota corta y pública de un cambio real: de la señal a la decisión que abre.", k: "Pensamiento", c: "var(--signal-cyan)" },
   { h: "Workshop instrumentado", p: "Una sesión que no produce post-its, sino instrumentos de decisión para llevarse.", k: "Trabajo", c: "var(--human-pink)" },
 ];
 
@@ -63,7 +63,7 @@ const MANIFIESTO = [
 ];
 
 const COMO_TRABAJA = [
-  { n: "01", h: "Primera lectura", p: "Ordenamos la decisión, la tensión y lo que está cambiando. El objetivo es entender si hay una decisión real que vale la pena trabajar.", label: "Mapa de Claridad" },
+  { n: "01", h: "Primer diagnóstico", p: "Ordenamos la decisión, la tensión y lo que está cambiando. El objetivo es entender si hay una decisión real que vale la pena trabajar.", label: "Mapa de Claridad" },
   { n: "02", h: "Trabajo acotado", p: "Si hay tracción, construimos criterios, opciones, artefactos y un primer movimiento ejecutable. Con alcance definido desde el inicio.", label: "Sprint de Rumbo" },
   { n: "03", h: "Capacidad instalada", p: "Cuando el reto lo amerita, dejamos memoria, seguimiento y gobernanza para que la decisión no se pierda después de la sesión.", label: "Mission Control" },
 ];
@@ -105,7 +105,7 @@ export default function Home() {
               Change ayuda a organizaciones a leer lo que cambia, decidir sin esperar certeza y sostener aprendizaje antes de que la urgencia decida por ellas.
             </Reveal>
             <Reveal delay={200} style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12, marginTop: 36 }}>
-              <Link href="/contacto" className="btn btn-primary">Simular una decisión</Link>
+              <Link href="/contacto" className="btn btn-primary">Trabajar una decisión</Link>
               <Link href="#score" className="btn btn-secondary">Medir mi capacidad de futuro</Link>
             </Reveal>
 
@@ -304,7 +304,7 @@ export default function Home() {
         {/* ═══ 13 · FIELD NOTES ═══ */}
         <section style={{ background: "var(--surface-page)" }}>
           <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(92px,11vw,168px) 0" }}>
-            <SectionHead kicker="Field Notes" title="Lecturas cortas sobre lo que cambia — y la decisión que abre." lead="Cada nota toma una señal real del entorno y la recorre completa: de qué cambió a qué decisión queda en tus manos. Pocas notas, ninguna de relleno." />
+            <SectionHead kicker="Field Notes" title="Notas cortas sobre lo que cambia — y la decisión que abre." lead="Cada nota toma una señal real del entorno y la recorre completa: de qué cambió a qué decisión queda en tus manos. Pocas notas, ninguna de relleno." />
             <Reveal className="ch-card" style={{ border: "1px solid var(--border-subtle)", background: "rgba(255,255,255,.7)", padding: "clamp(32px,4vw,48px)" }}>
               <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-muted)" }}>El recorrido de cada nota</span>
 
@@ -352,7 +352,7 @@ export default function Home() {
             <Reveal delay={60} as="h2" style={{ margin: "0 auto", maxWidth: "18ch", font: "600 clamp(36px,5vw,76px)/1.0 var(--font-primary)", letterSpacing: "-.05em", color: "#fff", textWrap: "balance" }}>Empieza por una decisión. Construye capacidad desde ahí.</Reveal>
             <Reveal delay={120} as="p" style={{ margin: "26px auto 0", maxWidth: 600, font: "400 clamp(16px,1.4vw,19px)/1.6 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>La primera conversación no vende una solución cerrada. Identifica qué tensión enfrentas, qué decisión necesita estructura y qué capacidad debe empezar a construirse. De ahí sale el primer paso, acotado y concreto.</Reveal>
             <Reveal delay={180} style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12, marginTop: 40 }}>
-              <Link href="/contacto" className="btn btn-light">Simular una decisión</Link>
+              <Link href="/contacto" className="btn btn-light">Trabajar una decisión</Link>
               <Link href="/capacidades" className="btn btn-dghost">Conocer el método</Link>
             </Reveal>
           </div>

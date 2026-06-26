@@ -19,7 +19,7 @@ export default function ContactoPage() {
   return (
     <PageScaffold
       kicker="Contacto"
-      title={<GradientTitle pre="Trae una decisión difícil." accent="Sal con una primera lectura." accentGradient="var(--gradient-type-dark-ember)" />}
+      title={<GradientTitle pre="Trae una decisión difícil." accent="Sal con un primer diagnóstico." accentGradient="var(--gradient-type-dark-ember)" />}
       lead="No empieza con un proyecto ni con una propuesta. Empieza con una decisión real que tienes enfrente. Prueba el modelo con el simulador o escríbenos directamente."
     >
       <DecisionSimulator />
@@ -30,7 +30,7 @@ export default function ContactoPage() {
           <div style={{ maxWidth: 640 }}>
             <p style={{ margin: "0 0 6px", font: "600 11.5px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-muted)" }}>Sin simulador</p>
             <h2 style={{ margin: "0 0 14px", font: "600 clamp(22px,2.6vw,32px)/1.1 var(--font-primary)", letterSpacing: "-.035em", color: "var(--ink-graphite)" }}>Escríbenos la decisión como la dirías en voz alta.</h2>
-            <p style={{ margin: "0 0 36px", font: "400 15px/1.6 var(--font-primary)", color: "var(--text-muted)" }}>Sin estructura, sin formato. El board senior de Change la lee directamente. Si hay una tensión real que pueda trabajarse con el método, te respondemos en menos de dos días hábiles con una primera lectura y un paso posible.</p>
+            <p style={{ margin: "0 0 36px", font: "400 15px/1.6 var(--font-primary)", color: "var(--text-muted)" }}>Sin estructura, sin formato. El board senior de Change la lee directamente. Si hay una tensión real que pueda trabajarse con el método, te respondemos en menos de dos días hábiles con un primer diagnóstico y un paso posible.</p>
             <ContactFormSimple />
           </div>
         </div>

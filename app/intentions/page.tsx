@@ -220,7 +220,7 @@ export default async function IntentionsPage() {
               <Metric label="Iniciados" value={d.simStarts} />
               <Metric label="Resultado visto" value={d.simCompleted} sub={`${pct(d.simCompleted, d.simStarts)} conversión`} />
               <Metric label="Enviados (lead)" value={d.simSubmitted} sub={`${pct(d.simSubmitted, d.simCompleted)} de quienes leyeron`} />
-              <Metric label="Lectura copiada" value={d.simCopied} />
+              <Metric label="Diagnóstico copiado" value={d.simCopied} />
             </div>
 
             {d.simDims.length > 0 && (

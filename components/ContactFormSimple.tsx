@@ -85,13 +85,13 @@ export default function ContactFormSimple() {
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12" /></svg>
           </span>
           <p style={{ margin: "0 0 8px", font: "600 18px/1.3 var(--font-primary)", letterSpacing: "-.02em", color: "var(--ink-graphite)" }}>Gracias, recibimos tu mensaje.</p>
-          <p style={{ margin: 0, font: "400 14px/1.6 var(--font-primary)", color: "var(--text-muted)", maxWidth: 400, marginLeft: "auto", marginRight: "auto" }}>Lo lee el board de Change con calma. Te respondemos personalmente en los próximos días hábiles, con una primera lectura de tu decisión.</p>
+          <p style={{ margin: 0, font: "400 14px/1.6 var(--font-primary)", color: "var(--text-muted)", maxWidth: 400, marginLeft: "auto", marginRight: "auto" }}>Lo lee el board de Change con calma. Te respondemos personalmente en los próximos días hábiles, con un primer diagnóstico de tu decisión.</p>
         </div>
         <Toast
           open
           tone="success"
           title="Recibimos tu mensaje."
-          description="Te respondemos personalmente en los próximos días, con una primera lectura."
+          description="Te respondemos personalmente en los próximos días, con un primer diagnóstico."
           onClose={() => setStatus("idle")}
         />
       </>

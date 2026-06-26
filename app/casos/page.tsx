@@ -78,8 +78,8 @@ const CASOS = [
       "El mapa de tensiones nombró la brecha: la organización seguía optimizando lo que sabía hacer, mientras el usuario había cambiado de pregunta. No era un problema de ejecución, era de supuesto.",
       "Una matriz de decisión definió qué partes de la experiencia se rediseñaban a fondo y cuáles se sostenían — porque rediseñar todo a la vez era arriesgar lo que sí seguía funcionando.",
       "Un roadmap vivo de la nueva experiencia, priorizado por dónde la distancia entre lo que el usuario esperaba y lo que recibía era mayor — y por dónde cerrarla rendía más.",
-      "Las señales de comportamiento del usuario quedaron como lectura viva dentro de Mission Control. La experiencia dejó de revisarse cuando los números asustan y pasó a leerse de forma continua.",
-      "La organización dejó de diseñar para el usuario que recordaba y empezó a diseñar para el que tiene enfrente. Esa lectura ahora es un hábito, no un proyecto.",
+      "Las señales de comportamiento del usuario quedaron como interpretación viva dentro de Mission Control. La experiencia dejó de revisarse cuando los números asustan y pasó a leerse de forma continua.",
+      "La organización dejó de diseñar para el usuario que recordaba y empezó a diseñar para el que tiene enfrente. Esa interpretación ahora es un hábito, no un proyecto.",
     ],
   },
   {
@@ -160,7 +160,7 @@ export default function CasosPage() {
           <Reveal as="h2" style={{ margin: "0 auto", maxWidth: "20ch", font: "600 clamp(34px,5vw,72px)/1.0 var(--font-primary)", letterSpacing: "-.05em", color: "#fff", textWrap: "balance" }}>¿Cuál de estas tensiones se parece a la tuya?</Reveal>
           <Reveal delay={100} as="p" style={{ margin: "24px auto 0", maxWidth: 580, font: "400 clamp(16px,1.4vw,19px)/1.6 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>Ninguna de estas decisiones empezó con un plan. Empezó con una organización que sabía que tenía que actuar antes de tener certeza. Tráenos la decisión que traes atorada y trabajémosla — esa es la entrada.</Reveal>
           <Reveal delay={160} style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12, marginTop: 38 }}>
-            <Link href="/contacto" className="btn btn-light">Simular una decisión</Link>
+            <Link href="/contacto" className="btn btn-light">Trabajar una decisión</Link>
             <Link href="/capacidades" className="btn btn-dghost">Ver cómo trabajamos</Link>
           </Reveal>
         </div>

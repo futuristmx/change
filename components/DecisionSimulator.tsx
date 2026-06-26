@@ -130,13 +130,13 @@ function ReadingPanel({ answers }: { answers: StepAnswer[] }) {
       }}>
         <span data-pulse aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--signal-cyan)", flexShrink: 0 }} />
         <span style={{ font: "600 10px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-muted)" }}>
-          Lectura del board
+          Diagnóstico del board
         </span>
       </div>
 
       {items.length === 0 ? (
         <p style={{ font: "400 13px/1.6 var(--font-primary)", color: "var(--text-faint)", margin: 0 }}>
-          Tu lectura aparece aquí conforme avanzas.
+          Tu diagnóstico aparece aquí conforme avanzas.
         </p>
       ) : (
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
@@ -170,7 +170,7 @@ function ResultCard({ reading }: { reading: SimulatorReading }) {
       <div style={{ display: "flex", alignItems: "center", gap: 9, marginBottom: 28 }}>
         <span aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--signal-cyan)" }} />
         <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(255,255,255,.55)" }}>
-          Lectura del board · Change
+          Diagnóstico del board · Change
         </span>
       </div>
 
@@ -491,13 +491,13 @@ export default function DecisionSimulator() {
         <div style={{ ...WRAP, padding: "clamp(56px,7vw,88px) 0" }}>
           <div style={{ maxWidth: "52ch", marginBottom: "clamp(36px,5vw,52px)" }}>
             <span style={{ display: "block", font: "600 11px var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 16 }}>
-              Simulador de decisiones
+              Estructura tu decisión
             </span>
             <h2 style={{ margin: "0 0 16px", font: "600 clamp(26px,3.2vw,44px)/1.06 var(--font-primary)", letterSpacing: "-.04em", color: "var(--ink-graphite)", textWrap: "balance" }}>
-              Prueba el modelo antes de compartir tu caso.
+              Ordena tu decisión en cinco preguntas.
             </h2>
             <p style={{ margin: 0, font: "400 clamp(15px,1.3vw,18px)/1.6 var(--font-primary)", color: "var(--text-muted)" }}>
-              Selecciona un escenario para ver cómo Change lee una situación, o describe la tuya directamente.
+              Elige un escenario para ver cómo Change estructura una situación, o describe la tuya directamente.
             </p>
           </div>
 
@@ -577,7 +577,7 @@ export default function DecisionSimulator() {
           >
             <div
               role="progressbar"
-              aria-label="Avance del simulador"
+              aria-label="Avance"
               aria-valuemin={0}
               aria-valuemax={5}
               aria-valuenow={step + 1}
@@ -713,7 +713,7 @@ export default function DecisionSimulator() {
                   disabled={!canAdvance}
                   style={{ opacity: canAdvance ? 1 : 0.45 }}
                 >
-                  {step < 4 ? "Siguiente →" : "Ver lectura →"}
+                  {step < 4 ? "Siguiente →" : "Ver diagnóstico →"}
                 </button>
                 {step < 4 && (
                   <button
@@ -752,12 +752,12 @@ export default function DecisionSimulator() {
         <div style={{ ...WRAP, padding: "clamp(56px,7vw,88px) 0" }}>
           <div style={{ maxWidth: 680, marginBottom: "clamp(32px,4vw,48px)" }}>
             <span style={{ display: "block", font: "600 11px var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 14 }}>
-              Resultado del simulador
+              Tu diagnóstico
             </span>
             <h2 style={{ margin: 0, font: "600 clamp(24px,3vw,42px)/1.06 var(--font-primary)", letterSpacing: "-.04em", color: "var(--ink-graphite)", textWrap: "balance" }}>
               {selectedScenario
-                ? `Lectura para el escenario: ${selectedScenario.label}`
-                : "Lectura de tu decisión"}
+                ? `Diagnóstico del escenario: ${selectedScenario.label}`
+                : "Diagnóstico de tu decisión"}
             </h2>
           </div>
 
@@ -796,10 +796,10 @@ export default function DecisionSimulator() {
               className="btn btn-secondary"
               onClick={handleCopyReading}
               aria-live="polite"
-              aria-label={copied ? "Lectura copiada al portapapeles" : "Copiar lectura al portapapeles"}
+              aria-label={copied ? "Diagnóstico copiado al portapapeles" : "Copiar diagnóstico al portapapeles"}
               style={{ minWidth: 130 }}
             >
-              {copied ? "Copiado ✓" : "Copiar lectura"}
+              {copied ? "Copiado ✓" : "Copiar diagnóstico"}
             </button>
           </div>
         </div>
@@ -825,13 +825,13 @@ export default function DecisionSimulator() {
                 El board senior lee tu caso antes de buscarte.
               </h2>
               <p style={{ margin: "0 0 28px", font: "400 15.5px/1.6 var(--font-primary)", color: "var(--text-muted)", maxWidth: "44ch" }}>
-                Tu caso llega al board senior de Change. Si hay una tensión real que podamos trabajar, te respondemos con una primera lectura y un siguiente paso posible.
+                Tu caso llega al board senior de Change. Si hay una tensión real que podamos trabajar, te respondemos con un primer diagnóstico y un siguiente paso posible.
               </p>
 
               <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
                 {[
                   ["Tu información no circula", "Tratamos cada decisión como información sensible. No la compartimos ni la reciclamos."],
-                  ["Sin pitch ni propuesta automática", "Lo que recibes es una lectura estructurada, no un correo de venta."],
+                  ["Sin pitch ni propuesta automática", "Lo que recibes es un diagnóstico estructurado, no un correo de venta."],
                 ].map(([h, p]) => (
                   <div key={h} style={{ display: "flex", gap: 12 }}>
                     <span aria-hidden="true" style={{ flexShrink: 0, marginTop: 7, width: 6, height: 6, borderRadius: "50%", background: "var(--change-violet)" }} />
@@ -848,7 +848,7 @@ export default function DecisionSimulator() {
                 onClick={handleRetry}
                 style={{ marginTop: 28, background: "none", border: "none", padding: 0, cursor: "pointer", font: "400 13px var(--font-primary)", color: "var(--text-muted)", display: "flex", alignItems: "center", gap: 6 }}
               >
-                ← Ver la lectura de nuevo
+                ← Ver el diagnóstico de nuevo
               </button>
             </div>
 
@@ -905,7 +905,7 @@ export default function DecisionSimulator() {
             Listo. Tu decisión llegó al board.
           </h2>
           <p style={{ margin: "0 0 16px", font: "400 16px/1.6 var(--font-primary)", color: "var(--text-muted)", maxWidth: "44ch" }}>
-            Andrés Valencia y Miguel Cadena leen tu caso y te buscamos en un máximo de dos días hábiles con una primera lectura. No necesitas hacer nada más.
+            Andrés Valencia y Miguel Cadena leen tu caso y te buscamos en un máximo de dos días hábiles con un primer diagnóstico. No necesitas hacer nada más.
           </p>
           {reading && (
             <p style={{ margin: "0 0 36px", font: "400 14px/1.5 var(--font-primary)", color: "var(--text-muted)", maxWidth: "44ch" }}>

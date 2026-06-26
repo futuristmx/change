@@ -5,11 +5,11 @@ import Reveal from "@/components/Reveal";
 import { Glyph, type GlyphName } from "@/components/ds";
 
 export const metadata: Metadata = {
-  title: "Field Notes: lecturas para decidir antes que la urgencia",
+  title: "Field Notes: notas para decidir antes que la urgencia",
   description:
     "Notas breves sobre lo que está cambiando y lo que ese cambio te obliga a decidir. No comentamos la noticia: la convertimos en una decisión que tu organización todavía puede tomar a tiempo.",
   openGraph: {
-    images: [{ url: "/assets/og-default.png", width: 1200, height: 630, alt: "Field Notes: lecturas para decidir antes que la urgencia" }],
+    images: [{ url: "/assets/og-default.png", width: 1200, height: 630, alt: "Field Notes: notas para decidir antes que la urgencia" }],
   },
   twitter: { images: ["/assets/og-default.png"] },
 };
@@ -25,13 +25,13 @@ const CONTRATO: Array<{ v: string; h: string; p: string; c: string; g: GlyphName
 ];
 
 const TIPOS = [
-  { k: "Señal → decisión", c: "var(--signal-cyan)", h: "Lectura de señal", p: "Tomamos un movimiento concreto del entorno mexicano —regulatorio, tecnológico, cultural, de mercado— y mostramos la tensión que esconde y a quién obliga a decidir." },
+  { k: "Señal → decisión", c: "var(--signal-cyan)", h: "Interpretación de señal", p: "Tomamos un movimiento concreto del entorno mexicano —regulatorio, tecnológico, cultural, de mercado— y mostramos la tensión que esconde y a quién obliga a decidir." },
   { k: "Fuerzas en conflicto", c: "var(--soft-violet)", h: "Mapa de tensión", p: "Un solo conflicto de fondo que atraviesa varios sectores a la vez, desplegado como mapa de tensiones para verlo completo, no por pedazos." },
   { k: "El instrumento por dentro", c: "var(--change-violet)", h: "Nota de método", p: "Cómo se ve por dentro un instrumento de decisión —un radar de señales, una matriz de decisión, un roadmap vivo— usando un caso real desidentificado." },
 ];
 
 const RITMO = [
-  { k: "Cadencia real", h: "Sin ruido de calendario", p: "No publicamos por inercia. Si una semana no hay nada que cambie tu forma de decidir, no hay nota. El silencio también es una lectura." },
+  { k: "Cadencia real", h: "Sin ruido de calendario", p: "No publicamos por inercia. Si una semana no hay nada que cambie tu forma de decidir, no hay nota. El silencio también dice algo." },
   { k: "Cierre accionable", h: "Una señal, una decisión", p: "Ninguna nota termina en abstracto. Si no abre una decisión concreta, no es una Field Note: es un comentario." },
   { k: "Lente local", h: "Contexto mexicano primero", p: "Leemos el entorno donde operan nuestros clientes. Las señales se interpretan desde aquí, no traducidas de otro mercado." },
 ];
@@ -40,7 +40,7 @@ export default function FieldNotesPage() {
   return (
     <PageScaffold
       kicker="Field Notes"
-      title={<GradientTitle pre="Lecturas para decidir antes" accent="de que la urgencia cierre opciones." accentGradient="var(--gradient-type-dark-rose)" />}
+      title={<GradientTitle pre="Notas para decidir antes" accent="de que la urgencia cierre opciones." accentGradient="var(--gradient-type-dark-rose)" />}
       lead="Pocas notas, ninguna de relleno. Primera serie en preparación — las Field Notes existen cuando una señal merece convertirse en decisión, no antes."
     >
       {/* ═══ POR QUÉ EXISTE ═══ */}
@@ -59,7 +59,7 @@ export default function FieldNotesPage() {
           <div className="fn-types" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
             {[
               { h: "La señal llega temprano", p: "No esperamos a que un tema sea tendencia para nombrarlo. La señal débil de hoy es el frente abierto del próximo trimestre." },
-              { h: "La interpretas, no solo la archivas", p: "Cada nota explica qué tensión sistémica revela la señal. Sin esa lectura, una señal es solo un dato más." },
+              { h: "La interpretas, no solo la archivas", p: "Cada nota explica qué tensión sistémica revela la señal. Sin esa interpretación, una señal es solo un dato más." },
               { h: "Sale en forma de decisión", p: "Toda nota cierra en una decisión que sigue abierta para ti. No te dejamos con un dato: te dejamos con una opción que aún puedes tomar." },
             ].map((c, i) => (
               <Reveal key={c.h} delay={i * 110} as="article" className="ch-card" style={{ background: "rgba(255,255,255,.82)", border: "1px solid var(--border-subtle)", padding: 32, minHeight: 210, display: "flex", flexDirection: "column" }}>

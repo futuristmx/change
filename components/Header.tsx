@@ -27,7 +27,7 @@ const PULSE_VISIBLE_MS = 1200;
 interface HeaderProps {
   /** "dark" → variante glass oscura (para superficies dark como el login) */
   variant?: "light" | "dark";
-  /** false → oculta el CTA "Simular una decisión" (p. ej. en el login) */
+  /** false → oculta el CTA "Trabajar una decisión" (p. ej. en el login) */
   showCta?: boolean;
 }
 
@@ -184,7 +184,7 @@ export default function Header({ variant = "light", showCta = true }: HeaderProp
           </div>
 
           <div style={{ justifySelf: "end", display: "flex", alignItems: "center", gap: 12 }}>
-            {showCta && <Link href="/contacto" className="btn btn-primary btn-sm ch-cta">Simular una decisión</Link>}
+            {showCta && <Link href="/contacto" className="btn btn-primary btn-sm ch-cta">Trabajar una decisión</Link>}
             <button
               onClick={() => setOpen((v) => !v)}
               aria-label="Menú" aria-expanded={open}

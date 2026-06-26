@@ -104,9 +104,9 @@ export default function CapacityScore() {
           ¿Qué tan lista está tu organización para actuar cuando no hay certeza?
         </h3>
         <p style={{ margin: "16px 0 28px", maxWidth: "54ch", font: "400 16px/1.6 var(--font-primary)", color: "var(--text-muted)" }}>
-          Cinco preguntas sobre las cinco capacidades del método: leer, interpretar, decidir, diseñar y sostener. Una lectura parcial pero útil en dos minutos. Sin datos personales hasta que tú decidas.
+          Cinco preguntas sobre las cinco capacidades del método: leer, interpretar, decidir, diseñar y sostener. Un diagnóstico parcial pero útil en dos minutos. Sin datos personales hasta que tú decidas.
         </p>
-        <button onClick={start} className="btn btn-primary">Empezar la lectura</button>
+        <button onClick={start} className="btn btn-primary">Empezar el diagnóstico</button>
       </Shell>
     );
   }
@@ -150,7 +150,7 @@ export default function CapacityScore() {
   if (phase === "result" && result.status === "ok") {
     const r = result;
     return (
-      <Shell kicker="Tu lectura">
+      <Shell kicker="Tu diagnóstico">
         <div className="cs-result" style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: "clamp(24px,4vw,44px)", alignItems: "center", marginBottom: 30 }}>
           <div style={{ textAlign: "center" }}>
             <div style={{ font: "300 clamp(56px,9vw,88px)/.9 var(--font-secondary)", background: "var(--gradient-type-electric)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>{r.total}</div>
@@ -189,7 +189,7 @@ export default function CapacityScore() {
           <p style={{ margin: "8px 0 0", font: "400 15px/1.55 var(--font-primary)", color: "var(--deep-warm-gray)" }}><strong style={{ fontWeight: 600, color: "var(--ink-graphite)" }}>Primer movimiento:</strong> {r.firstMove}</p>
         </div>
 
-        <p style={{ margin: "20px 0 0", font: "400 13px/1.5 var(--font-primary)", color: "var(--text-faint)" }}>Esta lectura es parcial: una conversación la vuelve precisa. No promete certeza — la trabaja.</p>
+        <p style={{ margin: "20px 0 0", font: "400 13px/1.5 var(--font-primary)", color: "var(--text-faint)" }}>Este diagnóstico es parcial: una conversación la vuelve precisa. No promete certeza — la trabaja.</p>
 
         {!showForm ? (
           <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 24 }}>
@@ -198,7 +198,7 @@ export default function CapacityScore() {
           </div>
         ) : (
           <form onSubmit={submit} noValidate style={{ marginTop: 26, paddingTop: 24, borderTop: "1px solid var(--border-subtle)", display: "flex", flexDirection: "column", gap: 16 }}>
-            <p style={{ margin: 0, font: "400 14px/1.55 var(--font-primary)", color: "var(--text-muted)" }}>Te enviamos tu lectura y, si quieres, trabajamos tu punto vulnerable. Solo lo que escribas aquí se guarda.</p>
+            <p style={{ margin: 0, font: "400 14px/1.55 var(--font-primary)", color: "var(--text-muted)" }}>Te enviamos tu diagnóstico y, si quieres, trabajamos tu punto vulnerable. Solo lo que escribas aquí se guarda.</p>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }} className="cs-frow">
               <div><label htmlFor="s-nombre" style={FLABEL}>Nombre y rol</label><input id="s-nombre" name="nombre" style={FIELD} placeholder="Cómo te llamas" /></div>
               <div><label htmlFor="s-org" style={FLABEL}>Organización</label><input id="s-org" name="organizacion" style={FIELD} placeholder="Tu empresa" /></div>
@@ -219,7 +219,7 @@ export default function CapacityScore() {
     return (
       <Shell kicker="Recibido">
         <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--success)" }}>Listo</span>
-        <h3 style={{ margin: "14px 0 10px", font: "600 clamp(22px,2.4vw,30px)/1.08 var(--font-primary)", letterSpacing: "-.03em", color: "var(--ink-graphite)" }}>Tu lectura está en camino.</h3>
+        <h3 style={{ margin: "14px 0 10px", font: "600 clamp(22px,2.4vw,30px)/1.08 var(--font-primary)", letterSpacing: "-.03em", color: "var(--ink-graphite)" }}>Tu diagnóstico está en camino.</h3>
         <p style={{ margin: 0, maxWidth: "48ch", font: "400 15.5px/1.6 var(--font-primary)", color: "var(--text-muted)" }}>Te escribimos pronto. Si quieres, ya puedes traer tu punto vulnerable a una primera conversación — sin compromiso.</p>
         <div style={{ marginTop: 22 }}><Link href="/contacto" onClick={() => track("score_cta_contacto")} className="btn btn-primary">Trabajar esta decisión con Change</Link></div>
       </Shell>
