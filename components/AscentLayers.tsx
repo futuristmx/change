@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Glyph, type GlyphName } from "@/components/ds";
+import { type Lang } from "@/lib/i18n";
 
 export interface AscentLevel {
   n: string;
@@ -15,7 +16,9 @@ export interface AscentLevel {
    Cada nivel es una plataforma-horizonte inclinada en perspectiva 3D que gana
    luminosidad hacia la cumbre, conectada por un eje luminoso. Lectura por
    altitud (estética de instrumento). La cumbre se renderiza arriba: se asciende. */
-export default function AscentLayers({ levels }: { levels: AscentLevel[] }) {
+export default function AscentLayers({ levels, lang = "es" }: { levels: AscentLevel[]; lang?: Lang }) {
+  const levelWord = lang === "en" ? "LEVEL" : "NIVEL";
+  const summitWord = lang === "en" ? " · SUMMIT" : " · CUMBRE";
   const [inView, setInView] = useState(false);
   const ref = useRef<HTMLDivElement | null>(null);
 
@@ -57,7 +60,7 @@ export default function AscentLayers({ levels }: { levels: AscentLevel[] }) {
               <div className="al-meta">
                 <span className="al-tag">{lv.tag}</span>
                 <span className="al-alt" aria-hidden="true">
-                  <span className="al-alt-ticks" />NIVEL {alt}{top ? " · CUMBRE" : ""}
+                  <span className="al-alt-ticks" />{levelWord} {alt}{top ? summitWord : ""}
                 </span>
               </div>
               <h3 className="al-title">{lv.n}</h3>

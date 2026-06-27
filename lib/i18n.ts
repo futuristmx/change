@@ -15,6 +15,7 @@ export const LANGS: Lang[] = ["es", "en"];
 export const EN_ROUTES = new Set<string>([
   "/",
   "/capacidades",
+  "/mission-control",
 ]);
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://change.live";
