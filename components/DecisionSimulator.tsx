@@ -32,6 +32,7 @@ const DS_UI = {
     received: "Recibido", sentH: "Listo. Tu decisión llegó al board.", sentP: "Andrés Valencia y Miguel Cadena leen tu caso y te buscamos en un máximo de dos días hábiles con un primer diagnóstico. No necesitas hacer nada más.", readsAs1: "Change lo lee como caso de", readsAs2: ".",
     copyTitle: "LECTURA DE CHANGE · change.live", copyMove: "Movimiento principal", copyTension: "TENSIÓN IDENTIFICADA", copyRisk: "RIESGO DOMINANTE", copyFirst: "PRIMER MOVIMIENTO", copyArt: "Artefacto sugerido",
     ready: "Diagnóstico listo", inProgress: "Diagnóstico en curso", revealLead: "Esto es lo que vimos en tu decisión.", primaryMoveLabel: "Movimiento principal del método",
+    strategicRead: "Cómo lo leemos", resultNote: "Es una primera lectura estructurada de tu decisión. Una conversación con el board la vuelve precisa — no promete certeza, la trabaja.",
     downloadPdf: "Descargar PDF", downloadingPdf: "Generando…",
     pdfTitle: "Diagnóstico de decisión", pdfSteps: "Tu recorrido", pdfCta: "El siguiente paso: trabaja esta decisión con Change", pdfContact: "change.live · change.live/contacto", pdfFile: "Diagnostico-Change.pdf",
   },
@@ -54,6 +55,7 @@ const DS_UI = {
     received: "Received", sentH: "Done. Your decision reached the board.", sentP: "Andrés Valencia and Miguel Cadena read your case and we'll reach out within two business days with a first diagnosis. You don't need to do anything else.", readsAs1: "Change reads it as a case of", readsAs2: ".",
     copyTitle: "CHANGE READING · change.live", copyMove: "Primary move", copyTension: "TENSION IDENTIFIED", copyRisk: "DOMINANT RISK", copyFirst: "FIRST MOVE", copyArt: "Suggested artifact",
     ready: "Diagnosis ready", inProgress: "Diagnosis in progress", revealLead: "Here's what we saw in your decision.", primaryMoveLabel: "Primary method move",
+    strategicRead: "How we read it", resultNote: "This is a first structured reading of your decision. A conversation with the board makes it precise — it doesn't promise certainty, it works on it.",
     downloadPdf: "Download PDF", downloadingPdf: "Generating…",
     pdfTitle: "Decision diagnosis", pdfSteps: "Your path", pdfCta: "Next step: work this decision with Change", pdfContact: "change.live · change.live/en/contacto", pdfFile: "Change-diagnosis.pdf",
   },
@@ -507,6 +509,7 @@ export default function DecisionSimulator({ lang = "es" }: { lang?: Lang }) {
       .sim-layers { grid-template-columns: 1fr; }
     }
     @media (max-width: 720px) { .sim-intro-grid { grid-template-columns: 1fr !important; } .sim-contact-grid { grid-template-columns: 1fr !important; } }
+    @media (max-width: 640px) { .sim-focal { grid-template-columns: 1fr !important; gap: 18px !important; } }
     @media (max-width: 560px) {
       .sim-path-label { display: none; } .sim-path-label-end { display: block !important; }
       .sim-path-dot { width: 26px; height: 26px; } .sim-path-line { margin-top: 12px; }
@@ -762,54 +765,52 @@ export default function DecisionSimulator({ lang = "es" }: { lang?: Lang }) {
       barLeft: <><span data-pulse aria-hidden="true" style={dotStyle("var(--success)")} /> {t.ready}</>,
       progress: 1,
       body: (
-        <div className="sim-reveal" style={{ display: "flex", flexDirection: "column", gap: "clamp(18px,2.4vw,24px)" }}>
+        <div className="sim-reveal" style={{ display: "flex", flexDirection: "column", gap: "clamp(22px,2.8vw,30px)" }}>
           {/* Encabezado de revelación */}
           <div>
+            <span style={{ display: "block", font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 12 }}>{t.yourDiag}</span>
             <h2 style={{ margin: 0, font: "600 clamp(24px,3vw,40px)/1.06 var(--font-primary)", letterSpacing: "-.04em", color: "var(--ink-graphite)", textWrap: "balance" }}>
               {selectedScenario ? `${t.scenarioDiag}: ${selectedScenario.label}` : t.yourDecisionDiag}
             </h2>
-            <p style={{ margin: "10px 0 0", font: "400 clamp(15px,1.3vw,17px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>{t.revealLead}</p>
+            <p style={{ margin: "10px 0 0", maxWidth: "56ch", font: "400 clamp(15px,1.3vw,17px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>{t.revealLead}</p>
           </div>
 
-          {/* HERO — el movimiento principal, figura dominante */}
-          <div className="sim-hero">
-            <span style={{ display: "block", font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(255,255,255,.55)", marginBottom: 12 }}>{t.primaryMoveLabel}</span>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
-              <span aria-hidden="true" style={{ width: 10, height: 10, borderRadius: "50%", background: DIM_COLOR[reading.primaryDim] }} />
-              <span style={{ font: "600 clamp(26px,3.2vw,40px)/1 var(--font-primary)", letterSpacing: "-.03em", color: "#fff" }}>{DIM_LABEL[reading.primaryDim]}</span>
+          {/* Focal — el movimiento principal como RESULTADO (figura, relevancia) */}
+          <div className="sim-focal" style={{ display: "grid", gridTemplateColumns: "minmax(0,auto) minmax(0,1fr)", gap: "clamp(24px,4vw,52px)", alignItems: "center", paddingBottom: "clamp(24px,3vw,30px)", borderBottom: "1px solid var(--border-subtle)" }}>
+            <div>
+              <span style={{ display: "block", font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-faint)", marginBottom: 10 }}>{t.primaryMoveLabel}</span>
+              <div style={{ display: "inline-flex", alignItems: "center", gap: 13 }}>
+                <span aria-hidden="true" style={{ width: 12, height: 12, borderRadius: "50%", background: DIM_COLOR[reading.primaryDim], flexShrink: 0 }} />
+                <span style={{ font: "300 clamp(40px,5.4vw,66px)/.92 var(--font-primary)", letterSpacing: "-.04em", background: "var(--gradient-type-electric)", WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>{DIM_LABEL[reading.primaryDim]}</span>
+              </div>
               {reading.secondaryDim && (
-                <>
-                  <span style={{ color: "rgba(255,255,255,.35)", font: "300 22px var(--font-primary)" }}>+</span>
-                  <span aria-hidden="true" style={{ width: 8, height: 8, borderRadius: "50%", background: DIM_COLOR[reading.secondaryDim] }} />
-                  <span style={{ font: "400 clamp(17px,1.8vw,22px) var(--font-primary)", color: "rgba(255,255,255,.62)" }}>{DIM_LABEL[reading.secondaryDim]}</span>
-                </>
+                <span style={{ display: "inline-flex", alignItems: "center", gap: 8, marginTop: 12, font: "400 14px var(--font-primary)", color: "var(--text-muted)" }}>
+                  <span aria-hidden="true" style={{ color: "var(--text-faint)" }}>+</span>
+                  <span aria-hidden="true" style={dotStyle(DIM_COLOR[reading.secondaryDim])} />{DIM_LABEL[reading.secondaryDim]}
+                </span>
               )}
             </div>
-            <p style={{ margin: "16px 0 0", maxWidth: "62ch", font: "400 clamp(14px,1.2vw,16px)/1.6 var(--font-primary)", color: "rgba(255,255,255,.78)" }}>{reading.methodNote}</p>
-          </div>
-
-          {/* Capas estratégicas — jerarquía, no bullets planos */}
-          <div className="sim-layers">
-            <div className="sim-layer">
-              <span style={{ display: "inline-flex", alignItems: "center", gap: 8, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--soft-violet)", marginBottom: 9 }}><span aria-hidden="true" style={dotStyle("var(--soft-violet)")} />{t.tensionDetected}</span>
-              <p style={{ margin: 0, font: "400 14.5px/1.55 var(--font-primary)", color: "var(--ink-graphite)" }}>{reading.tension}</p>
-            </div>
-            <div className="sim-layer">
-              <span style={{ display: "inline-flex", alignItems: "center", gap: 8, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--status-error-fg)", marginBottom: 9 }}><span aria-hidden="true" style={dotStyle("var(--status-error-fg)")} />{t.domRisk}</span>
-              <p style={{ margin: 0, font: "400 14.5px/1.55 var(--font-primary)", color: "var(--ink-graphite)" }}>{reading.risk}</p>
-            </div>
-            <div className="sim-layer sim-layer-key">
-              <span style={{ display: "inline-flex", alignItems: "center", gap: 8, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--change-violet)", marginBottom: 9 }}><span aria-hidden="true" style={dotStyle("var(--change-violet)")} />{t.firstMove}</span>
-              <p style={{ margin: 0, font: "600 15px/1.55 var(--font-primary)", letterSpacing: "-.01em", color: "var(--ink-graphite)" }}>{reading.firstMove}</p>
-            </div>
-            <div className="sim-layer">
-              <span style={{ display: "block", font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--text-faint)", marginBottom: 11 }}>{t.suggArtifact}</span>
-              <span style={{ display: "inline-flex", alignItems: "center", gap: 9, padding: "9px 14px", border: `1px solid ${DIM_COLOR[reading.primaryDim]}`, background: "var(--surface-card)" }}>
+            <div>
+              <p style={{ margin: 0, font: "400 clamp(15px,1.4vw,17px)/1.6 var(--font-primary)", color: "var(--text-muted)" }}>{reading.methodNote}</p>
+              <span style={{ display: "inline-flex", alignItems: "center", gap: 9, marginTop: 16, padding: "9px 14px", border: `1px solid ${DIM_COLOR[reading.primaryDim]}`, background: "var(--surface-card)" }}>
                 <span aria-hidden="true" style={dotStyle(DIM_COLOR[reading.primaryDim])} />
-                <span style={{ font: "600 14.5px var(--font-primary)", color: "var(--ink-graphite)" }}>{reading.artifact}</span>
+                <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".06em", textTransform: "uppercase", color: "var(--text-faint)" }}>{t.suggArtifact}</span>
+                <span style={{ font: "600 14px var(--font-primary)", color: "var(--ink-graphite)" }}>{reading.artifact}</span>
               </span>
             </div>
           </div>
+
+          {/* Lectura estratégica — bloque con relevancia (como el punto vulnerable del Score) */}
+          <div style={{ border: "1px solid var(--border-subtle)", borderLeft: "3px solid var(--change-violet)", background: "var(--gradient-sky-pearl)", padding: "clamp(22px,2.6vw,28px) clamp(22px,2.6vw,28px)" }}>
+            <span style={{ display: "inline-flex", alignItems: "center", gap: 8, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--ink-graphite)", marginBottom: 14 }}>
+              <span aria-hidden="true" style={dotStyle("var(--change-violet)")} />{t.strategicRead}
+            </span>
+            <p style={{ margin: "0 0 10px", font: "400 15px/1.55 var(--font-primary)", color: "var(--deep-warm-gray)" }}><strong style={{ fontWeight: 600, color: "var(--ink-graphite)" }}>{t.tensionDetected}: </strong>{reading.tension}</p>
+            <p style={{ margin: "0 0 10px", font: "400 15px/1.55 var(--font-primary)", color: "var(--deep-warm-gray)" }}><strong style={{ fontWeight: 600, color: "var(--ink-graphite)" }}>{t.domRisk}: </strong>{reading.risk}</p>
+            <p style={{ margin: 0, font: "400 15px/1.55 var(--font-primary)", color: "var(--deep-warm-gray)" }}><strong style={{ fontWeight: 600, color: "var(--change-violet)" }}>{t.firstMove}: </strong><strong style={{ fontWeight: 600, color: "var(--ink-graphite)" }}>{reading.firstMove}</strong></p>
+          </div>
+
+          <p style={{ margin: 0, font: "400 13px/1.5 var(--font-primary)", color: "var(--text-faint)" }}>{t.resultNote}</p>
 
           {/* Recap — refuerza que trabajó SOBRE su input */}
           <details className="sim-recap">
