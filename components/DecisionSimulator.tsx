@@ -2,13 +2,51 @@
 
 import { useState, useEffect, useRef } from "react";
 import {
-  SCENARIOS, QUESTIONS, CHIPS,
+  SCENARIOS_ES, SCENARIOS_EN, QUESTIONS_ES, QUESTIONS_EN, CHIPS_ES, CHIPS_EN,
   buildPartialReading, buildFullReading, buildDecisionText,
-  DIM_LABEL, DIM_COLOR,
+  DIM_LABEL_ES, DIM_LABEL_EN, DIM_COLOR,
   type Scenario, type StepAnswer, type SimulatorReading,
 } from "@/lib/decision-simulator";
 import { track } from "@/lib/telemetry";
 import { contactSchema } from "@/lib/contact-schema";
+import { type Lang } from "@/lib/i18n";
+
+const DS_UI = {
+  es: {
+    boardDiag: "Diagnóstico del board", changePrefix: "Cambio", emergingTension: "Tensión emergente", domRisk: "Riesgo dominante", firstMove: "Primer movimiento", suggArtifact: "Artefacto sugerido",
+    diagPlaceholder: "Tu diagnóstico aparece aquí conforme avanzas.",
+    boardDiagChange: "Diagnóstico del board · Change", primaryMove: "Movimiento principal", tensionDetected: "Tensión detectada",
+    introEyebrow: "Estructura tu decisión", introH: "Ordena tu decisión en cinco preguntas.", introP: "Elige un escenario para ver cómo Change estructura una situación, o describe la tuya directamente.",
+    or: "o", describeDirect: "Describir mi decisión directamente",
+    changeScenario: "Cambiar escenario", back: "Volver", of: "de", scenario: "Escenario", next: "Siguiente →", seeDiag: "Ver diagnóstico →", skip: "Saltar",
+    yourDiag: "Tu diagnóstico", scenarioDiag: "Diagnóstico del escenario", yourDecisionDiag: "Diagnóstico de tu decisión", whatYouDescribed: "Lo que describiste",
+    workWithChange: "Trabajar esta decisión con Change", tryAnother: "Probar otro escenario", copied: "Copiado ✓", copyDiag: "Copiar diagnóstico", copiedAria: "Diagnóstico copiado al portapapeles", copyAria: "Copiar diagnóstico al portapapeles",
+    nextStep: "El siguiente paso", contactH: "El board senior lee tu caso antes de buscarte.", contactP: "Tu caso llega al board senior de Change. Si hay una tensión real que podamos trabajar, te respondemos con un primer diagnóstico y un siguiente paso posible.",
+    benefits: [["Tu información no circula", "Tratamos cada decisión como información sensible. No la compartimos ni la reciclamos."], ["Sin pitch ni propuesta automática", "Lo que recibes es un diagnóstico estructurado, no un correo de venta."]],
+    seeDiagAgain: "← Ver el diagnóstico de nuevo",
+    nameL: "Nombre", nameP: "Cómo te llamas", roleL: "Rol", roleP: "Tu rol o posición", orgL: "Organización", orgP: "Tu empresa", emailL: "Correo", emailP: "tu@empresa.com",
+    sending: "Enviando…", sendCase: "Enviar mi caso", checkData: "Revisa los datos e intenta de nuevo.", sendFail: "Algo falló al enviar. Intenta de nuevo en un momento.",
+    received: "Recibido", sentH: "Listo. Tu decisión llegó al board.", sentP: "Andrés Valencia y Miguel Cadena leen tu caso y te buscamos en un máximo de dos días hábiles con un primer diagnóstico. No necesitas hacer nada más.", readsAs1: "Change lo lee como caso de", readsAs2: ".",
+    copyTitle: "LECTURA DE CHANGE · change.live", copyMove: "Movimiento principal", copyTension: "TENSIÓN IDENTIFICADA", copyRisk: "RIESGO DOMINANTE", copyFirst: "PRIMER MOVIMIENTO", copyArt: "Artefacto sugerido",
+  },
+  en: {
+    boardDiag: "Board diagnosis", changePrefix: "Change", emergingTension: "Emerging tension", domRisk: "Dominant risk", firstMove: "First move", suggArtifact: "Suggested artifact",
+    diagPlaceholder: "Your diagnosis appears here as you go.",
+    boardDiagChange: "Board diagnosis · Change", primaryMove: "Primary move", tensionDetected: "Tension detected",
+    introEyebrow: "Structure your decision", introH: "Order your decision in five questions.", introP: "Pick a scenario to see how Change structures a situation, or describe yours directly.",
+    or: "or", describeDirect: "Describe my decision directly",
+    changeScenario: "Change scenario", back: "Back", of: "of", scenario: "Scenario", next: "Next →", seeDiag: "See diagnosis →", skip: "Skip",
+    yourDiag: "Your diagnosis", scenarioDiag: "Scenario diagnosis", yourDecisionDiag: "Diagnosis of your decision", whatYouDescribed: "What you described",
+    workWithChange: "Work this decision with Change", tryAnother: "Try another scenario", copied: "Copied ✓", copyDiag: "Copy diagnosis", copiedAria: "Diagnosis copied to clipboard", copyAria: "Copy diagnosis to clipboard",
+    nextStep: "The next step", contactH: "The senior board reads your case before reaching out.", contactP: "Your case reaches Change's senior board. If there's a real tension we can work, we'll reply with a first diagnosis and a possible next step.",
+    benefits: [["Your information doesn't circulate", "We treat every decision as sensitive information. We don't share it or recycle it."], ["No pitch or automatic proposal", "What you get is a structured diagnosis, not a sales email."]],
+    seeDiagAgain: "← See the diagnosis again",
+    nameL: "Name", nameP: "What you go by", roleL: "Role", roleP: "Your role or position", orgL: "Organization", orgP: "Your company", emailL: "Email", emailP: "you@company.com",
+    sending: "Sending…", sendCase: "Send my case", checkData: "Check the details and try again.", sendFail: "Something went wrong sending. Try again in a moment.",
+    received: "Received", sentH: "Done. Your decision reached the board.", sentP: "Andrés Valencia and Miguel Cadena read your case and we'll reach out within two business days with a first diagnosis. You don't need to do anything else.", readsAs1: "Change reads it as a case of", readsAs2: ".",
+    copyTitle: "CHANGE READING · change.live", copyMove: "Primary move", copyTension: "TENSION IDENTIFIED", copyRisk: "DOMINANT RISK", copyFirst: "FIRST MOVE", copyArt: "Suggested artifact",
+  },
+};
 
 type Phase = "intro" | "quiz" | "result" | "contact" | "sent";
 
@@ -45,7 +83,8 @@ const FIELD_STYLE: React.CSSProperties = {
   borderRadius: 0,
 };
 
-const STEP_LABELS = ["Contexto", "Decisión", "Riesgo", "Actores", "Horizonte"];
+const STEP_LABELS_ES = ["Contexto", "Decisión", "Riesgo", "Actores", "Horizonte"];
+const STEP_LABELS_EN = ["Context", "Decision", "Risk", "Actors", "Horizon"];
 
 /* ── Chip de respuesta ── */
 function Chip({
@@ -74,45 +113,35 @@ function Chip({
 }
 
 /* ── Panel de lectura parcial ── */
-function ReadingPanel({ answers }: { answers: StepAnswer[] }) {
-  const partial = buildPartialReading(answers);
+function ReadingPanel({ answers, lang }: { answers: StepAnswer[]; lang: Lang }) {
+  const partial = buildPartialReading(answers, lang);
+  const t = DS_UI[lang];
+  const DIM_LABEL = lang === "en" ? DIM_LABEL_EN : DIM_LABEL_ES;
 
   const items: { label: string; text: string; color: string }[] = [];
 
   if (partial.changeDim && partial.changeSignal) {
     items.push({
-      label: `Cambio · ${DIM_LABEL[partial.changeDim]}`,
+      label: `${t.changePrefix} · ${DIM_LABEL[partial.changeDim]}`,
       text: partial.changeSignal,
       color: DIM_COLOR[partial.changeDim],
     });
   }
   if (partial.tension) {
     items.push({
-      label: "Tensión emergente",
+      label: t.emergingTension,
       text: partial.tension,
       color: partial.decisionDim ? DIM_COLOR[partial.decisionDim] : "var(--change-violet)",
     });
   }
   if (partial.risk) {
-    items.push({
-      label: "Riesgo dominante",
-      text: partial.risk,
-      color: "var(--status-error-fg)",
-    });
+    items.push({ label: t.domRisk, text: partial.risk, color: "var(--status-error-fg)" });
   }
   if (partial.firstMove) {
-    items.push({
-      label: "Primer movimiento",
-      text: partial.firstMove,
-      color: "var(--success)",
-    });
+    items.push({ label: t.firstMove, text: partial.firstMove, color: "var(--success)" });
   }
   if (partial.artifact) {
-    items.push({
-      label: "Artefacto sugerido",
-      text: partial.artifact,
-      color: "var(--opportunity-orange)",
-    });
+    items.push({ label: t.suggArtifact, text: partial.artifact, color: "var(--opportunity-orange)" });
   }
 
   return (
@@ -130,13 +159,13 @@ function ReadingPanel({ answers }: { answers: StepAnswer[] }) {
       }}>
         <span data-pulse aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--signal-cyan)", flexShrink: 0 }} />
         <span style={{ font: "600 10px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-muted)" }}>
-          Diagnóstico del board
+          {t.boardDiag}
         </span>
       </div>
 
       {items.length === 0 ? (
         <p style={{ font: "400 13px/1.6 var(--font-primary)", color: "var(--text-faint)", margin: 0 }}>
-          Tu diagnóstico aparece aquí conforme avanzas.
+          {t.diagPlaceholder}
         </p>
       ) : (
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
@@ -160,7 +189,9 @@ function ReadingPanel({ answers }: { answers: StepAnswer[] }) {
 }
 
 /* ── Tarjeta de resultado ── */
-function ResultCard({ reading }: { reading: SimulatorReading }) {
+function ResultCard({ reading, lang }: { reading: SimulatorReading; lang: Lang }) {
+  const t = DS_UI[lang];
+  const DIM_LABEL = lang === "en" ? DIM_LABEL_EN : DIM_LABEL_ES;
   return (
     <div style={{
       background: "radial-gradient(circle at 80% -10%,color-mix(in srgb, var(--change-violet) 22%, transparent),transparent 50%),var(--surface-dark-secondary)",
@@ -170,7 +201,7 @@ function ResultCard({ reading }: { reading: SimulatorReading }) {
       <div style={{ display: "flex", alignItems: "center", gap: 9, marginBottom: 28 }}>
         <span aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--signal-cyan)" }} />
         <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(255,255,255,.55)" }}>
-          Diagnóstico del board · Change
+          {t.boardDiagChange}
         </span>
       </div>
 
@@ -178,7 +209,7 @@ function ResultCard({ reading }: { reading: SimulatorReading }) {
         {/* movimiento principal */}
         <div style={{ paddingBottom: 24, borderBottom: "1px solid rgba(255,255,255,.1)" }}>
           <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "rgba(255,255,255,.45)", display: "block", marginBottom: 8 }}>
-            Movimiento principal
+            {t.primaryMove}
           </span>
           <div style={{ display: "inline-flex", alignItems: "center", gap: 10 }}>
             <span aria-hidden="true" style={{ width: 8, height: 8, borderRadius: "50%", background: DIM_COLOR[reading.primaryDim] }} />
@@ -203,7 +234,7 @@ function ResultCard({ reading }: { reading: SimulatorReading }) {
         {/* tensión */}
         <div style={{ paddingBottom: 24, borderBottom: "1px solid rgba(255,255,255,.1)" }}>
           <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "rgba(255,255,255,.45)", display: "block", marginBottom: 8 }}>
-            Tensión detectada
+            {t.tensionDetected}
           </span>
           <p style={{ margin: 0, font: "400 15px/1.6 var(--font-primary)", color: "rgba(255,255,255,.85)" }}>
             {reading.tension}
@@ -213,7 +244,7 @@ function ResultCard({ reading }: { reading: SimulatorReading }) {
         {/* riesgo */}
         <div style={{ paddingBottom: 24, borderBottom: "1px solid rgba(255,255,255,.1)" }}>
           <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "rgba(255,255,255,.45)", display: "block", marginBottom: 8 }}>
-            Riesgo dominante
+            {t.domRisk}
           </span>
           <p style={{ margin: 0, font: "400 15px/1.6 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>
             {reading.risk}
@@ -223,7 +254,7 @@ function ResultCard({ reading }: { reading: SimulatorReading }) {
         {/* primer movimiento */}
         <div style={{ paddingBottom: 24, borderBottom: "1px solid rgba(255,255,255,.1)" }}>
           <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "rgba(255,255,255,.45)", display: "block", marginBottom: 8 }}>
-            Primer movimiento
+            {t.firstMove}
           </span>
           <p style={{ margin: 0, font: "400 15px/1.6 var(--font-primary)", color: "rgba(255,255,255,.85)" }}>
             {reading.firstMove}
@@ -233,7 +264,7 @@ function ResultCard({ reading }: { reading: SimulatorReading }) {
         {/* artefacto */}
         <div>
           <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "rgba(255,255,255,.45)", display: "block", marginBottom: 8 }}>
-            Artefacto sugerido
+            {t.suggArtifact}
           </span>
           <div style={{ display: "inline-flex", alignItems: "center", gap: 10, padding: "10px 16px", border: "1px solid rgba(255,255,255,.15)", background: "rgba(255,255,255,.06)" }}>
             <span aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: DIM_COLOR[reading.primaryDim] }} />
@@ -246,7 +277,13 @@ function ResultCard({ reading }: { reading: SimulatorReading }) {
 }
 
 /* ── Componente principal ── */
-export default function DecisionSimulator() {
+export default function DecisionSimulator({ lang = "es" }: { lang?: Lang }) {
+  const t = DS_UI[lang];
+  const SCENARIOS = lang === "en" ? SCENARIOS_EN : SCENARIOS_ES;
+  const QUESTIONS = lang === "en" ? QUESTIONS_EN : QUESTIONS_ES;
+  const CHIPS = lang === "en" ? CHIPS_EN : CHIPS_ES;
+  const DIM_LABEL = lang === "en" ? DIM_LABEL_EN : DIM_LABEL_ES;
+  const STEP_LABELS = lang === "en" ? STEP_LABELS_EN : STEP_LABELS_ES;
   const [phase, setPhase] = useState<Phase>("intro");
   const [step, setStep] = useState(0);
   const [completedAnswers, setCompletedAnswers] = useState<StepAnswer[]>([]);
@@ -266,21 +303,21 @@ export default function DecisionSimulator() {
   function handleCopyReading() {
     if (!reading) return;
     const lines = [
-      "LECTURA DE CHANGE · change.live",
+      t.copyTitle,
       "",
-      `Movimiento principal: ${DIM_LABEL[reading.primaryDim]}` +
+      `${t.copyMove}: ${DIM_LABEL[reading.primaryDim]}` +
         (reading.secondaryDim ? ` + ${DIM_LABEL[reading.secondaryDim]}` : ""),
       "",
-      "TENSIÓN IDENTIFICADA",
+      t.copyTension,
       reading.tension,
       "",
-      "RIESGO DOMINANTE",
+      t.copyRisk,
       reading.risk,
       "",
-      "PRIMER MOVIMIENTO",
+      t.copyFirst,
       reading.firstMove,
       "",
-      `Artefacto sugerido: ${reading.artifact}`,
+      `${t.copyArt}: ${reading.artifact}`,
     ].join("\n");
     navigator.clipboard.writeText(lines).then(() => {
       setCopied(true);
@@ -409,7 +446,7 @@ export default function DecisionSimulator() {
       }
       setStep(nextStep);
     } else {
-      const fullReading = buildFullReading(newAnswers);
+      const fullReading = buildFullReading(newAnswers, lang);
       setReading(fullReading);
       setPhase("result");
       track("simulator_result_viewed", {
@@ -443,7 +480,8 @@ export default function DecisionSimulator() {
     const decisionText = buildDecisionText(
       completedAnswers,
       reading,
-      selectedScenario?.id ?? null
+      selectedScenario?.id ?? null,
+      lang
     );
 
     const nombreConRol = contact.nombre.trim() + (contact.rol.trim() ? `, ${contact.rol.trim()}` : "");
@@ -459,7 +497,7 @@ export default function DecisionSimulator() {
     const parsed = contactSchema.safeParse(payload);
     if (!parsed.success) {
       const fe = parsed.error.flatten().fieldErrors;
-      const msg = fe.email?.[0] ?? fe.nombre?.[0] ?? "Revisa los datos e intenta de nuevo.";
+      const msg = fe.email?.[0] ?? fe.nombre?.[0] ?? t.checkData;
       setSubmitError(msg);
       setSubmitStatus("error");
       return;
@@ -475,7 +513,7 @@ export default function DecisionSimulator() {
       setPhase("sent");
       track("simulator_submitted", { primary_dim: reading.primaryDim, artifact: reading.artifact });
     } catch {
-      setSubmitError("Algo falló al enviar. Intenta de nuevo en un momento.");
+      setSubmitError(t.sendFail);
       setSubmitStatus("error");
     }
   }
@@ -491,13 +529,13 @@ export default function DecisionSimulator() {
         <div style={{ ...WRAP, padding: "clamp(56px,7vw,88px) 0" }}>
           <div style={{ maxWidth: "52ch", marginBottom: "clamp(36px,5vw,52px)" }}>
             <span style={{ display: "block", font: "600 11px var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 16 }}>
-              Estructura tu decisión
+              {t.introEyebrow}
             </span>
             <h2 style={{ margin: "0 0 16px", font: "600 clamp(26px,3.2vw,44px)/1.06 var(--font-primary)", letterSpacing: "-.04em", color: "var(--ink-graphite)", textWrap: "balance" }}>
-              Ordena tu decisión en cinco preguntas.
+              {t.introH}
             </h2>
             <p style={{ margin: 0, font: "400 clamp(15px,1.3vw,18px)/1.6 var(--font-primary)", color: "var(--text-muted)" }}>
-              Elige un escenario para ver cómo Change estructura una situación, o describe la tuya directamente.
+              {t.introP}
             </p>
           </div>
 
@@ -532,12 +570,12 @@ export default function DecisionSimulator() {
 
           <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 28 }}>
             <div style={{ flex: 1, height: 1, background: "var(--border-subtle)" }} />
-            <span style={{ font: "400 13px var(--font-primary)", color: "var(--text-faint)" }}>o</span>
+            <span style={{ font: "400 13px var(--font-primary)", color: "var(--text-faint)" }}>{t.or}</span>
             <div style={{ flex: 1, height: 1, background: "var(--border-subtle)" }} />
           </div>
 
           <button type="button" className="btn btn-secondary" onClick={startCustom}>
-            Describir mi decisión directamente
+            {t.describeDirect}
           </button>
         </div>
 
@@ -605,10 +643,10 @@ export default function DecisionSimulator() {
                   style={{ background: "none", border: "none", padding: 0, cursor: "pointer", font: "400 13px var(--font-primary)", color: "var(--text-muted)", display: "flex", alignItems: "center", gap: 5 }}
                 >
                   <span aria-hidden="true" style={{ fontSize: 14 }}>←</span>
-                  {selectedScenario ? "Cambiar escenario" : "Volver"}
+                  {selectedScenario ? t.changeScenario : t.back}
                 </button>
                 <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".08em", color: "var(--text-faint)" }}>
-                  {step + 1} de 5
+                  {step + 1} {t.of} 5
                 </span>
               </div>
 
@@ -653,7 +691,7 @@ export default function DecisionSimulator() {
                 <div style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 14, padding: "5px 10px", background: "color-mix(in srgb, var(--change-violet) 6%, var(--pure-white))", border: "1px solid color-mix(in srgb, var(--change-violet) 18%, var(--border-subtle))" }}>
                   <span aria-hidden="true" style={{ width: 6, height: 6, borderRadius: "50%", background: DIM_COLOR[selectedScenario.primaryDim] }} />
                   <span style={{ font: "600 10.5px var(--font-mono)", letterSpacing: ".09em", textTransform: "uppercase", color: "var(--ink-graphite)" }}>
-                    Escenario: {selectedScenario.label}
+                    {t.scenario}: {selectedScenario.label}
                   </span>
                 </div>
               )}
@@ -713,7 +751,7 @@ export default function DecisionSimulator() {
                   disabled={!canAdvance}
                   style={{ opacity: canAdvance ? 1 : 0.45 }}
                 >
-                  {step < 4 ? "Siguiente →" : "Ver diagnóstico →"}
+                  {step < 4 ? t.next : t.seeDiag}
                 </button>
                 {step < 4 && (
                   <button
@@ -721,14 +759,14 @@ export default function DecisionSimulator() {
                     onClick={skipStep}
                     style={{ background: "none", border: "none", padding: 0, cursor: "pointer", font: "400 13px var(--font-primary)", color: "var(--text-faint)" }}
                   >
-                    Saltar
+                    {t.skip}
                   </button>
                 )}
               </div>
             </div>
 
             {/* columna derecha — lectura parcial */}
-            <ReadingPanel answers={completedAnswers} />
+            <ReadingPanel answers={completedAnswers} lang={lang} />
           </div>
         </div>
 
@@ -752,21 +790,21 @@ export default function DecisionSimulator() {
         <div style={{ ...WRAP, padding: "clamp(56px,7vw,88px) 0" }}>
           <div style={{ maxWidth: 680, marginBottom: "clamp(32px,4vw,48px)" }}>
             <span style={{ display: "block", font: "600 11px var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 14 }}>
-              Tu diagnóstico
+              {t.yourDiag}
             </span>
             <h2 style={{ margin: 0, font: "600 clamp(24px,3vw,42px)/1.06 var(--font-primary)", letterSpacing: "-.04em", color: "var(--ink-graphite)", textWrap: "balance" }}>
               {selectedScenario
-                ? `Diagnóstico del escenario: ${selectedScenario.label}`
-                : "Diagnóstico de tu decisión"}
+                ? `${t.scenarioDiag}: ${selectedScenario.label}`
+                : t.yourDecisionDiag}
             </h2>
           </div>
 
           <div className="sim-result-grid" style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(0,1fr)", gap: "clamp(28px,4vw,48px)", alignItems: "start", marginBottom: "clamp(40px,5vw,60px)" }}>
-            <ResultCard reading={reading} />
+            <ResultCard reading={reading} lang={lang} />
 
             <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
               <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-muted)" }}>
-                Lo que describiste
+                {t.whatYouDescribed}
               </span>
               {completedAnswers.map((a, i) => a.text ? (
                 <div key={i} style={{ display: "flex", gap: 14, padding: "14px 0", borderTop: i === 0 ? "none" : "1px solid var(--border-subtle)" }}>
@@ -786,20 +824,20 @@ export default function DecisionSimulator() {
 
           <div style={{ display: "flex", flexWrap: "wrap", gap: 14, borderTop: "1px solid var(--border-subtle)", paddingTop: 32 }}>
             <button type="button" className="btn btn-primary" onClick={handleStartContact}>
-              Trabajar esta decisión con Change
+              {t.workWithChange}
             </button>
             <button type="button" className="btn btn-secondary" onClick={handleRetry}>
-              Probar otro escenario
+              {t.tryAnother}
             </button>
             <button
               type="button"
               className="btn btn-secondary"
               onClick={handleCopyReading}
               aria-live="polite"
-              aria-label={copied ? "Diagnóstico copiado al portapapeles" : "Copiar diagnóstico al portapapeles"}
+              aria-label={copied ? t.copiedAria : t.copyAria}
               style={{ minWidth: 130 }}
             >
-              {copied ? "Copiado ✓" : "Copiar diagnóstico"}
+              {copied ? t.copied : t.copyDiag}
             </button>
           </div>
         </div>
@@ -819,20 +857,17 @@ export default function DecisionSimulator() {
           <div className="sim-contact-grid" style={{ display: "grid", gridTemplateColumns: "minmax(0,.9fr) minmax(0,1.1fr)", gap: "clamp(44px,6vw,88px)", alignItems: "start" }}>
             <div>
               <span style={{ display: "block", font: "600 11px var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 14 }}>
-                El siguiente paso
+                {t.nextStep}
               </span>
               <h2 style={{ margin: "0 0 16px", font: "600 clamp(24px,2.8vw,40px)/1.06 var(--font-primary)", letterSpacing: "-.04em", color: "var(--ink-graphite)", textWrap: "balance" }}>
-                El board senior lee tu caso antes de buscarte.
+                {t.contactH}
               </h2>
               <p style={{ margin: "0 0 28px", font: "400 15.5px/1.6 var(--font-primary)", color: "var(--text-muted)", maxWidth: "44ch" }}>
-                Tu caso llega al board senior de Change. Si hay una tensión real que podamos trabajar, te respondemos con un primer diagnóstico y un siguiente paso posible.
+                {t.contactP}
               </p>
 
               <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-                {[
-                  ["Tu información no circula", "Tratamos cada decisión como información sensible. No la compartimos ni la reciclamos."],
-                  ["Sin pitch ni propuesta automática", "Lo que recibes es un diagnóstico estructurado, no un correo de venta."],
-                ].map(([h, p]) => (
+                {t.benefits.map(([h, p]) => (
                   <div key={h} style={{ display: "flex", gap: 12 }}>
                     <span aria-hidden="true" style={{ flexShrink: 0, marginTop: 7, width: 6, height: 6, borderRadius: "50%", background: "var(--change-violet)" }} />
                     <div>
@@ -848,33 +883,33 @@ export default function DecisionSimulator() {
                 onClick={handleRetry}
                 style={{ marginTop: 28, background: "none", border: "none", padding: 0, cursor: "pointer", font: "400 13px var(--font-primary)", color: "var(--text-muted)", display: "flex", alignItems: "center", gap: 6 }}
               >
-                ← Ver el diagnóstico de nuevo
+                {t.seeDiagAgain}
               </button>
             </div>
 
             <form onSubmit={handleSubmit} noValidate style={{ display: "flex", flexDirection: "column", gap: 20, border: "1px solid var(--border-subtle)", background: "var(--surface-card)", padding: "clamp(28px,4vw,40px)" }}>
               <div>
-                <label htmlFor="sim-nombre" style={LABEL_STYLE}>Nombre</label>
-                <input id="sim-nombre" type="text" autoComplete="name" required value={contact.nombre} onChange={(e) => setContact((c) => ({ ...c, nombre: e.target.value }))} placeholder="Cómo te llamas" style={FIELD_STYLE} />
+                <label htmlFor="sim-nombre" style={LABEL_STYLE}>{t.nameL}</label>
+                <input id="sim-nombre" type="text" autoComplete="name" required value={contact.nombre} onChange={(e) => setContact((c) => ({ ...c, nombre: e.target.value }))} placeholder={t.nameP} style={FIELD_STYLE} />
               </div>
               <div>
-                <label htmlFor="sim-rol" style={LABEL_STYLE}>Rol</label>
-                <input id="sim-rol" type="text" value={contact.rol} onChange={(e) => setContact((c) => ({ ...c, rol: e.target.value }))} placeholder="Tu rol o posición" style={FIELD_STYLE} />
+                <label htmlFor="sim-rol" style={LABEL_STYLE}>{t.roleL}</label>
+                <input id="sim-rol" type="text" value={contact.rol} onChange={(e) => setContact((c) => ({ ...c, rol: e.target.value }))} placeholder={t.roleP} style={FIELD_STYLE} />
               </div>
               <div>
-                <label htmlFor="sim-org" style={LABEL_STYLE}>Organización</label>
-                <input id="sim-org" type="text" autoComplete="organization" value={contact.organizacion} onChange={(e) => setContact((c) => ({ ...c, organizacion: e.target.value }))} placeholder="Tu empresa" style={FIELD_STYLE} />
+                <label htmlFor="sim-org" style={LABEL_STYLE}>{t.orgL}</label>
+                <input id="sim-org" type="text" autoComplete="organization" value={contact.organizacion} onChange={(e) => setContact((c) => ({ ...c, organizacion: e.target.value }))} placeholder={t.orgP} style={FIELD_STYLE} />
               </div>
               <div>
-                <label htmlFor="sim-correo" style={LABEL_STYLE}>Correo</label>
-                <input id="sim-correo" type="email" autoComplete="email" required value={contact.correo} onChange={(e) => setContact((c) => ({ ...c, correo: e.target.value }))} placeholder="tu@empresa.com" style={FIELD_STYLE} />
+                <label htmlFor="sim-correo" style={LABEL_STYLE}>{t.emailL}</label>
+                <input id="sim-correo" type="email" autoComplete="email" required value={contact.correo} onChange={(e) => setContact((c) => ({ ...c, correo: e.target.value }))} placeholder={t.emailP} style={FIELD_STYLE} />
               </div>
 
               <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }} />
 
               <div style={{ paddingTop: 4, display: "flex", flexWrap: "wrap", alignItems: "center", gap: 14 }}>
                 <button type="submit" className="btn btn-primary" disabled={submitStatus === "submitting"} style={{ opacity: submitStatus === "submitting" ? 0.7 : 1 }}>
-                  {submitStatus === "submitting" ? "Enviando…" : "Enviar mi caso"}
+                  {submitStatus === "submitting" ? t.sending : t.sendCase}
                 </button>
                 {submitStatus === "error" && (
                   <span style={{ font: "400 13px var(--font-primary)", color: "var(--status-error-fg)" }}>
@@ -899,24 +934,24 @@ export default function DecisionSimulator() {
       <section ref={containerRef} style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-sky-pearl)", scrollMarginTop: 80 }}>
         <div style={{ ...WRAP, padding: "clamp(88px,12vw,160px) 0" }}>
           <span style={{ display: "block", font: "600 11px var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--success)", marginBottom: 14 }}>
-            Recibido
+            {t.received}
           </span>
           <h2 style={{ margin: "0 0 16px", font: "600 clamp(28px,3.8vw,52px)/1.04 var(--font-primary)", letterSpacing: "-.04em", color: "var(--ink-graphite)", maxWidth: "20ch", textWrap: "balance" }}>
-            Listo. Tu decisión llegó al board.
+            {t.sentH}
           </h2>
           <p style={{ margin: "0 0 16px", font: "400 16px/1.6 var(--font-primary)", color: "var(--text-muted)", maxWidth: "44ch" }}>
-            Andrés Valencia y Miguel Cadena leen tu caso y te buscamos en un máximo de dos días hábiles con un primer diagnóstico. No necesitas hacer nada más.
+            {t.sentP}
           </p>
           {reading && (
             <p style={{ margin: "0 0 36px", font: "400 14px/1.5 var(--font-primary)", color: "var(--text-muted)", maxWidth: "44ch" }}>
               <span style={{ display: "inline-flex", alignItems: "center", gap: 7 }}>
                 <span aria-hidden="true" style={{ width: 6, height: 6, borderRadius: "50%", flexShrink: 0, background: DIM_COLOR[reading.primaryDim] }} />
-                Change lo lee como caso de <strong style={{ color: "var(--ink-graphite)", marginLeft: 3 }}>{DIM_LABEL[reading.primaryDim]}</strong>.
+                {t.readsAs1} <strong style={{ color: "var(--ink-graphite)", marginLeft: 3 }}>{DIM_LABEL[reading.primaryDim]}</strong>{t.readsAs2}
               </span>
             </p>
           )}
           <button type="button" className="btn btn-secondary" onClick={handleRetry}>
-            Probar otro escenario
+            {t.tryAnother}
           </button>
         </div>
       </section>

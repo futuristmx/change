@@ -2,6 +2,28 @@
 
 import { useState, useRef } from "react";
 import { Toast } from "@/components/ds";
+import { type Lang } from "@/lib/i18n";
+
+const CF = {
+  es: {
+    aria: "Formulario de contacto", nameL: "Nombre", nameP: "Tu nombre", orgL: "Organización", optional: "(opcional)", orgP: "Empresa o institución",
+    emailL: "Correo", emailP: "correo@organizacion.com", msgL: "Mensaje", msgP: "Cuéntanos brevemente qué decisión enfrentas o qué tensión quieres trabajar.",
+    send: "Enviar mensaje", sending: "Enviando...",
+    vName: "Escribe tu nombre, por favor.", vEmail: "Revisa el formato del correo.", vMsgShort: "Cuéntanos un poco más sobre lo que necesitas.", vMsgLong: "El mensaje es demasiado largo. Resúmelo un poco más.",
+    errSend: "No se pudo enviar. Intenta de nuevo.", errConn: "Hubo un problema de conexión. Intenta de nuevo.",
+    okTitle: "Gracias, recibimos tu mensaje.", okBody: "Lo lee el board de Change con calma. Te respondemos personalmente en los próximos días hábiles, con un primer diagnóstico de tu decisión.",
+    toastTitle: "Recibimos tu mensaje.", toastDesc: "Te respondemos personalmente en los próximos días, con un primer diagnóstico.",
+  },
+  en: {
+    aria: "Contact form", nameL: "Name", nameP: "Your name", orgL: "Organization", optional: "(optional)", orgP: "Company or institution",
+    emailL: "Email", emailP: "email@organization.com", msgL: "Message", msgP: "Tell us briefly what decision you're facing or what tension you want to work.",
+    send: "Send message", sending: "Sending...",
+    vName: "Please write your name.", vEmail: "Check the email format.", vMsgShort: "Tell us a bit more about what you need.", vMsgLong: "The message is too long. Trim it a little.",
+    errSend: "Couldn't send. Try again.", errConn: "There was a connection problem. Try again.",
+    okTitle: "Thanks, we received your message.", okBody: "The Change board reads it carefully. We'll reply to you personally in the coming business days, with a first diagnosis of your decision.",
+    toastTitle: "We received your message.", toastDesc: "We'll reply to you personally in the coming days, with a first diagnosis.",
+  },
+};
 
 const LABEL_STYLE: React.CSSProperties = {
   display: "block",
@@ -26,7 +48,8 @@ const INPUT_STYLE: React.CSSProperties = {
   transition: "border-color .15s ease",
 };
 
-export default function ContactFormSimple() {
+export default function ContactFormSimple({ lang = "es" }: { lang?: Lang }) {
+  const t = CF[lang];
   const [nombre, setNombre] = useState("");
   const [organizacion, setOrganizacion] = useState("");
   const [correo, setCorreo] = useState("");
@@ -37,10 +60,10 @@ export default function ContactFormSimple() {
   const loadedAt = useRef<number>(typeof Date !== "undefined" ? Date.now() : 0);
 
   function validate(): string | null {
-    if (!nombre.trim() || nombre.trim().length < 2) return "Escribe tu nombre, por favor.";
-    if (!correo.trim() || !correo.includes("@") || !correo.includes(".")) return "Revisa el formato del correo.";
-    if (!mensaje.trim() || mensaje.trim().length < 20) return "Cuéntanos un poco más sobre lo que necesitas.";
-    if (mensaje.trim().length > 2000) return "El mensaje es demasiado largo. Resúmelo un poco más.";
+    if (!nombre.trim() || nombre.trim().length < 2) return t.vName;
+    if (!correo.trim() || !correo.includes("@") || !correo.includes(".")) return t.vEmail;
+    if (!mensaje.trim() || mensaje.trim().length < 20) return t.vMsgShort;
+    if (mensaje.trim().length > 2000) return t.vMsgLong;
     return null;
   }
 
@@ -68,11 +91,11 @@ export default function ContactFormSimple() {
       if (data.ok) {
         setStatus("ok");
       } else {
-        setErrorMsg(data.error ?? "No se pudo enviar. Intenta de nuevo.");
+        setErrorMsg(data.error ?? t.errSend);
         setStatus("error");
       }
     } catch {
-      setErrorMsg("Hubo un problema de conexión. Intenta de nuevo.");
+      setErrorMsg(t.errConn);
       setStatus("error");
     }
   }
@@ -84,14 +107,14 @@ export default function ContactFormSimple() {
           <span style={{ display: "flex", alignItems: "center", justifyContent: "center", width: 40, height: 40, borderRadius: "50%", background: "var(--change-violet)", margin: "0 auto 20px" }}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12" /></svg>
           </span>
-          <p style={{ margin: "0 0 8px", font: "600 18px/1.3 var(--font-primary)", letterSpacing: "-.02em", color: "var(--ink-graphite)" }}>Gracias, recibimos tu mensaje.</p>
-          <p style={{ margin: 0, font: "400 14px/1.6 var(--font-primary)", color: "var(--text-muted)", maxWidth: 400, marginLeft: "auto", marginRight: "auto" }}>Lo lee el board de Change con calma. Te respondemos personalmente en los próximos días hábiles, con un primer diagnóstico de tu decisión.</p>
+          <p style={{ margin: "0 0 8px", font: "600 18px/1.3 var(--font-primary)", letterSpacing: "-.02em", color: "var(--ink-graphite)" }}>{t.okTitle}</p>
+          <p style={{ margin: 0, font: "400 14px/1.6 var(--font-primary)", color: "var(--text-muted)", maxWidth: 400, marginLeft: "auto", marginRight: "auto" }}>{t.okBody}</p>
         </div>
         <Toast
           open
           tone="success"
-          title="Recibimos tu mensaje."
-          description="Te respondemos personalmente en los próximos días, con un primer diagnóstico."
+          title={t.toastTitle}
+          description={t.toastDesc}
           onClose={() => setStatus("idle")}
         />
       </>
@@ -99,7 +122,7 @@ export default function ContactFormSimple() {
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate aria-label="Formulario de contacto" style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+    <form onSubmit={handleSubmit} noValidate aria-label={t.aria} style={{ display: "flex", flexDirection: "column", gap: 20 }}>
       {/* Honeypot — invisible para humanos, visible para bots */}
       <div style={{ position: "absolute", left: "-9999px", opacity: 0, pointerEvents: "none" }} aria-hidden="true">
         <label htmlFor="website-field">Sitio web</label>
@@ -108,14 +131,14 @@ export default function ContactFormSimple() {
 
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
         <div>
-          <label htmlFor="cf-nombre" style={LABEL_STYLE}>Nombre</label>
+          <label htmlFor="cf-nombre" style={LABEL_STYLE}>{t.nameL}</label>
           <input
             id="cf-nombre"
             type="text"
             autoComplete="name"
             required
             maxLength={120}
-            placeholder="Tu nombre"
+            placeholder={t.nameP}
             value={nombre}
             onChange={e => setNombre(e.target.value)}
             style={INPUT_STYLE}
@@ -124,13 +147,13 @@ export default function ContactFormSimple() {
           />
         </div>
         <div>
-          <label htmlFor="cf-org" style={LABEL_STYLE}>Organización <span style={{ font: "400 11px var(--font-primary)", letterSpacing: 0, textTransform: "none", color: "var(--text-faint)" }}>(opcional)</span></label>
+          <label htmlFor="cf-org" style={LABEL_STYLE}>{t.orgL} <span style={{ font: "400 11px var(--font-primary)", letterSpacing: 0, textTransform: "none", color: "var(--text-faint)" }}>{t.optional}</span></label>
           <input
             id="cf-org"
             type="text"
             autoComplete="organization"
             maxLength={120}
-            placeholder="Empresa o institución"
+            placeholder={t.orgP}
             value={organizacion}
             onChange={e => setOrganizacion(e.target.value)}
             style={INPUT_STYLE}
@@ -141,14 +164,14 @@ export default function ContactFormSimple() {
       </div>
 
       <div>
-        <label htmlFor="cf-correo" style={LABEL_STYLE}>Correo</label>
+        <label htmlFor="cf-correo" style={LABEL_STYLE}>{t.emailL}</label>
         <input
           id="cf-correo"
           type="email"
           autoComplete="email"
           required
           maxLength={200}
-          placeholder="correo@organizacion.com"
+          placeholder={t.emailP}
           value={correo}
           onChange={e => setCorreo(e.target.value)}
           style={INPUT_STYLE}
@@ -158,13 +181,13 @@ export default function ContactFormSimple() {
       </div>
 
       <div>
-        <label htmlFor="cf-mensaje" style={LABEL_STYLE}>Mensaje</label>
+        <label htmlFor="cf-mensaje" style={LABEL_STYLE}>{t.msgL}</label>
         <textarea
           id="cf-mensaje"
           required
           rows={5}
           maxLength={2000}
-          placeholder="Cuéntanos brevemente qué decisión enfrentas o qué tensión quieres trabajar."
+          placeholder={t.msgP}
           value={mensaje}
           onChange={e => setMensaje(e.target.value)}
           style={{ ...INPUT_STYLE, resize: "vertical", minHeight: 120 }}
@@ -187,7 +210,7 @@ export default function ContactFormSimple() {
           className="btn btn-primary"
           style={{ opacity: status === "sending" ? 0.65 : 1, cursor: status === "sending" ? "wait" : "pointer" }}
         >
-          {status === "sending" ? "Enviando..." : "Enviar mensaje"}
+          {status === "sending" ? t.sending : t.send}
         </button>
       </div>
 
