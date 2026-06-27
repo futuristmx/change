@@ -241,7 +241,7 @@ Una forma de operar instalada en la organización: leer señales débiles, decid
                 <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(34px,4.4vw,64px)/.98 var(--font-primary)", letterSpacing: "-.05em", color: "#fff", textWrap: "balance" }}>La estrategia necesita memoria.</Reveal>
                 <Reveal delay={120} as="p" style={{ margin: "24px 0 0", maxWidth: 500, font: "400 clamp(17px,1.5vw,21px)/1.5 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>Sostiene señales, decisiones y reportes vivos para que la organización no reinvente el rumbo cada vez que el contexto cambia. La infraestructura donde el aprendizaje se queda instalado.</Reveal>
                 <Reveal delay={180} style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 36 }}>
-                  <Link href="/mission-control" className="btn btn-light">Ver Mission Control</Link>
+                  <Link href="/mission-control" target="_blank" rel="noopener noreferrer" className="btn btn-light">Ver Mission Control</Link>
                   <Link href="/capacidades" className="btn btn-dghost">Ver el método</Link>
                 </Reveal>
               </div>

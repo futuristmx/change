@@ -52,7 +52,10 @@ export default function FieldNotesPage() {
                 <span style={{ width: 7, height: 7, background: "var(--change-violet)" }} />
                 <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)" }}>Por qué existe</span>
               </Reveal>
-              <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(28px,4vw,54px)/1.0 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>Casi todo lo que vas a leer hoy te dice qué pasó. Casi nada te dice qué decidir.</Reveal>
+              <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(28px,4vw,54px)/1.0 var(--font-primary)", letterSpacing: "-.05em", color: "var(--ink-graphite)", textWrap: "balance" }}>
+                <span style={{ backgroundImage: "linear-gradient(100deg, var(--text-muted) 0%, var(--ink-graphite) 100%)", WebkitBackgroundClip: "text", backgroundClip: "text", WebkitTextFillColor: "transparent", color: "transparent" }}>Casi todo lo que vas a leer hoy te dice qué pasó. </span>
+                <span style={{ backgroundImage: "linear-gradient(100deg, var(--change-violet) 0%, var(--soft-violet) 52%, var(--human-pink) 100%)", WebkitBackgroundClip: "text", backgroundClip: "text", WebkitTextFillColor: "transparent", color: "transparent" }}>Casi nada te dice qué decidir.</span>
+              </Reveal>
             </div>
             <Reveal delay={120} as="p" style={{ margin: 0, font: "400 clamp(17px,1.4vw,20px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>El cambio se vuelve visible cuando ya es urgente, y la urgencia cierra opciones antes de que alcances a evaluarlas. Field Notes trabaja un paso antes: lee la señal mientras todavía es débil y la deja en forma de decisión.</Reveal>
           </div>
