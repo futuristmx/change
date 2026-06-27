@@ -21,6 +21,8 @@ const WRAP = "min(1340px, calc(100% - clamp(40px,8vw,128px)))";
 const CASOS_ES = [
   {
     k: "Crecer sin diluir", c: "var(--opportunity-orange)",
+    img: "/img/proyectos/boardroom-ejecutivo.jpg",
+    imgAlt: "Sesión ejecutiva en boardroom de altura — contexto de expansión corporativa",
     h: "La identidad que abrió la puerta no es la que cabe en la siguiente etapa.",
     s: "Una organización en expansión: cada mercado nuevo pedía adaptar la marca, y cada adaptación la volvía un poco menos reconocible. El crecimiento amenazaba justo lo que lo había hecho posible.",
     flow: [
@@ -34,6 +36,8 @@ const CASOS_ES = [
   },
   {
     k: "Priorizar apuestas", c: "var(--change-violet)",
+    img: "/img/proyectos/taller-senales.jpg",
+    imgAlt: "Organización visual de señales y apuestas en taller estratégico",
     h: "Todo era importante, y por eso nada avanzaba.",
     s: "Más iniciativas valiosas que recursos para sostenerlas. La organización no tenía un problema de ideas: tenía un problema de elegir, y la indecisión se estaba volviendo su estrategia por defecto.",
     flow: [
@@ -47,6 +51,8 @@ const CASOS_ES = [
   },
   {
     k: "Transferir juicio", c: "var(--human-pink)",
+    img: "/img/proyectos/transferencia-juicio.jpg",
+    imgAlt: "Facilitación de transferencia de conocimiento estratégico entre equipos",
     h: "El juicio que sostiene a la organización vive en pocas cabezas. Y nadie lo escribió.",
     s: "Un relevo entre generaciones —o entre equipos— donde lo que estaba en juego no eran las operaciones, sino el juicio: cómo se decide aquí, y por qué. Eso casi nunca está documentado, y cuando se va, se va completo.",
     flow: [
@@ -60,6 +66,8 @@ const CASOS_ES = [
   },
   {
     k: "Anticipar la presión", c: "var(--warning)",
+    img: "/img/proyectos/perspectiva-cdmx.jpg",
+    imgAlt: "Vista estratégica desde altura — lectura del entorno desde un punto de ventaja",
     h: "Lo que aguanta en calma no es lo que aguanta bajo presión.",
     s: "Una organización que funcionaba bien en condiciones normales quería saber, antes de vivirlo, qué parte de su modelo se rompería primero cuando llegara el estrés — de demanda, de mercado o de capital.",
     flow: [
@@ -73,6 +81,8 @@ const CASOS_ES = [
   },
   {
     k: "Cuando el usuario ya cambió", c: "var(--signal-cyan)",
+    img: "/img/proyectos/ideacion-usuario.jpg",
+    imgAlt: "Sesión de investigación y co-diseño centrada en el usuario",
     h: "El producto seguía igual. El usuario, no.",
     s: "La experiencia funcionaba para un usuario que ya había cambiado: nuevas expectativas, nuevos hábitos, nuevas comparaciones. La organización lo intuía en los números, pero no tenía el lenguaje para nombrar qué se había movido.",
     flow: [
@@ -86,6 +96,8 @@ const CASOS_ES = [
   },
   {
     k: "Visión gobernable", c: "var(--change-violet)",
+    img: "/img/proyectos/mapeo-vision.jpg",
+    imgAlt: "Mapeo colectivo de visión estratégica — organización de criterios e implicaciones",
     h: "Tenían una visión clara. Y ningún modo de gobernarla.",
     s: "Una dirección ambiciosa, articulada y compartida — que en la operación se diluía en decisiones cotidianas que nadie conectaba con ella. La visión existía en los discursos, no en las elecciones de cada semana.",
     flow: [
@@ -226,6 +238,7 @@ export function CasosView({ lang }: { lang: Lang }) {
         <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(36px,4vw,52px) 0" }}>
           <Reveal className="ch-card" style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: 18, alignItems: "start", border: "1px solid var(--border-violet)", background: "rgba(109,59,255,.04)", padding: "22px 26px" }}>
             <span aria-hidden="true" style={{ flexShrink: 0, marginTop: 6, width: 8, height: 8, borderRadius: "50%", background: "var(--change-violet)" }} />
+
             <div>
               <span style={{ display: "block", marginBottom: 6, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--change-violet)" }}>{t.discK}</span>
               <p style={{ margin: 0, font: "500 15.5px/1.55 var(--font-primary)", color: "var(--ink-graphite)", maxWidth: "78ch" }}>{t.discP}</p>
@@ -238,7 +251,7 @@ export function CasosView({ lang }: { lang: Lang }) {
       {CASOS.map((caso, idx) => (
         <CasoCard
           key={caso.k}
-          caso={caso}
+          caso={{ ...caso, img: CASOS_ES[idx].img, imgAlt: CASOS_ES[idx].imgAlt }}
           idx={idx}
           lang={lang}
           bg={idx % 2 === 0 ? "var(--gradient-sky-pearl)" : "linear-gradient(180deg,#FFFFFF,var(--pure-white))"}
