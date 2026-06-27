@@ -142,13 +142,15 @@ export default function Header({ variant = "light", showCta = true, lang = "es" 
             position: "relative",
             width: "min(1340px, calc(100% - clamp(40px,8vw,128px)))",
             margin: "0 auto", display: "grid",
-            gridTemplateColumns: "auto minmax(0,1fr) auto",
-            alignItems: "center", gap: 28,
+            gridTemplateColumns: "auto minmax(0,1fr) auto minmax(0,1fr) auto",
+            alignItems: "center", gap: 20,
           }}
         >
           <Link href={localizeHref("/", lang)} aria-label="Change" className="ch-logo" data-pulsing={pulsing ? "true" : undefined} style={{ display: "block" }}>
             <Image src={c.logo} alt="Change" width={161} height={39} style={{ height: 39, width: "auto", display: "block" }} priority />
           </Link>
+
+          <span aria-hidden="true" />{/* spacer col2 — mantiene el menú centrado */}
 
           <div
             className="ch-command"
@@ -191,8 +193,9 @@ export default function Header({ variant = "light", showCta = true, lang = "es" 
             })}
           </div>
 
+          <span className="ch-lang" style={{ justifySelf: "center" }}><LanguageToggle variant={variant} /></span>
+
           <div style={{ justifySelf: "end", display: "flex", alignItems: "center", gap: 12 }}>
-            <span className="ch-lang"><LanguageToggle variant={variant} /></span>
             {showCta && <Link href={localizeHref("/contacto", lang)} className="btn btn-primary btn-sm ch-cta">{lang === "en" ? CTA_LABEL.en : CTA_LABEL.es}</Link>}
             <button
               onClick={() => setOpen((v) => !v)}
