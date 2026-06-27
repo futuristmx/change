@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { ScrollProgress } from "@/components/ds";
 import StickyCta from "@/components/StickyCta";
+import SmoothScroll from "@/components/SmoothScroll";
+import FloatingContactTab from "@/components/FloatingContactTab";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://change.live";
 const OG_IMAGE = "/assets/og-default.png";
@@ -80,8 +82,10 @@ export default function RootLayout({
           }}
         />
         <a href="#main-content" className="skip-link">Ir al contenido principal</a>
+        <SmoothScroll />
         <ScrollProgress />
         {children}
+        <FloatingContactTab />
         <StickyCta />
       </body>
     </html>
