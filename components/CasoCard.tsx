@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Reveal from "@/components/Reveal";
+import { type Lang } from "@/lib/i18n";
 
 interface Caso {
   k: string;
@@ -10,6 +11,13 @@ interface Caso {
   s: string;
   flow: string[];
 }
+
+const STEPS_ES = ["Leer", "Interpretar", "Decidir", "Diseñar", "Sostener", "Capacidad instalada"];
+const STEPS_EN = ["Read", "Interpret", "Decide", "Design", "Sustain", "Installed capacity"];
+const CC_UI = {
+  es: { tension: "Tensión", open: "Ver el recorrido completo ↓", close: "Cerrar recorrido ↑" },
+  en: { tension: "Tension", open: "See the full journey ↓", close: "Close journey ↑" },
+};
 
 /* Evolution Ramp (DS 2.4) — color de cada paso del método según madurez */
 const STEP_EVO = [
@@ -21,11 +29,11 @@ const STEP_EVO = [
   "var(--evo-validated)",  /* Capacidad instalada — cerrado */
 ];
 
-const STEPS = ["Leer", "Interpretar", "Decidir", "Diseñar", "Sostener", "Capacidad instalada"];
-
-export default function CasoCard({ caso, idx, bg }: { caso: Caso; idx: number; bg: string }) {
+export default function CasoCard({ caso, idx, bg, lang = "es" }: { caso: Caso; idx: number; bg: string; lang?: Lang }) {
   const [open, setOpen] = useState(false);
   const label = String(idx + 1).padStart(2, "0");
+  const STEPS = lang === "en" ? STEPS_EN : STEPS_ES;
+  const ui = CC_UI[lang];
 
   return (
     <section style={{ borderTop: "1px solid var(--border-subtle)", background: bg }}>
@@ -35,7 +43,7 @@ export default function CasoCard({ caso, idx, bg }: { caso: Caso; idx: number; b
         <div style={{ maxWidth: 820 }}>
           <Reveal style={{ display: "inline-flex", alignItems: "center", gap: 9, marginBottom: 16, font: "700 11px var(--font-secondary)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--ink-graphite)" }}>
             <span aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: caso.c }} />
-            Tensión {label} · {caso.k}
+            {ui.tension} {label} · {caso.k}
           </Reveal>
           <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(28px,3.6vw,50px)/1.02 var(--font-primary)", letterSpacing: "-.04em", color: "var(--ink-graphite)", textWrap: "balance" }}>
             {caso.h}
@@ -61,7 +69,7 @@ export default function CasoCard({ caso, idx, bg }: { caso: Caso; idx: number; b
             onFocus={e => { (e.currentTarget as HTMLButtonElement).style.boxShadow = "0 0 0 3px var(--change-violet)"; }}
             onBlur={e => { (e.currentTarget as HTMLButtonElement).style.boxShadow = "none"; }}
           >
-            {open ? "Cerrar recorrido ↑" : "Ver el recorrido completo ↓"}
+            {open ? ui.close : ui.open}
           </button>
         </Reveal>
 
