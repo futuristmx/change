@@ -46,6 +46,7 @@ export type IntentEvent =
   | "simulator_submitted"
   | "simulator_abandoned"
   | "simulator_result_copied"
+  | "simulator_pdf_exported"
   | "simulator_step_skipped";
 
 /** Envía un evento de intención. No bloquea, no lanza, no recolecta PII. */
