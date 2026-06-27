@@ -52,7 +52,8 @@ const CASOS_ES = [
   {
     k: "Transferir juicio", c: "var(--human-pink)",
     img: "/img/proyectos/transferencia-juicio.jpg",
-    imgAlt: "Facilitación de transferencia de conocimiento estratégico entre equipos",
+    imgAlt: "Sesión de facilitación estratégica — participantes anonimizados",
+    imgFilter: "grayscale(100%) blur(5px) contrast(1.1) brightness(.92)",
     h: "El juicio que sostiene a la organización vive en pocas cabezas. Y nadie lo escribió.",
     s: "Un relevo entre generaciones —o entre equipos— donde lo que estaba en juego no eran las operaciones, sino el juicio: cómo se decide aquí, y por qué. Eso casi nunca está documentado, y cuando se va, se va completo.",
     flow: [
