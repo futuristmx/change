@@ -13,6 +13,8 @@ export interface Horizon {
   photo?: string;
   /** object-position de la foto, ej "center 35%" */
   focus?: string;
+  /** overlay de color sobre la foto, ej "var(--change-olive-overlay)" */
+  photoTint?: string;
 }
 
 export default function HorizonPanels({ horizontes, minH = "clamp(420px,42vw,540px)" }: { horizontes: Horizon[]; minH?: string }) {
@@ -55,6 +57,10 @@ export default function HorizonPanels({ horizontes, minH = "clamp(420px,42vw,540
               {/* foto fundida con transparencia (cuando exista) */}
               {m.photo && (
                 <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: `url(${m.photo}) ${m.focus ?? "center 30%"} / cover no-repeat`, opacity: 0.9, mixBlendMode: "luminosity" }} />
+              )}
+              {/* tint olive (DS 2.6) — unifica la sección sin anular los colores semánticos */}
+              {m.photo && m.photoTint && (
+                <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: m.photoTint, pointerEvents: "none" }} />
               )}
               {/* numeral watermark (solo placeholder) */}
               {!m.photo && (

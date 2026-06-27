@@ -20,21 +20,30 @@ export const metadata: Metadata = {
 
 const WRAP = "min(1340px, calc(100% - clamp(40px,8vw,128px)))";
 
-const VALORES_ES: Array<{ k: string; h: string; p: string; g: GlyphName; c: string }> = [
-  { k: "01", h: "Interpretar primero", p: "Antes de proponer una respuesta, leemos. La urgencia no es excusa para saltarse el juicio. La velocidad importa, la dirección más.", g: "read", c: "var(--signal-cyan)" },
-  { k: "02", h: "Tensión sobre certeza", p: "Trabajamos donde las decisiones todavía no tienen forma. Nombrar la tensión vale más que prometer certeza falsa.", g: "risk", c: "var(--human-pink)" },
-  { k: "03", h: "Criterio explícito", p: "Toda decisión deja su porqué a la vista — qué se gana, qué se sacrifica y bajo qué condición se revisa. La estrategia no es solo lo que se decide, es por qué se decidió así.", g: "decision", c: "var(--change-violet)" },
-  { k: "04", h: "Instrumentos, no opiniones", p: "Cada intervención deja un artefacto — radar, mapa, matriz, roadmap, memoria. Lo que el equipo puede leer, discutir y usar.", g: "project", c: "var(--opportunity-orange)" },
-  { k: "05", h: "Memoria del porqué", p: "El aprendizaje queda vivo. La próxima coyuntura no empieza de cero — empieza donde la anterior dejó criterio instalado.", g: "status", c: "var(--success)" },
-  { k: "06", h: "Confidencialidad como base", p: "Las decisiones que acompañamos casi nunca pueden hacerse públicas. Protegemos el contexto estratégico antes de usarlo como credencial.", g: "lock", c: "var(--warning)" },
+const OL = "var(--change-olive-overlay)";
+const VALOR_PHOTOS: Array<{ photo: string; focus: string }> = [
+  { photo: "/img/proyectos/taller-senales.jpg",      focus: "center 40%" },
+  { photo: "/img/proyectos/dialogo-estrategico.jpg", focus: "center 35%" },
+  { photo: "/img/proyectos/boardroom-ejecutivo.jpg", focus: "center 40%" },
+  { photo: "/img/proyectos/facilitation-equipo.jpg", focus: "center 42%" },
+  { photo: "/img/proyectos/mapeo-vision.jpg",        focus: "center 45%" },
+  { photo: "/img/proyectos/sesion-nocturna.jpg",     focus: "center 38%" },
 ];
-const VALORES_EN: Array<{ k: string; h: string; p: string; g: GlyphName; c: string }> = [
-  { k: "01", h: "Interpret first", p: "Before proposing an answer, we read. Urgency is no excuse to skip judgment. Speed matters; direction matters more.", g: "read", c: "var(--signal-cyan)" },
-  { k: "02", h: "Tension over certainty", p: "We work where decisions don't have shape yet. Naming the tension is worth more than promising false certainty.", g: "risk", c: "var(--human-pink)" },
-  { k: "03", h: "Explicit criteria", p: "Every decision leaves its why in plain sight — what's gained, what's sacrificed, and under what condition it's revisited. Strategy isn't only what's decided; it's why it was decided that way.", g: "decision", c: "var(--change-violet)" },
-  { k: "04", h: "Instruments, not opinions", p: "Every intervention leaves an artifact — radar, map, matrix, roadmap, memory. What the team can read, discuss, and use.", g: "project", c: "var(--opportunity-orange)" },
-  { k: "05", h: "Memory of the why", p: "Learning stays alive. The next turn doesn't start from zero — it starts where the last one left criteria installed.", g: "status", c: "var(--success)" },
-  { k: "06", h: "Confidentiality as a base", p: "The decisions we support can almost never be made public. We protect the strategic context before using it as a credential.", g: "lock", c: "var(--warning)" },
+const VALORES_ES: Array<{ k: string; h: string; p: string; g: GlyphName; c: string; photo?: string; focus?: string; photoTint?: string }> = [
+  { k: "01", h: "Interpretar primero", p: "Antes de proponer una respuesta, leemos. La urgencia no es excusa para saltarse el juicio. La velocidad importa, la dirección más.", g: "read", c: "var(--signal-cyan)", ...VALOR_PHOTOS[0], photoTint: OL },
+  { k: "02", h: "Tensión sobre certeza", p: "Trabajamos donde las decisiones todavía no tienen forma. Nombrar la tensión vale más que prometer certeza falsa.", g: "risk", c: "var(--human-pink)", ...VALOR_PHOTOS[1], photoTint: OL },
+  { k: "03", h: "Criterio explícito", p: "Toda decisión deja su porqué a la vista — qué se gana, qué se sacrifica y bajo qué condición se revisa. La estrategia no es solo lo que se decide, es por qué se decidió así.", g: "decision", c: "var(--change-violet)", ...VALOR_PHOTOS[2], photoTint: OL },
+  { k: "04", h: "Instrumentos, no opiniones", p: "Cada intervención deja un artefacto — radar, mapa, matriz, roadmap, memoria. Lo que el equipo puede leer, discutir y usar.", g: "project", c: "var(--opportunity-orange)", ...VALOR_PHOTOS[3], photoTint: OL },
+  { k: "05", h: "Memoria del porqué", p: "El aprendizaje queda vivo. La próxima coyuntura no empieza de cero — empieza donde la anterior dejó criterio instalado.", g: "status", c: "var(--success)", ...VALOR_PHOTOS[4], photoTint: OL },
+  { k: "06", h: "Confidencialidad como base", p: "Las decisiones que acompañamos casi nunca pueden hacerse públicas. Protegemos el contexto estratégico antes de usarlo como credencial.", g: "lock", c: "var(--warning)", ...VALOR_PHOTOS[5], photoTint: OL },
+];
+const VALORES_EN: Array<{ k: string; h: string; p: string; g: GlyphName; c: string; photo?: string; focus?: string; photoTint?: string }> = [
+  { k: "01", h: "Interpret first", p: "Before proposing an answer, we read. Urgency is no excuse to skip judgment. Speed matters; direction matters more.", g: "read", c: "var(--signal-cyan)", ...VALOR_PHOTOS[0], photoTint: OL },
+  { k: "02", h: "Tension over certainty", p: "We work where decisions don't have shape yet. Naming the tension is worth more than promising false certainty.", g: "risk", c: "var(--human-pink)", ...VALOR_PHOTOS[1], photoTint: OL },
+  { k: "03", h: "Explicit criteria", p: "Every decision leaves its why in plain sight — what's gained, what's sacrificed, and under what condition it's revisited. Strategy isn't only what's decided; it's why it was decided that way.", g: "decision", c: "var(--change-violet)", ...VALOR_PHOTOS[2], photoTint: OL },
+  { k: "04", h: "Instruments, not opinions", p: "Every intervention leaves an artifact — radar, map, matrix, roadmap, memory. What the team can read, discuss, and use.", g: "project", c: "var(--opportunity-orange)", ...VALOR_PHOTOS[3], photoTint: OL },
+  { k: "05", h: "Memory of the why", p: "Learning stays alive. The next turn doesn't start from zero — it starts where the last one left criteria installed.", g: "status", c: "var(--success)", ...VALOR_PHOTOS[4], photoTint: OL },
+  { k: "06", h: "Confidentiality as a base", p: "The decisions we support can almost never be made public. We protect the strategic context before using it as a credential.", g: "lock", c: "var(--warning)", ...VALOR_PHOTOS[5], photoTint: OL },
 ];
 
 const HORIZONTES_ES = [
@@ -154,8 +163,8 @@ export function FuturoView({ lang }: { lang: Lang }) {
 
           {/* Paneles dinámicos expandibles (light) — 2 filas de 3 */}
           <div style={{ display: "flex", flexDirection: "column", gap: "clamp(14px,1.6vw,20px)" }}>
-            <Reveal delay={110}><HorizonPanels horizontes={VALORES.slice(0, 3).map((v) => ({ k: v.k, num: v.k, h: v.h, p: v.p, c: v.c }))} minH="clamp(340px,32vw,420px)" /></Reveal>
-            <Reveal delay={150}><HorizonPanels horizontes={VALORES.slice(3, 6).map((v) => ({ k: v.k, num: v.k, h: v.h, p: v.p, c: v.c }))} minH="clamp(340px,32vw,420px)" /></Reveal>
+            <Reveal delay={110}><HorizonPanels horizontes={VALORES.slice(0, 3).map((v) => ({ k: v.k, num: v.k, h: v.h, p: v.p, c: v.c, photo: v.photo, focus: v.focus, photoTint: v.photoTint }))} minH="clamp(340px,32vw,420px)" /></Reveal>
+            <Reveal delay={150}><HorizonPanels horizontes={VALORES.slice(3, 6).map((v) => ({ k: v.k, num: v.k, h: v.h, p: v.p, c: v.c, photo: v.photo, focus: v.focus, photoTint: v.photoTint }))} minH="clamp(340px,32vw,420px)" /></Reveal>
           </div>
         </div>
       </section>

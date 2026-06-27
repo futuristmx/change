@@ -73,6 +73,14 @@
   --text-faint: #4B4F59;
 }
 
+/* ── Motion 2.6 — hue olive (nuevo) ──
+   Complementa el mineral (#5AA67A, validado/completado) con un oliva más terroso
+   para atmósfera de overlays. Semántica: sabiduría en práctica, principios arraigados. */
+:root {
+  --change-olive:         #5A7A3E;
+  --change-olive-overlay: rgba(90, 122, 62, 0.18);
+}
+
 /* ── Tooltip (InlineTooltip) — superficie FIJA, no se invierte bajo .change-dark ──
    El popover siempre es una tarjeta clara con texto grafito, legible sobre
    cualquier fondo (incl. footer dark). Define hex aquí (permitido en tokens). */
