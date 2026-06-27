@@ -21,12 +21,12 @@ const CO_COPY = {
   es: {
     kicker: "Contacto", titlePre: "Trae una decisión difícil.", titleAccent: "Sal con un primer diagnóstico.",
     lead: "No empieza con un proyecto ni con una propuesta. Empieza con una decisión real que tienes enfrente. Prueba el modelo con el simulador o escríbenos directamente.",
-    altK: "Sin simulador", altH: "Escríbenos la decisión como la dirías en voz alta.", altP: "Sin estructura, sin formato. El board senior de Change la lee directamente. Si hay una tensión real que pueda trabajarse con el método, te respondemos en menos de dos días hábiles con un primer diagnóstico y un paso posible.",
+    altK: "Sin simulador", altH: "Escríbenos tu decisión como la dirías en voz alta.", altP: "Queremos empezar la conversación con un primer contexto. Escríbela en tus palabras —nosotros la leemos y te buscamos.",
   },
   en: {
     kicker: "Contact", titlePre: "Bring a hard decision.", titleAccent: "Leave with a first diagnosis.",
     lead: "It doesn't start with a project or a proposal. It starts with a real decision you're facing. Try the model with the simulator or write to us directly.",
-    altK: "Without the simulator", altH: "Write us the decision as you'd say it out loud.", altP: "No structure, no format. Change's senior board reads it directly. If there's a real tension that can be worked with the method, we reply in under two business days with a first diagnosis and a possible step.",
+    altK: "Without the simulator", altH: "Write us your decision the way you'd say it out loud.", altP: "We just want a first bit of context to start the conversation. Write it in your own words —we'll read it and reach out.",
   },
 };
 
