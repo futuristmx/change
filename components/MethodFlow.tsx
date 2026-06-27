@@ -2,14 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Glyph, type GlyphName } from "@/components/ds";
-
-const GLYPH_MAP: Record<string, GlyphName> = {
-  Leer: "read",
-  Interpretar: "risk",
-  Decidir: "decision",
-  Diseñar: "project",
-  Sostener: "status",
-};
+import { type Lang } from "@/lib/i18n";
 
 interface Node {
   title: string;
@@ -21,11 +14,17 @@ interface Node {
   artefacto: string;
   decision: string;
   mc: string;
+  g: GlyphName;
 }
 
-const NODES: Node[] = [
+const UI = {
+  es: { arc: "El arco del método", auto: "Avance automático", paused: "En pausa", evolution: "Evolución", chain: "Leer · Interpretar · Decidir · Diseñar · Sostener", riesgo: "Riesgo que reduce", decision: "Decisión que habilita", mc: "En Mission Control", step: "Paso", of: "de", progressAria: "Avance del arco del método" },
+  en: { arc: "The arc of the method", auto: "Auto-advance", paused: "Paused", evolution: "Evolution", chain: "Read · Interpret · Decide · Design · Sustain", riesgo: "Risk it reduces", decision: "Decision it enables", mc: "In Mission Control", step: "Step", of: "of", progressAria: "Method arc progress" },
+};
+
+const NODES_ES: Node[] = [
   {
-    title: "Leer", micro: "qué cambia", color: "var(--signal-cyan)", halo: "rgba(89,184,217,.22)",
+    title: "Leer", micro: "qué cambia", color: "var(--signal-cyan)", halo: "rgba(89,184,217,.22)", g: "read",
     q: "¿Qué está cambiando que todavía no aparece en los números?",
     riesgo: "Enterarte tarde, cuando el cambio ya es urgencia.",
     artefacto: "Radar de señales",
@@ -33,7 +32,7 @@ const NODES: Node[] = [
     mc: "Las señales quedan vivas y vigiladas, no en una presentación que se archiva.",
   },
   {
-    title: "Interpretar", micro: "qué significa", color: "var(--soft-violet)", halo: "rgba(138,108,255,.16)",
+    title: "Interpretar", micro: "qué significa", color: "var(--soft-violet)", halo: "rgba(138,108,255,.16)", g: "risk",
     q: "¿Qué significan estas señales para nosotros, no para el mercado en general?",
     riesgo: "Confundir movimiento del entorno con ruido, o reaccionar a la señal equivocada.",
     artefacto: "Mapa de tensiones",
@@ -41,7 +40,7 @@ const NODES: Node[] = [
     mc: "Las tensiones se vuelven el marco compartido con el que el equipo lee el contexto.",
   },
   {
-    title: "Decidir", micro: "qué importa", color: "var(--change-violet)", halo: "rgba(109,59,255,.18)",
+    title: "Decidir", micro: "qué importa", color: "var(--change-violet)", halo: "rgba(109,59,255,.18)", g: "decision",
     q: "¿Qué importa de verdad, qué se sacrifica y por qué?",
     riesgo: "Decidir por inercia o por la voz más fuerte de la junta.",
     artefacto: "Matriz de decisión",
@@ -49,7 +48,7 @@ const NODES: Node[] = [
     mc: "La decisión queda registrada con su criterio, no solo con su resultado.",
   },
   {
-    title: "Diseñar", micro: "qué forma toma", color: "var(--change-violet)", halo: "rgba(109,59,255,.18)",
+    title: "Diseñar", micro: "qué forma toma", color: "var(--change-violet)", halo: "rgba(109,59,255,.18)", g: "project",
     q: "¿Qué forma concreta toma esto para que el equipo lo ejecute?",
     riesgo: "Que la buena decisión se quede en intención.",
     artefacto: "Roadmap vivo",
@@ -57,7 +56,7 @@ const NODES: Node[] = [
     mc: "El roadmap se mantiene vivo, no congelado en un documento.",
   },
   {
-    title: "Sostener", micro: "qué se aprende", color: "var(--ink-graphite)", halo: "rgba(46,46,51,.12)",
+    title: "Sostener", micro: "qué se aprende", color: "var(--ink-graphite)", halo: "rgba(46,46,51,.12)", g: "status",
     q: "¿Cómo seguimos aprendiendo cuando cambie el contexto otra vez?",
     riesgo: "Reinventar el rumbo en cada coyuntura y perder lo aprendido.",
     artefacto: "Mission Control",
@@ -66,14 +65,59 @@ const NODES: Node[] = [
   },
 ];
 
-const LAST = NODES.length - 1;
-const INSET = 100 / (2 * NODES.length);
+const NODES_EN: Node[] = [
+  {
+    title: "Read", micro: "what's changing", color: "var(--signal-cyan)", halo: "rgba(89,184,217,.22)", g: "read",
+    q: "What's changing that the numbers don't show yet?",
+    riesgo: "Finding out too late, when the change is already an emergency.",
+    artefacto: "Signal radar",
+    decision: "Where to pay attention before it becomes urgent.",
+    mc: "Signals stay alive and monitored, not buried in a deck that gets archived.",
+  },
+  {
+    title: "Interpret", micro: "what it means", color: "var(--soft-violet)", halo: "rgba(138,108,255,.16)", g: "risk",
+    q: "What do these signals mean for us — not for the market at large?",
+    riesgo: "Mistaking shifts in the environment for noise, or reacting to the wrong signal.",
+    artefacto: "Tension map",
+    decision: "Which tension to face first.",
+    mc: "Tensions become the shared frame the team reads the context with.",
+  },
+  {
+    title: "Decide", micro: "what matters", color: "var(--change-violet)", halo: "rgba(109,59,255,.18)", g: "decision",
+    q: "What truly matters, what gets sacrificed, and why?",
+    riesgo: "Deciding by inertia, or by the loudest voice in the room.",
+    artefacto: "Decision matrix",
+    decision: "The bet, with its cost made explicit.",
+    mc: "The decision is recorded with its rationale, not just its outcome.",
+  },
+  {
+    title: "Design", micro: "what shape it takes", color: "var(--change-violet)", halo: "rgba(109,59,255,.18)", g: "project",
+    q: "What concrete shape does this take so the team can execute it?",
+    riesgo: "Letting a good decision stall as mere intention.",
+    artefacto: "Living roadmap",
+    decision: "What happens first, who owns it, and in what sequence.",
+    mc: "The roadmap stays alive, not frozen in a document.",
+  },
+  {
+    title: "Sustain", micro: "what we learn", color: "var(--ink-graphite)", halo: "rgba(46,46,51,.12)", g: "status",
+    q: "How do we keep learning when the context shifts again?",
+    riesgo: "Reinventing the course at every turn and losing what was learned.",
+    artefacto: "Mission Control",
+    decision: "Adjust with memory, not from scratch.",
+    mc: "Here the cycle closes: the next turn doesn't start from zero — it starts with memory.",
+  },
+];
 
-export default function MethodFlow() {
+const LAST = NODES_ES.length - 1;
+const INSET = 100 / (2 * NODES_ES.length);
+
+export default function MethodFlow({ lang = "es" }: { lang?: Lang }) {
   const [active, setActive] = useState(0);
   const [auto, setAuto] = useState(true);
   const [inView, setInView] = useState(false);
   const ref = useRef<HTMLDivElement | null>(null);
+  const NODES = lang === "en" ? NODES_EN : NODES_ES;
+  const ui = UI[lang];
   const node = NODES[active];
   const fill = (active / LAST) * (100 - 2 * INSET);
 
@@ -102,10 +146,10 @@ export default function MethodFlow() {
   return (
     <div ref={ref} style={{ maxWidth: 1020, margin: "0 auto", background: "linear-gradient(155deg,rgba(255,255,255,.94),rgba(244,242,250,.62))", border: "1px solid var(--border-subtle)", boxShadow: "0 30px 90px rgba(31,17,72,.08)" }}>
       <div style={{ display: "flex", justifyContent: "space-between", gap: 16, alignItems: "center", padding: "20px 28px", borderBottom: "1px solid var(--border-subtle)" }}>
-        <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-muted)" }}>El arco del método</span>
+        <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-muted)" }}>{ui.arc}</span>
         <button type="button" onClick={() => setAuto((a) => !a)} aria-pressed={auto} style={{ all: "unset", display: "inline-flex", alignItems: "center", gap: 8, cursor: "pointer", font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-muted)" }}>
           <span {...(auto ? { "data-pulse": "" } : {})} aria-hidden="true" style={{ width: 6, height: 6, borderRadius: "50%", background: auto ? "var(--signal-cyan)" : "var(--soft-stone-gray)" }} />
-          {auto ? "Avance automático" : "En pausa"}
+          {auto ? ui.auto : ui.paused}
         </button>
       </div>
 
@@ -126,12 +170,12 @@ export default function MethodFlow() {
                 className="mf-node-btn"
                 onClick={() => { setActive(i); setAuto(false); }}
                 aria-pressed={on}
-                aria-label={`${n.title}, paso ${i + 1} de ${NODES.length}`}
+                aria-label={`${n.title}, ${ui.step.toLowerCase()} ${i + 1} ${ui.of} ${NODES.length}`}
                 style={{ border: 0, background: "transparent", padding: 0, textAlign: "center", cursor: "pointer", fontFamily: "var(--font-primary)", color: "inherit", opacity: inView ? 1 : 0, transform: inView ? "translateY(0)" : "translateY(8px)", transition: `opacity .5s ${120 + i * 90}ms, transform .5s ${120 + i * 90}ms var(--ease-premium)` }}
               >
                 {/* Numeral monoespaciado, sobrio */}
                 <span aria-hidden="true" style={{ display: "block", marginBottom: 14, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: on ? n.color : "var(--text-faint)", transition: "color var(--duration-standard) var(--ease-premium)" }}>
-                  PASO {String(i + 1).padStart(2, "0")}
+                  {ui.step.toUpperCase()} {String(i + 1).padStart(2, "0")}
                 </span>
 
                 {/* Nodo principal — círculo 44px con Glyph dentro.
@@ -155,7 +199,7 @@ export default function MethodFlow() {
                     transition: "transform var(--duration-standard) var(--ease-premium), box-shadow var(--duration-standard) var(--ease-premium), background var(--duration-standard) var(--ease-premium), color var(--duration-standard) var(--ease-premium), border-color var(--duration-standard) var(--ease-premium)",
                   }}
                 >
-                  <Glyph name={GLYPH_MAP[n.title] ?? "nav"} size={22} />
+                  <Glyph name={n.g} size={22} />
                 </span>
 
                 <strong style={{ display: "block", font: "600 clamp(15px,1.4vw,17px) var(--font-primary)", letterSpacing: "-.015em", color: "var(--ink-graphite)", opacity: on ? 1 : 0.7, transition: "opacity var(--duration-standard) var(--ease-premium)" }}>{n.title}</strong>
@@ -167,10 +211,10 @@ export default function MethodFlow() {
 
         {/* Slider de evolución — auto-avanza y se arrastra; gris → color */}
         <div className="mf-slider" style={{ margin: "34px 0 0", display: "flex", alignItems: "center", gap: 18 }}>
-          <span aria-hidden="true" style={{ flexShrink: 0, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-faint)" }}>Evolución</span>
+          <span aria-hidden="true" style={{ flexShrink: 0, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-faint)" }}>{ui.evolution}</span>
           <input
             type="range" min={0} max={LAST} step={1} value={active}
-            aria-label="Avance del arco del método"
+            aria-label={ui.progressAria}
             onChange={(e) => { setActive(Number(e.currentTarget.value)); setAuto(false); }}
             onPointerDown={() => setAuto(false)}
             className="mf-range"
@@ -180,7 +224,7 @@ export default function MethodFlow() {
         </div>
 
         <div className="mf-chain" style={{ display: "none", marginTop: 24, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".06em", color: "var(--text-muted)", textAlign: "center" }}>
-          Leer · Interpretar · Decidir · Diseñar · Sostener
+          {ui.chain}
         </div>
 
         {/* panel de detalle — superficie con gradiente del paso + glow y sheen al activar */}
@@ -211,8 +255,8 @@ export default function MethodFlow() {
             <h3 style={{ margin: "0 0 24px", font: "600 clamp(20px,1.9vw,26px)/1.28 var(--font-primary)", letterSpacing: "-.025em", color: "var(--ink-graphite)", textWrap: "balance" }}>{node.q}</h3>
             <div className="mf-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "18px 28px" }}>
               {[
-                ["Riesgo que reduce", node.riesgo],
-                ["Decisión que habilita", node.decision],
+                [ui.riesgo, node.riesgo],
+                [ui.decision, node.decision],
               ].map(([label, text]) => (
                 <div key={label}>
                   <span style={{ display: "inline-flex", alignItems: "center", gap: 7, marginBottom: 6, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--text-faint)" }}>
@@ -223,7 +267,7 @@ export default function MethodFlow() {
               ))}
             </div>
             <div style={{ marginTop: 20, padding: "16px 18px", borderLeft: `2px solid color-mix(in srgb, ${node.color} 60%, transparent)`, background: `color-mix(in srgb, ${node.color} 6%, transparent)` }}>
-              <span style={{ display: "block", marginBottom: 5, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--text-faint)" }}>En Mission Control</span>
+              <span style={{ display: "block", marginBottom: 5, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--text-faint)" }}>{ui.mc}</span>
               <span style={{ display: "block", font: "400 14.5px/1.55 var(--font-primary)", color: "var(--text-muted)" }}>{node.mc}</span>
             </div>
           </div>

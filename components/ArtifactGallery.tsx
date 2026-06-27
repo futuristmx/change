@@ -2,23 +2,40 @@
 
 import { useEffect, useState } from "react";
 import { Glyph, InlineTooltip, type GlyphName } from "@/components/ds";
+import { type Lang } from "@/lib/i18n";
 
-const GLYPH_K: Record<string, GlyphName> = {
-  "Leer": "read",
-  "Interpretar": "risk",
-  "Decidir": "decision",
-  "Diseñar": "project",
-  "Sostener": "status",
-  "Transversal": "nav",
+// Glyph y tip por ÍNDICE — las arrays ES/EN son paralelas, así el icono y
+// el diagrama no dependen del texto traducido.
+const ART_GLYPHS: GlyphName[] = ["read", "risk", "decision", "project", "project", "status", "nav", "status"];
+const ART_TIPS = {
+  es: [
+    "Detectar y nombrar lo que se mueve en el entorno antes de que se vuelva urgencia.",
+    "Convertir señales dispersas en sentido accionable para esta organización.",
+    "Hacer explícito el criterio de elección antes de comprometer recursos.",
+    "Convertir el criterio en movimientos concretos que el equipo puede ejecutar.",
+    "Convertir el criterio en movimientos concretos que el equipo puede ejecutar.",
+    "Mantener la capacidad construida viva entre decisiones.",
+    "Activa varios movimientos del arco del método según el reto de la sesión.",
+    "Mantener la capacidad construida viva entre decisiones.",
+  ],
+  en: [
+    "Spot and name what's moving in the environment before it turns into urgency.",
+    "Turn scattered signals into actionable meaning for this organization.",
+    "Make the choice criteria explicit before committing resources.",
+    "Turn criteria into concrete moves the team can execute.",
+    "Turn criteria into concrete moves the team can execute.",
+    "Keep the capacity you've built alive between decisions.",
+    "Activates several moves of the method's arc depending on the session's challenge.",
+    "Keep the capacity you've built alive between decisions.",
+  ],
 };
-
-const METHOD_TIPS: Record<string, string> = {
-  "Leer":        "Detectar y nombrar lo que se mueve en el entorno antes de que se vuelva urgencia.",
-  "Interpretar": "Convertir señales dispersas en sentido accionable para esta organización.",
-  "Decidir":     "Hacer explícito el criterio de elección antes de comprometer recursos.",
-  "Diseñar":     "Convertir el criterio en movimientos concretos que el equipo puede ejecutar.",
-  "Sostener":    "Mantener la capacidad construida viva entre decisiones.",
-  "Transversal": "Activa varios movimientos del arco del método según el reto de la sesión.",
+const ART_UI = {
+  es: { open: "Ver detalle →", close: "Cerrar ↑", detail: "Detalle" },
+  en: { open: "View detail →", close: "Close ↑", detail: "Detail" },
+};
+const COL_LABELS = {
+  es: { pregunta: "Pregunta que responde", deja: "Qué deja", riesgo: "Riesgo que reduce", decision: "Decisión que habilita" },
+  en: { pregunta: "Question it answers", deja: "What it leaves", riesgo: "Risk it reduces", decision: "Decision it enables" },
 };
 
 interface Artifact {
@@ -34,7 +51,7 @@ interface Artifact {
   decision: string;
 }
 
-const ARTIFACTS: Artifact[] = [
+const ARTIFACTS_ES: Artifact[] = [
   {
     h: "Radar de señales",
     k: "Leer",
@@ -133,12 +150,90 @@ const ARTIFACTS: Artifact[] = [
   },
 ];
 
-const DETAIL_COLS = [
-  { key: "pregunta" as const,  label: "Pregunta que responde" },
-  { key: "deja" as const,      label: "Qué deja" },
-  { key: "riesgo" as const,    label: "Riesgo que reduce" },
-  { key: "decision" as const,  label: "Decisión que habilita" },
+const ARTIFACTS_EN: Artifact[] = [
+  {
+    h: "Signal radar", k: "Read", c: "var(--signal-cyan)",
+    p: "The map of what's moving around you that isn't obvious yet.",
+    pregunta: "What's changing in the environment that doesn't have a name in your organization yet?",
+    cuando: "When something feels different but no one can name it yet — before it becomes urgency.",
+    deja: "A prioritized list of signals with criteria for reading them: what to watch, how often, and who interprets.",
+    method: "Activates the method's first move: Read. The work starts here.",
+    riesgo: "Reacting late. Letting urgency decide for you before you've chosen.",
+    decision: "Which signals deserve strategic attention — and which are noise not worth chasing.",
+  },
+  {
+    h: "Tension map", k: "Interpret", c: "var(--soft-violet)",
+    p: "The forces in contradiction that define the field where you'll decide.",
+    pregunta: "What forces pull against each other in this decision, and where is the real conflict — not the apparent one?",
+    cuando: "When there's information but no agreement on what it means for this organization in particular.",
+    deja: "The tensions named and ordered — the decision field made visible before you take a position.",
+    method: "Activates Interpret: turns scattered signals into actionable meaning for the organization.",
+    riesgo: "Deciding on the symptom. Mistaking the visible conflict for the real one.",
+    decision: "Where the conflict that matters lies — and which tension the decision must resolve.",
+  },
+  {
+    h: "Decision matrix", k: "Decide", c: "var(--change-violet)",
+    p: "The criteria and trade-offs of each path, explicit on the table.",
+    pregunta: "What do we gain, what do we sacrifice, and why — before committing resources?",
+    cuando: "When there are valid options but no explicit criteria to choose between them.",
+    deja: "The criteria documented, the trade-offs visible, and the choice defensible to any interlocutor.",
+    method: "Activates Decide: makes the criteria explicit and sustainable for next time.",
+    riesgo: "Choosing without criteria and being unable to explain why. Reopening the discussion every time pressure appears.",
+    decision: "Which option is chosen — and what criteria makes that choice defensible over time.",
+  },
+  {
+    h: "Living roadmap", k: "Design", c: "var(--change-violet)",
+    p: "The sequence of moves that updates as conditions change.",
+    pregunta: "How does the decision come down to concrete moves the team can execute this week?",
+    cuando: "When the decision exists as intention but has no shape in the team's day to day.",
+    deja: "A sequence of steps with owners, review conditions, and a defined first move.",
+    method: "Activates Design: turns criteria into an executable plan with its logic visible.",
+    riesgo: "Letting the decision die in the deck. Letting operational urgency push aside what was decided.",
+    decision: "What the first move is — and what condition triggers the plan's review.",
+  },
+  {
+    h: "Executive report", k: "Design", c: "var(--opportunity-orange)",
+    p: "The synthesis that brings the decision into the language of the board and whoever signs.",
+    pregunta: "How do you bring the diagnosis into the language of whoever has to approve it and whoever has to implement it?",
+    cuando: "When the decision is made but needs to be communicated and defended to the board or leadership.",
+    deja: "An executive synthesis with the criteria and trade-offs visible, ready to present.",
+    method: "Activates Design in communication mode: the decision in the format that moves people.",
+    riesgo: "Whoever approves doesn't grasp the reasoning and the decision gets lost on the way.",
+    decision: "How the criteria is presented so someone who wasn't in the room can stand behind it.",
+  },
+  {
+    h: "Field Note", k: "Sustain", c: "var(--signal-cyan)",
+    p: "The short record of what was learned along the way, so the judgment isn't lost.",
+    pregunta: "What did the organization learn in this decision, and how is it kept so it counts next time?",
+    cuando: "At the close of a project or important decision, before the team disperses.",
+    deja: "A structured record of the judgment used: what was considered, what was discarded, and why.",
+    method: "Activates Sustain: turns one-off learning into institutional memory that compounds.",
+    riesgo: "Letting the learning stay in the head of whoever lived it and not travel with the organization.",
+    decision: "What criteria stays documented so the next decision doesn't start from zero.",
+  },
+  {
+    h: "Instrumented workshop", k: "Cross-cutting", c: "var(--human-pink)",
+    p: "A session that doesn't end in sticky notes: it ends in an artifact that decides.",
+    pregunta: "How do you align a team around a complex decision without the session evaporating into thin air?",
+    cuando: "When the decision involves multiple perspectives and needs the team to build it, not just receive it.",
+    deja: "No sticky notes: one of the method's artifacts, built collectively in session and ready to use.",
+    method: "Can activate any move of the arc depending on the session — it's the format, not the content.",
+    riesgo: "Spending collective energy in a space that produces neither criteria nor an actionable artifact.",
+    decision: "How to turn collective judgment into something the organization can use and sustain.",
+  },
+  {
+    h: "Mission Control", k: "Sustain", c: "var(--ink-graphite)",
+    p: "The strategic-memory infrastructure where capacity stays alive between decisions.",
+    pregunta: "How does decision-making capacity stay alive after the work is done?",
+    cuando: "When the organization has already made decisions and wants the learning not to be lost as it grows.",
+    deja: "A living memory infrastructure: signals, tensions, decisions, and learnings connected in one system.",
+    method: "It's the destination of all the method's artifacts: where capacity is sustained between decisions.",
+    riesgo: "Letting the capacity you built depend on the people who built it — and leave with them.",
+    decision: "How to sustain the criteria over time so the organization doesn't start from zero again.",
+  },
 ];
+
+const DETAIL_KEYS = ["pregunta", "deja", "riesgo", "decision"] as const;
 
 function useResponsiveCols() {
   const [cols, setCols] = useState(4);
@@ -161,9 +256,11 @@ interface ArtCardProps {
   i: number;
   active: boolean;
   onToggle: (i: number) => void;
+  lang: Lang;
 }
 
-function ArtCard({ art, i, active, onToggle }: ArtCardProps) {
+function ArtCard({ art, i, active, onToggle, lang }: ArtCardProps) {
+  const tip = ART_TIPS[lang][i];
   const accentBorder = `3px solid ${art.c}`;
   return (
     <button
@@ -201,14 +298,14 @@ function ArtCard({ art, i, active, onToggle }: ArtCardProps) {
     >
       {/* Slot 1 — glyph */}
       <span aria-hidden="true" style={{ display: "inline-flex", marginBottom: 12, color: art.c, opacity: active ? 1 : 0.7, transition: "opacity var(--duration-standard)" }}>
-        <Glyph name={GLYPH_K[art.k] ?? "nav"} size={24} />
+        <Glyph name={ART_GLYPHS[i] ?? "nav"} size={24} />
       </span>
 
       {/* Slot 1 — meta eyebrow */}
       <span style={{ display: "inline-flex", alignItems: "center", gap: 7, font: "700 11px var(--font-secondary)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--ink-graphite)", marginBottom: 12 }}>
         <span aria-hidden="true" style={{ width: 6, height: 6, borderRadius: "50%", background: art.c, flexShrink: 0 }} />
-        {METHOD_TIPS[art.k] ? (
-          <InlineTooltip content={METHOD_TIPS[art.k]}>
+        {tip ? (
+          <InlineTooltip content={tip}>
             {art.k}
           </InlineTooltip>
         ) : art.k}
@@ -222,7 +319,7 @@ function ArtCard({ art, i, active, onToggle }: ArtCardProps) {
 
       {/* Slot 8 — state feedback */}
       <span aria-hidden="true" style={{ marginTop: 16, font: "700 10px var(--font-secondary)", letterSpacing: ".1em", textTransform: "uppercase", color: active ? art.c : "var(--text-faint)", transition: "color .18s ease" }}>
-        {active ? "Cerrar ↑" : "Ver detalle →"}
+        {active ? ART_UI[lang].close : ART_UI[lang].open}
       </span>
     </button>
   );
@@ -234,10 +331,10 @@ function ArtCard({ art, i, active, onToggle }: ArtCardProps) {
 const INK = "var(--ink-graphite)";
 const FAINT = "var(--soft-stone-gray)";
 
-function InstrumentDiagram({ name }: { name: string }) {
+function InstrumentDiagram({ index }: { index: number }) {
   const body = (() => {
-    switch (name) {
-      case "Radar de señales":
+    switch (index) {
+      case 0:
         return (
           <>
             <g stroke={FAINT} strokeWidth="1.3"><circle cx="80" cy="80" r="58" /><circle cx="80" cy="80" r="38" /><circle cx="80" cy="80" r="19" /></g>
@@ -247,7 +344,7 @@ function InstrumentDiagram({ name }: { name: string }) {
             <circle cx="110" cy="56" r="5" fill={INK} stroke="none" />
           </>
         );
-      case "Mapa de tensiones":
+      case 1:
         return (
           <>
             <g stroke={FAINT} strokeWidth="1.3" opacity="0.8"><line x1="80" y1="26" x2="80" y2="134" /><line x1="26" y1="80" x2="134" y2="80" /></g>
@@ -257,7 +354,7 @@ function InstrumentDiagram({ name }: { name: string }) {
             <circle cx="80" cy="80" r="7" fill={INK} stroke="none" />
           </>
         );
-      case "Matriz de decisión":
+      case 2:
         return (
           <>
             <rect x="34" y="34" width="92" height="92" stroke={FAINT} strokeWidth="1.3" />
@@ -267,7 +364,7 @@ function InstrumentDiagram({ name }: { name: string }) {
             <circle cx="103" cy="57" r="6" fill={INK} stroke="none" />
           </>
         );
-      case "Roadmap vivo":
+      case 3:
         return (
           <>
             <line x1="26" y1="92" x2="134" y2="92" stroke={FAINT} strokeWidth="1.3" />
@@ -277,7 +374,7 @@ function InstrumentDiagram({ name }: { name: string }) {
             <circle cx="122" cy="64" r="4.5" fill="none" stroke={FAINT} strokeWidth="1.4" />
           </>
         );
-      case "Reporte ejecutivo":
+      case 4:
         return (
           <>
             <rect x="46" y="26" width="68" height="108" stroke={INK} strokeWidth="1.8" />
@@ -286,7 +383,7 @@ function InstrumentDiagram({ name }: { name: string }) {
             <line x1="58" y1="114" x2="84" y2="114" stroke={INK} strokeWidth="3.2" />
           </>
         );
-      case "Field Note":
+      case 5:
         return (
           <>
             <path d="M50 32 H96 L114 50 V128 H50 Z" stroke={INK} strokeWidth="1.8" />
@@ -295,7 +392,7 @@ function InstrumentDiagram({ name }: { name: string }) {
             <circle cx="64" cy="62" r="3.2" fill={INK} stroke="none" />
           </>
         );
-      case "Workshop instrumentado":
+      case 6:
         return (
           <>
             <g stroke={FAINT} strokeWidth="1.3"><line x1="42" y1="46" x2="80" y2="80" /><line x1="118" y1="46" x2="80" y2="80" /><line x1="38" y1="106" x2="80" y2="80" /><line x1="122" y1="110" x2="80" y2="80" /></g>
@@ -304,7 +401,7 @@ function InstrumentDiagram({ name }: { name: string }) {
             <circle cx="80" cy="80" r="8" fill={INK} stroke="none" />
           </>
         );
-      case "Mission Control":
+      case 7:
         return (
           <>
             <g stroke={FAINT} strokeWidth="1.3"><line x1="80" y1="80" x2="44" y2="50" /><line x1="80" y1="80" x2="118" y2="54" /><line x1="80" y1="80" x2="46" y2="112" /><line x1="80" y1="80" x2="114" y2="114" /><line x1="44" y1="50" x2="118" y2="54" /><line x1="46" y1="112" x2="114" y2="114" /></g>
@@ -325,12 +422,12 @@ function InstrumentDiagram({ name }: { name: string }) {
   );
 }
 
-function DetailPanel({ sel, selected }: { sel: Artifact; selected: number }) {
+function DetailPanel({ sel, selected, lang }: { sel: Artifact; selected: number; lang: Lang }) {
   return (
     <div
       id={`art-detail-${selected}`}
       role="region"
-      aria-label={`Detalle: ${sel.h}`}
+      aria-label={`${ART_UI[lang].detail}: ${sel.h}`}
       aria-live="polite"
       style={{ marginTop: 12, marginBottom: 12, overflow: "hidden", animation: "art-detail-in .28s var(--ease-premium)" }}
     >
@@ -345,15 +442,15 @@ function DetailPanel({ sel, selected }: { sel: Artifact; selected: number }) {
         {/* Diagrama del instrumento + datos esenciales */}
         <div className="art-detail-grid" style={{ display: "grid", gridTemplateColumns: "minmax(0,250px) minmax(0,1fr)", gap: "clamp(24px,3vw,48px)", alignItems: "start" }}>
           <div style={{ background: "color-mix(in srgb, var(--ink-graphite) 3.5%, transparent)", border: "1px solid var(--border-subtle)", padding: "clamp(22px,2.6vw,32px)", display: "grid", placeItems: "center", aspectRatio: "1 / 1" }}>
-            <InstrumentDiagram name={sel.h} />
+            <InstrumentDiagram index={selected} />
           </div>
           <div className="art-detail-cols" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "26px 32px" }}>
-            {DETAIL_COLS.map((col) => (
-              <div key={col.key}>
+            {DETAIL_KEYS.map((key) => (
+              <div key={key}>
                 <span style={{ display: "block", font: "700 10px var(--font-secondary)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-faint)", marginBottom: 9 }}>
-                  {col.label}
+                  {COL_LABELS[lang][key]}
                 </span>
-                <p style={{ margin: 0, font: "400 14px/1.6 var(--font-primary)", color: "var(--ink-graphite)" }}>{sel[col.key]}</p>
+                <p style={{ margin: 0, font: "400 14px/1.6 var(--font-primary)", color: "var(--ink-graphite)" }}>{sel[key]}</p>
               </div>
             ))}
           </div>
@@ -363,9 +460,10 @@ function DetailPanel({ sel, selected }: { sel: Artifact; selected: number }) {
   );
 }
 
-export default function ArtifactGallery() {
+export default function ArtifactGallery({ lang = "es" }: { lang?: Lang }) {
   const [selected, setSelected] = useState<number | null>(null);
   const cols = useResponsiveCols();
+  const ARTIFACTS = lang === "en" ? ARTIFACTS_EN : ARTIFACTS_ES;
 
   function toggle(i: number) {
     setSelected((prev) => (prev === i ? null : i));
@@ -389,10 +487,10 @@ export default function ArtifactGallery() {
           >
             {row.map((art, colIdx) => {
               const globalI = rowIdx * cols + colIdx;
-              return <ArtCard key={art.h} art={art} i={globalI} active={selected === globalI} onToggle={toggle} />;
+              return <ArtCard key={art.h} art={art} i={globalI} active={selected === globalI} onToggle={toggle} lang={lang} />;
             })}
           </div>
-          {sel && selectedRow === rowIdx && <DetailPanel sel={sel} selected={selected as number} />}
+          {sel && selectedRow === rowIdx && <DetailPanel sel={sel} selected={selected as number} lang={lang} />}
         </div>
       ))}
 
