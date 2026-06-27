@@ -34,6 +34,7 @@ export default function HorizonPanels({ horizontes, minH = "clamp(420px,42vw,540
         {horizontes.map((m, i) => {
           const on = i === active;
           const numeral = String(i + 1).padStart(2, "0");
+          const dark = !!m.photo;
           return (
             <article
               key={m.k}
@@ -52,39 +53,87 @@ export default function HorizonPanels({ horizontes, minH = "clamp(420px,42vw,540
                 background: "var(--surface-card)",
               }}
             >
-              {/* base: gradiente light del color del horizonte */}
-              <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: `linear-gradient(155deg, color-mix(in srgb, ${m.c} 16%, var(--pure-white)) 0%, var(--surface-soft) 56%, var(--pure-white) 100%)` }} />
-              {/* foto fundida con transparencia (cuando exista) */}
-              {m.photo && (
-                <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: `url(${m.photo}) ${m.focus ?? "center 30%"} / cover no-repeat`, opacity: 0.9, mixBlendMode: "luminosity" }} />
+              {/* base — dark con foto, light sin foto */}
+              <div aria-hidden="true" style={{
+                position: "absolute", inset: 0,
+                background: dark
+                  ? `linear-gradient(155deg, color-mix(in srgb, var(--surface-dark) 92%, ${m.c}) 0%, var(--surface-dark-secondary) 100%)`
+                  : `linear-gradient(155deg, color-mix(in srgb, ${m.c} 16%, var(--pure-white)) 0%, var(--surface-soft) 56%, var(--pure-white) 100%)`,
+              }} />
+
+              {/* foto fundida (luminosity sobre base dark = atmósfera etérea) */}
+              {dark && (
+                <div aria-hidden="true" style={{
+                  position: "absolute", inset: 0,
+                  background: `url(${m.photo}) ${m.focus ?? "center 30%"} / cover no-repeat`,
+                  opacity: 0.9,
+                  mixBlendMode: "luminosity",
+                }} />
               )}
-              {/* tint olive (DS 2.6) — unifica la sección sin anular los colores semánticos */}
-              {m.photo && m.photoTint && (
+
+              {/* tint olive DS 2.6 — unifica la sección */}
+              {dark && m.photoTint && (
                 <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: m.photoTint, pointerEvents: "none" }} />
               )}
-              {/* numeral watermark (solo placeholder) */}
-              {!m.photo && (
-                <span aria-hidden="true" style={{ position: "absolute", top: "clamp(14px,2.6vw,30px)", right: "clamp(14px,2.4vw,26px)", font: "300 clamp(76px,11vw,150px)/1 var(--font-secondary)", color: `color-mix(in srgb, ${m.c} 16%, transparent)`, letterSpacing: "-.04em" }}>{m.num ?? numeral}</span>
-              )}
-              {/* overlay light inferior para legibilidad del texto grafito */}
-              <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: "linear-gradient(180deg, rgba(255,255,255,0) 42%, color-mix(in srgb, var(--surface-card) 78%, transparent) 72%, var(--surface-card) 100%)" }} />
 
-              {/* label vertical — el horizonte */}
-              <span aria-hidden="true" className="hp-vlabel" style={{ position: "absolute", top: "clamp(20px,3.2vw,36px)", left: "clamp(16px,2vw,26px)", writingMode: "vertical-rl", transform: "rotate(180deg)", font: "700 11px var(--font-secondary)", letterSpacing: ".22em", textTransform: "uppercase", color: "var(--ink-graphite)", opacity: on ? 0.32 : 0.7, transition: "opacity .4s var(--ease-premium)" }}>
+              {/* numeral watermark — solo sin foto */}
+              {!dark && (
+                <span aria-hidden="true" style={{
+                  position: "absolute", top: "clamp(14px,2.6vw,30px)", right: "clamp(14px,2.4vw,26px)",
+                  font: "300 clamp(76px,11vw,150px)/1 var(--font-secondary)",
+                  color: `color-mix(in srgb, ${m.c} 16%, transparent)`, letterSpacing: "-.04em",
+                }}>{m.num ?? numeral}</span>
+              )}
+
+              {/* overlay inferior — oscuro con foto para legibilidad del texto blanco */}
+              <div aria-hidden="true" style={{
+                position: "absolute", inset: 0,
+                background: dark
+                  ? `linear-gradient(180deg, transparent 30%, color-mix(in srgb, var(--surface-dark) 78%, transparent) 60%, var(--surface-dark) 100%)`
+                  : `linear-gradient(180deg, rgba(255,255,255,0) 42%, color-mix(in srgb, var(--surface-card) 78%, transparent) 72%, var(--surface-card) 100%)`,
+              }} />
+
+              {/* label vertical */}
+              <span aria-hidden="true" className="hp-vlabel" style={{
+                position: "absolute", top: "clamp(20px,3.2vw,36px)", left: "clamp(16px,2vw,26px)",
+                writingMode: "vertical-rl", transform: "rotate(180deg)",
+                font: "700 11px var(--font-secondary)", letterSpacing: ".22em", textTransform: "uppercase",
+                color: dark ? "var(--pure-white)" : "var(--ink-graphite)",
+                opacity: on ? 0.28 : 0.6,
+                transition: "opacity .4s var(--ease-premium)",
+              }}>
                 {m.k}
               </span>
 
               {/* contenido inferior */}
               <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, padding: "clamp(22px,2.4vw,38px)" }}>
-                <span aria-hidden="true" style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 12, font: "700 10.5px var(--font-secondary)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)" }}>
+                <span aria-hidden="true" style={{
+                  display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 12,
+                  font: "700 10.5px var(--font-secondary)", letterSpacing: ".16em", textTransform: "uppercase",
+                  color: dark ? "color-mix(in srgb, var(--pure-white) 72%, transparent)" : "var(--text-muted)",
+                }}>
                   <span style={{ width: 6, height: 6, borderRadius: "50%", background: m.c }} />{m.k}
                 </span>
-                <h3 style={{ margin: 0, font: "600 clamp(20px,1.9vw,28px)/1.12 var(--font-primary)", letterSpacing: "-.03em", color: "var(--ink-graphite)", textWrap: "balance" }}>{m.h}</h3>
+                <h3 style={{
+                  margin: 0,
+                  font: "600 clamp(20px,1.9vw,28px)/1.12 var(--font-primary)", letterSpacing: "-.03em",
+                  color: dark ? "var(--pure-white)" : "var(--ink-graphite)",
+                  textWrap: "balance",
+                }}>{m.h}</h3>
 
                 {/* revelado al expandir */}
-                <div className="hp-reveal" style={{ display: "grid", gridTemplateRows: on ? "1fr" : "0fr", opacity: on ? 1 : 0, transition: "grid-template-rows .5s var(--ease-premium), opacity .45s var(--ease-premium)" }}>
+                <div className="hp-reveal" style={{
+                  display: "grid",
+                  gridTemplateRows: on ? "1fr" : "0fr",
+                  opacity: on ? 1 : 0,
+                  transition: "grid-template-rows .5s var(--ease-premium), opacity .45s var(--ease-premium)",
+                }}>
                   <div style={{ overflow: "hidden", minHeight: 0 }}>
-                    <p style={{ margin: "14px 0 0", font: "400 14.5px/1.6 var(--font-primary)", color: "var(--text-muted)", maxWidth: "48ch" }}>{m.p}</p>
+                    <p style={{
+                      margin: "14px 0 0", font: "400 14.5px/1.6 var(--font-primary)",
+                      color: dark ? "color-mix(in srgb, var(--pure-white) 80%, transparent)" : "var(--text-muted)",
+                      maxWidth: "48ch",
+                    }}>{m.p}</p>
                   </div>
                 </div>
               </div>
