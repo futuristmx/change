@@ -18,8 +18,8 @@ const DS_UI = {
     diagPlaceholder: "Tu diagnóstico aparece aquí conforme avanzas.",
     boardDiagChange: "Diagnóstico del board · Change", primaryMove: "Movimiento principal", tensionDetected: "Tensión detectada",
     introEyebrow: "Estructura tu decisión", introH: "Estructura una decisión atorada y recibe un diagnóstico.", introP: "Respondes cinco preguntas guiadas —con opciones sugeridas— y al final obtienes un diagnóstico: el movimiento del método que activa, la tensión, el riesgo y un primer paso concreto.",
-    instrTag: "Instrumento interactivo", instrMeta: "5 preguntas · 2 min", pathEnd: "Diagnóstico",
-    startPrimary: "Estructurar mi decisión", orExamples: "¿No sabes por dónde empezar? Toca un ejemplo y míralo resuelto:", exHint: "Ver resuelto",
+    instrTag: "Instrumento interactivo", instrMeta: "5 preguntas · 2 min", pathEnd: "Diagnóstico", pathStart: "Inicio",
+    step0Label: "Paso 0 · Elige tu punto de partida", ownTitle: "Tu propia decisión", ownDesc: "Parte de la decisión que traes hoy.", examplesLabel: "Escenarios de ejemplo",
     or: "o", describeDirect: "Describir mi decisión directamente",
     changeScenario: "Cambiar escenario", back: "Volver", of: "de", scenario: "Escenario", next: "Siguiente →", seeDiag: "Ver diagnóstico →", skip: "Saltar",
     yourDiag: "Tu diagnóstico", scenarioDiag: "Diagnóstico del escenario", yourDecisionDiag: "Diagnóstico de tu decisión", whatYouDescribed: "Lo que describiste",
@@ -41,8 +41,8 @@ const DS_UI = {
     diagPlaceholder: "Your diagnosis appears here as you go.",
     boardDiagChange: "Board diagnosis · Change", primaryMove: "Primary move", tensionDetected: "Tension detected",
     introEyebrow: "Structure your decision", introH: "Structure a stuck decision and get a diagnosis.", introP: "You answer five guided questions —with suggested options— and at the end you get a diagnosis: the method move it activates, the tension, the risk, and a concrete first step.",
-    instrTag: "Interactive instrument", instrMeta: "5 questions · 2 min", pathEnd: "Diagnosis",
-    startPrimary: "Structure my decision", orExamples: "Not sure where to start? Tap an example and see it solved:", exHint: "See it solved",
+    instrTag: "Interactive instrument", instrMeta: "5 questions · 2 min", pathEnd: "Diagnosis", pathStart: "Start",
+    step0Label: "Step 0 · Choose your starting point", ownTitle: "Your own decision", ownDesc: "Start from the decision you're carrying today.", examplesLabel: "Example scenarios",
     or: "or", describeDirect: "Describe my decision directly",
     changeScenario: "Change scenario", back: "Back", of: "of", scenario: "Scenario", next: "Next →", seeDiag: "See diagnosis →", skip: "Skip",
     yourDiag: "Your diagnosis", scenarioDiag: "Scenario diagnosis", yourDecisionDiag: "Diagnosis of your decision", whatYouDescribed: "What you described",
@@ -478,6 +478,13 @@ export default function DecisionSimulator({ lang = "es" }: { lang?: Lang }) {
     .sim-path-line-end { background: linear-gradient(90deg, var(--soft-stone-gray), var(--change-violet)); opacity: .8; }
     .sim-path-dot-end { border: none; background: var(--change-violet); box-shadow: 0 6px 18px color-mix(in srgb, var(--change-violet) 32%, transparent); }
     .sim-path-label-end { color: var(--change-violet); font-weight: 700; }
+    .sim-path-dot-start { border-color: var(--change-violet); color: var(--change-violet); box-shadow: 0 0 0 3px color-mix(in srgb, var(--change-violet) 14%, transparent); }
+    .sim-path-label-start { color: var(--change-violet); font-weight: 700; }
+    .sim-own { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; text-align: left; cursor: pointer; padding: 18px 20px; border: 1px solid var(--change-violet); border-left: 3px solid var(--change-violet); background: color-mix(in srgb, var(--change-violet) 5%, var(--surface-card)); transition: background .18s var(--ease-premium), box-shadow .18s var(--ease-premium), transform .18s var(--ease-premium); }
+    .sim-own:hover { background: color-mix(in srgb, var(--change-violet) 9%, var(--surface-card)); box-shadow: 0 10px 26px color-mix(in srgb, var(--change-violet) 16%, transparent); transform: translateY(-2px); }
+    .sim-own:focus-visible { outline: 2px solid var(--soft-violet); outline-offset: 2px; }
+    .sim-own-arrow { flex-shrink: 0; color: var(--change-violet); font-size: 20px; transition: transform .18s var(--ease-premium); }
+    .sim-own:hover .sim-own-arrow { transform: translateX(3px); }
 
     .sim-quiz { display: grid; grid-template-columns: 1fr 248px; }
     .sim-quiz-q { padding-right: clamp(20px,2.4vw,30px); }
@@ -517,6 +524,7 @@ export default function DecisionSimulator({ lang = "es" }: { lang?: Lang }) {
     }
     @media (prefers-reduced-motion: reduce) {
       .sim-ex-card { transition: none; } .sim-ex-card:hover { transform: none; }
+      .sim-own { transition: none; } .sim-own:hover { transform: none; } .sim-own:hover .sim-own-arrow { transform: none; }
       .sim-reveal > * { animation: none; opacity: 1; transform: none; }
     }
   `;
@@ -555,11 +563,15 @@ export default function DecisionSimulator({ lang = "es" }: { lang?: Lang }) {
             {t.introP}
           </p>
 
-          {/* Preview del recorrido — continuidad + cierre: 5 pasos → Diagnóstico (la recompensa, distinta = figura) */}
+          {/* Preview del recorrido — continuidad + cierre: Paso 0 → 5 pasos → Diagnóstico */}
           <div className="sim-path" aria-hidden="true">
+            <span className="sim-path-node">
+              <span className="sim-path-dot sim-path-dot-start">0</span>
+              <span className="sim-path-label sim-path-label-start">{t.pathStart}</span>
+            </span>
             {STEP_LABELS.map((label, i) => (
               <Fragment key={i}>
-                {i > 0 && <span className="sim-path-line" />}
+                <span className="sim-path-line" />
                 <span className="sim-path-node">
                   <span className="sim-path-dot">{i + 1}</span>
                   <span className="sim-path-label">{label}</span>
@@ -575,14 +587,23 @@ export default function DecisionSimulator({ lang = "es" }: { lang?: Lang }) {
             </span>
           </div>
 
-          {/* CTA primario — figura inequívoca */}
-          <button type="button" className="btn btn-primary sim-start" onClick={startCustom}>
-            {t.startPrimary} <span aria-hidden="true" style={{ marginLeft: 2 }}>→</span>
-          </button>
-
-          {/* Ejemplos — secundarios: affordance clara de "míralo resuelto" */}
+          {/* PASO 0 — punto de partida (con relevancia) */}
           <div style={{ marginTop: "clamp(28px,3.4vw,40px)", paddingTop: "clamp(24px,3vw,30px)", borderTop: "1px solid var(--border-subtle)" }}>
-            <span style={{ display: "block", marginBottom: 16, font: "400 13.5px/1.5 var(--font-primary)", color: "var(--text-muted)" }}>{t.orExamples}</span>
+            <span style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 14, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--change-violet)" }}>
+              <span aria-hidden="true" style={dotStyle("var(--change-violet)")} />{t.step0Label}
+            </span>
+
+            {/* Opción primaria — tu propia decisión */}
+            <button type="button" className="sim-own" onClick={startCustom}>
+              <span style={{ display: "flex", flexDirection: "column", gap: 3 }}>
+                <strong style={{ font: "600 16px var(--font-primary)", letterSpacing: "-.02em", color: "var(--ink-graphite)" }}>{t.ownTitle}</strong>
+                <span style={{ font: "400 13.5px/1.45 var(--font-primary)", color: "var(--text-muted)" }}>{t.ownDesc}</span>
+              </span>
+              <span aria-hidden="true" className="sim-own-arrow">→</span>
+            </button>
+
+            {/* Escenarios de ejemplo */}
+            <span style={{ display: "block", margin: "22px 0 14px", font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-faint)" }}>{t.examplesLabel}</span>
             <div className="sim-intro-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 12 }}>
               {SCENARIOS.map((sc) => (
                 <button
@@ -590,14 +611,13 @@ export default function DecisionSimulator({ lang = "es" }: { lang?: Lang }) {
                   type="button"
                   onClick={() => startScenario(sc)}
                   className="sim-ex-card"
-                  style={{ display: "flex", flexDirection: "column", gap: 8, padding: "16px 16px 14px", background: "var(--pure-white)", border: "1px solid var(--border-subtle)", cursor: "pointer", textAlign: "left" }}
+                  style={{ display: "flex", flexDirection: "column", gap: 8, padding: "16px 16px", background: "var(--pure-white)", border: "1px solid var(--border-subtle)", cursor: "pointer", textAlign: "left" }}
                 >
                   <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                     <span aria-hidden="true" style={dotStyle(DIM_COLOR[sc.primaryDim])} />
                     <span style={{ font: "600 13.5px var(--font-primary)", letterSpacing: "-.01em", color: "var(--ink-graphite)" }}>{sc.label}</span>
                   </div>
-                  <p style={{ margin: 0, font: "400 12.5px/1.5 var(--font-primary)", color: "var(--text-muted)", flexGrow: 1 }}>{sc.description}</p>
-                  <span className="sim-ex-hint" aria-hidden="true" style={{ marginTop: 4, font: "600 10.5px var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--change-violet)" }}>{t.exHint} →</span>
+                  <p style={{ margin: 0, font: "400 12.5px/1.5 var(--font-primary)", color: "var(--text-muted)" }}>{sc.description}</p>
                 </button>
               ))}
             </div>
