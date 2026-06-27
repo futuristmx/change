@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Glyph, type GlyphName } from "@/components/ds";
+import { type Lang } from "@/lib/i18n";
 
 export interface BuildStage {
   n: string;
@@ -16,7 +17,8 @@ export interface BuildStage {
    al entrar en vista, el rail se traza y los anillos de progreso se llenan en
    cascada (cada etapa "se construye"). Al hover, esa etapa gana foco y las
    demás se atenúan. */
-export default function ProgressiveBuild({ stages }: { stages: BuildStage[] }) {
+export default function ProgressiveBuild({ stages, lang = "es" }: { stages: BuildStage[]; lang?: Lang }) {
+  const stepWord = lang === "en" ? "Step" : "Paso";
   const [inView, setInView] = useState(false);
   const [hovered, setHovered] = useState<number | null>(null);
   const ref = useRef<HTMLDivElement | null>(null);
@@ -66,7 +68,7 @@ export default function ProgressiveBuild({ stages }: { stages: BuildStage[] }) {
                 </span>
               </div>
 
-              <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 10 }}>Paso {num} · {s.tag}</span>
+              <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 10 }}>{stepWord} {num} · {s.tag}</span>
               <h3 style={{ margin: "0 0 12px", font: "600 clamp(20px,1.9vw,26px)/1.04 var(--font-primary)", letterSpacing: "-.03em", color: "var(--ink-graphite)" }}>{s.n}</h3>
               <span style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 8, marginBottom: 16, font: "600 11px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: focused ? "var(--ink-graphite)" : "var(--text-muted)", transition: "color .3s var(--ease-premium)" }}>
                 <span aria-hidden="true" style={{ width: 6, height: 6, borderRadius: "50%", background: s.c }} />{s.duration}
