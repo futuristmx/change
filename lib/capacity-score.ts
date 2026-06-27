@@ -28,7 +28,9 @@ export interface DimensionMeta {
   firstMove: string;
 }
 
-export const DIMENSION_META: Record<Dimension, DimensionMeta> = {
+import type { Lang } from "@/lib/i18n";
+
+export const DIMENSION_META_ES: Record<Dimension, DimensionMeta> = {
   leer: {
     key: "leer", label: "Leer",
     question: "¿Detectan las señales del entorno antes de que se vuelvan urgentes?",
@@ -61,6 +63,46 @@ export const DIMENSION_META: Record<Dimension, DimensionMeta> = {
   },
 };
 
+export const DIMENSION_META_EN: Record<Dimension, DimensionMeta> = {
+  leer: {
+    key: "leer", label: "Read",
+    question: "Do you spot signals from the environment before they turn urgent?",
+    risk: "You find out late, when the change is already an emergency.",
+    firstMove: "Set up a signal radar: what to watch before it's obvious to everyone.",
+  },
+  interpretar: {
+    key: "interpretar", label: "Interpret",
+    question: "Do you understand what those signals mean for your context, not for the market at large?",
+    risk: "Reacting to the wrong signal, or mistaking noise for a trend.",
+    firstMove: "Build a tension map of the decision you're carrying today.",
+  },
+  decidir: {
+    key: "decidir", label: "Decide",
+    question: "Do you make decisions with explicit criteria and trade-offs?",
+    risk: "Deciding by inertia, or by the loudest voice in the room.",
+    firstMove: "Make the criteria and trade-offs of your stuck decision explicit.",
+  },
+  disenar: {
+    key: "disenar", label: "Design",
+    question: "Do you turn decisions into concrete, sequenced moves?",
+    risk: "Letting good decisions stall as mere intention.",
+    firstMove: "Bring a decision down to a living roadmap with its first step.",
+  },
+  sostener: {
+    key: "sostener", label: "Sustain",
+    question: "Do you keep memory, learning and follow-through on what you decide?",
+    risk: "Reinventing the course at every turn and losing what was learned.",
+    firstMove: "Give your judgment memory, so you don't start from zero next time.",
+  },
+};
+
+/** Alias ES por compatibilidad (tests y código existente). */
+export const DIMENSION_META = DIMENSION_META_ES;
+
+export function getDimensionMeta(lang: Lang): Record<Dimension, DimensionMeta> {
+  return lang === "en" ? DIMENSION_META_EN : DIMENSION_META_ES;
+}
+
 export type Level = "reactivo" | "emergente" | "en-construccion" | "sostenido";
 
 export interface LevelMeta {
@@ -71,12 +113,22 @@ export interface LevelMeta {
   blurb: string;
 }
 
-export const LEVELS: LevelMeta[] = [
+export const LEVELS_ES: LevelMeta[] = [
   { key: "reactivo", label: "Reactivo", min: 0, max: 39, blurb: "La organización responde cuando el cambio ya es urgencia. Hay capacidad, pero llega tarde." },
   { key: "emergente", label: "Emergente", min: 40, max: 59, blurb: "Hay lectura del entorno, pero el criterio no termina de sostenerse en el tiempo." },
   { key: "en-construccion", label: "En construcción", min: 60, max: 79, blurb: "La capacidad existe en partes; falta conectarla en una cadena que sostenga el rumbo." },
   { key: "sostenido", label: "Sostenido", min: 80, max: 100, blurb: "La organización lee, decide y aprende como sistema. El reto es no perderlo al crecer." },
 ];
+
+export const LEVELS_EN: LevelMeta[] = [
+  { key: "reactivo", label: "Reactive", min: 0, max: 39, blurb: "The organization responds when change is already an emergency. There's capacity, but it arrives late." },
+  { key: "emergente", label: "Emerging", min: 40, max: 59, blurb: "There's reading of the environment, but judgment doesn't quite hold over time." },
+  { key: "en-construccion", label: "Under construction", min: 60, max: 79, blurb: "The capacity exists in parts; it still needs connecting into a chain that holds the course." },
+  { key: "sostenido", label: "Sustained", min: 80, max: 100, blurb: "The organization reads, decides and learns as a system. The challenge is not to lose it while growing." },
+];
+
+/** Alias ES por compatibilidad. */
+export const LEVELS = LEVELS_ES;
 
 export type ScoreResult =
   | { status: "incomplete"; answered: number; missing: Dimension[] }
@@ -99,8 +151,8 @@ function isValidAnswer(v: unknown): v is AnswerValue {
   return typeof v === "number" && Number.isInteger(v) && v >= ANSWER_MIN && v <= ANSWER_MAX;
 }
 
-function levelFor(total: number): LevelMeta {
-  return LEVELS.find((l) => total >= l.min && total <= l.max) ?? LEVELS[LEVELS.length - 1];
+function levelFor(total: number, levels: LevelMeta[]): LevelMeta {
+  return levels.find((l) => total >= l.min && total <= l.max) ?? levels[levels.length - 1];
 }
 
 /**
@@ -110,7 +162,7 @@ function levelFor(total: number): LevelMeta {
  * - Completo y válido → status "ok" con score total, por dimensión, dimensión
  *   más vulnerable, nivel, riesgo principal y primer movimiento.
  */
-export function scoreCapacity(answers: Answers): ScoreResult {
+export function scoreCapacity(answers: Answers, lang: Lang = "es"): ScoreResult {
   // 1) valores inválidos (presentes pero fuera de rango)
   const invalid: Dimension[] = [];
   for (const d of DIMENSIONS) {
@@ -138,8 +190,10 @@ export function scoreCapacity(answers: Answers): ScoreResult {
     if (byDimension[d] < byDimension[weakest]) weakest = d;
   }
 
-  const lvl = levelFor(total);
-  const meta = DIMENSION_META[weakest];
+  const metaSet = lang === "en" ? DIMENSION_META_EN : DIMENSION_META_ES;
+  const levels = lang === "en" ? LEVELS_EN : LEVELS_ES;
+  const lvl = levelFor(total, levels);
+  const meta = metaSet[weakest];
 
   return {
     status: "ok",
@@ -152,7 +206,9 @@ export function scoreCapacity(answers: Answers): ScoreResult {
     levelBlurb: lvl.blurb,
     risk: meta.risk,
     firstMove: meta.firstMove,
-    recommendation: `Tu punto más vulnerable es ${meta.label}. ${meta.firstMove}`,
+    recommendation: lang === "en"
+      ? `Your most vulnerable point is ${meta.label}. ${meta.firstMove}`
+      : `Tu punto más vulnerable es ${meta.label}. ${meta.firstMove}`,
   };
 }
 

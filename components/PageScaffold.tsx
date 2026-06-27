@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Reveal from "@/components/Reveal";
 import { SignalField } from "@/components/ds";
+import { type Lang, localizeHref } from "@/lib/i18n";
 
 /**
  * GradientTitle — utilidad para hero titles con dos gradientes inline.
@@ -40,6 +41,8 @@ interface PageScaffoldProps {
   dark?: boolean;
   /** ambient SignalField behind the hero */
   ambient?: boolean;
+  /** idioma activo */
+  lang?: Lang;
   children?: React.ReactNode;
 }
 
@@ -48,7 +51,10 @@ interface PageScaffoldProps {
  * `children` carries page-specific content. Used by the V1 inner pages
  * until each gets its full port in Fase 2.
  */
-export default function PageScaffold({ kicker, title, lead, dark = false, ambient = false, children }: PageScaffoldProps) {
+export default function PageScaffold({ kicker, title, lead, dark = false, ambient = false, lang = "es", children }: PageScaffoldProps) {
+  const fb = lang === "en"
+    ? { eyebrow: "Coming soon", title: "This section is being built in detail.", lead: "The full content arrives in the next phase. In the meantime, you can start with a conversation.", cta: "Work on a decision" }
+    : { eyebrow: "Próximamente", title: "Esta sección se está construyendo a detalle.", lead: "El contenido completo llega en la siguiente fase. Mientras tanto, puedes empezar por una conversación.", cta: "Trabajar una decisión" };
   const heroBg = dark
     ? "radial-gradient(circle at 82% 0%,color-mix(in srgb, var(--change-violet) 22%, transparent),transparent 40%),linear-gradient(180deg,var(--surface-dark) 0%,var(--surface-dark-secondary) 100%)"
     : "radial-gradient(110% 80% at 84% -10%,rgba(138,108,255,.14) 0%,rgba(89,184,217,.06) 32%,rgba(255,255,255,0) 58%),linear-gradient(180deg,#FFFFFF 0%,var(--pure-white) 70%,var(--warm-haze) 100%)";
@@ -59,7 +65,7 @@ export default function PageScaffold({ kicker, title, lead, dark = false, ambien
   return (
     <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
       {/* Header always outside the dark wrapper so its CSS vars stay in light-mode context */}
-      <Header />
+      <Header lang={lang} />
       <div className={dark ? "change-dark" : undefined} style={{ flex: 1, display: "flex", flexDirection: "column", background: dark ? "var(--surface-dark)" : "var(--surface-page)" }}>
       <main id="main-content" style={{ flex: 1 }}>
         <section style={{ position: "relative", overflow: "hidden", background: heroBg }}>
@@ -78,18 +84,18 @@ export default function PageScaffold({ kicker, title, lead, dark = false, ambien
           <section style={{ borderTop: dark ? "1px solid rgba(255,255,255,.1)" : "1px solid var(--border-subtle)", background: dark ? "transparent" : "var(--gradient-sky-pearl)" }}>
             <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(80px,10vw,140px) 0" }}>
               <Reveal style={{ border: dark ? "1px solid rgba(255,255,255,.12)" : "1px solid var(--border-subtle)", background: dark ? "rgba(255,255,255,.04)" : "rgba(255,255,255,.8)", padding: "clamp(40px,6vw,72px)", textAlign: "center" }}>
-                <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: dark ? "var(--soft-violet)" : "var(--change-violet)" }}>Próximamente</span>
-                <h2 style={{ margin: "16px auto 0", maxWidth: "24ch", font: "600 clamp(26px,3vw,42px)/1.05 var(--font-primary)", letterSpacing: "-.04em", color: titleColor }}>Esta sección se está construyendo a detalle.</h2>
+                <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: dark ? "var(--soft-violet)" : "var(--change-violet)" }}>{fb.eyebrow}</span>
+                <h2 style={{ margin: "16px auto 0", maxWidth: "24ch", font: "600 clamp(26px,3vw,42px)/1.05 var(--font-primary)", letterSpacing: "-.04em", color: titleColor }}>{fb.title}</h2>
                 <p style={{ margin: "16px auto 32px", maxWidth: "46ch", font: "400 16px/1.6 var(--font-primary)", color: dark ? "rgba(255,255,255,.8)" : "var(--text-muted)" }}>
-                  El contenido completo llega en la siguiente fase. Mientras tanto, puedes empezar por una conversación.
+                  {fb.lead}
                 </p>
-                <Link href="/contacto" className={dark ? "btn btn-light" : "btn btn-primary"}>Trabajar una decisión</Link>
+                <Link href={localizeHref("/contacto", lang)} className={dark ? "btn btn-light" : "btn btn-primary"}>{fb.cta}</Link>
               </Reveal>
             </div>
           </section>
         )}
       </main>
-      <Footer />
+      <Footer lang={lang} />
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { type Lang } from "@/lib/i18n";
 
 interface Level {
   k: string;
@@ -10,15 +11,30 @@ interface Level {
   p: string;
 }
 
-const LEVELS: Level[] = [
+const LEVELS_ES: Level[] = [
   { k: "Época", scale: "Lo macro", color: "var(--signal-cyan)", width: "100%", p: "La certeza dejó de llegar antes de las decisiones importantes. Se decide con información incompleta, señales contradictorias y ventanas que se cierran rápido." },
   { k: "Contexto", scale: "Lo competitivo", color: "var(--soft-violet)", width: "82%", p: "Las empresas crecen más rápido que sus sistemas para decidir. El negocio suma frentes y sube lo que está en juego, pero la forma de pensar el rumbo sigue siendo la de antes." },
   { k: "Organización", scale: "Lo interno", color: "var(--change-violet)", width: "64%", p: "La operación avanza, pero el aprendizaje no se sostiene. Se decide, se ejecuta y se sigue, sin retener por qué se decidió así. Cada coyuntura empieza de cero." },
 ];
 
-const DECISION = {
+const LEVELS_EN: Level[] = [
+  { k: "Era", scale: "The macro", color: "var(--signal-cyan)", width: "100%", p: "Certainty stopped arriving before the decisions that matter. You decide with incomplete information, contradictory signals and windows that close fast." },
+  { k: "Context", scale: "The competitive", color: "var(--soft-violet)", width: "82%", p: "Companies grow faster than their systems for deciding. The business adds fronts and raises the stakes, but the way it thinks about direction is still the old one." },
+  { k: "Organization", scale: "The internal", color: "var(--change-violet)", width: "64%", p: "Operations move forward, but learning doesn't hold. You decide, execute and move on, without retaining why you decided that way. Every turn starts from zero." },
+];
+
+const DECISION_ES = {
   k: "La decisión que te toca",
   p: "La pregunta deja de ser «¿qué está pasando en el mundo?» y se vuelve «¿qué hacemos el lunes?». Ahí es donde Change trabaja: en el punto exacto donde una tensión amplia se vuelve una decisión concreta.",
+};
+const DECISION_EN = {
+  k: "The decision that's yours to make",
+  p: "The question stops being “what's happening in the world?” and becomes “what do we do on Monday?”. That's where Change works: at the exact point where a broad tension becomes a concrete decision.",
+};
+
+const HUD_UI = {
+  es: { radar: "RADAR · TENSIÓN", live: "EN VIVO" },
+  en: { radar: "RADAR · TENSION", live: "LIVE" },
 };
 
 /* ── Radar de tensiones — scope vectorial vivo ──
@@ -38,18 +54,26 @@ const TICKS = Array.from({ length: 72 }, (_, i) => i * 5);
 const HEX = Array.from({ length: 6 }, (_, i) => polar(i * 60, 100).map((n) => n.toFixed(1)).join(",")).join(" ");
 const FOCUS = [1.42, 1.04, 0.64, 0.18];
 const COLORS = ["var(--signal-cyan)", "var(--soft-violet)", "var(--change-violet)", "var(--success)"];
-const META = [
+const META_ES = [
   { scale: "MACRO", name: "Época · lo macro" },
   { scale: "COMPETITIVO", name: "Contexto · lo competitivo" },
   { scale: "INTERNO", name: "Organización · lo interno" },
   { scale: "DECISIÓN", name: "La decisión que te toca" },
 ];
+const META_EN = [
+  { scale: "MACRO", name: "Era · the macro" },
+  { scale: "COMPETITIVE", name: "Context · the competitive" },
+  { scale: "INTERNAL", name: "Organization · the internal" },
+  { scale: "DECISION", name: "The decision that's yours" },
+];
 /* contactos del scope [ángulo°, radio] y enlaces entre ellos */
 const CONTACTS: Array<[number, number]> = [[25, 118], [82, 88], [150, 134], [212, 66], [268, 104], [320, 92], [122, 150]];
 const LINKS: Array<[number, number]> = [[0, 2], [1, 4], [3, 5]];
 
-function DescentFigure({ active }: { active: number }) {
+function DescentFigure({ active, lang }: { active: number; lang: Lang }) {
   const consolidated = active === 3;
+  const META = lang === "en" ? META_EN : META_ES;
+  const hud = HUD_UI[lang];
   const meta = META[active] ?? META[0]!;
   const areaColor = COLORS[active] ?? "var(--signal-cyan)";
   const focus = FOCUS[active] ?? 1;
@@ -158,10 +182,10 @@ function DescentFigure({ active }: { active: number }) {
 
       {/* HUD — lectura tipo instrumento */}
       <div className="sd-hud" aria-hidden="true">
-        <span className="sd-hud-tl"><span className="sd-hud-dot" />RADAR · TENSIÓN</span>
+        <span className="sd-hud-tl"><span className="sd-hud-dot" />{hud.radar}</span>
         <span className="sd-hud-tr">0{active + 1} / 04</span>
         <span className="sd-hud-bl"><strong style={{ color: consolidated ? "var(--success)" : "var(--ink-graphite)" }}>{meta.scale}</strong><em>{meta.name}</em></span>
-        <span className="sd-hud-br"><span className="sd-hud-live" />EN VIVO</span>
+        <span className="sd-hud-br"><span className="sd-hud-live" />{hud.live}</span>
       </div>
 
       <style>{`
@@ -200,10 +224,12 @@ function DescentFigure({ active }: { active: number }) {
   );
 }
 
-export default function SystemicDescent() {
+export default function SystemicDescent({ lang = "es" }: { lang?: Lang }) {
   const [active, setActive] = useState(0);
   const [inView, setInView] = useState(false);
   const ref = useRef<HTMLDivElement | null>(null);
+  const LEVELS = lang === "en" ? LEVELS_EN : LEVELS_ES;
+  const DECISION = lang === "en" ? DECISION_EN : DECISION_ES;
 
   useEffect(() => {
     const el = ref.current;
@@ -272,7 +298,7 @@ export default function SystemicDescent() {
 
       {/* figura — sticky en su columna para acompañar el scroll */}
       <div className="sd-figcol" style={{ position: "sticky", top: 100, alignSelf: "center" }}>
-        <DescentFigure active={active} />
+        <DescentFigure active={active} lang={lang} />
       </div>
 
       <style>{`

@@ -4,18 +4,22 @@ import { Fragment, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
+import { type Lang, localizeHref } from "@/lib/i18n";
+import LanguageToggle from "@/components/LanguageToggle";
 
 const ACCESO_HREF = "/mission-control/login";
 
 const NAV = [
-  { idx: "01", label: "Método", href: "/capacidades" },
-  { idx: "02", label: "Mission Control", href: "/mission-control" },
-  { idx: "03", label: "Casos", href: "/casos" },
-  { idx: "04", label: "Equipo", href: "/equipo" },
-  { idx: "05", label: "Field Notes", href: "/field-notes" },
-  { idx: "06", label: "Futuro", href: "/futuro" },
-  { idx: "07", label: "Acceso Clientes", href: ACCESO_HREF },
+  { idx: "01", es: "Método", en: "Method", href: "/capacidades" },
+  { idx: "02", es: "Mission Control", en: "Mission Control", href: "/mission-control" },
+  { idx: "03", es: "Casos", en: "Cases", href: "/casos" },
+  { idx: "04", es: "Equipo", en: "Team", href: "/equipo" },
+  { idx: "05", es: "Field Notes", en: "Field Notes", href: "/field-notes" },
+  { idx: "06", es: "Futuro", en: "Future", href: "/futuro" },
+  { idx: "07", es: "Acceso Clientes", en: "Client Access", href: ACCESO_HREF },
 ];
+
+const CTA_LABEL = { es: "Trabajar una decisión", en: "Work on a decision" };
 
 // Pulse del logo — secuencia variable:
 // pulse a los 15s, 30s, 45s, 60s, 75s, 95s, 120s; luego cada 45s.
@@ -29,9 +33,11 @@ interface HeaderProps {
   variant?: "light" | "dark";
   /** false → oculta el CTA "Trabajar una decisión" (p. ej. en el login) */
   showCta?: boolean;
+  /** idioma activo — localiza labels y hrefs */
+  lang?: Lang;
 }
 
-export default function Header({ variant = "light", showCta = true }: HeaderProps) {
+export default function Header({ variant = "light", showCta = true, lang = "es" }: HeaderProps) {
   const [open, setOpen] = useState(false);
   const [pulsing, setPulsing] = useState(false);
   const pathname = usePathname();
@@ -140,7 +146,7 @@ export default function Header({ variant = "light", showCta = true }: HeaderProp
             alignItems: "center", gap: 28,
           }}
         >
-          <Link href="/" aria-label="Change" className="ch-logo" data-pulsing={pulsing ? "true" : undefined} style={{ display: "block" }}>
+          <Link href={localizeHref("/", lang)} aria-label="Change" className="ch-logo" data-pulsing={pulsing ? "true" : undefined} style={{ display: "block" }}>
             <Image src={c.logo} alt="Change" width={161} height={39} style={{ height: 39, width: "auto", display: "block" }} priority />
           </Link>
 
@@ -152,7 +158,9 @@ export default function Header({ variant = "light", showCta = true }: HeaderProp
             }}
           >
             {NAV.map((item) => {
-              const active = pathname === item.href || pathname.startsWith(item.href + "/");
+              const lhref = localizeHref(item.href, lang);
+              const label = lang === "en" ? item.en : item.es;
+              const active = pathname === lhref || pathname.startsWith(lhref + "/");
               const isAcceso = item.href === ACCESO_HREF;
               return (
                 <Fragment key={item.href}>
@@ -160,7 +168,7 @@ export default function Header({ variant = "light", showCta = true }: HeaderProp
                     <span aria-hidden="true" style={{ width: 1, height: 22, background: dark ? "rgba(255,255,255,.14)" : "var(--border-subtle)", margin: "0 6px" }} />
                   )}
                   <Link
-                    href={item.href}
+                    href={lhref}
                     aria-current={active ? "page" : undefined}
                     target={isAcceso ? "_blank" : undefined}
                     rel={isAcceso ? "noopener noreferrer" : undefined}
@@ -176,7 +184,7 @@ export default function Header({ variant = "light", showCta = true }: HeaderProp
                     }}
                   >
                     <span className="ch-navidx" style={{ font: "600 11px var(--font-mono)", letterSpacing: "0.04em", color: active ? c.idxActive : c.idxIdle }}>{item.idx}</span>
-                    {item.label}
+                    {label}
                   </Link>
                 </Fragment>
               );
@@ -184,7 +192,8 @@ export default function Header({ variant = "light", showCta = true }: HeaderProp
           </div>
 
           <div style={{ justifySelf: "end", display: "flex", alignItems: "center", gap: 12 }}>
-            {showCta && <Link href="/contacto" className="btn btn-primary btn-sm ch-cta">Trabajar una decisión</Link>}
+            <span className="ch-lang"><LanguageToggle variant={variant} /></span>
+            {showCta && <Link href={localizeHref("/contacto", lang)} className="btn btn-primary btn-sm ch-cta">{lang === "en" ? CTA_LABEL.en : CTA_LABEL.es}</Link>}
             <button
               onClick={() => setOpen((v) => !v)}
               aria-label="Menú" aria-expanded={open}
@@ -207,12 +216,14 @@ export default function Header({ variant = "light", showCta = true }: HeaderProp
         <div style={{ position: "sticky", top: 80, zIndex: 55, background: c.mobileBg, backdropFilter: c.blur, WebkitBackdropFilter: c.blur, borderBottom: c.mobileBorder, padding: "8px 0" }}>
           <div style={{ width: "min(1340px, calc(100% - clamp(40px,8vw,128px)))", margin: "0 auto", display: "flex", flexDirection: "column" }}>
             {NAV.map((item, i) => {
-              const active = pathname === item.href || pathname.startsWith(item.href + "/");
+              const lhref = localizeHref(item.href, lang);
+              const label = lang === "en" ? item.en : item.es;
+              const active = pathname === lhref || pathname.startsWith(lhref + "/");
               const isAcceso = item.href === ACCESO_HREF;
               return (
                 <Link
                   key={item.href}
-                  href={item.href}
+                  href={lhref}
                   aria-current={active ? "page" : undefined}
                   target={isAcceso ? "_blank" : undefined}
                   rel={isAcceso ? "noopener noreferrer" : undefined}
@@ -224,13 +235,14 @@ export default function Header({ variant = "light", showCta = true }: HeaderProp
                     alignItems: "center",
                     font: active ? "600 16px var(--font-primary)" : "500 16px var(--font-primary)",
                     color: active ? c.mobileItemActive : c.mobileItemIdle,
-                    borderBottom: i < NAV.length - 1 ? c.mobileSep : "none",
+                    borderBottom: c.mobileSep,
                   }}
                 >
-                  {item.label}
+                  {label}
                 </Link>
               );
             })}
+            <div style={{ padding: "14px 4px" }}><LanguageToggle variant={variant} /></div>
           </div>
         </div>
       )}
@@ -245,6 +257,7 @@ export default function Header({ variant = "light", showCta = true }: HeaderProp
           .ch-command { display: none !important; }
           .ch-burger { display: inline-flex !important; }
           .ch-cta { display: none !important; }
+          .ch-lang { display: none !important; }
         }
         /* Hover del logo — feedback de que lleva al inicio */
         .ch-logo { transition: opacity .18s var(--ease-premium); }
