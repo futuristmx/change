@@ -194,6 +194,27 @@ Toda card estratégica considera estos slots (solo container + header son obliga
 
 ---
 
+## i18n — bilingüe ES/EN (BLOQUEADO)
+
+El sitio es bilingüe. **ES vive en la raíz** (`/`, `/futuro`, …); **EN vive bajo `/en`**
+(`/en`, `/en/futuro`, …), con `hreflang` en metadata y sitemap.
+
+- **Arquitectura:** cada página es un `XView({ lang })` con un dict `COPY = { es, en }`
+  (o data `_ES`/`_EN`). `app/<ruta>/page.tsx` renderiza `<XView lang="es" />`;
+  `app/en/<ruta>/page.tsx` renderiza `<XView lang="en" />`. Helpers en `lib/i18n.ts`:
+  `localizeHref(href, lang)` (prefija `/en`), `altLinks`/`altLinksEn` (hreflang), `EN_ROUTES`.
+- **Componentes con contenido** reciben `lang` y resuelven texto desde dicts locales
+  (MethodFlow, SystemicDescent, ArtifactGallery, CapacityScore, MissionControlLive,
+  AscentLayers, ProgressiveBuild, CasoCard, ContactFormSimple, DecisionSimulator + su lib).
+- **Glyph/diagramas por ÍNDICE**, no por texto traducido (las arrays ES/EN son paralelas).
+- **LanguageToggle:** un solo switch, muestra el idioma ACTUAL (pill `ES`/`ENG` + flechas),
+  grafito por defecto, hover sólido (ENG rojo, ES verde). Va en header (centrado entre
+  menú y CTA) y footer. Solo enlaza a `/en/<ruta>` si está en `EN_ROUTES`; si no, a `/en`.
+- **Al traducir una página nueva:** crear su `/en`, añadir la ruta a `EN_ROUTES` y al sitemap.
+- **Rutas internas en ES a propósito** (no-index, sin enlaces públicos): `/laboratorio`,
+  `/intentions`, `/hub`. No requieren EN.
+- **No** hardcodear strings en componentes con contenido: van por dict + `lang`.
+
 ## Cómo debe trabajar Claude Code en este repo
 
 1. Antes de implementar, verificar que el cambio fortalece la plataforma estratégica
