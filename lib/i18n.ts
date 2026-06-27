@@ -21,6 +21,7 @@ export const EN_ROUTES = new Set<string>([
   "/field-notes",
   "/casos",
   "/contacto",
+  "/mission-control/login",
 ]);
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://change.live";
