@@ -9,13 +9,17 @@
 export const DIMENSIONS = ["leer", "interpretar", "decidir", "disenar", "sostener"] as const;
 export type Dimension = (typeof DIMENSIONS)[number];
 
-export const DIM_LABEL: Record<Dimension, string> = {
-  leer: "Leer",
-  interpretar: "Interpretar",
-  decidir: "Decidir",
-  disenar: "Diseñar",
-  sostener: "Sostener",
+import type { Lang } from "@/lib/i18n";
+
+export const DIM_LABEL_ES: Record<Dimension, string> = {
+  leer: "Leer", interpretar: "Interpretar", decidir: "Decidir", disenar: "Diseñar", sostener: "Sostener",
 };
+export const DIM_LABEL_EN: Record<Dimension, string> = {
+  leer: "Read", interpretar: "Interpret", decidir: "Decide", disenar: "Design", sostener: "Sustain",
+};
+/** Alias ES por compatibilidad. */
+export const DIM_LABEL = DIM_LABEL_ES;
+export const getDimLabel = (lang: Lang) => (lang === "en" ? DIM_LABEL_EN : DIM_LABEL_ES);
 
 export const DIM_COLOR: Record<Dimension, string> = {
   leer: "var(--signal-cyan)",
@@ -26,16 +30,24 @@ export const DIM_COLOR: Record<Dimension, string> = {
 };
 
 /* ── señal de cambio que aparece después de Q1 ── */
-const CHANGE_SIGNALS: Record<Dimension, string> = {
+const CHANGE_SIGNALS_ES: Record<Dimension, string> = {
   leer: "El entorno emite señales que todavía no tienen nombre en la organización.",
   interpretar: "El cambio ya es visible, pero su significado específico para este contexto no está claro.",
   decidir: "El cambio trae más oportunidades de las que el equipo puede sostener al mismo tiempo.",
   disenar: "El cambio exige una respuesta ejecutable, no solo una lectura del entorno.",
   sostener: "El cambio pone en riesgo lo que la organización tardó tiempo en construir.",
 };
+const CHANGE_SIGNALS_EN: Record<Dimension, string> = {
+  leer: "The environment is emitting signals that don't have a name in the organization yet.",
+  interpretar: "The change is already visible, but its specific meaning for this context isn't clear.",
+  decidir: "The change brings more opportunities than the team can sustain at once.",
+  disenar: "The change demands an executable response, not just a reading of the environment.",
+  sostener: "The change puts at risk what the organization took time to build.",
+};
 
+type TData = { tension: string; risk: string; firstMove: string; artifact: string; methodNote: string };
 /* ── datos de la lectura por dimensión primaria ── */
-const TENSION_DATA: Record<Dimension, { tension: string; risk: string; firstMove: string; artifact: string; methodNote: string }> = {
+const TENSION_DATA_ES: Record<Dimension, TData> = {
   leer: {
     tension: "El entorno se mueve más rápido que la capacidad para nombrarlo.",
     risk: "Se reacciona cuando el cambio ya es urgencia — cuando la ventana de opciones ya se cerró.",
@@ -72,6 +84,43 @@ const TENSION_DATA: Record<Dimension, { tension: string; risk: string; firstMove
     methodNote: "Esta lectura activa principalmente Sostener. El trabajo es construir infraestructura de continuidad, no solo volver a decidir.",
   },
 };
+const TENSION_DATA_EN: Record<Dimension, TData> = {
+  leer: {
+    tension: "The environment moves faster than the capacity to name it.",
+    risk: "You react when the change is already an emergency — when the window of options has already closed.",
+    firstMove: "Set up a signal radar: what to watch, how often, and who's responsible for interpreting it.",
+    artifact: "Signal radar",
+    methodNote: "This reading mainly activates Read — the method's first move. The work starts before the change is obvious to everyone.",
+  },
+  interpretar: {
+    tension: "The information exists, but there's no agreement on what it means for this organization in particular.",
+    risk: "Reacting to the wrong signal, or moving by inertia without understanding what's truly at stake.",
+    firstMove: "Build a tension map: what forces oppose each other and where the real conflict of the decision lies.",
+    artifact: "Tension map",
+    methodNote: "This reading mainly activates Interpret — the most-skipped layer. The problem isn't lack of information: it's lack of criteria to read it.",
+  },
+  decidir: {
+    tension: "There are clear options, but no explicit criteria to choose between them — the decision is postponed.",
+    risk: "Deciding by the loudest voice in the room, without the criteria being recorded for next time.",
+    firstMove: "Make the trade-offs explicit: what's gained, what's sacrificed, and why — before committing resources.",
+    artifact: "Trade-off matrix",
+    methodNote: "This reading mainly activates Decide. The challenge isn't choosing the right option, but making the criteria defensible and sustainable.",
+  },
+  disenar: {
+    tension: "The decision exists as intention, but has no executable form — it's in presentations, not in moves.",
+    risk: "Letting the good decision stay in the deck and never reach the team that has to execute it.",
+    firstMove: "Bring the decision down to a living roadmap: first steps, owners, sequence, and review point.",
+    artifact: "Living roadmap",
+    methodNote: "This reading mainly activates Design. What's missing isn't clarity, but structure that brings the decision down to the team that executes it.",
+  },
+  sostener: {
+    tension: "Decisions get made, but learning doesn't accumulate — every turn starts from zero.",
+    risk: "Reinventing the course in every crisis and losing the criteria that took work to build.",
+    firstMove: "Give decisions memory: the why, the criteria used, and the conditions under which they'll be revisited.",
+    artifact: "Mission Control",
+    methodNote: "This reading mainly activates Sustain. The work is building continuity infrastructure, not just deciding again.",
+  },
+};
 
 /* ── chips por pregunta ── */
 export interface ChipOption {
@@ -79,7 +128,7 @@ export interface ChipOption {
   dim: Dimension | null;
 }
 
-export const CHIPS: ChipOption[][] = [
+export const CHIPS_ES: ChipOption[][] = [
   /* Q1 — qué cambia */
   [
     { text: "El mercado se mueve más rápido que nuestra respuesta.", dim: "leer" },
@@ -120,6 +169,42 @@ export const CHIPS: ChipOption[][] = [
   ],
 ];
 
+export const CHIPS_EN: ChipOption[][] = [
+  [
+    { text: "The market moves faster than our response.", dim: "leer" },
+    { text: "Our customer has new expectations we hadn't seen.", dim: "leer" },
+    { text: "Operations grew, but our judgment didn't scale with them.", dim: "sostener" },
+    { text: "There are more pressures than capacity to handle them at once.", dim: "decidir" },
+    { text: "The context demands acting before having certainty.", dim: "interpretar" },
+  ],
+  [
+    { text: "Where to grow without losing what makes us who we are.", dim: "interpretar" },
+    { text: "Which initiatives we sustain and which we say no to.", dim: "decidir" },
+    { text: "How to give executable form to the direction we already have.", dim: "disenar" },
+    { text: "How to keep the judgment we've built from being lost.", dim: "sostener" },
+    { text: "Which part of the experience to redesign first.", dim: "disenar" },
+  ],
+  [
+    { text: "We grow, but lose what makes us unique.", dim: null },
+    { text: "Everything moves slowly and the team burns out with no visible results.", dim: null },
+    { text: "Every crisis starts from zero. Learning doesn't accumulate.", dim: null },
+    { text: "We lose relevance without knowing exactly where.", dim: null },
+    { text: "The vision stays in presentations, not in decisions.", dim: null },
+  ],
+  [
+    { text: "Senior leadership and the executive team.", dim: null },
+    { text: "The commercial and product teams.", dim: null },
+    { text: "The founding team and the next generation.", dim: null },
+    { text: "The leadership team and area leads.", dim: null },
+  ],
+  [
+    { text: "There's something to move in the next ninety days.", dim: null },
+    { text: "The real effect plays out at twelve to eighteen months.", dim: null },
+    { text: "It's urgent now; the change will take years to consolidate.", dim: null },
+    { text: "There's no fixed date, but the cost of waiting is real.", dim: null },
+  ],
+];
+
 /* ── meta de cada pregunta ── */
 export interface Question {
   label: string;
@@ -128,7 +213,7 @@ export interface Question {
   example: string;
 }
 
-export const QUESTIONS: Question[] = [
+export const QUESTIONS_ES: Question[] = [
   {
     label: "¿Qué está cambiando a tu alrededor?",
     micro: "Una señal del mercado, del cliente, del contexto regulatorio o del equipo. Lo que sea que se esté moviendo.",
@@ -160,6 +245,38 @@ export const QUESTIONS: Question[] = [
     example: "Ej. Hay una ventana de seis meses antes de que el competidor consolide su posición.",
   },
 ];
+export const QUESTIONS_EN: Question[] = [
+  {
+    label: "What's changing around you?",
+    micro: "A signal from the market, the customer, the regulatory context, or the team. Whatever is moving.",
+    placeholder: "A new competitor changed how the customer buys and our model started to feel slow.",
+    example: "E.g. The market no longer buys like before — the decision cycle got longer and our sales team doesn't know how to respond.",
+  },
+  {
+    label: "What decision is stuck?",
+    micro: "The one that never quite gets made. Describe it as you'd say it out loud, unpolished.",
+    placeholder: "Whether we redesign the whole offering or protect what already works for another year.",
+    example: "E.g. Whether we keep growing in the segment we know or make the bet toward a market that doesn't buy from us yet.",
+  },
+  {
+    label: "What happens if it isn't decided?",
+    micro: "What erodes, what loses ground, or what someone else decides for you if you don't.",
+    placeholder: "We arrive late to the new category and the margin keeps falling without us knowing why.",
+    example: "E.g. The team keeps executing on autopilot, with initiatives competing against each other and none reaching completion.",
+  },
+  {
+    label: "Who has to sustain this decision?",
+    micro: "Not who signs it — who carries it day to day afterward.",
+    placeholder: "Senior leadership and the commercial team, who execute the shift.",
+    example: "E.g. The product team that has to change its roadmap and the leadership that has to explain it to the board.",
+  },
+  {
+    label: "What horizon matters here?",
+    micro: "Not the ideal one — the timeframe that truly weighs on this decision.",
+    placeholder: "Something before year-end; the real effect plays out at twenty-four months.",
+    example: "E.g. There's a six-month window before the competitor consolidates its position.",
+  },
+];
 
 /* ── 6 escenarios demo ── */
 export interface Scenario {
@@ -171,7 +288,7 @@ export interface Scenario {
   chipDims: [Dimension | null, Dimension | null, null, null, null];
 }
 
-export const SCENARIOS: Scenario[] = [
+export const SCENARIOS_ES: Scenario[] = [
   {
     id: "crecer-sin-diluir",
     label: "Crecer sin diluir",
@@ -258,14 +375,95 @@ export const SCENARIOS: Scenario[] = [
   },
 ];
 
+export const SCENARIOS_EN: Scenario[] = [
+  {
+    id: "crecer-sin-diluir", label: "Grow without diluting",
+    description: "The market asks for adaptation, but each change pulls us away from what made us relevant.",
+    primaryDim: "interpretar",
+    answers: [
+      "The market asks us to adapt, but each adaptation pulls us away from what made us relevant.",
+      "Where to grow without losing what makes us who we are.",
+      "We grow, but the offering becomes generic. We lose the reason they chose us.",
+      "Senior leadership and the commercial team.",
+      "The changes we make now define what we'll be in three years.",
+    ],
+    chipDims: ["leer", "interpretar", null, null, null],
+  },
+  {
+    id: "demasiadas-iniciativas", label: "Too many initiatives",
+    description: "More good opportunities than capacity to pursue them. The team scatters.",
+    primaryDim: "decidir",
+    answers: [
+      "There are more pressures and initiatives than we can handle at once.",
+      "Which initiatives we sustain and which we say no to this year.",
+      "Everything moves slowly and nothing reaches completion. The team burns out with no visible results.",
+      "The leadership team that has to prioritize resources and time.",
+      "If we don't resolve it this quarter, we lose the momentum.",
+    ],
+    chipDims: ["decidir", "decidir", null, null, null],
+  },
+  {
+    id: "decisiones-que-se-pierden", label: "Decisions that get lost",
+    description: "The criteria behind each important decision disappears. Every crisis starts from zero.",
+    primaryDim: "sostener",
+    answers: [
+      "Operations move forward, but the criteria behind each important decision doesn't accumulate.",
+      "How to keep learning from being lost and every turn from starting at zero.",
+      "Every new challenge starts from zero. What took work to build isn't inherited.",
+      "The team that operates and the leaders who make strategic decisions.",
+      "It's urgent now, before the team grows more and the problem amplifies.",
+    ],
+    chipDims: ["sostener", "sostener", null, null, null],
+  },
+  {
+    id: "cliente-que-cambio", label: "The customer already changed",
+    description: "Our customer decides differently. The experience we offer no longer responds the same.",
+    primaryDim: "leer",
+    answers: [
+      "Our customer has new expectations we hadn't seen and the experience we give no longer responds.",
+      "Which part of the experience to redesign first and what to keep in the meantime.",
+      "We lose relevance without knowing exactly where or why.",
+      "The product team and commercial leadership.",
+      "We need to move something concrete this year.",
+    ],
+    chipDims: ["leer", "disenar", null, null, null],
+  },
+  {
+    id: "vision-sin-roadmap", label: "Vision without roadmap",
+    description: "There's a clear direction, but it doesn't translate into moves the team executes.",
+    primaryDim: "disenar",
+    answers: [
+      "We have a clear direction, but it doesn't come down to day-to-day decisions.",
+      "How to give executable form to the direction we already have.",
+      "The vision stays in presentations. Operations follow their own path.",
+      "The leadership team and area leads who execute.",
+      "The real effect plays out in the next eighteen months.",
+    ],
+    chipDims: ["interpretar", "disenar", null, null, null],
+  },
+  {
+    id: "criterio-en-pocas-cabezas", label: "Judgment in few hands",
+    description: "The course depends on those who started it. If they're not there, the judgment disappears.",
+    primaryDim: "sostener",
+    answers: [
+      "The context demands acting before having certainty, but the judgment lives in very few heads.",
+      "How to transfer the strategic judgment to a team that can sustain it.",
+      "If someone key leaves, the judgment leaves with them. The organization is left without a compass.",
+      "The generation that holds the knowledge and the one that should receive it.",
+      "The transition is already happening or about to begin.",
+    ],
+    chipDims: ["interpretar", "sostener", null, null, null],
+  },
+];
+
 /* ── detección de dimensión desde texto libre ── */
 function detectDimFromText(text: string): Dimension {
   const t = text.toLowerCase();
-  if (/señal|mercado|entorno|tendencia|cliente|exterior|compra|regul/.test(t)) return "leer";
-  if (/significa|interpretar|tensión|conflicto|criterio para|entender|qué somos|identidad|leer/.test(t)) return "interpretar";
-  if (/decidir|priorizar|elegir|trade.off|sacrificar|qué importa|iniciativas|cuáles|decimos que no/.test(t)) return "decidir";
-  if (/forma ejecutable|roadmap|ejecutar|construir|implementar|rediseñar|traducir|bajar/.test(t)) return "disenar";
-  if (/sostener|memoria|aprendizaje|continuar|acumula|hereda|transferir|no se pierda/.test(t)) return "sostener";
+  if (/señal|mercado|entorno|tendencia|cliente|exterior|compra|regul|signal|market|environment|trend|customer|buy/.test(t)) return "leer";
+  if (/significa|interpretar|tensión|conflicto|criterio para|entender|qué somos|identidad|means?|interpret|tension|conflict|understand|identity/.test(t)) return "interpretar";
+  if (/decidir|priorizar|elegir|trade.off|sacrificar|qué importa|iniciativas|cuáles|decimos que no|decide|prioriti|choose|sacrifice|initiative|say no/.test(t)) return "decidir";
+  if (/forma ejecutable|roadmap|ejecutar|construir|implementar|rediseñar|traducir|bajar|executable|execute|build|implement|redesign|translate/.test(t)) return "disenar";
+  if (/sostener|memoria|aprendizaje|continuar|acumula|hereda|transferir|no se pierda|sustain|memory|learning|accumulate|inherit|transfer/.test(t)) return "sostener";
   return "interpretar";
 }
 
@@ -288,7 +486,9 @@ export interface PartialReading {
   isComplete: boolean;
 }
 
-export function buildPartialReading(answers: StepAnswer[]): PartialReading {
+export function buildPartialReading(answers: StepAnswer[], lang: Lang = "es"): PartialReading {
+  const CHANGE_SIGNALS = lang === "en" ? CHANGE_SIGNALS_EN : CHANGE_SIGNALS_ES;
+  const TENSION_DATA = lang === "en" ? TENSION_DATA_EN : TENSION_DATA_ES;
   const count = answers.length;
 
   const changeDim = count >= 1
@@ -330,8 +530,10 @@ export interface SimulatorReading {
   methodNote: string;
 }
 
-export function buildFullReading(answers: StepAnswer[]): SimulatorReading {
-  const partial = buildPartialReading(answers);
+export function buildFullReading(answers: StepAnswer[], lang: Lang = "es"): SimulatorReading {
+  const partial = buildPartialReading(answers, lang);
+  const CHANGE_SIGNALS = lang === "en" ? CHANGE_SIGNALS_EN : CHANGE_SIGNALS_ES;
+  const TENSION_DATA = lang === "en" ? TENSION_DATA_EN : TENSION_DATA_ES;
 
   const primaryDim = partial.decisionDim ?? "interpretar";
   const secondaryDim: Dimension | null =
@@ -355,21 +557,25 @@ export function buildFullReading(answers: StepAnswer[]): SimulatorReading {
 export function buildDecisionText(
   answers: StepAnswer[],
   reading: SimulatorReading,
-  scenarioId: string | null
+  scenarioId: string | null,
+  lang: Lang = "es"
 ): string {
-  const labels = ["Qué está cambiando", "Decisión atorada", "Qué pasa si no se decide", "Quién la sostiene", "Horizonte"];
+  const DIM_LABEL = lang === "en" ? DIM_LABEL_EN : DIM_LABEL_ES;
+  const labels = lang === "en"
+    ? ["What's changing", "Stuck decision", "What happens if not decided", "Who sustains it", "Horizon"]
+    : ["Qué está cambiando", "Decisión atorada", "Qué pasa si no se decide", "Quién la sostiene", "Horizonte"];
   const lines = answers
     .map((a, i) => (a.text ? `${labels[i]}: ${a.text}` : null))
     .filter((l): l is string => Boolean(l));
 
   lines.push(
-    `\n— Lectura del simulador —`,
-    `Movimiento principal: ${DIM_LABEL[reading.primaryDim]}`,
-    `Tensión: ${reading.tension}`,
-    `Artefacto sugerido: ${reading.artifact}`,
+    lang === "en" ? `\n— Simulator reading —` : `\n— Lectura del simulador —`,
+    `${lang === "en" ? "Primary move" : "Movimiento principal"}: ${DIM_LABEL[reading.primaryDim]}`,
+    `${lang === "en" ? "Tension" : "Tensión"}: ${reading.tension}`,
+    `${lang === "en" ? "Suggested artifact" : "Artefacto sugerido"}: ${reading.artifact}`,
   );
 
-  if (scenarioId) lines.push(`Escenario de referencia: ${scenarioId}`);
+  if (scenarioId) lines.push(`${lang === "en" ? "Reference scenario" : "Escenario de referencia"}: ${scenarioId}`);
 
   return lines.join("\n").slice(0, 2000);
 }
