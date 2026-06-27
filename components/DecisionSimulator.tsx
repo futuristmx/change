@@ -10,6 +10,7 @@ import {
 import { track } from "@/lib/telemetry";
 import { contactSchema } from "@/lib/contact-schema";
 import { type Lang } from "@/lib/i18n";
+import { exportSimulatorPdf } from "@/lib/simulator-pdf";
 
 const DS_UI = {
   es: {
@@ -30,6 +31,9 @@ const DS_UI = {
     sending: "Enviando…", sendCase: "Enviar mi caso", checkData: "Revisa los datos e intenta de nuevo.", sendFail: "Algo falló al enviar. Intenta de nuevo en un momento.",
     received: "Recibido", sentH: "Listo. Tu decisión llegó al board.", sentP: "Andrés Valencia y Miguel Cadena leen tu caso y te buscamos en un máximo de dos días hábiles con un primer diagnóstico. No necesitas hacer nada más.", readsAs1: "Change lo lee como caso de", readsAs2: ".",
     copyTitle: "LECTURA DE CHANGE · change.live", copyMove: "Movimiento principal", copyTension: "TENSIÓN IDENTIFICADA", copyRisk: "RIESGO DOMINANTE", copyFirst: "PRIMER MOVIMIENTO", copyArt: "Artefacto sugerido",
+    ready: "Diagnóstico listo", inProgress: "Diagnóstico en curso", revealLead: "Esto es lo que vimos en tu decisión.", primaryMoveLabel: "Movimiento principal del método",
+    downloadPdf: "Descargar PDF", downloadingPdf: "Generando…",
+    pdfTitle: "Diagnóstico de decisión", pdfSteps: "Tu recorrido", pdfCta: "El siguiente paso: trabaja esta decisión con Change", pdfContact: "change.live · change.live/contacto", pdfFile: "Diagnostico-Change.pdf",
   },
   en: {
     boardDiag: "Board diagnosis", changePrefix: "Change", emergingTension: "Emerging tension", domRisk: "Dominant risk", firstMove: "First move", suggArtifact: "Suggested artifact",
@@ -49,6 +53,9 @@ const DS_UI = {
     sending: "Sending…", sendCase: "Send my case", checkData: "Check the details and try again.", sendFail: "Something went wrong sending. Try again in a moment.",
     received: "Received", sentH: "Done. Your decision reached the board.", sentP: "Andrés Valencia and Miguel Cadena read your case and we'll reach out within two business days with a first diagnosis. You don't need to do anything else.", readsAs1: "Change reads it as a case of", readsAs2: ".",
     copyTitle: "CHANGE READING · change.live", copyMove: "Primary move", copyTension: "TENSION IDENTIFIED", copyRisk: "DOMINANT RISK", copyFirst: "FIRST MOVE", copyArt: "Suggested artifact",
+    ready: "Diagnosis ready", inProgress: "Diagnosis in progress", revealLead: "Here's what we saw in your decision.", primaryMoveLabel: "Primary method move",
+    downloadPdf: "Download PDF", downloadingPdf: "Generating…",
+    pdfTitle: "Decision diagnosis", pdfSteps: "Your path", pdfCta: "Next step: work this decision with Change", pdfContact: "change.live · change.live/en/contacto", pdfFile: "Change-diagnosis.pdf",
   },
 };
 
@@ -192,93 +199,6 @@ function ReadingPanel({ answers, lang }: { answers: StepAnswer[]; lang: Lang }) 
   );
 }
 
-/* ── Tarjeta de resultado ── */
-function ResultCard({ reading, lang }: { reading: SimulatorReading; lang: Lang }) {
-  const t = DS_UI[lang];
-  const DIM_LABEL = lang === "en" ? DIM_LABEL_EN : DIM_LABEL_ES;
-  return (
-    <div style={{
-      background: "radial-gradient(circle at 80% -10%,color-mix(in srgb, var(--change-violet) 22%, transparent),transparent 50%),var(--surface-dark-secondary)",
-      padding: "clamp(36px,5vw,52px)",
-      color: "rgba(255,255,255,.9)",
-    }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 9, marginBottom: 28 }}>
-        <span aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--signal-cyan)" }} />
-        <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(255,255,255,.55)" }}>
-          {t.boardDiagChange}
-        </span>
-      </div>
-
-      <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
-        {/* movimiento principal */}
-        <div style={{ paddingBottom: 24, borderBottom: "1px solid rgba(255,255,255,.1)" }}>
-          <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "rgba(255,255,255,.45)", display: "block", marginBottom: 8 }}>
-            {t.primaryMove}
-          </span>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 10 }}>
-            <span aria-hidden="true" style={{ width: 8, height: 8, borderRadius: "50%", background: DIM_COLOR[reading.primaryDim] }} />
-            <span style={{ font: "600 22px var(--font-primary)", letterSpacing: "-.02em", color: "#fff" }}>
-              {DIM_LABEL[reading.primaryDim]}
-            </span>
-            {reading.secondaryDim && (
-              <>
-                <span style={{ color: "rgba(255,255,255,.3)" }}>+</span>
-                <span aria-hidden="true" style={{ width: 8, height: 8, borderRadius: "50%", background: DIM_COLOR[reading.secondaryDim] }} />
-                <span style={{ font: "400 16px var(--font-primary)", color: "rgba(255,255,255,.6)" }}>
-                  {DIM_LABEL[reading.secondaryDim]}
-                </span>
-              </>
-            )}
-          </div>
-          <p style={{ margin: "12px 0 0", font: "400 14px/1.6 var(--font-primary)", color: "rgba(255,255,255,.65)" }}>
-            {reading.methodNote}
-          </p>
-        </div>
-
-        {/* tensión */}
-        <div style={{ paddingBottom: 24, borderBottom: "1px solid rgba(255,255,255,.1)" }}>
-          <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "rgba(255,255,255,.45)", display: "block", marginBottom: 8 }}>
-            {t.tensionDetected}
-          </span>
-          <p style={{ margin: 0, font: "400 15px/1.6 var(--font-primary)", color: "rgba(255,255,255,.85)" }}>
-            {reading.tension}
-          </p>
-        </div>
-
-        {/* riesgo */}
-        <div style={{ paddingBottom: 24, borderBottom: "1px solid rgba(255,255,255,.1)" }}>
-          <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "rgba(255,255,255,.45)", display: "block", marginBottom: 8 }}>
-            {t.domRisk}
-          </span>
-          <p style={{ margin: 0, font: "400 15px/1.6 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>
-            {reading.risk}
-          </p>
-        </div>
-
-        {/* primer movimiento */}
-        <div style={{ paddingBottom: 24, borderBottom: "1px solid rgba(255,255,255,.1)" }}>
-          <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "rgba(255,255,255,.45)", display: "block", marginBottom: 8 }}>
-            {t.firstMove}
-          </span>
-          <p style={{ margin: 0, font: "400 15px/1.6 var(--font-primary)", color: "rgba(255,255,255,.85)" }}>
-            {reading.firstMove}
-          </p>
-        </div>
-
-        {/* artefacto */}
-        <div>
-          <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "rgba(255,255,255,.45)", display: "block", marginBottom: 8 }}>
-            {t.suggArtifact}
-          </span>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 10, padding: "10px 16px", border: "1px solid rgba(255,255,255,.15)", background: "rgba(255,255,255,.06)" }}>
-            <span aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: DIM_COLOR[reading.primaryDim] }} />
-            <span style={{ font: "600 15px var(--font-primary)", color: "#fff" }}>{reading.artifact}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 /* ── Componente principal ── */
 export default function DecisionSimulator({ lang = "es" }: { lang?: Lang }) {
@@ -300,9 +220,9 @@ export default function DecisionSimulator({ lang = "es" }: { lang?: Lang }) {
   const [submitStatus, setSubmitStatus] = useState<"idle" | "submitting" | "error">("idle");
   const [submitError, setSubmitError] = useState("");
   const [copied, setCopied] = useState(false);
+  const [pdfBusy, setPdfBusy] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const containerRef = useRef<HTMLElement>(null);
-  const [headerH, setHeaderH] = useState(80);
 
   function handleCopyReading() {
     if (!reading) return;
@@ -336,36 +256,47 @@ export default function DecisionSimulator({ lang = "es" }: { lang?: Lang }) {
     }
   }, [phase, step]);
 
-  // Mide la altura real del header sticky para que la barra de progreso
-  // se ancle justo debajo (sin solaparse) y el scroll-into-view deje el
-  // simulador a la altura correcta.
-  useEffect(() => {
-    function measure() {
-      const h = document.querySelector("header")?.offsetHeight;
-      if (h && h > 0) setHeaderH(h);
-    }
-    measure();
-    window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
-  }, []);
-
-  // Scroll-into-view al cambiar de fase: evita que el usuario abra el quiz/
-  // resultado/contacto a mitad de scroll. Honra prefers-reduced-motion.
+  // El instrumento es UNA sola superficie: las fases se intercambian dentro de
+  // la misma card, sin reposicionar la página. Solo aseguramos —de forma
+  // instantánea y sin pelear con el smooth-scroll de Lenis— que la card siga a
+  // la vista si quedó parcialmente fuera; nunca arrastramos al usuario.
   useEffect(() => {
     if (phase === "intro") return;
-    const reduce =
-      typeof window !== "undefined" &&
-      window.matchMedia?.("(prefers-reduced-motion:reduce)").matches;
-    requestAnimationFrame(() => {
-      const el = containerRef.current;
-      if (!el) return;
-      const top = el.getBoundingClientRect().top + window.scrollY - headerH;
-      window.scrollTo({
-        top: Math.max(0, top),
-        behavior: reduce ? "auto" : "smooth",
+    const el = containerRef.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    if (r.top < 0 || r.top > window.innerHeight * 0.5) {
+      el.scrollIntoView({ block: "start", behavior: "auto" });
+    }
+  }, [phase]);
+
+  async function handleExportPdf() {
+    if (!reading || pdfBusy) return;
+    setPdfBusy(true);
+    track("simulator_pdf_exported", { primary_dim: reading.primaryDim });
+    try {
+      const dateStr = new Intl.DateTimeFormat(lang === "en" ? "en-US" : "es-MX", { day: "numeric", month: "long", year: "numeric" }).format(new Date());
+      await exportSimulatorPdf({
+        title: t.pdfTitle,
+        dateStr,
+        stepsTitle: t.pdfSteps,
+        steps: STEP_LABELS.map((label, i) => ({ label, answer: completedAnswers[i]?.text ?? "" })),
+        primaryMoveLabel: t.primaryMoveLabel,
+        primaryLabel: DIM_LABEL[reading.primaryDim],
+        secondaryLabel: reading.secondaryDim ? DIM_LABEL[reading.secondaryDim] : null,
+        methodNote: reading.methodNote,
+        tensionLabel: t.tensionDetected, tension: reading.tension,
+        riskLabel: t.domRisk, risk: reading.risk,
+        firstMoveLabel: t.firstMove, firstMove: reading.firstMove,
+        artifactLabel: t.suggArtifact, artifact: reading.artifact,
+        ctaTitle: t.pdfCta,
+        contactLine: t.pdfContact,
+        fileName: t.pdfFile,
       });
-    });
-  }, [phase, headerH]);
+    } catch { /* noop */ } finally {
+      setPdfBusy(false);
+    }
+  }
 
   function resetQuiz() {
     setStep(0);
@@ -526,109 +457,151 @@ export default function DecisionSimulator({ lang = "es" }: { lang?: Lang }) {
      RENDER
   ═══════════════════════════════════════════════════════ */
 
+  /* ═══════════════════════════════════════════════════════
+     RENDER — una sola superficie-instrumento; las fases se
+     intercambian dentro de la misma card (sin saltos).
+  ═══════════════════════════════════════════════════════ */
+  const dotStyle = (c: string): React.CSSProperties => ({ width: 7, height: 7, borderRadius: "50%", background: c, flexShrink: 0 });
+
+  const simCss = `
+    .sim-start { margin-top: clamp(22px,2.8vw,30px); height: 50px; padding: 0 26px; font-size: 15px; }
+    .sim-ex-card { transition: border-color .18s var(--ease-premium), box-shadow .18s var(--ease-premium), transform .18s var(--ease-premium); }
+    .sim-ex-card:hover { border-color: var(--change-violet); box-shadow: 0 10px 26px color-mix(in srgb, var(--change-violet) 14%, transparent); transform: translateY(-2px); }
+    .sim-ex-card:hover .sim-ex-hint { color: var(--soft-violet); }
+    .sim-path { display: flex; align-items: flex-start; gap: 0; margin: clamp(22px,3vw,30px) 0 0; }
+    .sim-path-node { display: flex; flex-direction: column; align-items: center; gap: 8px; flex-shrink: 0; text-align: center; }
+    .sim-path-dot { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; border: 1.5px solid var(--soft-stone-gray); color: var(--text-muted); font: 600 12px var(--font-mono); background: var(--surface-card); }
+    .sim-path-label { font: 600 10px var(--font-mono); letter-spacing: .07em; text-transform: uppercase; color: var(--text-faint); max-width: 10ch; line-height: 1.25; }
+    .sim-path-line { flex: 1 1 auto; min-width: 12px; height: 2px; margin: 14px 3px 0; background: var(--soft-stone-gray); opacity: .5; }
+    .sim-path-line-end { background: linear-gradient(90deg, var(--soft-stone-gray), var(--change-violet)); opacity: .8; }
+    .sim-path-dot-end { border: none; background: var(--change-violet); box-shadow: 0 6px 18px color-mix(in srgb, var(--change-violet) 32%, transparent); }
+    .sim-path-label-end { color: var(--change-violet); font-weight: 700; }
+
+    .sim-quiz { display: grid; grid-template-columns: 1fr 248px; }
+    .sim-quiz-q { padding-right: clamp(20px,2.4vw,30px); }
+    .sim-quiz-side { border-left: 1px solid var(--border-subtle); }
+    .sim-chips > div { flex: 1 0 calc(50% - 4px); min-width: 0; }
+
+    .sim-reveal > * { opacity: 0; transform: translateY(10px); animation: sim-rise .6s var(--ease-premium) forwards; }
+    .sim-reveal > *:nth-child(1) { animation-delay: .04s; }
+    .sim-reveal > *:nth-child(2) { animation-delay: .12s; }
+    .sim-reveal > *:nth-child(3) { animation-delay: .2s; }
+    .sim-reveal > *:nth-child(4) { animation-delay: .32s; }
+    .sim-reveal > *:nth-child(5) { animation-delay: .44s; }
+    .sim-reveal > *:nth-child(6) { animation-delay: .54s; }
+    @keyframes sim-rise { to { opacity: 1; transform: none; } }
+    .sim-hero { position: relative; overflow: hidden; padding: clamp(24px,3vw,34px); background: radial-gradient(circle at 82% -10%, color-mix(in srgb, var(--change-violet) 28%, transparent), transparent 55%), var(--surface-dark-secondary); border-left: 3px solid var(--change-violet); }
+    .sim-layers { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border-subtle); border: 1px solid var(--border-subtle); }
+    .sim-layer { background: var(--surface-card); padding: 20px 22px; }
+    .sim-layer-key { background: color-mix(in srgb, var(--change-violet) 5%, var(--surface-card)); }
+    .sim-recap { margin-top: 6px; border: 1px solid var(--border-subtle); background: rgba(255,255,255,.5); }
+    .sim-recap > summary { cursor: pointer; list-style: none; padding: 14px 18px; font: 600 var(--text-meta) var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--text-muted); display: flex; align-items: center; justify-content: space-between; }
+    .sim-recap > summary::-webkit-details-marker { display: none; }
+    .sim-recap[open] > summary { border-bottom: 1px solid var(--border-subtle); }
+    .sim-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+
+    @media (max-width: 760px) {
+      .sim-quiz { grid-template-columns: 1fr; }
+      .sim-quiz-q { padding-right: 0; }
+      .sim-quiz-side { border-left: none; border-top: 1px solid var(--border-subtle); margin-top: 18px; }
+      .sim-layers { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 720px) { .sim-intro-grid { grid-template-columns: 1fr !important; } .sim-contact-grid { grid-template-columns: 1fr !important; } }
+    @media (max-width: 560px) {
+      .sim-path-label { display: none; } .sim-path-label-end { display: block !important; }
+      .sim-path-dot { width: 26px; height: 26px; } .sim-path-line { margin-top: 12px; }
+      .sim-chips > div { flex: 1 0 100%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .sim-ex-card { transition: none; } .sim-ex-card:hover { transform: none; }
+      .sim-reveal > * { animation: none; opacity: 1; transform: none; }
+    }
+  `;
+
+  const shell = (opts: { barLeft: React.ReactNode; barRight?: React.ReactNode; progress?: number | null; wide?: boolean; body: React.ReactNode }) => (
+    <section ref={containerRef} className="sim-sec" style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-sky-pearl)", scrollMarginTop: 96 }}>
+      <div style={{ ...WRAP, padding: "clamp(48px,6vw,80px) 0" }}>
+        <div className="sim-card" style={{ maxWidth: opts.wide ? 960 : 880, margin: "0 auto", border: "1px solid var(--border-subtle)", background: "linear-gradient(155deg,rgba(255,255,255,.96),rgba(244,242,250,.66))", boxShadow: "0 30px 80px rgba(31,17,72,.07)" }}>
+          <div style={{ position: "relative", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, flexWrap: "wrap", padding: "14px 22px", borderBottom: "1px solid var(--border-subtle)" }}>
+            <span style={{ display: "inline-flex", alignItems: "center", gap: 9, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--ink-graphite)" }}>{opts.barLeft}</span>
+            {opts.barRight != null && <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--text-faint)" }}>{opts.barRight}</span>}
+            {typeof opts.progress === "number" && (
+              <span aria-hidden="true" style={{ position: "absolute", left: 0, right: 0, bottom: -1, height: 2, background: "rgba(46,46,51,.08)" }}>
+                <span style={{ display: "block", height: "100%", width: `${Math.round(opts.progress * 100)}%`, background: "linear-gradient(90deg,var(--signal-cyan),var(--change-violet))", transition: "width .5s var(--ease-premium)" }} />
+              </span>
+            )}
+          </div>
+          <div style={{ padding: "clamp(26px,3.4vw,40px)" }}>{opts.body}</div>
+        </div>
+      </div>
+      <style>{simCss}</style>
+    </section>
+  );
+
   /* ── INTRO ── */
   if (phase === "intro") {
-    return (
-      <section ref={containerRef} style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-sky-pearl)", scrollMarginTop: 80 }}>
-        <div style={{ ...WRAP, padding: "clamp(48px,6vw,80px) 0" }}>
-          {/* Instrumento — región común: una sola superficie que se percibe como herramienta */}
-          <div className="sim-card" style={{ maxWidth: 880, margin: "0 auto", border: "1px solid var(--border-subtle)", background: "linear-gradient(155deg,rgba(255,255,255,.96),rgba(244,242,250,.66))", boxShadow: "0 30px 80px rgba(31,17,72,.07)" }}>
-            {/* Barra de estado — comunica interactividad + costo/recompensa */}
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, flexWrap: "wrap", padding: "14px 22px", borderBottom: "1px solid var(--border-subtle)" }}>
-              <span style={{ display: "inline-flex", alignItems: "center", gap: 9, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--ink-graphite)" }}>
-                <span data-pulse aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--change-violet)" }} />
-                {t.instrTag}
-              </span>
-              <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--text-faint)" }}>{t.instrMeta}</span>
-            </div>
+    return shell({
+      barLeft: <><span data-pulse aria-hidden="true" style={dotStyle("var(--change-violet)")} /> {t.instrTag}</>,
+      barRight: t.instrMeta,
+      body: (
+        <>
+          <h2 style={{ margin: "0 0 14px", maxWidth: "24ch", font: "600 clamp(24px,3vw,40px)/1.07 var(--font-primary)", letterSpacing: "-.04em", color: "var(--ink-graphite)", textWrap: "balance" }}>
+            {t.introH}
+          </h2>
+          <p style={{ margin: "0 0 4px", maxWidth: "60ch", font: "400 clamp(15px,1.3vw,17px)/1.6 var(--font-primary)", color: "var(--text-muted)" }}>
+            {t.introP}
+          </p>
 
-            <div style={{ padding: "clamp(26px,3.4vw,40px)" }}>
-              <h2 style={{ margin: "0 0 14px", maxWidth: "24ch", font: "600 clamp(24px,3vw,40px)/1.07 var(--font-primary)", letterSpacing: "-.04em", color: "var(--ink-graphite)", textWrap: "balance" }}>
-                {t.introH}
-              </h2>
-              <p style={{ margin: "0 0 4px", maxWidth: "60ch", font: "400 clamp(15px,1.3vw,17px)/1.6 var(--font-primary)", color: "var(--text-muted)" }}>
-                {t.introP}
-              </p>
-
-              {/* Preview del recorrido — continuidad + cierre: 5 pasos → Diagnóstico (la recompensa, distinta = figura) */}
-              <div className="sim-path" aria-hidden="true">
-                {STEP_LABELS.map((label, i) => (
-                  <Fragment key={i}>
-                    {i > 0 && <span className="sim-path-line" />}
-                    <span className="sim-path-node">
-                      <span className="sim-path-dot">{i + 1}</span>
-                      <span className="sim-path-label">{label}</span>
-                    </span>
-                  </Fragment>
-                ))}
-                <span className="sim-path-line sim-path-line-end" />
+          {/* Preview del recorrido — continuidad + cierre: 5 pasos → Diagnóstico (la recompensa, distinta = figura) */}
+          <div className="sim-path" aria-hidden="true">
+            {STEP_LABELS.map((label, i) => (
+              <Fragment key={i}>
+                {i > 0 && <span className="sim-path-line" />}
                 <span className="sim-path-node">
-                  <span className="sim-path-dot sim-path-dot-end">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
-                  </span>
-                  <span className="sim-path-label sim-path-label-end">{t.pathEnd}</span>
+                  <span className="sim-path-dot">{i + 1}</span>
+                  <span className="sim-path-label">{label}</span>
                 </span>
-              </div>
+              </Fragment>
+            ))}
+            <span className="sim-path-line sim-path-line-end" />
+            <span className="sim-path-node">
+              <span className="sim-path-dot sim-path-dot-end">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+              </span>
+              <span className="sim-path-label sim-path-label-end">{t.pathEnd}</span>
+            </span>
+          </div>
 
-              {/* CTA primario — figura inequívoca */}
-              <button type="button" className="btn btn-primary sim-start" onClick={startCustom}>
-                {t.startPrimary} <span aria-hidden="true" style={{ marginLeft: 2 }}>→</span>
-              </button>
+          {/* CTA primario — figura inequívoca */}
+          <button type="button" className="btn btn-primary sim-start" onClick={startCustom}>
+            {t.startPrimary} <span aria-hidden="true" style={{ marginLeft: 2 }}>→</span>
+          </button>
 
-              {/* Ejemplos — secundarios: affordance clara de "míralo resuelto" */}
-              <div style={{ marginTop: "clamp(28px,3.4vw,40px)", paddingTop: "clamp(24px,3vw,30px)", borderTop: "1px solid var(--border-subtle)" }}>
-                <span style={{ display: "block", marginBottom: 16, font: "400 13.5px/1.5 var(--font-primary)", color: "var(--text-muted)" }}>{t.orExamples}</span>
-                <div className="sim-intro-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 12 }}>
-                  {SCENARIOS.map((sc) => (
-                    <button
-                      key={sc.id}
-                      type="button"
-                      onClick={() => startScenario(sc)}
-                      className="sim-ex-card"
-                      style={{ display: "flex", flexDirection: "column", gap: 8, padding: "16px 16px 14px", background: "var(--pure-white)", border: "1px solid var(--border-subtle)", cursor: "pointer", textAlign: "left" }}
-                    >
-                      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                        <span aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: DIM_COLOR[sc.primaryDim], flexShrink: 0 }} />
-                        <span style={{ font: "600 13.5px var(--font-primary)", letterSpacing: "-.01em", color: "var(--ink-graphite)" }}>{sc.label}</span>
-                      </div>
-                      <p style={{ margin: 0, font: "400 12.5px/1.5 var(--font-primary)", color: "var(--text-muted)", flexGrow: 1 }}>{sc.description}</p>
-                      <span className="sim-ex-hint" aria-hidden="true" style={{ marginTop: 4, font: "600 10.5px var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--change-violet)" }}>{t.exHint} →</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
+          {/* Ejemplos — secundarios: affordance clara de "míralo resuelto" */}
+          <div style={{ marginTop: "clamp(28px,3.4vw,40px)", paddingTop: "clamp(24px,3vw,30px)", borderTop: "1px solid var(--border-subtle)" }}>
+            <span style={{ display: "block", marginBottom: 16, font: "400 13.5px/1.5 var(--font-primary)", color: "var(--text-muted)" }}>{t.orExamples}</span>
+            <div className="sim-intro-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 12 }}>
+              {SCENARIOS.map((sc) => (
+                <button
+                  key={sc.id}
+                  type="button"
+                  onClick={() => startScenario(sc)}
+                  className="sim-ex-card"
+                  style={{ display: "flex", flexDirection: "column", gap: 8, padding: "16px 16px 14px", background: "var(--pure-white)", border: "1px solid var(--border-subtle)", cursor: "pointer", textAlign: "left" }}
+                >
+                  <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <span aria-hidden="true" style={dotStyle(DIM_COLOR[sc.primaryDim])} />
+                    <span style={{ font: "600 13.5px var(--font-primary)", letterSpacing: "-.01em", color: "var(--ink-graphite)" }}>{sc.label}</span>
+                  </div>
+                  <p style={{ margin: 0, font: "400 12.5px/1.5 var(--font-primary)", color: "var(--text-muted)", flexGrow: 1 }}>{sc.description}</p>
+                  <span className="sim-ex-hint" aria-hidden="true" style={{ marginTop: 4, font: "600 10.5px var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--change-violet)" }}>{t.exHint} →</span>
+                </button>
+              ))}
             </div>
           </div>
-        </div>
-
-        <style>{`
-          .sim-start { margin-top: clamp(22px,2.8vw,30px); height: 50px; padding: 0 26px; font-size: 15px; }
-          .sim-ex-card { transition: border-color .18s var(--ease-premium), box-shadow .18s var(--ease-premium), transform .18s var(--ease-premium); }
-          .sim-ex-card:hover { border-color: var(--change-violet); box-shadow: 0 10px 26px color-mix(in srgb, var(--change-violet) 14%, transparent); transform: translateY(-2px); }
-          .sim-ex-card:hover .sim-ex-hint { color: var(--soft-violet); }
-
-          .sim-path { display: flex; align-items: flex-start; gap: 0; margin: clamp(22px,3vw,30px) 0 0; }
-          .sim-path-node { display: flex; flex-direction: column; align-items: center; gap: 8px; flex-shrink: 0; text-align: center; }
-          .sim-path-dot { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; border: 1.5px solid var(--soft-stone-gray); color: var(--text-muted); font: 600 12px var(--font-mono); background: var(--surface-card); }
-          .sim-path-label { font: 600 10px var(--font-mono); letter-spacing: .07em; text-transform: uppercase; color: var(--text-faint); max-width: 10ch; line-height: 1.25; }
-          .sim-path-line { flex: 1 1 auto; min-width: 12px; height: 2px; margin: 14px 3px 0; background: var(--soft-stone-gray); opacity: .5; }
-          .sim-path-line-end { background: linear-gradient(90deg, var(--soft-stone-gray), var(--change-violet)); opacity: .8; }
-          .sim-path-dot-end { border: none; background: var(--change-violet); box-shadow: 0 6px 18px color-mix(in srgb, var(--change-violet) 32%, transparent); }
-          .sim-path-label-end { color: var(--change-violet); font-weight: 700; }
-
-          @media (max-width: 720px) { .sim-intro-grid { grid-template-columns: 1fr !important; } }
-          @media (max-width: 560px) {
-            .sim-path-label { display: none; }
-            .sim-path-label-end { display: block !important; }
-            .sim-path-dot { width: 26px; height: 26px; }
-            .sim-path-line { margin-top: 12px; }
-          }
-          @media (prefers-reduced-motion: reduce) {
-            .sim-ex-card { transition: none; } .sim-ex-card:hover { transform: none; }
-          }
-        `}</style>
-      </section>
-    );
+        </>
+      ),
+    });
   }
 
   /* ── QUIZ ── */
@@ -637,50 +610,17 @@ export default function DecisionSimulator({ lang = "es" }: { lang?: Lang }) {
     const chips = CHIPS[step];
     const canAdvance = currentText.trim().length >= 3;
 
-    return (
-      <section ref={containerRef} style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-sky-pearl)", scrollMarginTop: 80 }}>
-        <div style={{ ...WRAP, padding: "clamp(32px,4vw,44px) 0" }}>
-
-          {/* Barra global de progreso — fija JUSTO debajo del header sticky.
-              Mide headerH dinámicamente para evitar solape. zIndex 55 (debajo
-              del header z:60) garantiza que nunca quede encima del menú; al
-              usar top=headerH la barra cae siempre 0px debajo. */}
-          <div
-            aria-hidden="true"
-            style={{
-              position: "fixed",
-              top: headerH,
-              left: 0,
-              right: 0,
-              height: 4,
-              background: "var(--track-graphite)",
-              zIndex: 55,
-            }}
-          >
-            <div
-              role="progressbar"
-              aria-label="Avance"
-              aria-valuemin={0}
-              aria-valuemax={5}
-              aria-valuenow={step + 1}
-              style={{
-                height: "100%",
-                width: `${((step + 1) / 5) * 100}%`,
-                background: "var(--line-gradient-progress)",
-                transition: "width var(--duration-premium) var(--ease-premium)",
-              }}
-            />
-          </div>
-
-          {/* ── Widget card ── */}
-          <div className="sim-quiz-card" style={{ position: "relative", display: "grid", gridTemplateColumns: "1fr 252px", border: "1px solid var(--border-subtle)", background: "var(--surface-card)" }}>
-
-
+    return shell({
+      barLeft: <><span data-pulse aria-hidden="true" style={dotStyle("var(--change-violet)")} /> {t.inProgress}</>,
+      barRight: `${step + 1} ${t.of} 5`,
+      progress: (step + 1) / 5,
+      body: (
+        <div className="sim-quiz" style={{ display: "grid", gridTemplateColumns: "1fr 248px" }}>
             {/* columna izquierda — pregunta */}
-            <div style={{ padding: "clamp(22px,3vw,32px)", borderRight: "1px solid var(--border-subtle)" }}>
+            <div className="sim-quiz-q">
 
-              {/* header: back + step counter */}
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 18 }}>
+              {/* back */}
+              <div style={{ marginBottom: 16 }}>
                 <button
                   type="button"
                   onClick={handleRetry}
@@ -689,9 +629,6 @@ export default function DecisionSimulator({ lang = "es" }: { lang?: Lang }) {
                   <span aria-hidden="true" style={{ fontSize: 14 }}>←</span>
                   {selectedScenario ? t.changeScenario : t.back}
                 </button>
-                <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".08em", color: "var(--text-faint)" }}>
-                  {step + 1} {t.of} 5
-                </span>
               </div>
 
               {/* ── stepper breadcrumb ── */}
@@ -809,100 +746,108 @@ export default function DecisionSimulator({ lang = "es" }: { lang?: Lang }) {
               </div>
             </div>
 
-            {/* columna derecha — lectura parcial */}
-            <ReadingPanel answers={completedAnswers} lang={lang} />
-          </div>
+            {/* columna derecha — lectura parcial (diagnóstico en vivo) */}
+            <div className="sim-quiz-side">
+              <ReadingPanel answers={completedAnswers} lang={lang} />
+            </div>
         </div>
-
-        <style>{`
-          @media (max-width: 760px) {
-            .sim-quiz-card { grid-template-columns: 1fr !important; }
-            .sim-quiz-card > div:last-child { border-top: 1px solid var(--border-subtle); border-right: none !important; }
-          }
-          @media (max-width: 540px) {
-            .sim-chips > div { flex: 1 0 100% !important; }
-          }
-        `}</style>
-      </section>
-    );
+      ),
+    });
   }
 
   /* ── RESULTADO ── */
   if (phase === "result" && reading) {
-    return (
-      <section ref={containerRef} style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-sky-pearl)", scrollMarginTop: 80 }}>
-        <div style={{ ...WRAP, padding: "clamp(56px,7vw,88px) 0" }}>
-          <div style={{ maxWidth: 680, marginBottom: "clamp(32px,4vw,48px)" }}>
-            <span style={{ display: "block", font: "600 11px var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 14 }}>
-              {t.yourDiag}
-            </span>
-            <h2 style={{ margin: 0, font: "600 clamp(24px,3vw,42px)/1.06 var(--font-primary)", letterSpacing: "-.04em", color: "var(--ink-graphite)", textWrap: "balance" }}>
-              {selectedScenario
-                ? `${t.scenarioDiag}: ${selectedScenario.label}`
-                : t.yourDecisionDiag}
+    return shell({
+      wide: true,
+      barLeft: <><span data-pulse aria-hidden="true" style={dotStyle("var(--success)")} /> {t.ready}</>,
+      progress: 1,
+      body: (
+        <div className="sim-reveal" style={{ display: "flex", flexDirection: "column", gap: "clamp(18px,2.4vw,24px)" }}>
+          {/* Encabezado de revelación */}
+          <div>
+            <h2 style={{ margin: 0, font: "600 clamp(24px,3vw,40px)/1.06 var(--font-primary)", letterSpacing: "-.04em", color: "var(--ink-graphite)", textWrap: "balance" }}>
+              {selectedScenario ? `${t.scenarioDiag}: ${selectedScenario.label}` : t.yourDecisionDiag}
             </h2>
+            <p style={{ margin: "10px 0 0", font: "400 clamp(15px,1.3vw,17px)/1.55 var(--font-primary)", color: "var(--text-muted)" }}>{t.revealLead}</p>
           </div>
 
-          <div className="sim-result-grid" style={{ display: "grid", gridTemplateColumns: "minmax(0,1fr) minmax(0,1fr)", gap: "clamp(28px,4vw,48px)", alignItems: "start", marginBottom: "clamp(40px,5vw,60px)" }}>
-            <ResultCard reading={reading} lang={lang} />
+          {/* HERO — el movimiento principal, figura dominante */}
+          <div className="sim-hero">
+            <span style={{ display: "block", font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(255,255,255,.55)", marginBottom: 12 }}>{t.primaryMoveLabel}</span>
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
+              <span aria-hidden="true" style={{ width: 10, height: 10, borderRadius: "50%", background: DIM_COLOR[reading.primaryDim] }} />
+              <span style={{ font: "600 clamp(26px,3.2vw,40px)/1 var(--font-primary)", letterSpacing: "-.03em", color: "#fff" }}>{DIM_LABEL[reading.primaryDim]}</span>
+              {reading.secondaryDim && (
+                <>
+                  <span style={{ color: "rgba(255,255,255,.35)", font: "300 22px var(--font-primary)" }}>+</span>
+                  <span aria-hidden="true" style={{ width: 8, height: 8, borderRadius: "50%", background: DIM_COLOR[reading.secondaryDim] }} />
+                  <span style={{ font: "400 clamp(17px,1.8vw,22px) var(--font-primary)", color: "rgba(255,255,255,.62)" }}>{DIM_LABEL[reading.secondaryDim]}</span>
+                </>
+              )}
+            </div>
+            <p style={{ margin: "16px 0 0", maxWidth: "62ch", font: "400 clamp(14px,1.2vw,16px)/1.6 var(--font-primary)", color: "rgba(255,255,255,.78)" }}>{reading.methodNote}</p>
+          </div>
 
-            <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
-              <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-muted)" }}>
-                {t.whatYouDescribed}
+          {/* Capas estratégicas — jerarquía, no bullets planos */}
+          <div className="sim-layers">
+            <div className="sim-layer">
+              <span style={{ display: "inline-flex", alignItems: "center", gap: 8, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--soft-violet)", marginBottom: 9 }}><span aria-hidden="true" style={dotStyle("var(--soft-violet)")} />{t.tensionDetected}</span>
+              <p style={{ margin: 0, font: "400 14.5px/1.55 var(--font-primary)", color: "var(--ink-graphite)" }}>{reading.tension}</p>
+            </div>
+            <div className="sim-layer">
+              <span style={{ display: "inline-flex", alignItems: "center", gap: 8, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--status-error-fg)", marginBottom: 9 }}><span aria-hidden="true" style={dotStyle("var(--status-error-fg)")} />{t.domRisk}</span>
+              <p style={{ margin: 0, font: "400 14.5px/1.55 var(--font-primary)", color: "var(--ink-graphite)" }}>{reading.risk}</p>
+            </div>
+            <div className="sim-layer sim-layer-key">
+              <span style={{ display: "inline-flex", alignItems: "center", gap: 8, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--change-violet)", marginBottom: 9 }}><span aria-hidden="true" style={dotStyle("var(--change-violet)")} />{t.firstMove}</span>
+              <p style={{ margin: 0, font: "600 15px/1.55 var(--font-primary)", letterSpacing: "-.01em", color: "var(--ink-graphite)" }}>{reading.firstMove}</p>
+            </div>
+            <div className="sim-layer">
+              <span style={{ display: "block", font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--text-faint)", marginBottom: 11 }}>{t.suggArtifact}</span>
+              <span style={{ display: "inline-flex", alignItems: "center", gap: 9, padding: "9px 14px", border: `1px solid ${DIM_COLOR[reading.primaryDim]}`, background: "var(--surface-card)" }}>
+                <span aria-hidden="true" style={dotStyle(DIM_COLOR[reading.primaryDim])} />
+                <span style={{ font: "600 14.5px var(--font-primary)", color: "var(--ink-graphite)" }}>{reading.artifact}</span>
               </span>
+            </div>
+          </div>
+
+          {/* Recap — refuerza que trabajó SOBRE su input */}
+          <details className="sim-recap">
+            <summary>{t.whatYouDescribed}<span aria-hidden="true" style={{ color: "var(--change-violet)" }}>▾</span></summary>
+            <div style={{ padding: "6px 18px 16px" }}>
               {completedAnswers.map((a, i) => a.text ? (
-                <div key={i} style={{ display: "flex", gap: 14, padding: "14px 0", borderTop: i === 0 ? "none" : "1px solid var(--border-subtle)" }}>
-                  <span style={{ flexShrink: 0, font: "600 11px var(--font-mono)", color: "var(--text-faint)", marginTop: 2 }}>
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
+                <div key={i} style={{ display: "flex", gap: 14, padding: "12px 0", borderTop: i === 0 ? "none" : "1px solid var(--border-subtle)" }}>
+                  <span style={{ flexShrink: 0, font: "600 11px var(--font-mono)", color: "var(--text-faint)", marginTop: 2 }}>{String(i + 1).padStart(2, "0")}</span>
                   <div>
-                    <span style={{ display: "block", font: "600 12px var(--font-mono)", letterSpacing: ".08em", textTransform: "uppercase", color: "var(--text-faint)", marginBottom: 4 }}>
-                      {QUESTIONS[i].label.replace("¿", "").replace("?", "")}
-                    </span>
-                    <span style={{ font: "400 14px/1.55 var(--font-primary)", color: "var(--ink-graphite)" }}>{a.text}</span>
+                    <span style={{ display: "block", font: "600 11px var(--font-mono)", letterSpacing: ".08em", textTransform: "uppercase", color: "var(--text-faint)", marginBottom: 3 }}>{STEP_LABELS[i]}</span>
+                    <span style={{ font: "400 14px/1.5 var(--font-primary)", color: "var(--ink-graphite)" }}>{a.text}</span>
                   </div>
                 </div>
               ) : null)}
             </div>
-          </div>
+          </details>
 
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 14, borderTop: "1px solid var(--border-subtle)", paddingTop: 32 }}>
-            <button type="button" className="btn btn-primary" onClick={handleStartContact}>
-              {t.workWithChange}
-            </button>
-            <button type="button" className="btn btn-secondary" onClick={handleRetry}>
-              {t.tryAnother}
-            </button>
-            <button
-              type="button"
-              className="btn btn-secondary"
-              onClick={handleCopyReading}
-              aria-live="polite"
-              aria-label={copied ? t.copiedAria : t.copyAria}
-              style={{ minWidth: 130 }}
-            >
-              {copied ? t.copied : t.copyDiag}
-            </button>
+          {/* Acciones */}
+          <div className="sim-actions" style={{ borderTop: "1px solid var(--border-subtle)", paddingTop: "clamp(22px,2.6vw,28px)" }}>
+            <button type="button" className="btn btn-primary" onClick={handleStartContact}>{t.workWithChange}</button>
+            <button type="button" className="btn btn-secondary" onClick={handleExportPdf} disabled={pdfBusy} style={{ opacity: pdfBusy ? 0.7 : 1 }}>{pdfBusy ? t.downloadingPdf : t.downloadPdf}</button>
+            <button type="button" className="btn btn-secondary" onClick={handleCopyReading} aria-live="polite" aria-label={copied ? t.copiedAria : t.copyAria}>{copied ? t.copied : t.copyDiag}</button>
+            <button type="button" onClick={handleRetry} style={{ background: "none", border: "none", padding: "0 6px", cursor: "pointer", font: "500 13px var(--font-primary)", color: "var(--text-muted)" }}>{t.tryAnother}</button>
           </div>
         </div>
-
-        <style>{`
-          @media (max-width: 860px) { .sim-result-grid { grid-template-columns: 1fr !important; } }
-        `}</style>
-      </section>
-    );
+      ),
+    });
   }
 
   /* ── CONTACTO ── */
   if (phase === "contact") {
-    return (
-      <section ref={containerRef} style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-sky-pearl)", scrollMarginTop: 80 }}>
-        <div style={{ ...WRAP, padding: "clamp(56px,7vw,88px) 0" }}>
-          <div className="sim-contact-grid" style={{ display: "grid", gridTemplateColumns: "minmax(0,.9fr) minmax(0,1.1fr)", gap: "clamp(44px,6vw,88px)", alignItems: "start" }}>
+    return shell({
+      wide: true,
+      barLeft: <><span aria-hidden="true" style={dotStyle("var(--change-violet)")} /> {t.nextStep}</>,
+      progress: 1,
+      body: (
+          <div className="sim-contact-grid" style={{ display: "grid", gridTemplateColumns: "minmax(0,.9fr) minmax(0,1.1fr)", gap: "clamp(36px,5vw,64px)", alignItems: "start" }}>
             <div>
-              <span style={{ display: "block", font: "600 11px var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 14 }}>
-                {t.nextStep}
-              </span>
               <h2 style={{ margin: "0 0 16px", font: "600 clamp(24px,2.8vw,40px)/1.06 var(--font-primary)", letterSpacing: "-.04em", color: "var(--ink-graphite)", textWrap: "balance" }}>
                 {t.contactH}
               </h2>
@@ -963,43 +908,38 @@ export default function DecisionSimulator({ lang = "es" }: { lang?: Lang }) {
               </div>
             </form>
           </div>
-        </div>
-
-        <style>{`
-          @media (max-width: 860px) { .sim-contact-grid { grid-template-columns: 1fr !important; } }
-        `}</style>
-      </section>
-    );
+      ),
+    });
   }
 
   /* ── ENVIADO ── */
   if (phase === "sent") {
-    return (
-      <section ref={containerRef} style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-sky-pearl)", scrollMarginTop: 80 }}>
-        <div style={{ ...WRAP, padding: "clamp(88px,12vw,160px) 0" }}>
-          <span style={{ display: "block", font: "600 11px var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--success)", marginBottom: 14 }}>
-            {t.received}
-          </span>
-          <h2 style={{ margin: "0 0 16px", font: "600 clamp(28px,3.8vw,52px)/1.04 var(--font-primary)", letterSpacing: "-.04em", color: "var(--ink-graphite)", maxWidth: "20ch", textWrap: "balance" }}>
+    return shell({
+      barLeft: <><span aria-hidden="true" style={dotStyle("var(--success)")} /> {t.received}</>,
+      progress: 1,
+      body: (
+        <div style={{ padding: "clamp(8px,2vw,24px) 0" }}>
+          <h2 style={{ margin: "0 0 16px", font: "600 clamp(26px,3.4vw,44px)/1.05 var(--font-primary)", letterSpacing: "-.04em", color: "var(--ink-graphite)", maxWidth: "20ch", textWrap: "balance" }}>
             {t.sentH}
           </h2>
-          <p style={{ margin: "0 0 16px", font: "400 16px/1.6 var(--font-primary)", color: "var(--text-muted)", maxWidth: "44ch" }}>
+          <p style={{ margin: "0 0 16px", font: "400 16px/1.6 var(--font-primary)", color: "var(--text-muted)", maxWidth: "48ch" }}>
             {t.sentP}
           </p>
           {reading && (
-            <p style={{ margin: "0 0 36px", font: "400 14px/1.5 var(--font-primary)", color: "var(--text-muted)", maxWidth: "44ch" }}>
+            <p style={{ margin: "0 0 32px", font: "400 14px/1.5 var(--font-primary)", color: "var(--text-muted)", maxWidth: "48ch" }}>
               <span style={{ display: "inline-flex", alignItems: "center", gap: 7 }}>
                 <span aria-hidden="true" style={{ width: 6, height: 6, borderRadius: "50%", flexShrink: 0, background: DIM_COLOR[reading.primaryDim] }} />
                 {t.readsAs1} <strong style={{ color: "var(--ink-graphite)", marginLeft: 3 }}>{DIM_LABEL[reading.primaryDim]}</strong>{t.readsAs2}
               </span>
             </p>
           )}
-          <button type="button" className="btn btn-secondary" onClick={handleRetry}>
-            {t.tryAnother}
-          </button>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
+            <button type="button" className="btn btn-secondary" onClick={handleExportPdf} disabled={pdfBusy} style={{ opacity: pdfBusy ? 0.7 : 1 }}>{pdfBusy ? t.downloadingPdf : t.downloadPdf}</button>
+            <button type="button" onClick={handleRetry} style={{ background: "none", border: "none", padding: "0 6px", cursor: "pointer", font: "500 13px var(--font-primary)", color: "var(--text-muted)" }}>{t.tryAnother}</button>
+          </div>
         </div>
-      </section>
-    );
+      ),
+    });
   }
 
   return null;
