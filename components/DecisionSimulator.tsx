@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, Fragment } from "react";
 import {
   SCENARIOS_ES, SCENARIOS_EN, QUESTIONS_ES, QUESTIONS_EN, CHIPS_ES, CHIPS_EN,
   buildPartialReading, buildFullReading, buildDecisionText,
@@ -16,7 +16,9 @@ const DS_UI = {
     boardDiag: "Diagnóstico del board", changePrefix: "Cambio", emergingTension: "Tensión emergente", domRisk: "Riesgo dominante", firstMove: "Primer movimiento", suggArtifact: "Artefacto sugerido",
     diagPlaceholder: "Tu diagnóstico aparece aquí conforme avanzas.",
     boardDiagChange: "Diagnóstico del board · Change", primaryMove: "Movimiento principal", tensionDetected: "Tensión detectada",
-    introEyebrow: "Estructura tu decisión", introH: "Ordena tu decisión en cinco preguntas.", introP: "Elige un escenario para ver cómo Change estructura una situación, o describe la tuya directamente.",
+    introEyebrow: "Estructura tu decisión", introH: "Estructura una decisión atorada y recibe un diagnóstico.", introP: "Respondes cinco preguntas guiadas —con opciones sugeridas— y al final obtienes un diagnóstico: el movimiento del método que activa, la tensión, el riesgo y un primer paso concreto.",
+    instrTag: "Instrumento interactivo", instrMeta: "5 preguntas · 2 min", pathEnd: "Diagnóstico",
+    startPrimary: "Estructurar mi decisión", orExamples: "¿No sabes por dónde empezar? Toca un ejemplo y míralo resuelto:", exHint: "Ver resuelto",
     or: "o", describeDirect: "Describir mi decisión directamente",
     changeScenario: "Cambiar escenario", back: "Volver", of: "de", scenario: "Escenario", next: "Siguiente →", seeDiag: "Ver diagnóstico →", skip: "Saltar",
     yourDiag: "Tu diagnóstico", scenarioDiag: "Diagnóstico del escenario", yourDecisionDiag: "Diagnóstico de tu decisión", whatYouDescribed: "Lo que describiste",
@@ -33,7 +35,9 @@ const DS_UI = {
     boardDiag: "Board diagnosis", changePrefix: "Change", emergingTension: "Emerging tension", domRisk: "Dominant risk", firstMove: "First move", suggArtifact: "Suggested artifact",
     diagPlaceholder: "Your diagnosis appears here as you go.",
     boardDiagChange: "Board diagnosis · Change", primaryMove: "Primary move", tensionDetected: "Tension detected",
-    introEyebrow: "Structure your decision", introH: "Order your decision in five questions.", introP: "Pick a scenario to see how Change structures a situation, or describe yours directly.",
+    introEyebrow: "Structure your decision", introH: "Structure a stuck decision and get a diagnosis.", introP: "You answer five guided questions —with suggested options— and at the end you get a diagnosis: the method move it activates, the tension, the risk, and a concrete first step.",
+    instrTag: "Interactive instrument", instrMeta: "5 questions · 2 min", pathEnd: "Diagnosis",
+    startPrimary: "Structure my decision", orExamples: "Not sure where to start? Tap an example and see it solved:", exHint: "See it solved",
     or: "or", describeDirect: "Describe my decision directly",
     changeScenario: "Change scenario", back: "Back", of: "of", scenario: "Scenario", next: "Next →", seeDiag: "See diagnosis →", skip: "Skip",
     yourDiag: "Your diagnosis", scenarioDiag: "Scenario diagnosis", yourDecisionDiag: "Diagnosis of your decision", whatYouDescribed: "What you described",
@@ -526,62 +530,102 @@ export default function DecisionSimulator({ lang = "es" }: { lang?: Lang }) {
   if (phase === "intro") {
     return (
       <section ref={containerRef} style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-sky-pearl)", scrollMarginTop: 80 }}>
-        <div style={{ ...WRAP, padding: "clamp(56px,7vw,88px) 0" }}>
-          <div style={{ maxWidth: "52ch", marginBottom: "clamp(36px,5vw,52px)" }}>
-            <span style={{ display: "block", font: "600 11px var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "var(--text-muted)", marginBottom: 16 }}>
-              {t.introEyebrow}
-            </span>
-            <h2 style={{ margin: "0 0 16px", font: "600 clamp(26px,3.2vw,44px)/1.06 var(--font-primary)", letterSpacing: "-.04em", color: "var(--ink-graphite)", textWrap: "balance" }}>
-              {t.introH}
-            </h2>
-            <p style={{ margin: 0, font: "400 clamp(15px,1.3vw,18px)/1.6 var(--font-primary)", color: "var(--text-muted)" }}>
-              {t.introP}
-            </p>
-          </div>
+        <div style={{ ...WRAP, padding: "clamp(48px,6vw,80px) 0" }}>
+          {/* Instrumento — región común: una sola superficie que se percibe como herramienta */}
+          <div className="sim-card" style={{ maxWidth: 880, margin: "0 auto", border: "1px solid var(--border-subtle)", background: "linear-gradient(155deg,rgba(255,255,255,.96),rgba(244,242,250,.66))", boxShadow: "0 30px 80px rgba(31,17,72,.07)" }}>
+            {/* Barra de estado — comunica interactividad + costo/recompensa */}
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, flexWrap: "wrap", padding: "14px 22px", borderBottom: "1px solid var(--border-subtle)" }}>
+              <span style={{ display: "inline-flex", alignItems: "center", gap: 9, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--ink-graphite)" }}>
+                <span data-pulse aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--change-violet)" }} />
+                {t.instrTag}
+              </span>
+              <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--text-faint)" }}>{t.instrMeta}</span>
+            </div>
 
-          <div className="sim-intro-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 16, marginBottom: 36 }}>
-            {SCENARIOS.map((sc) => (
-              <button
-                key={sc.id}
-                type="button"
-                onClick={() => startScenario(sc)}
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 8,
-                  padding: "22px 20px",
-                  background: "var(--pure-white)",
-                  border: "1px solid var(--border-subtle)",
-                  cursor: "pointer",
-                  textAlign: "left",
-                  transition: "border-color .15s, box-shadow .15s",
-                }}
-                onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--change-violet)"; }}
-                onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.borderColor = "var(--border-subtle)"; }}
-              >
-                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                  <span aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: DIM_COLOR[sc.primaryDim], flexShrink: 0 }} />
-                  <span style={{ font: "600 14px var(--font-primary)", letterSpacing: "-.01em", color: "var(--ink-graphite)" }}>{sc.label}</span>
-                </div>
-                <p style={{ margin: 0, font: "400 13px/1.5 var(--font-primary)", color: "var(--text-muted)" }}>{sc.description}</p>
+            <div style={{ padding: "clamp(26px,3.4vw,40px)" }}>
+              <h2 style={{ margin: "0 0 14px", maxWidth: "24ch", font: "600 clamp(24px,3vw,40px)/1.07 var(--font-primary)", letterSpacing: "-.04em", color: "var(--ink-graphite)", textWrap: "balance" }}>
+                {t.introH}
+              </h2>
+              <p style={{ margin: "0 0 4px", maxWidth: "60ch", font: "400 clamp(15px,1.3vw,17px)/1.6 var(--font-primary)", color: "var(--text-muted)" }}>
+                {t.introP}
+              </p>
+
+              {/* Preview del recorrido — continuidad + cierre: 5 pasos → Diagnóstico (la recompensa, distinta = figura) */}
+              <div className="sim-path" aria-hidden="true">
+                {STEP_LABELS.map((label, i) => (
+                  <Fragment key={i}>
+                    {i > 0 && <span className="sim-path-line" />}
+                    <span className="sim-path-node">
+                      <span className="sim-path-dot">{i + 1}</span>
+                      <span className="sim-path-label">{label}</span>
+                    </span>
+                  </Fragment>
+                ))}
+                <span className="sim-path-line sim-path-line-end" />
+                <span className="sim-path-node">
+                  <span className="sim-path-dot sim-path-dot-end">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+                  </span>
+                  <span className="sim-path-label sim-path-label-end">{t.pathEnd}</span>
+                </span>
+              </div>
+
+              {/* CTA primario — figura inequívoca */}
+              <button type="button" className="btn btn-primary sim-start" onClick={startCustom}>
+                {t.startPrimary} <span aria-hidden="true" style={{ marginLeft: 2 }}>→</span>
               </button>
-            ))}
-          </div>
 
-          <div style={{ display: "flex", alignItems: "center", gap: 16, marginBottom: 28 }}>
-            <div style={{ flex: 1, height: 1, background: "var(--border-subtle)" }} />
-            <span style={{ font: "400 13px var(--font-primary)", color: "var(--text-faint)" }}>{t.or}</span>
-            <div style={{ flex: 1, height: 1, background: "var(--border-subtle)" }} />
+              {/* Ejemplos — secundarios: affordance clara de "míralo resuelto" */}
+              <div style={{ marginTop: "clamp(28px,3.4vw,40px)", paddingTop: "clamp(24px,3vw,30px)", borderTop: "1px solid var(--border-subtle)" }}>
+                <span style={{ display: "block", marginBottom: 16, font: "400 13.5px/1.5 var(--font-primary)", color: "var(--text-muted)" }}>{t.orExamples}</span>
+                <div className="sim-intro-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 12 }}>
+                  {SCENARIOS.map((sc) => (
+                    <button
+                      key={sc.id}
+                      type="button"
+                      onClick={() => startScenario(sc)}
+                      className="sim-ex-card"
+                      style={{ display: "flex", flexDirection: "column", gap: 8, padding: "16px 16px 14px", background: "var(--pure-white)", border: "1px solid var(--border-subtle)", cursor: "pointer", textAlign: "left" }}
+                    >
+                      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                        <span aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: DIM_COLOR[sc.primaryDim], flexShrink: 0 }} />
+                        <span style={{ font: "600 13.5px var(--font-primary)", letterSpacing: "-.01em", color: "var(--ink-graphite)" }}>{sc.label}</span>
+                      </div>
+                      <p style={{ margin: 0, font: "400 12.5px/1.5 var(--font-primary)", color: "var(--text-muted)", flexGrow: 1 }}>{sc.description}</p>
+                      <span className="sim-ex-hint" aria-hidden="true" style={{ marginTop: 4, font: "600 10.5px var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--change-violet)" }}>{t.exHint} →</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
-
-          <button type="button" className="btn btn-secondary" onClick={startCustom}>
-            {t.describeDirect}
-          </button>
         </div>
 
         <style>{`
-          @media (max-width: 920px) { .sim-intro-grid { grid-template-columns: repeat(2,1fr) !important; } }
-          @media (max-width: 580px) { .sim-intro-grid { grid-template-columns: 1fr !important; } }
+          .sim-start { margin-top: clamp(22px,2.8vw,30px); height: 50px; padding: 0 26px; font-size: 15px; }
+          .sim-ex-card { transition: border-color .18s var(--ease-premium), box-shadow .18s var(--ease-premium), transform .18s var(--ease-premium); }
+          .sim-ex-card:hover { border-color: var(--change-violet); box-shadow: 0 10px 26px color-mix(in srgb, var(--change-violet) 14%, transparent); transform: translateY(-2px); }
+          .sim-ex-card:hover .sim-ex-hint { color: var(--soft-violet); }
+
+          .sim-path { display: flex; align-items: flex-start; gap: 0; margin: clamp(22px,3vw,30px) 0 0; }
+          .sim-path-node { display: flex; flex-direction: column; align-items: center; gap: 8px; flex-shrink: 0; text-align: center; }
+          .sim-path-dot { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; border: 1.5px solid var(--soft-stone-gray); color: var(--text-muted); font: 600 12px var(--font-mono); background: var(--surface-card); }
+          .sim-path-label { font: 600 10px var(--font-mono); letter-spacing: .07em; text-transform: uppercase; color: var(--text-faint); max-width: 10ch; line-height: 1.25; }
+          .sim-path-line { flex: 1 1 auto; min-width: 12px; height: 2px; margin: 14px 3px 0; background: var(--soft-stone-gray); opacity: .5; }
+          .sim-path-line-end { background: linear-gradient(90deg, var(--soft-stone-gray), var(--change-violet)); opacity: .8; }
+          .sim-path-dot-end { border: none; background: var(--change-violet); box-shadow: 0 6px 18px color-mix(in srgb, var(--change-violet) 32%, transparent); }
+          .sim-path-label-end { color: var(--change-violet); font-weight: 700; }
+
+          @media (max-width: 720px) { .sim-intro-grid { grid-template-columns: 1fr !important; } }
+          @media (max-width: 560px) {
+            .sim-path-label { display: none; }
+            .sim-path-label-end { display: block !important; }
+            .sim-path-dot { width: 26px; height: 26px; }
+            .sim-path-line { margin-top: 12px; }
+          }
+          @media (prefers-reduced-motion: reduce) {
+            .sim-ex-card { transition: none; } .sim-ex-card:hover { transform: none; }
+          }
         `}</style>
       </section>
     );
