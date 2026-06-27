@@ -12,6 +12,7 @@ interface Caso {
   flow: string[];
   img?: string;
   imgAlt?: string;
+  imgFilter?: string;
 }
 
 const STEPS_ES = ["Leer", "Interpretar", "Decidir", "Diseñar", "Sostener", "Capacidad instalada"];
@@ -100,7 +101,7 @@ export default function CasoCard({ caso, idx, bg, lang = "es" }: { caso: Caso; i
                   height: "100%",
                   objectFit: "cover",
                   objectPosition: "center 40%",
-                  filter: "grayscale(15%) contrast(1.05) brightness(.96)",
+                  filter: caso.imgFilter ?? "grayscale(15%) contrast(1.05) brightness(.96)",
                   display: "block",
                 }}
               />
