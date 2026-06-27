@@ -14,6 +14,7 @@ export const LANGS: Lang[] = ["es", "en"];
     si no, manda a /en (home) para evitar 404 durante el rollout. */
 export const EN_ROUTES = new Set<string>([
   "/",
+  "/capacidades",
 ]);
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://change.live";

@@ -34,8 +34,9 @@ export default function LanguageToggle({ variant = "light" }: Props) {
       style={{ ["--hue" as string]: hue }}
     >
       <span className="lang-code">{isEn ? "ENG" : "ES"}</span>
-      <svg className="lang-swap" width="12" height="12" viewBox="0 0 12 12" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M2 4 H9 M7 2 L9 4 L7 6 M10 8 H3 M5 6 L3 8 L5 10" />
+      <svg className="lang-swap" width="14" height="14" viewBox="0 0 16 16" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M3 6 H13 M10.5 3.5 L13 6 L10.5 8.5" />
+        <path d="M13 10 H3 M5.5 7.5 L3 10 L5.5 12.5" />
       </svg>
 
       <style>{`
@@ -51,8 +52,8 @@ export default function LanguageToggle({ variant = "light" }: Props) {
         }
         .lang-switch:hover { border-color: color-mix(in srgb, var(--hue) 45%, transparent); color: var(--hue); }
         .lang-switch:hover .lang-code { color: var(--hue); }
-        .lang-swap { opacity: .5; transition: opacity .2s var(--ease-premium); }
-        .lang-switch:hover .lang-swap { opacity: .95; }
+        .lang-swap { flex-shrink: 0; opacity: .7; transition: opacity .2s var(--ease-premium); }
+        .lang-switch:hover .lang-swap { opacity: 1; }
 
         .lang-dark { color: rgba(240,244,255,.55); border-color: rgba(255,255,255,.16); }
         .lang-dark .lang-code { color: rgba(240,244,255,.55); }
