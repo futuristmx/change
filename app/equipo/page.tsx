@@ -125,6 +125,26 @@ export function EquipoView({ lang }: { lang: Lang }) {
               {t.whyP}
             </Reveal>
           </div>
+          {/* Evidencia visual — conferencia magistral */}
+          <Reveal delay={180} style={{ marginTop: "clamp(44px,5vw,64px)", position: "relative", height: "clamp(220px,22vw,360px)", overflow: "hidden" }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/img/proyectos/conferencia-gdl.jpg"
+              alt={lang === "en" ? "Andrés Valencia presenting at Universidad de Guadalajara" : "Andrés Valencia en conferencia, Universidad de Guadalajara"}
+              loading="lazy"
+              decoding="async"
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                objectPosition: "center 32%",
+                filter: "grayscale(8%) contrast(1.06) brightness(.94)",
+                display: "block",
+              }}
+            />
+            {/* Gradient overlay — sides and bottom fade */}
+            <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, transparent 40%, rgba(245,247,252,.55) 100%), linear-gradient(to right, rgba(245,247,252,.3) 0%, transparent 20%, transparent 80%, rgba(245,247,252,.3) 100%)", pointerEvents: "none" }} />
+          </Reveal>
         </div>
       </section>
 

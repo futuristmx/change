@@ -10,6 +10,8 @@ interface Caso {
   h: string;
   s: string;
   flow: string[];
+  img?: string;
+  imgAlt?: string;
 }
 
 const STEPS_ES = ["Leer", "Interpretar", "Decidir", "Diseñar", "Sostener", "Capacidad instalada"];
@@ -84,6 +86,29 @@ export default function CasoCard({ caso, idx, bg, lang = "es" }: { caso: Caso; i
             marginTop: open ? 40 : 0,
           }}
         >
+          {/* Imagen de evidencia (opcional) */}
+          {caso.img && (
+            <div style={{ position: "relative", width: "100%", height: "clamp(180px,18vw,280px)", overflow: "hidden", marginBottom: 32 }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={caso.img}
+                alt={caso.imgAlt ?? caso.k}
+                loading="lazy"
+                decoding="async"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  objectPosition: "center 40%",
+                  filter: "grayscale(15%) contrast(1.05) brightness(.96)",
+                  display: "block",
+                }}
+              />
+              {/* Gradient overlay — right edge fades to background */}
+              <div aria-hidden="true" style={{ position: "absolute", inset: 0, background: "linear-gradient(to bottom, transparent 55%, rgba(255,255,255,.65) 100%)", pointerEvents: "none" }} />
+            </div>
+          )}
+
           {/* Rail de conexión horizontal (desktop) + cards */}
           <div style={{ position: "relative" }}>
             {/* Rail de fondo */}

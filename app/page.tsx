@@ -9,6 +9,7 @@ import SystemicDescent from "@/components/SystemicDescent";
 import CapacityScore from "@/components/CapacityScore";
 import MissionControlLive from "@/components/MissionControlLive";
 import EtherealDivider from "@/components/ds/EtherealDivider";
+import WorkEvidence from "@/components/WorkEvidence";
 import ConstellationField from "@/components/ds/ConstellationField";
 import { Badge, SignalField, Glyph, type BadgeTone, type GlyphName } from "@/components/ds";
 
@@ -352,6 +353,9 @@ export function HomeView({ lang }: { lang: Lang }) {
             </Reveal>
           </div>
         </section>
+
+        {/* ═══ 12.5 · WORK EVIDENCE ═══ */}
+        <WorkEvidence lang={lang} />
 
         <EtherealDivider />
         {/* ═══ 13 · FIELD NOTES ═══ */}
