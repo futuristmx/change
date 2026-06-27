@@ -56,6 +56,38 @@ const ARTEFACTOS_EN = [
   { h: "Mission Control", p: "Where signals, decisions, projects, and reports stay alive and connected.", k: "Sustain", c: "var(--ink-graphite)" },
 ];
 
+/* Imágenes de fondo para las cards del Manifiesto — orden paralelo a MANIFIESTO_ES/EN */
+const MANI_IMGS = [
+  {
+    src: "/img/manifesto/ancla-al-cambio.png",
+    /* Ciudad nocturna con lluvia en cristal — "leer el mundo que cambia desde adentro" */
+    filter: "grayscale(100%) contrast(1.06) brightness(.82)",
+    pos: "center center",
+    overlay: "linear-gradient(160deg, rgba(14,13,18,.75) 0%, rgba(14,13,18,.88) 100%)",
+  },
+  {
+    src: "/img/manifesto/practica-real.png",
+    /* Mesa de trabajo, luz lateral — disciplina, acumulación de criterio */
+    filter: "grayscale(100%) contrast(1.14) brightness(.78)",
+    pos: "center 38%",
+    overlay: "linear-gradient(180deg, rgba(14,13,18,.70) 0%, rgba(14,13,18,.86) 100%)",
+  },
+  {
+    src: "/img/manifesto/artefactos.png",
+    /* Planos con compás, luz diagonal — instrumentos físicos del pensamiento */
+    filter: "grayscale(62%) contrast(1.12) brightness(.80)",
+    pos: "center 52%",
+    overlay: "linear-gradient(145deg, rgba(14,13,18,.72) 0%, rgba(14,13,18,.88) 100%)",
+  },
+  {
+    src: "/img/manifesto/memoria.png",
+    /* Figura de espaldas en biblioteca monumental — el ser humano frente al conocimiento acumulado */
+    filter: "grayscale(100%) contrast(1.18) brightness(.76)",
+    pos: "center 42%",
+    overlay: "linear-gradient(180deg, rgba(14,13,18,.65) 0%, rgba(14,13,18,.90) 100%)",
+  },
+] as const;
+
 const MANIFIESTO_ES = [
   { k: "Se ancla en lo que está cambiando", p: "Cada arco de trabajo arranca en una señal real del entorno y una decisión específica que la organización tiene enfrente." },
   { k: "Se entrena en decisiones reales", p: "Cada reto instala músculo. La capacidad se hace ejercitándola sobre casos concretos, no aprendiéndola en abstracto." },
@@ -241,13 +273,31 @@ export function HomeView({ lang }: { lang: Lang }) {
               </Reveal>
             </div>
 
-            <div className="ch-grid4" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 16, marginBottom: "clamp(40px,5vw,56px)" }}>
-              {MANIFIESTO.map((idea, i) => (
-                <Reveal key={idea.k} delay={(i % 4) * 60} as="article" className="ch-card" style={{ background: "rgba(255,255,255,.85)", border: "1px solid var(--border-subtle)", borderTop: `3px solid var(--change-violet)`, padding: "26px 24px 28px", display: "flex", flexDirection: "column" }}>
-                  <h3 style={{ margin: 0, font: "600 17px/1.18 var(--font-primary)", letterSpacing: "-.02em", color: "var(--ink-graphite)" }}>{idea.k}</h3>
-                  <p style={{ margin: "12px 0 0", font: "400 14px/1.55 var(--font-primary)", color: "var(--text-muted)", flexGrow: 1 }}>{idea.p}</p>
-                </Reveal>
-              ))}
+            <div className="ch-grid4" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 3, marginBottom: "clamp(40px,5vw,56px)" }}>
+              {MANIFIESTO.map((idea, i) => {
+                const imgData = MANI_IMGS[i];
+                return (
+                  <Reveal key={idea.k} delay={(i % 4) * 70} as="article" style={{ position: "relative", overflow: "hidden", minHeight: "clamp(260px,24vw,340px)", display: "flex", flexDirection: "column", borderTop: "3px solid var(--change-violet)" }}>
+                    {/* Imagen de fondo */}
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={imgData.src}
+                      alt=""
+                      aria-hidden="true"
+                      loading="lazy"
+                      decoding="async"
+                      style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: imgData.pos, filter: imgData.filter, zIndex: 0 }}
+                    />
+                    {/* Overlay — funde imagen con el copy */}
+                    <div aria-hidden="true" style={{ position: "absolute", inset: 0, zIndex: 1, background: imgData.overlay }} />
+                    {/* Contenido */}
+                    <div style={{ position: "relative", zIndex: 2, padding: "clamp(24px,2.5vw,32px) clamp(20px,2vw,28px) clamp(28px,3vw,36px)", display: "flex", flexDirection: "column", flex: 1 }}>
+                      <h3 style={{ margin: 0, font: "600 clamp(15px,1.3vw,18px)/1.18 var(--font-primary)", letterSpacing: "-.02em", color: "#fff" }}>{idea.k}</h3>
+                      <p style={{ margin: "12px 0 0", font: "400 13.5px/1.6 var(--font-primary)", color: "rgba(255,255,255,.8)", flexGrow: 1 }}>{idea.p}</p>
+                    </div>
+                  </Reveal>
+                );
+              })}
             </div>
 
             <Reveal delay={80}>
