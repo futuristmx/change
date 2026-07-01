@@ -12,13 +12,13 @@
     "verify:score": "node --experimental-strip-types --test lib/capacity-score.test.ts"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.45.0",
+    "@supabase/supabase-js": "^2.110.0",
     "jspdf": "^4.2.1",
     "lenis": "^1.3.25",
-    "motion": "^12.23.12",
+    "motion": "^12.42.2",
     "next": "15.5.19",
-    "react": "19.1.1",
-    "react-dom": "19.1.1",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
     "zod": "^3.25.76"
   },
   "devDependencies": {
