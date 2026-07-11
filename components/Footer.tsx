@@ -30,7 +30,6 @@ const COL_A = [
 ];
 const COL_B = [
   { es: "Equipo", en: "Team", href: "/equipo" },
-  { es: "Field Notes", en: "Field Notes", href: "/field-notes" },
   { es: "Futuro", en: "Future", href: "/futuro" },
 ];
 

@@ -57,6 +57,8 @@ const nextConfig: NextConfig = {
   // 301/302 de rutas heredadas → rutas vigentes (evita 404 silenciosos).
   async redirects() {
     return [
+      { source: "/metodo", destination: "/capacidades", permanent: true },
+      { source: "/en/metodo", destination: "/en/capacidades", permanent: true },
       { source: "/services", destination: "/capacidades", permanent: true },
       { source: "/projects", destination: "/casos", permanent: true },
       { source: "/about", destination: "/equipo", permanent: true },
