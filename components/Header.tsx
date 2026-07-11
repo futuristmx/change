@@ -14,9 +14,9 @@ const NAV = [
   { idx: "02", es: "Mission Control", en: "Mission Control", href: "/mission-control" },
   { idx: "03", es: "Casos", en: "Cases", href: "/casos" },
   { idx: "04", es: "Equipo", en: "Team", href: "/equipo" },
-  { idx: "05", es: "Field Notes", en: "Field Notes", href: "/field-notes" },
-  { idx: "06", es: "Futuro", en: "Future", href: "/futuro" },
-  { idx: "07", es: "Acceso Clientes", en: "Client Access", href: ACCESO_HREF },
+  // Field Notes fuera del nav hasta el go-live de la Fase 4 (URL sigue viva) — plan 2026-07-10, T2
+  { idx: "05", es: "Futuro", en: "Future", href: "/futuro" },
+  { idx: "06", es: "Acceso Clientes", en: "Client Access", href: ACCESO_HREF },
 ];
 
 const CTA_LABEL = { es: "Trabajar una decisión", en: "Work on a decision" };
