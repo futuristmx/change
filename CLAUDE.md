@@ -239,10 +239,13 @@ El sitio es bilingüe. **ES vive en la raíz** (`/`, `/futuro`, …); **EN vive 
 - Canal correcto: rama → PR → `gh pr merge --squash --delete-branch`
 - Claude NUNCA aparece como co-author en commits (override global)
 
-### Regla de calidad antes de declarar listo
+### Regla de calidad antes de declarar listo — preflight (2026-07-11)
 
-Ejecutar `npm run build` y confirmar que todas las páginas compilan sin errores.
-No declarar "listo" sin output visible del build.
+Antes de declarar listo, cerrar sprint o abrir PR: ejecutar `bash preflight.sh`
+(lint → typecheck estricto → build de producción) y mostrar el veredicto real
+(`PREFLIGHT ✓/✗`) en la respuesta. **El gate no se rodea** ni se declara
+"listo salvo el preflight". Instalado on-touch conforme a la política permanente
+de Andrés (2026-07-10); estándar completo en `Ecosistema/PREFLIGHT-ESTANDAR.md`.
 
 ---
 
