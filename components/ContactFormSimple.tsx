@@ -198,7 +198,7 @@ export default function ContactFormSimple({ lang = "es" }: { lang?: Lang }) {
       </div>
 
       {errorMsg && (
-        <p role="alert" style={{ margin: 0, font: "400 13.5px/1.45 var(--font-primary)", color: "var(--warning, #C0392B)", padding: "10px 14px", background: "rgba(192,57,43,.06)", border: "1px solid rgba(192,57,43,.18)" }}>
+        <p role="alert" style={{ margin: 0, font: "400 13.5px/1.45 var(--font-primary)", color: "var(--status-error-fg)", padding: "10px 14px", background: "var(--status-error-bg)", border: "1px solid var(--badge-error-border)" }}>
           {errorMsg}
         </p>
       )}

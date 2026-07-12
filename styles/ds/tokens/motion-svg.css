@@ -1,0 +1,147 @@
+/* ════════════════════════════════════════════════════════════
+   Change UI — Motion · SVG + Data-viz · UPGRADE 2.6
+   Extends Motion Living (2.5) to REAL svg drawing
+   (stroke-dasharray / stroke-dashoffset / pathLength), kinetic
+   relations and data-viz microinteractions: arcs that draw to a
+   value, bars that grow in an evolutionary wave, numerals that
+   count, signal that flows along a path.
+
+   Two laws (same as 2.5):
+     · base = final visible state — entrances play ONLY on a trigger
+       (.is-in-view / .is-active / [data-deck-active]).
+     · reduced-motion / print FREEZE crisp at that final state.
+
+   Additive over motion.css + motion-living.css. Honors
+   prefers-reduced-motion; freezes on print/PDF.
+
+   Stack note: drive these from Motion (React/Next) for 80% of cases
+   (entrances, pathLength, layout, scroll); reserve GSAP+ScrollTrigger
+   for cinematic / pinned-scroll sequences. The tokens + utilities
+   below are the framework-agnostic floor.
+   ════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Data-viz durations ── */
+  /* marching signal-flow dashes (loop) */
+  --flow-period:     1800ms;  /* @kind other */
+  /* radial arc / confidence ring draw */
+  --gauge-draw:      1400ms;  /* @kind other */
+  /* numeral count-up */
+  --count-duration:  1100ms;  /* @kind other */
+  /* bar / area growth */
+  --dataviz-grow:     900ms;  /* @kind other */
+  /* per-series stagger (bars, points) */
+  --dataviz-stagger:   90ms;  /* @kind other */
+
+  /* ── Easing ── */
+  /* Shared strategic curve — alias so data-viz reads as one family. */
+  --ease-dataviz: var(--ease-strategic, cubic-bezier(0.22, 1, 0.36, 1)); /* @kind other */
+}
+
+/* ─────────────────────────────────────────────────────────────
+   KEYFRAMES — every one resolves to the FINAL visible state
+   ───────────────────────────────────────────────────────────── */
+
+/* SVG stroke draw — requires pathLength="1" + stroke-dasharray:1 on
+   the <path>/<line>. from: retracted (offset 1) → to: drawn (0). */
+@keyframes change-stroke-draw {
+  from { stroke-dashoffset: 1; }
+  to   { stroke-dashoffset: 0; }
+}
+
+/* Radial gauge — draws the arc up to its value (--gauge-value 0–1). */
+@keyframes change-gauge-draw {
+  from { stroke-dashoffset: var(--gauge-value, 0.75); }
+  to   { stroke-dashoffset: 0; }
+}
+
+/* Bar / column growth from the baseline. */
+@keyframes change-grow {
+  from { transform: scaleY(0); }
+  to   { transform: scaleY(1); }
+}
+
+/* Marching dashes — a living relation (loops; it is state, not decor). */
+@keyframes change-flow-march {
+  from { stroke-dashoffset: 0; }
+  to   { stroke-dashoffset: -16; }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   UTILITIES — base = final state; entrance gated on a trigger
+   ───────────────────────────────────────────────────────────── */
+
+/* (1) SVG stroke draw — set pathLength="1" on the node. THE 2.6 core
+   primitive (stroke-dasharray / dashoffset / pathLength). */
+.change-draw-stroke {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;                         /* base = drawn */
+}
+.is-in-view .change-draw-stroke,
+[data-deck-active] .change-draw-stroke,
+.change-draw-stroke.is-active {
+  animation: change-stroke-draw var(--motion-draw, 3600ms) var(--ease-dataviz) both;
+}
+
+/* (2) Radial gauge arc — circle with pathLength="1" + --gauge-value (0–1). */
+.change-gauge-arc {
+  stroke-dasharray: var(--gauge-value, 0.75) 1;
+  stroke-dashoffset: 0;                         /* base = at value */
+  transform-box: fill-box;                      /* origin = the arc's own box */
+  transform-origin: 50% 50%;
+  transform: rotate(-90deg);                    /* start at 12 o'clock */
+}
+.is-in-view .change-gauge-arc,
+[data-deck-active] .change-gauge-arc,
+.change-gauge-arc.is-active {
+  animation: change-gauge-draw var(--gauge-draw, 1400ms) var(--ease-dataviz) both;
+}
+
+/* (3) Bar / column grow — set --bar-i (0,1,2…) for the evolutionary
+   left→right wave. transform-origin keeps it rooted to the baseline. */
+.change-bar-grow {
+  transform-origin: bottom;
+  transform: scaleY(1);                         /* base = full */
+}
+.is-in-view .change-bar-grow,
+[data-deck-active] .change-bar-grow,
+.change-bar-grow.is-active {
+  animation: change-grow var(--dataviz-grow, 900ms) var(--ease-dataviz) both;
+  animation-delay: calc(var(--dataviz-stagger, 90ms) * var(--bar-i, 0));
+}
+
+/* (4) Signal flow — marching dashes along a stroke (continuous, alive). */
+.change-flow {
+  stroke-dasharray: 2 14;
+  animation: change-flow-march var(--flow-period, 1800ms) linear infinite;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   REDUCED MOTION — collapse to final state (no draw, no march)
+   ───────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --flow-period:     1ms;  /* @kind other */
+    --gauge-draw:      1ms;  /* @kind other */
+    --count-duration:  1ms;  /* @kind other */
+    --dataviz-grow:    1ms;  /* @kind other */
+    --dataviz-stagger:  0s;  /* @kind other */
+  }
+  @keyframes change-stroke-draw { to { stroke-dashoffset: 0; } }
+  @keyframes change-gauge-draw  { to { stroke-dashoffset: 0; } }
+  @keyframes change-grow        { to { transform: scaleY(1); } }
+  .change-draw-stroke,
+  .change-gauge-arc,
+  .change-bar-grow,
+  .change-flow { animation: none !important; }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   PRINT / PDF — freeze everything at the final visible state
+   ───────────────────────────────────────────────────────────── */
+@media print {
+  .change-draw-stroke { stroke-dashoffset: 0 !important; }
+  .change-gauge-arc   { stroke-dashoffset: 0 !important; }
+  .change-bar-grow    { transform: scaleY(1) !important; }
+  * { animation: none !important; }
+}
