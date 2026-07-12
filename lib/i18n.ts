@@ -15,6 +15,7 @@ export const LANGS: Lang[] = ["es", "en"];
 export const EN_ROUTES = new Set<string>([
   "/",
   "/capacidades",
+  "/mapa-de-claridad",
   "/mission-control",
   "/equipo",
   "/futuro",

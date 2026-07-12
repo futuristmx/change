@@ -258,6 +258,19 @@ export default function DecisionSimulator({ lang = "es" }: { lang?: Lang }) {
     }
   }, [phase, step]);
 
+  // Preselección por URL (?escenario=<id>): las tensiones del home y de /casos
+  // llegan aquí con su escenario ya elegido — el visitante entra directo al
+  // recorrido sin repetir la elección en el Paso 0.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const id = new URLSearchParams(window.location.search).get("escenario");
+    if (!id) return;
+    const sc = SCENARIOS.find((s) => s.id === id);
+    if (sc) startScenario(sc);
+    // Solo al montar: la URL de entrada no cambia durante la sesión del instrumento.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // El instrumento es UNA sola superficie: las fases se intercambian dentro de
   // la misma card, sin reposicionar la página. Solo aseguramos —de forma
   // instantánea y sin pelear con el smooth-scroll de Lenis— que la card siga a
