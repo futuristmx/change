@@ -24,8 +24,9 @@ const COL_LINK: React.CSSProperties = {
 const COL_A = [
   { es: "Inicio", en: "Home", href: "/" },
   { es: "Método", en: "Method", href: "/capacidades" },
+  { es: "Tensiones", en: "Tensions", href: "/casos" },
+  { es: "Mapa de Claridad", en: "Clarity Map", href: "/mapa-de-claridad" },
   { es: "Mission Control", en: "Mission Control", href: "/mission-control" },
-  { es: "Casos", en: "Cases", href: "/casos" },
   { es: "Contacto", en: "Contact", href: "/contacto" },
 ];
 const COL_B = [

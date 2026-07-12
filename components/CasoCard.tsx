@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import Reveal from "@/components/Reveal";
-import { type Lang } from "@/lib/i18n";
+import { type Lang, localizeHref } from "@/lib/i18n";
 
 interface Caso {
   k: string;
@@ -13,13 +14,15 @@ interface Caso {
   img?: string;
   imgAlt?: string;
   imgFilter?: string;
+  /** id de escenario del simulador (/contacto?escenario=) — conecta la tensión con "trabajarla ahora" */
+  sim?: string;
 }
 
 const STEPS_ES = ["Leer", "Interpretar", "Decidir", "Diseñar", "Sostener", "Capacidad instalada"];
 const STEPS_EN = ["Read", "Interpret", "Decide", "Design", "Sustain", "Installed capacity"];
 const CC_UI = {
-  es: { tension: "Tensión", open: "Ver el recorrido completo ↓", close: "Cerrar recorrido ↑" },
-  en: { tension: "Tension", open: "See the full journey ↓", close: "Close journey ↑" },
+  es: { tension: "Tensión", open: "Ver el recorrido completo ↓", close: "Cerrar recorrido ↑", workIt: "¿Esta es tu tensión? Trabájala ahora — 5 preguntas, 2 min" },
+  en: { tension: "Tension", open: "See the full journey ↓", close: "Close journey ↑", workIt: "Is this your tension? Work it now — 5 questions, 2 min" },
 };
 
 /* Evolution Ramp (DS 2.4) — color de cada paso del método según madurez */
@@ -39,7 +42,7 @@ export default function CasoCard({ caso, idx, bg, lang = "es" }: { caso: Caso; i
   const ui = CC_UI[lang];
 
   return (
-    <section style={{ borderTop: "1px solid var(--border-subtle)", background: bg }}>
+    <section id={`tension-${label}`} style={{ borderTop: "1px solid var(--border-subtle)", background: bg, scrollMarginTop: 96 }}>
       <div style={{ width: "min(1340px, calc(100% - clamp(40px,8vw,128px)))", margin: "0 auto", padding: "clamp(80px,9vw,140px) 0" }}>
 
         {/* Cabecera siempre visible */}
@@ -180,6 +183,16 @@ export default function CasoCard({ caso, idx, bg, lang = "es" }: { caso: Caso; i
                 {r.l}
               </span>
             ))}
+          </div>
+
+          {/* CTA por tensión — salida específica al simulador (escenario preseleccionado si existe) */}
+          <div style={{ marginTop: 28 }}>
+            <Link
+              href={localizeHref(caso.sim ? `/contacto?escenario=${caso.sim}` : "/contacto", lang)}
+              className="btn btn-secondary btn-sm"
+            >
+              {ui.workIt}
+            </Link>
           </div>
         </div>
       </div>

@@ -3,7 +3,7 @@ import type { MetadataRoute } from "next";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://change.live";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = ["", "/capacidades", "/mission-control", "/equipo", "/field-notes", "/casos", "/contacto"];
+  const routes = ["", "/capacidades", "/mapa-de-claridad", "/mission-control", "/equipo", "/field-notes", "/casos", "/contacto"];
   // ES en la raíz + EN bajo /en, con alternates hreflang para SEO bilingüe.
   return routes.map((route) => {
     const esUrl = `${SITE_URL}${route}`;

@@ -11,12 +11,13 @@ const ACCESO_HREF = "/mission-control/login";
 
 const NAV = [
   { idx: "01", es: "Método", en: "Method", href: "/capacidades" },
-  { idx: "02", es: "Mission Control", en: "Mission Control", href: "/mission-control" },
-  { idx: "03", es: "Casos", en: "Cases", href: "/casos" },
-  { idx: "04", es: "Equipo", en: "Team", href: "/equipo" },
+  { idx: "02", es: "Tensiones", en: "Tensions", href: "/casos" },
+  { idx: "03", es: "Mapa de Claridad", en: "Clarity Map", href: "/mapa-de-claridad" },
+  { idx: "04", es: "Mission Control", en: "Mission Control", href: "/mission-control" },
+  { idx: "05", es: "Equipo", en: "Team", href: "/equipo" },
   // Field Notes fuera del nav hasta el go-live de la Fase 4 (URL sigue viva) — plan 2026-07-10, T2
-  { idx: "05", es: "Futuro", en: "Future", href: "/futuro" },
-  { idx: "06", es: "Acceso Clientes", en: "Client Access", href: ACCESO_HREF },
+  { idx: "06", es: "Futuro", en: "Future", href: "/futuro" },
+  { idx: "07", es: "Acceso Clientes", en: "Client Access", href: ACCESO_HREF },
 ];
 
 const CTA_LABEL = { es: "Trabajar una decisión", en: "Work on a decision" };

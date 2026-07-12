@@ -20,7 +20,7 @@ const WRAP = "min(1340px, calc(100% - clamp(40px,8vw,128px)))";
 
 const CASOS_ES = [
   {
-    k: "Crecer sin diluir", c: "var(--opportunity-orange)",
+    k: "Crecer sin diluir", c: "var(--opportunity-orange)", sim: "crecer-sin-diluir",
     img: "/img/proyectos/boardroom-ejecutivo.jpg",
     imgAlt: "Sesión ejecutiva en boardroom de altura — contexto de expansión corporativa",
     h: "La identidad que abrió la puerta no es la que cabe en la siguiente etapa.",
@@ -35,7 +35,7 @@ const CASOS_ES = [
     ],
   },
   {
-    k: "Priorizar apuestas", c: "var(--change-violet)",
+    k: "Priorizar apuestas", c: "var(--change-violet)", sim: "demasiadas-iniciativas",
     img: "/img/proyectos/taller-senales.jpg",
     imgAlt: "Organización visual de señales y apuestas en taller estratégico",
     h: "Todo era importante, y por eso nada avanzaba.",
@@ -50,7 +50,7 @@ const CASOS_ES = [
     ],
   },
   {
-    k: "Transferir juicio", c: "var(--human-pink)",
+    k: "Transferir juicio", c: "var(--human-pink)", sim: "criterio-en-pocas-cabezas",
     img: "/img/proyectos/transferencia-juicio.jpg",
     imgAlt: "Sesión de facilitación estratégica — participantes anonimizados",
     imgFilter: "grayscale(100%) blur(5px) contrast(1.1) brightness(.92)",
@@ -81,7 +81,7 @@ const CASOS_ES = [
     ],
   },
   {
-    k: "Cuando el usuario ya cambió", c: "var(--signal-cyan)",
+    k: "Cuando el usuario ya cambió", c: "var(--signal-cyan)", sim: "cliente-que-cambio",
     img: "/img/proyectos/ideacion-usuario.jpg",
     imgAlt: "Sesión de investigación y co-diseño centrada en el usuario",
     h: "El producto seguía igual. El usuario, no.",
@@ -96,7 +96,7 @@ const CASOS_ES = [
     ],
   },
   {
-    k: "Visión gobernable", c: "var(--change-violet)",
+    k: "Visión gobernable", c: "var(--change-violet)", sim: "vision-sin-roadmap",
     img: "/img/proyectos/mapeo-vision.jpg",
     imgAlt: "Mapeo colectivo de visión estratégica — organización de criterios e implicaciones",
     h: "Tenían una visión clara. Y ningún modo de gobernarla.",
@@ -114,7 +114,7 @@ const CASOS_ES = [
 
 const CASOS_EN = [
   {
-    k: "Grow without diluting", c: "var(--opportunity-orange)",
+    k: "Grow without diluting", c: "var(--opportunity-orange)", sim: "crecer-sin-diluir",
     h: "The identity that opened the door isn't the one that fits the next stage.",
     s: "An organization in expansion: each new market asked to adapt the brand, and each adaptation made it a little less recognizable. Growth threatened exactly what had made it possible.",
     flow: [
@@ -127,7 +127,7 @@ const CASOS_EN = [
     ],
   },
   {
-    k: "Prioritize bets", c: "var(--change-violet)",
+    k: "Prioritize bets", c: "var(--change-violet)", sim: "demasiadas-iniciativas",
     h: "Everything was important, and that's why nothing moved.",
     s: "More valuable initiatives than resources to sustain them. The organization didn't have an ideas problem: it had a choosing problem, and indecision was becoming its default strategy.",
     flow: [
@@ -140,7 +140,7 @@ const CASOS_EN = [
     ],
   },
   {
-    k: "Transfer judgment", c: "var(--human-pink)",
+    k: "Transfer judgment", c: "var(--human-pink)", sim: "criterio-en-pocas-cabezas",
     h: "The judgment that holds the organization lives in a few heads. And no one wrote it down.",
     s: "A handover between generations —or between teams— where what was at stake wasn't operations, but judgment: how decisions are made here, and why. That's almost never documented, and when it leaves, it leaves whole.",
     flow: [
@@ -166,7 +166,7 @@ const CASOS_EN = [
     ],
   },
   {
-    k: "When the user already changed", c: "var(--signal-cyan)",
+    k: "When the user already changed", c: "var(--signal-cyan)", sim: "cliente-que-cambio",
     h: "The product stayed the same. The user didn't.",
     s: "The experience worked for a user who had already changed: new expectations, new habits, new comparisons. The organization sensed it in the numbers, but didn't have the language to name what had moved.",
     flow: [
@@ -179,7 +179,7 @@ const CASOS_EN = [
     ],
   },
   {
-    k: "Governable vision", c: "var(--change-violet)",
+    k: "Governable vision", c: "var(--change-violet)", sim: "vision-sin-roadmap",
     h: "They had a clear vision. And no way to govern it.",
     s: "An ambitious, articulate, shared direction — that in operations diluted into everyday decisions no one connected to it. The vision existed in the speeches, not in the choices of each week.",
     flow: [
