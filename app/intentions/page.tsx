@@ -131,7 +131,7 @@ export default async function IntentionsPage() {
   const Metric = ({ label, value, sub }: { label: string; value: string | number; sub?: string }) => (
     <div style={{ padding: "20px 24px", background: "rgba(255,255,255,.06)", border: "1px solid rgba(255,255,255,.1)" }}>
       <span style={{ ...MONO, display: "block", fontSize: 10, letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(255,255,255,.45)", marginBottom: 8 }}>{label}</span>
-      <span style={{ ...SANS, display: "block", fontSize: 32, fontWeight: 700, letterSpacing: "-.04em", color: "#fff", lineHeight: 1 }}>{value}</span>
+      <span style={{ ...SANS, display: "block", fontSize: 32, fontWeight: 700, letterSpacing: "-.04em", color: "var(--text-on-dark)", lineHeight: 1 }}>{value}</span>
       {sub && <span style={{ ...MONO, display: "block", marginTop: 6, fontSize: 11, color: "rgba(255,255,255,.4)" }}>{sub}</span>}
     </div>
   );
@@ -142,7 +142,7 @@ export default async function IntentionsPage() {
 
   if (!d) {
     return (
-      <main style={{ minHeight: "100vh", background: "#0D1117", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <main style={{ minHeight: "100vh", background: "var(--dark-0)", display: "flex", alignItems: "center", justifyContent: "center" }}>
         <p style={{ ...MONO, color: "rgba(255,255,255,.35)", fontSize: 13 }}>Supabase no configurado.</p>
       </main>
     );
@@ -151,12 +151,12 @@ export default async function IntentionsPage() {
   const noData = d.total === 0;
 
   return (
-    <main style={{ minHeight: "100vh", background: "#0D1117", padding: "clamp(48px,8vw,80px) clamp(24px,6vw,80px)" }}>
+    <main style={{ minHeight: "100vh", background: "var(--dark-0)", padding: "clamp(48px,8vw,80px) clamp(24px,6vw,80px)" }}>
 
       {/* HEADER */}
       <header style={{ marginBottom: 56, borderBottom: "1px solid rgba(255,255,255,.1)", paddingBottom: 28 }}>
         <div style={{ display: "flex", alignItems: "baseline", gap: 20, flexWrap: "wrap" }}>
-          <h1 style={{ ...SANS, margin: 0, fontSize: 22, fontWeight: 700, letterSpacing: "-.03em", color: "#fff" }}>
+          <h1 style={{ ...SANS, margin: 0, fontSize: 22, fontWeight: 700, letterSpacing: "-.03em", color: "var(--text-on-dark)" }}>
             Intentions Board <span style={{ ...MONO, fontSize: 12, color: "rgba(255,255,255,.35)", fontWeight: 400, marginLeft: 6 }}>v0</span>
           </h1>
           <span style={{ ...MONO, fontSize: 11, color: "rgba(255,255,255,.35)", letterSpacing: ".08em" }}>change.live · uso interno</span>
@@ -203,7 +203,7 @@ export default async function IntentionsPage() {
                       padding: "6px 12px",
                       background: "rgba(255,255,255,.07)",
                       border: `1px solid ${DIM_COLOR[key] ?? "rgba(255,255,255,.15)"}`,
-                      color: DIM_COLOR[key] ?? "#fff",
+                      color: DIM_COLOR[key] ?? "var(--text-on-dark)",
                     }}>
                       {DIM_LABEL[key] ?? key} · {count}
                     </span>
@@ -232,8 +232,8 @@ export default async function IntentionsPage() {
                   <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                     {d.simDims.map(({ key, count }) => (
                       <div key={key} style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                        <span aria-hidden="true" style={{ width: 6, height: 6, borderRadius: "50%", flexShrink: 0, background: DIM_COLOR[key] ?? "#fff" }} />
-                        <span style={{ ...SANS, fontSize: 13, color: "#fff", flex: 1 }}>{DIM_LABEL[key] ?? key}</span>
+                        <span aria-hidden="true" style={{ width: 6, height: 6, borderRadius: "50%", flexShrink: 0, background: DIM_COLOR[key] ?? "var(--text-on-dark)" }} />
+                        <span style={{ ...SANS, fontSize: 13, color: "var(--text-on-dark)", flex: 1 }}>{DIM_LABEL[key] ?? key}</span>
                         <span style={{ ...MONO, fontSize: 12, color: "rgba(255,255,255,.5)" }}>{count}</span>
                       </div>
                     ))}
@@ -248,7 +248,7 @@ export default async function IntentionsPage() {
                     <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                       {d.simScenarios.map(({ key, count }) => (
                         <div key={key} style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                          <span style={{ ...SANS, fontSize: 13, color: "#fff", flex: 1 }}>{SCENARIO_LABEL[key] ?? key}</span>
+                          <span style={{ ...SANS, fontSize: 13, color: "var(--text-on-dark)", flex: 1 }}>{SCENARIO_LABEL[key] ?? key}</span>
                           <span style={{ ...MONO, fontSize: 12, color: "rgba(255,255,255,.5)" }}>{count}</span>
                         </div>
                       ))}
@@ -280,7 +280,7 @@ export default async function IntentionsPage() {
                         <td style={{ ...MONO, padding: "12px 16px", fontSize: 11, color: "rgba(255,255,255,.4)" }}>
                           {new Date(c.created_at).toLocaleDateString("es-MX", { day: "2-digit", month: "short" })}
                         </td>
-                        <td style={{ ...SANS, padding: "12px 16px", fontSize: 13, color: "#fff" }}>{c.nombre}</td>
+                        <td style={{ ...SANS, padding: "12px 16px", fontSize: 13, color: "var(--text-on-dark)" }}>{c.nombre}</td>
                         <td style={{ ...SANS, padding: "12px 16px", fontSize: 13, color: "rgba(255,255,255,.6)" }}>{c.organizacion}</td>
                         <td style={{ ...MONO, padding: "12px 16px", fontSize: 11, color: "rgba(255,255,255,.35)", letterSpacing: ".06em" }}>{c.source}</td>
                       </tr>

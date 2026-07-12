@@ -176,7 +176,7 @@ img, svg { display: block; max-width: 100%; }
 .btn-primary { background: var(--gradient-btn-primary); color: #fff; box-shadow: var(--shadow-violet); }
 .btn-primary:hover { filter: brightness(0.94); transform: translateY(-1px); }
 .btn-primary:active { background: var(--gradient-btn-deep); transform: translateY(0); }
-.btn-secondary { background: #fff; color: var(--ink-graphite); border-color: rgba(46,46,51,.16); box-shadow: 0 4px 14px rgba(46,46,51,.05); }
+.btn-secondary { background: var(--btn-secondary-surface); color: var(--btn-secondary-text); border-color: var(--btn-secondary-outline); box-shadow: var(--btn-secondary-shadow); }
 .btn-secondary:hover { border-color: rgba(46,46,51,.32); box-shadow: 0 10px 28px rgba(46,46,51,.09); }
 .btn-light { background: #fff; color: var(--ink-graphite); }
 .btn-light:hover { background: var(--lavender-mist); }

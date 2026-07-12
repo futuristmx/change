@@ -121,7 +121,7 @@ export function CapacidadesView({ lang }: { lang: Lang }) {
       </section>
 
       {/* ═══ LAS 5 CAPACIDADES ═══ */}
-      <section style={{ borderTop: "1px solid var(--border-subtle)", background: "linear-gradient(180deg,#FFFFFF,var(--pure-white))" }}>
+      <section style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-white-pearl)" }}>
         <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(88px,11vw,160px) 0" }}>
           <Head kicker={t.fiveKicker} title={t.fiveTitle} lead={t.fiveLead} />
           <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
@@ -154,7 +154,7 @@ export function CapacidadesView({ lang }: { lang: Lang }) {
       </section>
 
       {/* ═══ CONSTRUCCIÓN PROGRESIVA (escalera viva line-and-node) ═══ */}
-      <section style={{ borderTop: "1px solid var(--border-subtle)", background: "linear-gradient(180deg,#FFFFFF,var(--pure-white))" }}>
+      <section style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-white-pearl)" }}>
         <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(88px,11vw,160px) 0" }}>
           <Head kicker={t.buildKicker} title={t.buildTitle} lead={t.buildLead} />
           <ProgressiveBuild stages={ESCALERA} lang={lang} />
@@ -164,7 +164,7 @@ export function CapacidadesView({ lang }: { lang: Lang }) {
       {/* ═══ CTA ═══ */}
       <section style={{ position: "relative", overflow: "hidden", background: "radial-gradient(circle at 50% -10%,color-mix(in srgb, var(--change-violet) 24%, transparent),transparent 52%),var(--surface-dark-secondary)" }}>
         <div style={{ position: "relative", width: WRAP, margin: "0 auto", padding: "clamp(88px,12vw,168px) 0", textAlign: "center" }}>
-          <Reveal as="h2" style={{ margin: "0 auto", maxWidth: "20ch", font: "600 clamp(32px,5vw,68px)/1.02 var(--font-primary)", letterSpacing: "-.05em", color: "#fff", textWrap: "balance" }}>{t.ctaTitle}</Reveal>
+          <Reveal as="h2" style={{ margin: "0 auto", maxWidth: "20ch", font: "600 clamp(32px,5vw,68px)/1.02 var(--font-primary)", letterSpacing: "-.05em", color: "var(--text-on-dark)", textWrap: "balance" }}>{t.ctaTitle}</Reveal>
           <Reveal delay={100} as="p" style={{ margin: "24px auto 0", maxWidth: 560, font: "400 clamp(16px,1.4vw,19px)/1.6 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>{t.ctaLead}</Reveal>
           <Reveal delay={160} style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12, marginTop: 38 }}>
             <Link href={localizeHref("/contacto", lang)} className="btn btn-light">{t.ctaWork}</Link>

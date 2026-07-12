@@ -164,7 +164,7 @@ function DescentFigure({ active, lang }: { active: number; lang: Lang }) {
 
         {/* área de spread — relleno gradiente que se contrae al descender */}
         <polygon className="sd-area" points={HEX} fill="url(#sd-area)" stroke={areaColor} strokeWidth="1.4" strokeOpacity="0.65"
-          style={{ transform: `scale(${focus})`, transition: "transform .6s var(--ease-premium), stroke .5s var(--ease-premium)" }} />
+          style={{ transform: `scale(${focus})`, transition: "transform var(--duration-enter) var(--ease-premium), stroke var(--duration-enter) var(--ease-premium)" }} />
 
         {/* núcleo — la decisión; se ilumina al llegar a lo interno */}
         <circle cx={CX} cy={CY} r="7" fill="url(#sd-core-g)"
@@ -209,7 +209,7 @@ function DescentFigure({ active, lang }: { active: number; lang: Lang }) {
         .sd-hud-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--signal-cyan); animation: sd-live 2.4s ease-in-out infinite; }
         .sd-hud-tr { top: 2px; right: 4px; font: 600 11px var(--font-mono); letter-spacing: .12em; color: var(--ink-graphite); }
         .sd-hud-bl { bottom: 0; left: 4px; display: flex; flex-direction: column; gap: 3px; }
-        .sd-hud-bl strong { font: 700 13px var(--font-mono); letter-spacing: .16em; transition: color .5s var(--ease-premium); }
+        .sd-hud-bl strong { font: 700 13px var(--font-mono); letter-spacing: .16em; transition: color var(--duration-enter) var(--ease-premium); }
         .sd-hud-bl em { font: 600 11px var(--font-mono); font-style: normal; letter-spacing: .05em; color: var(--text-faint); }
         .sd-hud-br { bottom: 4px; right: 4px; display: inline-flex; align-items: center; gap: 7px; font: 600 11px var(--font-mono); letter-spacing: .14em; color: var(--text-muted); }
         .sd-hud-live { width: 6px; height: 6px; border-radius: 50%; background: var(--success); animation: sd-live 2s ease-in-out infinite; }
@@ -263,18 +263,18 @@ export default function SystemicDescent({ lang = "es" }: { lang?: Lang }) {
               style={{
                 position: "relative", width: lv.width, minWidth: 280, textAlign: "left", border: "1px solid var(--border-subtle)",
                 borderLeft: `3px solid ${on ? lv.color : "var(--border-subtle)"}`,
-                background: on ? "#fff" : "rgba(255,255,255,.7)", cursor: "pointer", padding: "22px 26px 22px 52px",
+                background: on ? "var(--surface-card)" : "rgba(255,255,255,.7)", cursor: "pointer", padding: "22px 26px 22px 52px",
                 opacity: inView ? 1 : 0, transform: inView ? "translateX(0)" : "translateX(-10px)",
-                transition: `opacity .5s ${i * 130}ms, transform .5s ${i * 130}ms var(--ease-premium), border-color .3s, background .3s, width .4s var(--ease-premium), box-shadow .2s var(--ease-premium)`,
+                transition: `opacity var(--duration-enter) ${i * 130}ms, transform var(--duration-enter) ${i * 130}ms var(--ease-premium), border-color var(--duration-premium), background var(--duration-premium), width var(--duration-enter) var(--ease-premium), box-shadow var(--duration-standard) var(--ease-premium)`,
                 fontFamily: "var(--font-primary)",
               }}
             >
-              <span aria-hidden="true" style={{ position: "absolute", left: 12, top: 24, width: 18, height: 18, borderRadius: "50%", background: lv.color, boxShadow: on ? `0 0 0 5px #fff, 0 0 0 9px ${lv.color}22` : "0 0 0 5px #fff", transform: on ? "scale(1.1)" : "scale(1)", transition: "transform .3s" }} />
+              <span aria-hidden="true" style={{ position: "absolute", left: 12, top: 24, width: 18, height: 18, borderRadius: "50%", background: lv.color, boxShadow: on ? `0 0 0 5px var(--pure-white), 0 0 0 9px ${lv.color}22` : "0 0 0 5px var(--pure-white)", transform: on ? "scale(1.1)" : "scale(1)", transition: "transform var(--duration-premium)" }} />
               <div style={{ display: "flex", alignItems: "baseline", gap: 12, flexWrap: "wrap" }}>
                 <h3 style={{ margin: 0, font: "600 clamp(20px,2vw,28px) var(--font-primary)", letterSpacing: "-.03em", color: "var(--ink-graphite)" }}>{lv.k}</h3>
                 <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--text-faint)" }}>{lv.scale}</span>
               </div>
-              <p style={{ margin: "10px 0 0", font: "400 14.5px/1.55 var(--font-primary)", color: on ? "var(--text-muted)" : "var(--text-faint)", transition: "color .3s var(--ease-premium)" }}>{lv.p}</p>
+              <p style={{ margin: "10px 0 0", font: "400 14.5px/1.55 var(--font-primary)", color: on ? "var(--text-muted)" : "var(--text-faint)", transition: "color var(--duration-premium) var(--ease-premium)" }}>{lv.p}</p>
             </button>
           );
         })}
@@ -288,8 +288,8 @@ export default function SystemicDescent({ lang = "es" }: { lang?: Lang }) {
           onMouseEnter={() => setActive(3)}
           onClick={() => setActive(3)}
           onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setActive(3); } }}
-          style={{ position: "relative", width: "62%", minWidth: 300, marginTop: 12, cursor: "pointer", outline: "none", border: "1px solid var(--change-violet)", borderLeft: "3px solid var(--change-violet)", background: "color-mix(in srgb, var(--change-violet) 5%, #fff)", padding: "24px 28px 26px 52px", opacity: inView ? 1 : 0, boxShadow: active === 3 ? "0 0 0 1px var(--success), 0 10px 30px color-mix(in srgb, var(--success) 16%, transparent)" : "none", transition: "opacity .6s .5s, width .4s var(--ease-premium), box-shadow .4s var(--ease-premium)" }}>
-          <span aria-hidden="true" style={{ position: "absolute", left: 11, top: 26, width: 20, height: 20, borderRadius: "50%", background: "var(--change-violet)", boxShadow: "0 0 0 5px #fff, 0 6px 18px rgba(109,59,255,.3)" }} />
+          style={{ position: "relative", width: "62%", minWidth: 300, marginTop: 12, cursor: "pointer", outline: "none", border: "1px solid var(--change-violet)", borderLeft: "3px solid var(--change-violet)", background: "color-mix(in srgb, var(--change-violet) 5%, var(--surface-card))", padding: "24px 28px 26px 52px", opacity: inView ? 1 : 0, boxShadow: active === 3 ? "0 0 0 1px var(--success), 0 10px 30px color-mix(in srgb, var(--success) 16%, transparent)" : "none", transition: "opacity var(--duration-enter) var(--duration-enter), width var(--duration-enter) var(--ease-premium), box-shadow var(--duration-enter) var(--ease-premium)" }}>
+          <span aria-hidden="true" style={{ position: "absolute", left: 11, top: 26, width: 20, height: 20, borderRadius: "50%", background: "var(--change-violet)", boxShadow: "0 0 0 5px var(--pure-white), 0 6px 18px rgba(109,59,255,.3)" }} />
           <span aria-hidden="true" style={{ position: "absolute", left: 19, top: -14, fontSize: 18, color: "var(--change-violet)" }}>↓</span>
           <span style={{ display: "inline-flex", alignItems: "center", gap: 8, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--ink-graphite)" }}><span aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--change-violet)" }} />{DECISION.k}</span>
           <p style={{ margin: "10px 0 0", font: "400 15px/1.6 var(--font-primary)", color: "var(--deep-warm-gray)" }}>{DECISION.p}</p>

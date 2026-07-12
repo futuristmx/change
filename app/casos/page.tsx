@@ -255,7 +255,7 @@ export function CasosView({ lang }: { lang: Lang }) {
           caso={{ ...caso, img: CASOS_ES[idx].img, imgAlt: CASOS_ES[idx].imgAlt }}
           idx={idx}
           lang={lang}
-          bg={idx % 2 === 0 ? "var(--gradient-sky-pearl)" : "linear-gradient(180deg,#FFFFFF,var(--pure-white))"}
+          bg={idx % 2 === 0 ? "var(--gradient-sky-pearl)" : "var(--gradient-white-pearl)"}
         />
       ))}
 
@@ -266,13 +266,13 @@ export function CasosView({ lang }: { lang: Lang }) {
             <span data-pulse style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--signal-cyan)" }} />
             <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "rgba(255,255,255,.8)" }}>{t.patternK}</span>
           </Reveal>
-          <Reveal delay={60} as="h2" style={{ margin: "0 0 16px", maxWidth: "20ch", font: "600 clamp(30px,4.2vw,58px)/.99 var(--font-primary)", letterSpacing: "-.05em", color: "#fff", textWrap: "balance" }}>{t.patternH}</Reveal>
+          <Reveal delay={60} as="h2" style={{ margin: "0 0 16px", maxWidth: "20ch", font: "600 clamp(30px,4.2vw,58px)/.99 var(--font-primary)", letterSpacing: "-.05em", color: "var(--text-on-dark)", textWrap: "balance" }}>{t.patternH}</Reveal>
           <Reveal delay={100} as="p" style={{ margin: "0 0 clamp(40px,5vw,56px)", maxWidth: "62ch", font: "400 clamp(16px,1.3vw,19px)/1.55 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>{t.patternP}</Reveal>
           <div className="cs-pattern" style={{ display: "grid", gridTemplateColumns: "repeat(5,1fr)", gap: 16 }}>
             {t.pattern.map(([v, p, c], i) => (
               <Reveal key={v} delay={i * 70} style={{ position: "relative", paddingTop: 20, borderTop: "2px solid rgba(255,255,255,.14)" }}>
                 <span aria-hidden="true" style={{ position: "absolute", top: -6, left: 0, width: 9, height: 9, borderRadius: "50%", background: c }} />
-                <strong style={{ display: "block", font: "600 16px var(--font-primary)", letterSpacing: "-.02em", color: "#fff" }}>{v}</strong>
+                <strong style={{ display: "block", font: "600 16px var(--font-primary)", letterSpacing: "-.02em", color: "var(--text-on-dark)" }}>{v}</strong>
                 <span style={{ display: "block", marginTop: 8, font: "400 13px/1.5 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>{p}</span>
               </Reveal>
             ))}
@@ -283,7 +283,7 @@ export function CasosView({ lang }: { lang: Lang }) {
       {/* ═══ CTA ═══ */}
       <section style={{ position: "relative", overflow: "hidden", borderTop: "1px solid rgba(255,255,255,.1)", background: "radial-gradient(circle at 50% -10%,color-mix(in srgb, var(--change-violet) 24%, transparent),transparent 52%),var(--surface-dark-secondary)" }}>
         <div style={{ position: "relative", width: WRAP, margin: "0 auto", padding: "clamp(88px,12vw,168px) 0", textAlign: "center" }}>
-          <Reveal as="h2" style={{ margin: "0 auto", maxWidth: "20ch", font: "600 clamp(34px,5vw,72px)/1.0 var(--font-primary)", letterSpacing: "-.05em", color: "#fff", textWrap: "balance" }}>{t.ctaH}</Reveal>
+          <Reveal as="h2" style={{ margin: "0 auto", maxWidth: "20ch", font: "600 clamp(34px,5vw,72px)/1.0 var(--font-primary)", letterSpacing: "-.05em", color: "var(--text-on-dark)", textWrap: "balance" }}>{t.ctaH}</Reveal>
           <Reveal delay={100} as="p" style={{ margin: "24px auto 0", maxWidth: 580, font: "400 clamp(16px,1.4vw,19px)/1.6 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>{t.ctaP}</Reveal>
           <Reveal delay={160} style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12, marginTop: 38 }}>
             <Link href={localizeHref("/contacto", lang)} className="btn btn-light">{t.ctaWork}</Link>

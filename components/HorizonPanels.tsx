@@ -100,7 +100,7 @@ export default function HorizonPanels({ horizontes, minH = "clamp(420px,42vw,540
                 font: "700 11px var(--font-secondary)", letterSpacing: ".22em", textTransform: "uppercase",
                 color: dark ? "var(--pure-white)" : "var(--ink-graphite)",
                 opacity: on ? 0.28 : 0.6,
-                transition: "opacity .4s var(--ease-premium)",
+                transition: "opacity var(--duration-enter) var(--ease-premium)",
               }}>
                 {m.k}
               </span>
@@ -109,7 +109,7 @@ export default function HorizonPanels({ horizontes, minH = "clamp(420px,42vw,540
               <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, padding: "clamp(22px,2.4vw,38px)" }}>
                 <span aria-hidden="true" style={{
                   display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 12,
-                  font: "700 10.5px var(--font-secondary)", letterSpacing: ".16em", textTransform: "uppercase",
+                  font: "700 11px var(--font-secondary)", letterSpacing: ".16em", textTransform: "uppercase",
                   color: dark ? "color-mix(in srgb, var(--pure-white) 72%, transparent)" : "var(--text-muted)",
                 }}>
                   <span style={{ width: 6, height: 6, borderRadius: "50%", background: m.c }} />{m.k}
@@ -126,7 +126,7 @@ export default function HorizonPanels({ horizontes, minH = "clamp(420px,42vw,540
                   display: "grid",
                   gridTemplateRows: on ? "1fr" : "0fr",
                   opacity: on ? 1 : 0,
-                  transition: "grid-template-rows .5s var(--ease-premium), opacity .45s var(--ease-premium)",
+                  transition: "grid-template-rows var(--duration-enter) var(--ease-premium), opacity var(--duration-enter) var(--ease-premium)",
                 }}>
                   <div style={{ overflow: "hidden", minHeight: 0 }}>
                     <p style={{
@@ -143,7 +143,7 @@ export default function HorizonPanels({ horizontes, minH = "clamp(420px,42vw,540
       </div>
 
       <style>{`
-        .hp-panel { transition: border-color .3s var(--ease-premium), box-shadow .3s var(--ease-premium); }
+        .hp-panel { transition: border-color var(--duration-premium) var(--ease-premium), box-shadow var(--duration-premium) var(--ease-premium); }
         .hp-panel:hover { box-shadow: 0 14px 36px rgba(31,17,72,.1); }
         @media (max-width: 820px) {
           .hp-grid { grid-template-columns: 1fr !important; }

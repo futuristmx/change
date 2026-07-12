@@ -127,14 +127,14 @@ export default function MissionControlLive({ lang = "es" }: { lang?: Lang }) {
           <span data-pulse style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--evo-analysis)" }} />
           {ui.title}
         </span>
-        <span style={{ font: "700 10px var(--font-secondary)", letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(255,255,255,.35)" }}>{ui.demo}</span>
+        <span style={{ font: "700 11px var(--font-secondary)", letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(255,255,255,.35)" }}>{ui.demo}</span>
       </div>
 
       <div className="mcl-body" style={{ display: "grid", gridTemplateColumns: "minmax(0,1.5fr) minmax(0,1fr)", gap: 1, background: "rgba(255,255,255,.04)" }}>
 
         {/* ── Columna A: trazabilidad de la decisión ── */}
         <div style={{ background: "var(--surface-dark-tertiary)", padding: "26px 24px" }}>
-          <span style={{ font: "700 10px var(--font-secondary)", letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(217,210,255,.5)" }}>{ui.traceEyebrow}</span>
+          <span style={{ font: "700 11px var(--font-secondary)", letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(217,210,255,.5)" }}>{ui.traceEyebrow}</span>
           <p style={{ margin: "8px 0 24px", font: "400 13px/1.5 var(--font-primary)", color: "rgba(255,255,255,.65)" }}>
             {ui.traceLead}
           </p>
@@ -182,7 +182,7 @@ export default function MissionControlLive({ lang = "es" }: { lang?: Lang }) {
                       className="mcl-nlabel"
                       style={{
                         display: "block",
-                        font: "700 10px var(--font-secondary)",
+                        font: "700 11px var(--font-secondary)",
                         letterSpacing: ".06em",
                         textTransform: "uppercase",
                         color: on ? "rgba(255,255,255,.9)" : "rgba(255,255,255,.45)",
@@ -200,7 +200,7 @@ export default function MissionControlLive({ lang = "es" }: { lang?: Lang }) {
           {/* Panel del paso activo */}
           <div style={{ border: "1px solid rgba(255,255,255,.1)", borderLeft: `3px solid ${stageColor}`, background: "rgba(255,255,255,.03)", padding: "20px 22px", minHeight: 156 }}>
             <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 12, flexWrap: "wrap", marginBottom: 12 }}>
-              <span style={{ display: "inline-flex", alignItems: "center", gap: 8, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "#fff" }}>
+              <span style={{ display: "inline-flex", alignItems: "center", gap: 8, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--text-on-dark)" }}>
                 <span aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: stageColor }} />
                 <span aria-hidden="true" style={{ display: "inline-flex", color: stageColor }}>
                   <Glyph name={STAGE_GLYPHS[active] ?? "nav"} size={18} />
@@ -208,12 +208,12 @@ export default function MissionControlLive({ lang = "es" }: { lang?: Lang }) {
                 {stage.k}
               </span>
               {/* Estado en ramp */}
-              <span style={{ display: "inline-flex", alignItems: "center", gap: 6, font: "700 10px var(--font-secondary)", letterSpacing: ".12em", textTransform: "uppercase", color: stageColor }}>
+              <span style={{ display: "inline-flex", alignItems: "center", gap: 6, font: "700 11px var(--font-secondary)", letterSpacing: ".12em", textTransform: "uppercase", color: stageColor }}>
                 <span aria-hidden="true" style={{ width: 5, height: 5, borderRadius: "50%", background: stageColor }} />
                 {stage.evo}
               </span>
             </div>
-            <div style={{ font: "700 10px var(--font-secondary)", letterSpacing: ".1em", textTransform: "uppercase", color: "rgba(217,210,255,.45)", marginBottom: 8 }}>
+            <div style={{ font: "700 11px var(--font-secondary)", letterSpacing: ".1em", textTransform: "uppercase", color: "rgba(217,210,255,.45)", marginBottom: 8 }}>
               {stage.artefacto}
             </div>
             <p key={stage.k} style={{ margin: 0, font: "400 14.5px/1.6 var(--font-primary)", color: "rgba(255,255,255,.7)" }}>{stage.body}</p>
@@ -223,7 +223,7 @@ export default function MissionControlLive({ lang = "es" }: { lang?: Lang }) {
         {/* ── Columna B: señales + aprendizaje ── */}
         <div style={{ background: "var(--surface-dark-secondary)", padding: "26px 24px", display: "flex", flexDirection: "column", gap: 22 }}>
           <div>
-            <span style={{ font: "700 10px var(--font-secondary)", letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(255,255,255,.5)" }}>{ui.activeSignals}</span>
+            <span style={{ font: "700 11px var(--font-secondary)", letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(255,255,255,.5)" }}>{ui.activeSignals}</span>
             <div style={{ marginTop: 14, display: "flex", flexDirection: "column", gap: 13 }}>
               {SIGNALS.map((s, idx) => (
                 <div key={s.t} style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
@@ -233,7 +233,7 @@ export default function MissionControlLive({ lang = "es" }: { lang?: Lang }) {
                   />
                   <div>
                     <span style={{ display: "block", font: "400 13px/1.45 var(--font-primary)", color: "rgba(255,255,255,.7)" }}>{s.t}</span>
-                    <span style={{ display: "block", marginTop: 3, font: "700 9px var(--font-secondary)", letterSpacing: ".12em", textTransform: "uppercase", color: s.c, opacity: .8 }}>{s.evo}</span>
+                    <span style={{ display: "block", marginTop: 3, font: "700 11px var(--font-secondary)", letterSpacing: ".12em", textTransform: "uppercase", color: s.c, opacity: .8 }}>{s.evo}</span>
                   </div>
                 </div>
               ))}
@@ -241,10 +241,10 @@ export default function MissionControlLive({ lang = "es" }: { lang?: Lang }) {
           </div>
 
           <div style={{ paddingTop: 20, borderTop: "1px solid rgba(255,255,255,.08)" }}>
-            <span style={{ font: "700 10px var(--font-secondary)", letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(255,255,255,.5)" }}>{ui.learnStatus}</span>
+            <span style={{ font: "700 11px var(--font-secondary)", letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(255,255,255,.5)" }}>{ui.learnStatus}</span>
             <div style={{ marginTop: 12, display: "flex", alignItems: "center", gap: 10 }}>
               <span data-pulse style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--evo-validated)" }} />
-              <strong style={{ font: "600 15px var(--font-primary)", color: "#fff" }}>{ui.sustained}</strong>
+              <strong style={{ font: "600 15px var(--font-primary)", color: "var(--text-on-dark)" }}>{ui.sustained}</strong>
             </div>
             <p style={{ margin: "8px 0 0", font: "400 13px/1.5 var(--font-primary)", color: "rgba(255,255,255,.65)" }}>
               {ui.learnBody}
@@ -258,7 +258,7 @@ export default function MissionControlLive({ lang = "es" }: { lang?: Lang }) {
         {METRICS.map((m) => (
           <div key={m.label} style={{ background: "var(--surface-dark-tertiary)", padding: "18px 22px" }}>
             <div style={{ font: "300 clamp(28px,3vw,38px)/1 var(--font-secondary)", color: m.c, letterSpacing: "-.02em" }}>{m.v}</div>
-            <div style={{ marginTop: 6, font: "700 10px var(--font-secondary)", letterSpacing: ".1em", textTransform: "uppercase", color: "rgba(255,255,255,.5)" }}>{m.label}</div>
+            <div style={{ marginTop: 6, font: "700 11px var(--font-secondary)", letterSpacing: ".1em", textTransform: "uppercase", color: "rgba(255,255,255,.5)" }}>{m.label}</div>
             <div style={{ marginTop: 4, font: "400 11.5px var(--font-primary)", color: m.c, opacity: .75 }}>{m.delta}</div>
           </div>
         ))}
@@ -266,9 +266,9 @@ export default function MissionControlLive({ lang = "es" }: { lang?: Lang }) {
 
       {/* ── Evolution ramp legend ── */}
       <div style={{ padding: "14px 22px", borderTop: "1px solid rgba(255,255,255,.06)", display: "flex", alignItems: "center", gap: 20, flexWrap: "wrap" }}>
-        <span style={{ font: "700 9px var(--font-secondary)", letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(255,255,255,.3)" }}>{ui.statusLabel}</span>
+        <span style={{ font: "700 11px var(--font-secondary)", letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(255,255,255,.3)" }}>{ui.statusLabel}</span>
         {ui.legend.map((r) => (
-          <span key={r.l} style={{ display: "inline-flex", alignItems: "center", gap: 6, font: "700 9px var(--font-secondary)", letterSpacing: ".1em", textTransform: "uppercase", color: r.c }}>
+          <span key={r.l} style={{ display: "inline-flex", alignItems: "center", gap: 6, font: "700 11px var(--font-secondary)", letterSpacing: ".1em", textTransform: "uppercase", color: r.c }}>
             <span aria-hidden="true" style={{ width: 6, height: 6, borderRadius: "50%", background: r.c }} />
             {r.l}
           </span>

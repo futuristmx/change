@@ -126,9 +126,9 @@ export function HomeView({ lang }: { lang: Lang }) {
                 ))}
               </div>
               <style>{`
-                .ch-arcglyph { display: inline-flex; color: var(--ink-graphite); opacity: .68; transition: color .3s var(--ease-premium), opacity .3s var(--ease-premium), transform .3s var(--ease-premium); }
-                .ch-arcdot { width: 8px; height: 8px; border-radius: 999px; background: var(--ink-graphite); opacity: .5; transition: background .3s var(--ease-premium), opacity .3s var(--ease-premium); }
-                .ch-arclabel { font: 600 var(--text-meta) var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); transition: color .3s var(--ease-premium); }
+                .ch-arcglyph { display: inline-flex; color: var(--ink-graphite); opacity: .68; transition: color var(--duration-premium) var(--ease-premium), opacity var(--duration-premium) var(--ease-premium), transform var(--duration-premium) var(--ease-premium); }
+                .ch-arcdot { width: 8px; height: 8px; border-radius: 999px; background: var(--ink-graphite); opacity: .5; transition: background var(--duration-premium) var(--ease-premium), opacity var(--duration-premium) var(--ease-premium); }
+                .ch-arclabel { font: 600 var(--text-meta) var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--text-muted); transition: color var(--duration-premium) var(--ease-premium); }
                 .ch-arcitem:hover .ch-arcglyph { color: var(--ac); opacity: 1; transform: translateY(-2px); }
                 .ch-arcitem:hover .ch-arcdot { background: var(--ac); opacity: 1; }
                 .ch-arcitem:hover .ch-arclabel { color: var(--ink-graphite); }
@@ -211,7 +211,7 @@ export function HomeView({ lang }: { lang: Lang }) {
                   <span data-pulse style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--signal-cyan)" }} />
                   <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "rgba(255,255,255,.8)" }}>{t.whyKicker}</span>
                 </Reveal>
-                <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(34px,4.4vw,64px)/.98 var(--font-primary)", letterSpacing: "-.05em", color: "#fff", textWrap: "balance" }}>{t.whyTitle}</Reveal>
+                <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(34px,4.4vw,64px)/.98 var(--font-primary)", letterSpacing: "-.05em", color: "var(--text-on-dark)", textWrap: "balance" }}>{t.whyTitle}</Reveal>
                 <Reveal delay={120} as="p" style={{ margin: "24px 0 0", maxWidth: 500, font: "400 clamp(17px,1.5vw,21px)/1.5 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>{t.whyLead}</Reveal>
                 <Reveal delay={180} style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 36 }}>
                   <Link href={localizeHref("/equipo", lang)} className="btn btn-light">{t.whyCta1}</Link>
@@ -236,7 +236,7 @@ export function HomeView({ lang }: { lang: Lang }) {
               <span data-pulse style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--signal-cyan)" }} />
               <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "rgba(255,255,255,.8)" }}>{t.ctaKicker}</span>
             </Reveal>
-            <Reveal delay={60} as="h2" style={{ margin: "0 auto", maxWidth: "18ch", font: "600 clamp(36px,5vw,76px)/1.0 var(--font-primary)", letterSpacing: "-.05em", color: "#fff", textWrap: "balance" }}>{t.ctaTitle}</Reveal>
+            <Reveal delay={60} as="h2" style={{ margin: "0 auto", maxWidth: "18ch", font: "600 clamp(36px,5vw,76px)/1.0 var(--font-primary)", letterSpacing: "-.05em", color: "var(--text-on-dark)", textWrap: "balance" }}>{t.ctaTitle}</Reveal>
             <Reveal delay={140} style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12, marginTop: 40 }}>
               <Link href={localizeHref("/contacto", lang)} className="btn btn-light">{t.ctaWork}</Link>
             </Reveal>
@@ -247,7 +247,7 @@ export function HomeView({ lang }: { lang: Lang }) {
       <Footer lang={lang} />
 
       <style>{`
-        .ch-tenlink { transition: color .15s ease; }
+        .ch-tenlink { transition: color var(--duration-fast) ease; }
         .ch-tenlink:hover { color: var(--ink-graphite) !important; }
         @media (max-width: 980px) {
           .ch-missionshell { grid-template-columns: 1fr !important; }

@@ -68,23 +68,23 @@ export default function FoundersPanels({ founders }: { founders: Founder[] }) {
               <span
                 aria-hidden="true"
                 className="fp-vlabel"
-                style={{ position: "absolute", top: "clamp(22px,3.5vw,38px)", left: "clamp(16px,2vw,26px)", writingMode: "vertical-rl", transform: "rotate(180deg)", font: "700 11px var(--font-secondary)", letterSpacing: ".22em", textTransform: "uppercase", color: "rgba(255,255,255,.62)", opacity: on ? 0.4 : 0.9, transition: "opacity .4s var(--ease-premium)" }}
+                style={{ position: "absolute", top: "clamp(22px,3.5vw,38px)", left: "clamp(16px,2vw,26px)", writingMode: "vertical-rl", transform: "rotate(180deg)", font: "700 11px var(--font-secondary)", letterSpacing: ".22em", textTransform: "uppercase", color: "rgba(255,255,255,.62)", opacity: on ? 0.4 : 0.9, transition: "opacity var(--duration-enter) var(--ease-premium)" }}
               >
                 {m.role} · {m.arc}
               </span>
 
               {/* contenido inferior */}
               <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, padding: "clamp(22px,2.4vw,40px)" }}>
-                <span aria-hidden="true" style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 12, font: "700 10.5px var(--font-secondary)", letterSpacing: ".16em", textTransform: "uppercase", color: "rgba(255,255,255,.62)" }}>
+                <span aria-hidden="true" style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 12, font: "700 11px var(--font-secondary)", letterSpacing: ".16em", textTransform: "uppercase", color: "rgba(255,255,255,.62)" }}>
                   <span style={{ width: 6, height: 6, borderRadius: "50%", background: m.c }} />{m.role}
                 </span>
-                <h3 style={{ margin: 0, font: "600 clamp(22px,2.3vw,34px)/1.03 var(--font-primary)", letterSpacing: "-.03em", color: "#fff" }}>{m.n}</h3>
+                <h3 style={{ margin: 0, font: "600 clamp(22px,2.3vw,34px)/1.03 var(--font-primary)", letterSpacing: "-.03em", color: "var(--text-on-dark)" }}>{m.n}</h3>
 
                 {/* revelado al expandir */}
-                <div className="fp-reveal" style={{ display: "grid", gridTemplateRows: on ? "1fr" : "0fr", opacity: on ? 1 : 0, transition: "grid-template-rows .5s var(--ease-premium), opacity .45s var(--ease-premium)" }}>
+                <div className="fp-reveal" style={{ display: "grid", gridTemplateRows: on ? "1fr" : "0fr", opacity: on ? 1 : 0, transition: "grid-template-rows var(--duration-enter) var(--ease-premium), opacity var(--duration-enter) var(--ease-premium)" }}>
                   <div style={{ overflow: "hidden", minHeight: 0 }}>
                     <span style={{ display: "block", marginTop: 8, font: "500 12.5px var(--font-mono)", letterSpacing: ".02em", color: "rgba(255,255,255,.66)" }}>{m.domain}</span>
-                    <p style={{ margin: "16px 0 0", font: "600 clamp(15px,1.3vw,18px)/1.34 var(--font-primary)", letterSpacing: "-.015em", color: "#fff", maxWidth: "30ch" }}>{m.tagline}</p>
+                    <p style={{ margin: "16px 0 0", font: "600 clamp(15px,1.3vw,18px)/1.34 var(--font-primary)", letterSpacing: "-.015em", color: "var(--text-on-dark)", maxWidth: "30ch" }}>{m.tagline}</p>
                     <p style={{ margin: "12px 0 0", font: "400 14px/1.6 var(--font-primary)", color: "rgba(255,255,255,.82)", maxWidth: "46ch" }}>{m.story}</p>
                   </div>
                 </div>
@@ -95,7 +95,7 @@ export default function FoundersPanels({ founders }: { founders: Founder[] }) {
       </div>
 
       <style>{`
-        .fp-panel { transition: border-color .3s var(--ease-premium); }
+        .fp-panel { transition: border-color var(--duration-premium) var(--ease-premium); }
         @media (max-width: 820px) {
           .fp-grid { grid-template-columns: 1fr !important; }
           .fp-panel { min-height: clamp(420px,80vw,520px) !important; }
