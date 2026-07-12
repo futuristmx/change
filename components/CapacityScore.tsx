@@ -172,9 +172,9 @@ export default function CapacityScore({ lang = "es" }: { lang?: Lang }) {
             return (
               <button key={o.v} onClick={() => answer(o.v)} role="radio" aria-checked={on}
                 style={{ display: "flex", alignItems: "center", gap: 12, textAlign: "left", cursor: "pointer", width: "100%",
-                  border: `1px solid ${on ? "var(--change-violet)" : "var(--border-subtle)"}`, background: on ? "color-mix(in srgb, var(--change-violet) 5%, #fff)" : "#fff",
+                  border: `1px solid ${on ? "var(--change-violet)" : "var(--border-subtle)"}`, background: on ? "color-mix(in srgb, var(--change-violet) 5%, var(--surface-card))" : "var(--surface-card)",
                   padding: "14px 18px", font: "400 15.5px var(--font-primary)", color: "var(--ink-graphite)", transition: "border-color .2s, background .2s" }}>
-                <span aria-hidden="true" style={{ flexShrink: 0, width: 16, height: 16, borderRadius: "50%", border: `2px solid ${on ? "var(--change-violet)" : "var(--soft-stone-gray)"}`, background: on ? "var(--change-violet)" : "transparent", boxShadow: on ? "inset 0 0 0 2px #fff" : "none", transition: "all .2s" }} />
+                <span aria-hidden="true" style={{ flexShrink: 0, width: 16, height: 16, borderRadius: "50%", border: `2px solid ${on ? "var(--change-violet)" : "var(--soft-stone-gray)"}`, background: on ? "var(--change-violet)" : "transparent", boxShadow: on ? "inset 0 0 0 2px var(--pure-white)" : "none", transition: "all .2s" }} />
                 {lang === "en" ? o.en : o.es}
               </button>
             );

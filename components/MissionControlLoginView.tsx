@@ -55,7 +55,7 @@ const FIELD: React.CSSProperties = {
   padding: "0 14px",
   background: "rgba(255,255,255,.045)",
   border: "1px solid rgba(255,255,255,.18)",
-  color: "#F0F1F5",
+  color: "var(--dark-text)",
   font: "400 15px var(--font-primary)",
   letterSpacing: "-0.005em",
   outline: "none",
@@ -126,7 +126,7 @@ export function LoginView({ lang }: { lang: Lang }) {
               <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "rgba(255,255,255,.82)" }}>{t.badge}</span>
             </div>
 
-            <h1 style={{ margin: "0 0 18px", maxWidth: "14ch", font: "600 clamp(34px,4.4vw,58px)/1.0 var(--font-primary)", letterSpacing: "-.045em", color: "#fff", textWrap: "balance" }}>
+            <h1 style={{ margin: "0 0 18px", maxWidth: "14ch", font: "600 clamp(34px,4.4vw,58px)/1.0 var(--font-primary)", letterSpacing: "-.045em", color: "var(--text-on-dark)", textWrap: "balance" }}>
               {t.h1}
             </h1>
             <p style={{ margin: 0, maxWidth: "46ch", font: "400 clamp(15px,1.3vw,18px)/1.55 var(--font-primary)", color: "rgba(240,244,255,.72)" }}>
@@ -160,7 +160,7 @@ export function LoginView({ lang }: { lang: Lang }) {
             <span style={{ display: "block", font: "600 11px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--lavender-mist)" }}>
               {t.signin}
             </span>
-            <h2 style={{ margin: "8px 0 28px", font: "600 clamp(22px,2.2vw,28px)/1.15 var(--font-primary)", letterSpacing: "-.025em", color: "#fff" }}>
+            <h2 style={{ margin: "8px 0 28px", font: "600 clamp(22px,2.2vw,28px)/1.15 var(--font-primary)", letterSpacing: "-.025em", color: "var(--text-on-dark)" }}>
               {t.welcome}
             </h2>
 
@@ -223,7 +223,7 @@ export function LoginView({ lang }: { lang: Lang }) {
               {/* SSO separator */}
               <div style={{ display: "flex", alignItems: "center", gap: 12, margin: "8px 0 0" }}>
                 <span aria-hidden="true" style={{ flex: 1, height: 1, background: "rgba(255,255,255,.1)" }} />
-                <span style={{ font: "600 10.5px var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "rgba(240,244,255,.5)" }}>{t.ssoSep}</span>
+                <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "rgba(240,244,255,.5)" }}>{t.ssoSep}</span>
                 <span aria-hidden="true" style={{ flex: 1, height: 1, background: "rgba(255,255,255,.1)" }} />
               </div>
 
@@ -252,13 +252,13 @@ export function LoginView({ lang }: { lang: Lang }) {
                 >
                   <strong style={{ display: "block", marginBottom: 4, font: "600 12.5px var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--lavender-mist)" }}>{t.restricted}</strong>
                   {t.infoPre}
-                  <Link href={localizeHref("/contacto", lang)} style={{ color: "#fff", textDecoration: "underline", textUnderlineOffset: 3 }}>{t.contactLink}</Link>{t.infoPost}
+                  <Link href={localizeHref("/contacto", lang)} style={{ color: "var(--text-on-dark)", textDecoration: "underline", textUnderlineOffset: 3 }}>{t.contactLink}</Link>{t.infoPost}
                 </div>
               )}
             </div>
 
             <div style={{ marginTop: 28, paddingTop: 18, borderTop: "1px solid rgba(255,255,255,.08)", display: "flex", flexWrap: "wrap", gap: 10, justifyContent: "space-between", alignItems: "center" }}>
-              <span style={{ font: "600 10.5px var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "rgba(240,244,255,.5)" }}>{t.ver}</span>
+              <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "rgba(240,244,255,.5)" }}>{t.ver}</span>
               <Link href={localizeHref("/mission-control", lang)} style={{ font: "400 12.5px var(--font-primary)", color: "rgba(240,244,255,.62)" }}>{t.backMC}</Link>
             </div>
           </form>

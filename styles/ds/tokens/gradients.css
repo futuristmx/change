@@ -8,6 +8,7 @@
 :root {
   /* ── Light atmospheres ── */
   --gradient-celestial-horizon: linear-gradient(180deg, #DCEAF5 0%, #F5F6F7 48%, #F3EEE9 100%);  /* @kind color */
+  --gradient-white-pearl:       linear-gradient(180deg, var(--white-absolute) 0%, var(--pure-white) 100%);  /* @kind color · sección blanco puro → blanco perla */
   --gradient-violet-atmosphere: linear-gradient(135deg, rgba(109,59,255,0.18) 0%, rgba(138,108,255,0.10) 42%, rgba(255,255,255,0) 100%);  /* @kind color */
   --gradient-sky-pearl:         linear-gradient(135deg, rgba(220,234,245,0.60) 0%, rgba(255,255,255,0.90) 55%, rgba(243,238,233,0.42) 100%);  /* @kind color */
   --gradient-ethereal-glow:     radial-gradient(circle at top center, rgba(138,108,255,0.18) 0%, rgba(220,234,245,0.12) 34%, rgba(255,255,255,0) 70%);  /* @kind color */

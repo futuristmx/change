@@ -83,7 +83,7 @@ export default function FloatingContactTab() {
           {status === "ok" ? (
             <div className="fct-ok" role="status" aria-live="polite">
               <span className="fct-ok-mark" aria-hidden="true">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" style={{ color: "var(--text-inverse)" }} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
               </span>
               <strong className="fct-ok-title">{t.okTitle}</strong>
               <span className="fct-ok-body">{t.okBody}</span>
@@ -155,7 +155,7 @@ export default function FloatingContactTab() {
           border: 1px solid rgba(255,255,255,.12); border-right: none;
           box-shadow: -10px 0 36px rgba(10,12,20,.42);
           color: rgba(255,255,255,.85);
-          transition: background .3s var(--ease-premium), box-shadow .3s var(--ease-premium);
+          transition: background var(--duration-premium) var(--ease-premium), box-shadow var(--duration-premium) var(--ease-premium);
         }
         .fct-handle:hover { background: linear-gradient(180deg, color-mix(in srgb, var(--change-violet) 52%, var(--surface-dark)) 0%, var(--surface-dark) 72%, var(--surface-dark-secondary) 100%); box-shadow: -12px 0 44px rgba(109,59,255,.28); }
         .fct-handle:focus-visible { outline: 2px solid var(--soft-violet); outline-offset: 2px; }
@@ -165,7 +165,7 @@ export default function FloatingContactTab() {
           font: 700 12px var(--font-secondary); letter-spacing: .22em; text-transform: uppercase;
           color: rgba(255,255,255,.82);
         }
-        .fct-chev { display: inline-flex; color: var(--change-violet-300); transition: transform .6s var(--ease-premium); }
+        .fct-chev { display: inline-flex; color: var(--change-violet-300); transition: transform var(--duration-enter) var(--ease-premium); }
         .fct-open .fct-chev { transform: rotate(180deg); }
 
         /* ── Panel expansible ── */
@@ -175,7 +175,7 @@ export default function FloatingContactTab() {
           background: linear-gradient(150deg, color-mix(in srgb, var(--change-violet) 16%, var(--surface-dark)) 0%, var(--surface-dark) 52%, var(--surface-dark-secondary) 100%);
           border: 1px solid rgba(138,108,255,.22); border-right: none;
           box-shadow: -22px 0 60px rgba(10,12,20,.5);
-          transition: width .6s var(--ease-premium);
+          transition: width var(--duration-enter) var(--ease-premium);
         }
         .fct-open .fct-panel { width: var(--fctw); }
         .fct-inner {
@@ -183,37 +183,37 @@ export default function FloatingContactTab() {
           padding: clamp(20px,2.4vw,28px) clamp(20px,2.4vw,26px);
           display: flex; flex-direction: column; justify-content: center;
           opacity: 0; transform: translateX(14px);
-          transition: opacity .42s var(--ease-premium), transform .5s var(--ease-premium);
+          transition: opacity var(--duration-enter) var(--ease-premium), transform var(--duration-enter) var(--ease-premium);
         }
-        .fct-open .fct-inner { opacity: 1; transform: translateX(0); transition-delay: .14s; }
+        .fct-open .fct-inner { opacity: 1; transform: translateX(0); transition-delay: var(--duration-fast); }
 
         .fct-eyebrow { font: 600 11px var(--font-mono); letter-spacing: .16em; text-transform: uppercase; color: var(--change-violet-300); margin-bottom: 12px; }
-        .fct-heading { margin: 0 0 18px; font: 600 clamp(16px,1.5vw,19px)/1.32 var(--font-primary); letter-spacing: -.02em; color: #fff; max-width: 30ch; }
+        .fct-heading { margin: 0 0 18px; font: 600 clamp(16px,1.5vw,19px)/1.32 var(--font-primary); letter-spacing: -.02em; color: var(--dark-text); max-width: 30ch; }
         .fct-form { margin: 0; }
         .fct-row { display: flex; gap: 8px; align-items: stretch; }
         .fct-input {
           flex: 1; min-width: 0; height: 44px; padding: 0 13px;
           background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.18);
-          color: #F0F1F5; font: 400 14.5px var(--font-primary); outline: none; border-radius: 0;
-          transition: border-color .2s var(--ease-premium), background .2s var(--ease-premium);
+          color: var(--dark-text); font: 400 14.5px var(--font-primary); outline: none; border-radius: 0;
+          transition: border-color var(--duration-standard) var(--ease-premium), background var(--duration-standard) var(--ease-premium);
         }
         .fct-input::placeholder { color: rgba(240,244,255,.42); }
         .fct-input:focus { border-color: var(--soft-violet); background: rgba(255,255,255,.08); }
         .fct-submit {
           flex-shrink: 0; width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center;
-          background: var(--change-violet); border: none; color: #fff; cursor: pointer;
-          transition: background .2s var(--ease-premium), opacity .2s;
+          background: var(--change-violet); border: none; color: var(--text-inverse); cursor: pointer;
+          transition: background var(--duration-standard) var(--ease-premium), opacity var(--duration-standard);
         }
         .fct-submit:hover { background: var(--soft-violet); }
         .fct-submit:disabled { opacity: .7; cursor: wait; }
         .fct-submit:focus-visible { outline: 2px solid var(--soft-violet); outline-offset: 2px; }
         .fct-err { display: block; margin-top: 9px; font: 400 12.5px var(--font-primary); color: var(--change-violet-300); }
-        .fct-spin { width: 16px; height: 16px; border: 2px solid rgba(255,255,255,.35); border-top-color: #fff; border-radius: 50%; animation: fct-spin .7s linear infinite; }
+        .fct-spin { width: 16px; height: 16px; border: 2px solid rgba(255,255,255,.35); border-top-color: var(--text-inverse); border-radius: 50%; animation: fct-spin .7s linear infinite; }
         @keyframes fct-spin { to { transform: rotate(360deg); } }
 
         .fct-ok { display: flex; flex-direction: column; gap: 8px; }
         .fct-ok-mark { width: 36px; height: 36px; border-radius: 50%; background: var(--success); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 4px; }
-        .fct-ok-title { font: 600 18px var(--font-primary); letter-spacing: -.02em; color: #fff; }
+        .fct-ok-title { font: 600 18px var(--font-primary); letter-spacing: -.02em; color: var(--dark-text); }
         .fct-ok-body { font: 400 14px/1.5 var(--font-primary); color: rgba(240,244,255,.78); max-width: 28ch; }
 
         @media (max-width: 600px) {

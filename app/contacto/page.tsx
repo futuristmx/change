@@ -42,7 +42,7 @@ export function ContactoView({ lang }: { lang: Lang }) {
       <DecisionSimulator lang={lang} />
 
       {/* Forma alternativa — mensaje directo */}
-      <section style={{ borderTop: "1px solid var(--border-subtle)", background: "linear-gradient(180deg,#FFFFFF,var(--pure-white))" }}>
+      <section style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-white-pearl)" }}>
         <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(64px,8vw,112px) 0" }}>
           <div style={{ maxWidth: 640 }}>
             <p style={{ margin: "0 0 6px", font: "600 11.5px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-muted)" }}>{t.altK}</p>

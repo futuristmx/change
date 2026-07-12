@@ -80,14 +80,14 @@ export default function AscentLayers({ levels, lang = "es" }: { levels: AscentLe
           background: linear-gradient(180deg, var(--change-violet), var(--human-pink) 52%, var(--signal-cyan));
           opacity: 0; transform: scaleY(0); transform-origin: top center;
           box-shadow: 0 0 14px color-mix(in srgb, var(--soft-violet) 50%, transparent);
-          transition: opacity .6s var(--ease-premium), transform 1.1s var(--ease-premium);
+          transition: opacity var(--duration-enter) var(--ease-premium), transform 1.1s var(--ease-premium);
         }
         .al-in .al-axis { opacity: .6; transform: scaleY(1); }
 
         .al-layer {
           position: relative; display: grid; grid-template-columns: 120px 1fr; gap: clamp(18px,2.4vw,34px);
           align-items: center; opacity: 0; transform: translateY(18px);
-          transition: opacity .7s var(--d,0ms) var(--ease-premium), transform .7s var(--d,0ms) var(--ease-premium);
+          transition: opacity 700ms var(--d,0ms) var(--ease-premium), transform 700ms var(--d,0ms) var(--ease-premium);
         }
         .al-in .al-layer { opacity: 1; transform: translateY(0); }
 
@@ -100,7 +100,7 @@ export default function AscentLayers({ levels, lang = "es" }: { levels: AscentLe
           background: radial-gradient(circle at 50% 50%, color-mix(in srgb, var(--c) 26%, transparent), transparent 68%);
           box-shadow: 0 0 26px color-mix(in srgb, var(--c) 36%, transparent), inset 0 0 20px color-mix(in srgb, var(--c) 20%, transparent);
           transform: rotateX(64deg) scale(.5); opacity: 0;
-          transition: transform .85s var(--d,0ms) var(--ease-premium), opacity .85s var(--d,0ms) var(--ease-premium);
+          transition: transform 850ms var(--d,0ms) var(--ease-premium), opacity 850ms var(--d,0ms) var(--ease-premium);
         }
         .al-in .al-disc { transform: rotateX(64deg) scale(1); opacity: 1; }
 
@@ -114,14 +114,14 @@ export default function AscentLayers({ levels, lang = "es" }: { levels: AscentLe
         .al-beam {
           position: absolute; left: 50%; top: 14px; width: 2px; height: 44px; margin-left: -1px;
           background: linear-gradient(180deg, transparent, var(--c)); opacity: 0;
-          transition: opacity .6s calc(var(--d,0ms) + 240ms) var(--ease-premium);
+          transition: opacity var(--duration-enter) calc(var(--d,0ms) + 240ms) var(--ease-premium);
         }
         .al-in .al-beam { opacity: .5; }
 
         /* nodo que flota sobre el horizonte */
         .al-node {
           position: relative; z-index: 2; width: 46px; height: 46px; border-radius: 50%;
-          display: inline-flex; align-items: center; justify-content: center; color: #fff;
+          display: inline-flex; align-items: center; justify-content: center; color: var(--text-inverse);
           background: color-mix(in srgb, var(--c) 24%, var(--surface-dark));
           border: 1.5px solid var(--c);
           box-shadow: 0 0 0 5px var(--surface-dark), 0 10px 26px color-mix(in srgb, var(--c) 42%, transparent);
@@ -135,7 +135,7 @@ export default function AscentLayers({ levels, lang = "es" }: { levels: AscentLe
         .al-meta { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 9px; }
         .al-tag {
           font: 600 var(--text-meta) var(--font-mono); letter-spacing: .12em; text-transform: uppercase;
-          color: color-mix(in srgb, var(--c) 58%, #fff);
+          color: color-mix(in srgb, var(--c) 58%, var(--pure-white));
         }
         .al-alt {
           display: inline-flex; align-items: center; gap: 8px;
@@ -143,7 +143,7 @@ export default function AscentLayers({ levels, lang = "es" }: { levels: AscentLe
           color: rgba(255,255,255,.5);
         }
         .al-alt-ticks { width: 22px; height: 7px; background-image: repeating-linear-gradient(90deg, rgba(255,255,255,.45) 0 1px, transparent 1px 5px); }
-        .al-title { margin: 0; font: 600 clamp(20px,1.9vw,26px)/1.06 var(--font-primary); letter-spacing: -.03em; color: #fff; }
+        .al-title { margin: 0; font: 600 clamp(20px,1.9vw,26px)/1.06 var(--font-primary); letter-spacing: -.03em; color: var(--text-on-dark); }
         .al-summit .al-title { font-size: clamp(22px,2.1vw,29px); }
         .al-desc { margin: 11px 0 0; max-width: 60ch; font: 400 14.5px/1.55 var(--font-primary); color: rgba(255,255,255,.8); }
 

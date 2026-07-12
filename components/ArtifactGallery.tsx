@@ -318,7 +318,7 @@ function ArtCard({ art, i, active, onToggle, lang }: ArtCardProps) {
       <span style={{ display: "block", font: "400 13px/1.55 var(--font-primary)", color: "var(--text-muted)", flexGrow: 1 }}>{art.p}</span>
 
       {/* Slot 8 — state feedback */}
-      <span aria-hidden="true" style={{ marginTop: 16, font: "700 10px var(--font-secondary)", letterSpacing: ".1em", textTransform: "uppercase", color: active ? art.c : "var(--text-faint)", transition: "color .18s ease" }}>
+      <span aria-hidden="true" style={{ marginTop: 16, font: "700 11px var(--font-secondary)", letterSpacing: ".1em", textTransform: "uppercase", color: active ? art.c : "var(--text-faint)", transition: "color .18s ease" }}>
         {active ? ART_UI[lang].close : ART_UI[lang].open}
       </span>
     </button>
@@ -436,7 +436,7 @@ function DetailPanel({ sel, selected, lang }: { sel: Artifact; selected: number;
         <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 28 }}>
           <span aria-hidden="true" style={{ width: 8, height: 8, borderRadius: "50%", background: sel.c, flexShrink: 0 }} />
           <span style={{ font: "600 13px var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--ink-graphite)" }}>{sel.h}</span>
-          <span style={{ font: "700 10px var(--font-secondary)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-muted)", marginLeft: 4 }}>· {sel.k}</span>
+          <span style={{ font: "700 11px var(--font-secondary)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-muted)", marginLeft: 4 }}>· {sel.k}</span>
         </div>
 
         {/* Diagrama del instrumento + datos esenciales */}
@@ -447,7 +447,7 @@ function DetailPanel({ sel, selected, lang }: { sel: Artifact; selected: number;
           <div className="art-detail-cols" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "26px 32px" }}>
             {DETAIL_KEYS.map((key) => (
               <div key={key}>
-                <span style={{ display: "block", font: "700 10px var(--font-secondary)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-faint)", marginBottom: 9 }}>
+                <span style={{ display: "block", font: "700 11px var(--font-secondary)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-faint)", marginBottom: 9 }}>
                   {COL_LABELS[lang][key]}
                 </span>
                 <p style={{ margin: 0, font: "400 14px/1.6 var(--font-primary)", color: "var(--ink-graphite)" }}>{sel[key]}</p>

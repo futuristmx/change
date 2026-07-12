@@ -133,13 +133,13 @@ export default function Footer({ lang = "es" }: { lang?: Lang }) {
           <span style={{ font: "400 12.5px var(--font-primary)", color: "rgba(240,244,255,.5)" }}>{t.copy}</span>
           <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
             <LanguageToggle variant="dark" />
-            <span style={{ font: "700 10px var(--font-secondary)", letterSpacing: ".16em", textTransform: "uppercase", color: "rgba(240,244,255,.35)" }}>{t.country}</span>
+            <span style={{ font: "700 11px var(--font-secondary)", letterSpacing: ".16em", textTransform: "uppercase", color: "rgba(240,244,255,.35)" }}>{t.country}</span>
           </div>
         </div>
       </div>
 
       <style>{`
-        .ch-foot-link { transition: color .15s ease; }
+        .ch-foot-link { transition: color var(--duration-fast) ease; }
         .ch-foot-link:hover { color: rgba(240,244,255,1) !important; }
         @media (max-width: 980px) { .ch-foot { grid-template-columns: 1fr 1fr !important; gap: 36px 28px !important; } }
         @media (max-width: 520px) {

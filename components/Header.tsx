@@ -58,13 +58,13 @@ export default function Header({ variant = "light", showCta = true, lang = "es" 
         cmdBorder: "1px solid rgba(255,255,255,.12)",
         cmdBg: "rgba(255,255,255,.045)",
         cmdShadow: "inset 0 1px 0 rgba(255,255,255,.07), 0 6px 24px rgba(0,0,0,.28)",
-        itemActive: "#fff",
+        itemActive: "var(--dark-text)",
         itemIdle: "rgba(240,244,255,.62)",
         idxActive: "var(--change-violet-300)",
         idxIdle: "rgba(255,255,255,.4)",
         activeBorder: "var(--soft-violet)",
         burgerBorder: "1px solid rgba(255,255,255,.16)",
-        burgerColor: "#fff",
+        burgerColor: "var(--dark-text)",
         mobileBg: "rgba(16,15,22,.97)",
         mobileBorder: "1px solid rgba(255,255,255,.1)",
         mobileSep: "1px solid rgba(255,255,255,.08)",
@@ -183,7 +183,7 @@ export default function Header({ variant = "light", showCta = true, lang = "es" 
                       letterSpacing: "-0.01em",
                       borderBottom: active ? `2px solid ${c.activeBorder}` : "2px solid transparent",
                       marginBottom: -1,
-                      transition: "color .15s ease, background-color .15s ease, border-color .15s ease",
+                      transition: "color var(--duration-fast) ease, background-color var(--duration-fast) ease, border-color var(--duration-fast) ease",
                     }}
                   >
                     <span className="ch-navidx" style={{ font: "600 11px var(--font-mono)", letterSpacing: "0.04em", color: active ? c.idxActive : c.idxIdle }}>{item.idx}</span>
@@ -255,8 +255,8 @@ export default function Header({ variant = "light", showCta = true, lang = "es" 
         /* Hover de items del nav — neutral, por variante */
         .ch-nav[data-variant="light"] .ch-navlink:hover { color: var(--ink-graphite) !important; background: color-mix(in srgb, var(--ink-graphite) 5%, transparent); }
         .ch-nav[data-variant="light"] .ch-navlink:hover .ch-navidx { color: var(--ink-graphite) !important; }
-        .ch-nav[data-variant="dark"] .ch-navlink:hover { color: #fff !important; background: rgba(255,255,255,.07); }
-        .ch-nav[data-variant="dark"] .ch-navlink:hover .ch-navidx { color: #fff !important; }
+        .ch-nav[data-variant="dark"] .ch-navlink:hover { color: var(--dark-text) !important; background: rgba(255,255,255,.07); }
+        .ch-nav[data-variant="dark"] .ch-navlink:hover .ch-navidx { color: var(--dark-text) !important; }
         @media (max-width: 1200px) {
           .ch-command { display: none !important; }
           .ch-burger { display: inline-flex !important; }
@@ -264,7 +264,7 @@ export default function Header({ variant = "light", showCta = true, lang = "es" 
           .ch-lang { display: none !important; }
         }
         /* Hover del logo — feedback de que lleva al inicio */
-        .ch-logo { transition: opacity .18s var(--ease-premium); }
+        .ch-logo { transition: opacity var(--duration-fast) var(--ease-premium); }
         .ch-logo:hover { opacity: .66; }
         /* Pulse del logo — driven por React state (data-pulsing).
            Disparos: 15s, 30s, 45s, 60s, 75s, 95s, 120s, luego cada 45s.

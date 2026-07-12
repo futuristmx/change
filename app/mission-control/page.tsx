@@ -90,7 +90,7 @@ export function MissionControlView({ lang }: { lang: Lang }) {
             <span data-pulse style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--signal-cyan)" }} />
             <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "rgba(255,255,255,.8)" }}>{t.quesK}</span>
           </Reveal>
-          <Reveal delay={60} as="h2" style={{ margin: "0 0 8px", maxWidth: "22ch", font: "600 clamp(30px,4.2vw,58px)/.99 var(--font-primary)", letterSpacing: "-.05em", color: "#fff", textWrap: "balance" }}>{t.quesH}</Reveal>
+          <Reveal delay={60} as="h2" style={{ margin: "0 0 8px", maxWidth: "22ch", font: "600 clamp(30px,4.2vw,58px)/.99 var(--font-primary)", letterSpacing: "-.05em", color: "var(--text-on-dark)", textWrap: "balance" }}>{t.quesH}</Reveal>
           <Reveal delay={100} as="p" style={{ margin: "0 0 clamp(32px,4vw,40px)", maxWidth: "62ch", font: "400 clamp(16px,1.3vw,19px)/1.55 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>{t.quesP}</Reveal>
           <Reveal delay={160} style={{ display: "inline-flex", flexWrap: "wrap", gap: 12, marginBottom: "clamp(40px,5vw,56px)" }}>
             <Link href={localizeHref("/mission-control/login", lang)} className="btn btn-light" style={{ display: "inline-flex", alignItems: "center", gap: 10 }}>
@@ -131,13 +131,13 @@ export function MissionControlView({ lang }: { lang: Lang }) {
             <span style={{ width: 7, height: 7, background: "var(--change-violet)" }} />
             <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "rgba(255,255,255,.8)" }}>{t.probK}</span>
           </Reveal>
-          <Reveal delay={60} as="h2" style={{ margin: "0 0 18px", maxWidth: "20ch", font: "600 clamp(30px,4.2vw,58px)/.99 var(--font-primary)", letterSpacing: "-.05em", color: "#fff", textWrap: "balance" }}>{t.probH}</Reveal>
+          <Reveal delay={60} as="h2" style={{ margin: "0 0 18px", maxWidth: "20ch", font: "600 clamp(30px,4.2vw,58px)/.99 var(--font-primary)", letterSpacing: "-.05em", color: "var(--text-on-dark)", textWrap: "balance" }}>{t.probH}</Reveal>
           <Reveal delay={100} as="p" style={{ margin: "0 0 clamp(40px,5vw,56px)", maxWidth: "58ch", font: "400 clamp(16px,1.3vw,19px)/1.55 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>{t.probP}</Reveal>
           <div className="mc-foso" style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
             {TENSIONES.map((c, i) => (
               <Reveal key={c.k} delay={i * 110} as="article" className="ch-card" style={{ border: "1px solid rgba(255,255,255,.1)", background: "rgba(255,255,255,.04)", padding: "30px 28px", display: "flex", flexDirection: "column", minHeight: 230 }}>
                 <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--change-violet-300)" }}>{c.t}</span>
-                <h3 style={{ margin: "14px 0 0", font: "600 clamp(20px,1.8vw,24px)/1.1 var(--font-primary)", letterSpacing: "-.03em", color: "#fff" }}>{c.k}</h3>
+                <h3 style={{ margin: "14px 0 0", font: "600 clamp(20px,1.8vw,24px)/1.1 var(--font-primary)", letterSpacing: "-.03em", color: "var(--text-on-dark)" }}>{c.k}</h3>
                 <p style={{ margin: "13px 0 0", font: "400 14.5px/1.55 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>{c.p}</p>
               </Reveal>
             ))}
@@ -155,7 +155,7 @@ export function MissionControlView({ lang }: { lang: Lang }) {
                 <span style={{ width: 6, height: 6, borderRadius: "50%", background: "var(--signal-cyan)" }} />
                 <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".12em", textTransform: "uppercase", color: "rgba(255,255,255,.8)" }}>{t.demoBadge}</span>
               </Reveal>
-              <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(28px,3.6vw,50px)/1.0 var(--font-primary)", letterSpacing: "-.04em", color: "#fff", textWrap: "balance" }}>{t.demoH}</Reveal>
+              <Reveal delay={60} as="h2" style={{ margin: 0, font: "600 clamp(28px,3.6vw,50px)/1.0 var(--font-primary)", letterSpacing: "-.04em", color: "var(--text-on-dark)", textWrap: "balance" }}>{t.demoH}</Reveal>
               <Reveal delay={120} as="p" style={{ margin: "22px 0 0", maxWidth: "46ch", font: "400 clamp(16px,1.3vw,19px)/1.55 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>{t.demoP}</Reveal>
             </div>
             <Reveal delay={140}><MissionControlLive lang={lang} /></Reveal>
@@ -171,7 +171,7 @@ export function MissionControlView({ lang }: { lang: Lang }) {
             <span style={{ width: 7, height: 7, background: "var(--change-violet)" }} />
             <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".16em", textTransform: "uppercase", color: "rgba(255,255,255,.8)" }}>{t.lastK}</span>
           </Reveal>
-          <Reveal delay={60} as="h2" style={{ margin: "0 0 clamp(40px,5vw,56px)", maxWidth: "20ch", font: "600 clamp(30px,4.2vw,58px)/.99 var(--font-primary)", letterSpacing: "-.05em", color: "#fff", textWrap: "balance" }}>{t.lastH}</Reveal>
+          <Reveal delay={60} as="h2" style={{ margin: "0 0 clamp(40px,5vw,56px)", maxWidth: "20ch", font: "600 clamp(30px,4.2vw,58px)/.99 var(--font-primary)", letterSpacing: "-.05em", color: "var(--text-on-dark)", textWrap: "balance" }}>{t.lastH}</Reveal>
           {/* Ascenso por horizontes estratégicos — la cumbre se gana */}
           <AscentLayers levels={ESCALERA} lang={lang} />
         </div>
@@ -181,7 +181,7 @@ export function MissionControlView({ lang }: { lang: Lang }) {
       {/* ═══ CTA ═══ */}
       <section style={{ position: "relative", overflow: "hidden", background: "radial-gradient(circle at 50% -10%,color-mix(in srgb, var(--change-violet) 26%, transparent),transparent 52%),var(--surface-dark-secondary)" }}>
         <div style={{ position: "relative", width: WRAP, margin: "0 auto", padding: "clamp(88px,12vw,168px) 0", textAlign: "center" }}>
-          <Reveal as="h2" style={{ margin: "0 auto", maxWidth: "20ch", font: "600 clamp(34px,5vw,72px)/1.0 var(--font-primary)", letterSpacing: "-.05em", color: "#fff", textWrap: "balance" }}>{t.ctaH}</Reveal>
+          <Reveal as="h2" style={{ margin: "0 auto", maxWidth: "20ch", font: "600 clamp(34px,5vw,72px)/1.0 var(--font-primary)", letterSpacing: "-.05em", color: "var(--text-on-dark)", textWrap: "balance" }}>{t.ctaH}</Reveal>
           <Reveal delay={100} as="p" style={{ margin: "24px auto 0", maxWidth: 580, font: "400 clamp(16px,1.4vw,19px)/1.6 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>{t.ctaP}</Reveal>
           <Reveal delay={160} style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12, marginTop: 38 }}>
             <Link href={localizeHref("/contacto", lang)} className="btn btn-light">{t.ctaWork}</Link>

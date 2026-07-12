@@ -88,7 +88,7 @@ export function MapaDeClaridadView({ lang }: { lang: Lang }) {
       </section>
 
       {/* ═══ QUÉ TRAES · QUÉ RECIBES ═══ */}
-      <section style={{ borderTop: "1px solid var(--border-subtle)", background: "linear-gradient(180deg,#FFFFFF,var(--pure-white))" }}>
+      <section style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-white-pearl)" }}>
         <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(72px,9vw,128px) 0" }}>
           <div className="mc-two" style={{ display: "grid", gridTemplateColumns: "minmax(280px,.8fr) minmax(0,1.2fr)", gap: "clamp(28px,3vw,44px)", alignItems: "start" }}>
             {/* Qué traes */}
@@ -133,7 +133,7 @@ export function MapaDeClaridadView({ lang }: { lang: Lang }) {
       {/* ═══ CTA ═══ */}
       <section style={{ position: "relative", overflow: "hidden", background: "radial-gradient(circle at 50% -10%,color-mix(in srgb, var(--change-violet) 24%, transparent),transparent 52%),var(--surface-dark-secondary)" }}>
         <div style={{ position: "relative", width: WRAP, margin: "0 auto", padding: "clamp(88px,12vw,168px) 0", textAlign: "center" }}>
-          <Reveal as="h2" style={{ margin: "0 auto", maxWidth: "18ch", font: "600 clamp(34px,5vw,72px)/1.0 var(--font-primary)", letterSpacing: "-.05em", color: "#fff", textWrap: "balance" }}>{t.ctaH}</Reveal>
+          <Reveal as="h2" style={{ margin: "0 auto", maxWidth: "18ch", font: "600 clamp(34px,5vw,72px)/1.0 var(--font-primary)", letterSpacing: "-.05em", color: "var(--text-on-dark)", textWrap: "balance" }}>{t.ctaH}</Reveal>
           <Reveal delay={100} as="p" style={{ margin: "24px auto 0", maxWidth: 520, font: "400 clamp(16px,1.4vw,19px)/1.6 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>{t.ctaP}</Reveal>
           <Reveal delay={160} style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12, marginTop: 38 }}>
             <Link href={localizeHref("/contacto", lang)} className="btn btn-light">{t.ctaWork}</Link>

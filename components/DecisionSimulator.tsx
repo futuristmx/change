@@ -117,7 +117,7 @@ function Chip({
         font: `${selected ? "500" : "400"} 13.5px/1.35 var(--font-primary)`,
         cursor: "pointer",
         textAlign: "left",
-        transition: "border-color .12s, background .12s, color .12s",
+        transition: "border-color var(--duration-fast), background var(--duration-fast), color var(--duration-fast)",
       }}
     >
       {text}
@@ -171,7 +171,7 @@ function ReadingPanel({ answers, lang }: { answers: StepAnswer[]; lang: Lang }) 
         borderBottom: "1px solid var(--border-subtle)",
       }}>
         <span data-pulse aria-hidden="true" style={{ width: 7, height: 7, borderRadius: "50%", background: "var(--signal-cyan)", flexShrink: 0 }} />
-        <span style={{ font: "600 10px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-muted)" }}>
+        <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-muted)" }}>
           {t.boardDiag}
         </span>
       </div>
@@ -186,7 +186,7 @@ function ReadingPanel({ answers, lang }: { answers: StepAnswer[]; lang: Lang }) 
             <div key={i} style={{ display: "flex", gap: 10 }}>
               <span aria-hidden="true" style={{ flexShrink: 0, marginTop: 6, width: 5, height: 5, borderRadius: "50%", background: item.color }} />
               <div>
-                <span style={{ display: "block", font: "600 10px var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--text-faint)", marginBottom: 3 }}>
+                <span style={{ display: "block", font: "600 11px var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--text-faint)", marginBottom: 3 }}>
                   {item.label}
                 </span>
                 <span style={{ font: "400 12.5px/1.5 var(--font-primary)", color: "var(--text-muted)" }}>
@@ -480,23 +480,23 @@ export default function DecisionSimulator({ lang = "es" }: { lang?: Lang }) {
 
   const simCss = `
     .sim-start { margin-top: clamp(22px,2.8vw,30px); height: 50px; padding: 0 26px; font-size: 15px; }
-    .sim-ex-card { transition: border-color .18s var(--ease-premium), box-shadow .18s var(--ease-premium), transform .18s var(--ease-premium); }
+    .sim-ex-card { transition: border-color var(--duration-fast) var(--ease-premium), box-shadow var(--duration-fast) var(--ease-premium), transform var(--duration-fast) var(--ease-premium); }
     .sim-ex-card:hover { border-color: var(--change-violet); box-shadow: 0 10px 26px color-mix(in srgb, var(--change-violet) 14%, transparent); transform: translateY(-2px); }
     .sim-ex-card:hover .sim-ex-hint { color: var(--soft-violet); }
     .sim-path { display: flex; align-items: flex-start; gap: 0; margin: clamp(22px,3vw,30px) 0 0; }
     .sim-path-node { display: flex; flex-direction: column; align-items: center; gap: 8px; flex-shrink: 0; text-align: center; }
     .sim-path-dot { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; border: 1.5px solid var(--soft-stone-gray); color: var(--text-muted); font: 600 12px var(--font-mono); background: var(--surface-card); }
-    .sim-path-label { font: 600 10px var(--font-mono); letter-spacing: .07em; text-transform: uppercase; color: var(--text-faint); max-width: 10ch; line-height: 1.25; }
+    .sim-path-label { font: 600 11px var(--font-mono); letter-spacing: .07em; text-transform: uppercase; color: var(--text-faint); max-width: 10ch; line-height: 1.25; }
     .sim-path-line { flex: 1 1 auto; min-width: 12px; height: 2px; margin: 14px 3px 0; background: var(--soft-stone-gray); opacity: .5; }
     .sim-path-line-end { background: linear-gradient(90deg, var(--soft-stone-gray), var(--change-violet)); opacity: .8; }
     .sim-path-dot-end { border: none; background: var(--change-violet); box-shadow: 0 6px 18px color-mix(in srgb, var(--change-violet) 32%, transparent); }
     .sim-path-label-end { color: var(--change-violet); font-weight: 700; }
     .sim-path-dot-start { border-color: var(--change-violet); color: var(--change-violet); box-shadow: 0 0 0 3px color-mix(in srgb, var(--change-violet) 14%, transparent); }
     .sim-path-label-start { color: var(--change-violet); font-weight: 700; }
-    .sim-own { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; text-align: left; cursor: pointer; padding: 18px 20px; border: 1px solid var(--change-violet); border-left: 3px solid var(--change-violet); background: color-mix(in srgb, var(--change-violet) 5%, var(--surface-card)); transition: background .18s var(--ease-premium), box-shadow .18s var(--ease-premium), transform .18s var(--ease-premium); }
+    .sim-own { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; text-align: left; cursor: pointer; padding: 18px 20px; border: 1px solid var(--change-violet); border-left: 3px solid var(--change-violet); background: color-mix(in srgb, var(--change-violet) 5%, var(--surface-card)); transition: background var(--duration-fast) var(--ease-premium), box-shadow var(--duration-fast) var(--ease-premium), transform var(--duration-fast) var(--ease-premium); }
     .sim-own:hover { background: color-mix(in srgb, var(--change-violet) 9%, var(--surface-card)); box-shadow: 0 10px 26px color-mix(in srgb, var(--change-violet) 16%, transparent); transform: translateY(-2px); }
     .sim-own:focus-visible { outline: 2px solid var(--soft-violet); outline-offset: 2px; }
-    .sim-own-arrow { flex-shrink: 0; color: var(--change-violet); font-size: 20px; transition: transform .18s var(--ease-premium); }
+    .sim-own-arrow { flex-shrink: 0; color: var(--change-violet); font-size: 20px; transition: transform var(--duration-fast) var(--ease-premium); }
     .sim-own:hover .sim-own-arrow { transform: translateX(3px); }
 
     .sim-quiz { display: grid; grid-template-columns: 1fr 248px; }
@@ -551,7 +551,7 @@ export default function DecisionSimulator({ lang = "es" }: { lang?: Lang }) {
             {opts.barRight != null && <span style={{ font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".1em", textTransform: "uppercase", color: "var(--text-faint)" }}>{opts.barRight}</span>}
             {typeof opts.progress === "number" && (
               <span aria-hidden="true" style={{ position: "absolute", left: 0, right: 0, bottom: -1, height: 2, background: "rgba(46,46,51,.08)" }}>
-                <span style={{ display: "block", height: "100%", width: `${Math.round(opts.progress * 100)}%`, background: "linear-gradient(90deg,var(--signal-cyan),var(--change-violet))", transition: "width .5s var(--ease-premium)" }} />
+                <span style={{ display: "block", height: "100%", width: `${Math.round(opts.progress * 100)}%`, background: "linear-gradient(90deg,var(--signal-cyan),var(--change-violet))", transition: "width var(--duration-enter) var(--ease-premium)" }} />
               </span>
             )}
           </div>
@@ -594,7 +594,7 @@ export default function DecisionSimulator({ lang = "es" }: { lang?: Lang }) {
             <span className="sim-path-line sim-path-line-end" />
             <span className="sim-path-node">
               <span className="sim-path-dot sim-path-dot-end">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" style={{ color: "var(--text-inverse)" }} strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
               </span>
               <span className="sim-path-label sim-path-label-end">{t.pathEnd}</span>
             </span>
@@ -677,7 +677,7 @@ export default function DecisionSimulator({ lang = "es" }: { lang?: Lang }) {
                         height: 2,
                         marginTop: 7,
                         background: i <= completedAnswers.length ? "var(--change-violet)" : "var(--border-subtle)",
-                        transition: "background .25s",
+                        transition: "background var(--duration-standard)",
                       }} />
                     )}
                     <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 5, flexShrink: 0 }}>
@@ -685,16 +685,16 @@ export default function DecisionSimulator({ lang = "es" }: { lang?: Lang }) {
                         width: 16, height: 16, borderRadius: "50%", flexShrink: 0,
                         background: i < completedAnswers.length ? "var(--change-violet)" : "var(--surface-card)",
                         border: `2px solid ${i < completedAnswers.length ? "var(--change-violet)" : i === step ? "var(--change-violet)" : "var(--border-subtle)"}`,
-                        transition: "background .25s, border-color .25s",
+                        transition: "background var(--duration-standard), border-color var(--duration-standard)",
                         boxShadow: i === step ? "0 0 0 3px color-mix(in srgb, var(--change-violet) 15%, transparent)" : "none",
                       }} />
                       <span style={{
-                        font: "600 9px var(--font-mono)",
+                        font: "600 11px var(--font-mono)",
                         letterSpacing: ".05em",
                         textTransform: "uppercase",
                         color: i === step ? "var(--change-violet)" : i < completedAnswers.length ? "var(--text-muted)" : "var(--text-faint)",
                         whiteSpace: "nowrap",
-                        transition: "color .25s",
+                        transition: "color var(--duration-standard)",
                       }}>
                         {label}
                       </span>
@@ -707,7 +707,7 @@ export default function DecisionSimulator({ lang = "es" }: { lang?: Lang }) {
               {selectedScenario && (
                 <div style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 14, padding: "5px 10px", background: "color-mix(in srgb, var(--change-violet) 6%, var(--pure-white))", border: "1px solid color-mix(in srgb, var(--change-violet) 18%, var(--border-subtle))" }}>
                   <span aria-hidden="true" style={{ width: 6, height: 6, borderRadius: "50%", background: DIM_COLOR[selectedScenario.primaryDim] }} />
-                  <span style={{ font: "600 10.5px var(--font-mono)", letterSpacing: ".09em", textTransform: "uppercase", color: "var(--ink-graphite)" }}>
+                  <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".09em", textTransform: "uppercase", color: "var(--ink-graphite)" }}>
                     {t.scenario}: {selectedScenario.label}
                   </span>
                 </div>

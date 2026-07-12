@@ -128,7 +128,7 @@ export function FieldNotesView({ lang }: { lang: Lang }) {
       </section>
 
       {/* ═══ EL CONTRATO ═══ */}
-      <section id="contrato" style={{ borderTop: "1px solid var(--border-subtle)", background: "linear-gradient(180deg,#FFFFFF,var(--pure-white))" }}>
+      <section id="contrato" style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-white-pearl)" }}>
         <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(88px,11vw,160px) 0" }}>
           <Reveal style={{ display: "flex", alignItems: "center", gap: 11, marginBottom: 20 }}>
             <span style={{ width: 7, height: 7, background: "var(--change-violet)" }} />
@@ -155,7 +155,7 @@ export function FieldNotesView({ lang }: { lang: Lang }) {
             <span aria-hidden="true" style={{ position: "absolute", left: 14, top: 8, bottom: 8, width: 2, background: "var(--line-gradient-relation)" }} />
             {CONTRATO.map((s, i) => (
               <Reveal key={s.h} delay={i * 80} style={{ position: "relative", display: "grid", gridTemplateColumns: "40px 1fr", gap: 14, alignItems: "start" }}>
-                <span aria-hidden="true" style={{ position: "relative", width: 26, height: 26, borderRadius: "50%", background: s.c, display: "inline-flex", alignItems: "center", justifyContent: "center", color: "#fff", boxShadow: `0 0 0 4px var(--surface-page)` }}>
+                <span aria-hidden="true" style={{ position: "relative", width: 26, height: 26, borderRadius: "50%", background: s.c, display: "inline-flex", alignItems: "center", justifyContent: "center", color: "var(--text-on-dark)", boxShadow: `0 0 0 4px var(--surface-page)` }}>
                   <Glyph name={s.g} size={12} />
                 </span>
                 <div>
@@ -193,7 +193,7 @@ export function FieldNotesView({ lang }: { lang: Lang }) {
       </section>
 
       {/* ═══ RITMO HONESTO ═══ */}
-      <section style={{ borderTop: "1px solid var(--border-subtle)", background: "linear-gradient(180deg,#FFFFFF,var(--pure-white))" }}>
+      <section style={{ borderTop: "1px solid var(--border-subtle)", background: "var(--gradient-white-pearl)" }}>
         <div style={{ width: WRAP, margin: "0 auto", padding: "clamp(88px,11vw,160px) 0" }}>
           <Reveal style={{ display: "flex", alignItems: "center", gap: 11, marginBottom: 20 }}>
             <span style={{ width: 7, height: 7, background: "var(--change-violet)" }} />
@@ -215,7 +215,7 @@ export function FieldNotesView({ lang }: { lang: Lang }) {
       {/* ═══ CTA ═══ */}
       <section style={{ position: "relative", overflow: "hidden", background: "radial-gradient(circle at 50% -10%,color-mix(in srgb, var(--change-violet) 24%, transparent),transparent 52%),var(--surface-dark-secondary)" }}>
         <div style={{ position: "relative", width: WRAP, margin: "0 auto", padding: "clamp(88px,12vw,168px) 0", textAlign: "center" }}>
-          <Reveal as="h2" style={{ margin: "0 auto", maxWidth: "22ch", font: "600 clamp(32px,5vw,68px)/1.02 var(--font-primary)", letterSpacing: "-.05em", color: "#fff", textWrap: "balance" }}>{t.ctaH}</Reveal>
+          <Reveal as="h2" style={{ margin: "0 auto", maxWidth: "22ch", font: "600 clamp(32px,5vw,68px)/1.02 var(--font-primary)", letterSpacing: "-.05em", color: "var(--text-on-dark)", textWrap: "balance" }}>{t.ctaH}</Reveal>
           <Reveal delay={100} as="p" style={{ margin: "24px auto 0", maxWidth: 580, font: "400 clamp(16px,1.4vw,19px)/1.6 var(--font-primary)", color: "rgba(255,255,255,.8)" }}>{t.ctaP}</Reveal>
           <Reveal delay={160} style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 12, marginTop: 38 }}>
             <Link href={localizeHref("/contacto", lang)} className="btn btn-light">{t.ctaWork}</Link>

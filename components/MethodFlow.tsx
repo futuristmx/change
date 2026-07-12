@@ -171,7 +171,7 @@ export default function MethodFlow({ lang = "es" }: { lang?: Lang }) {
                 onClick={() => { setActive(i); setAuto(false); }}
                 aria-pressed={on}
                 aria-label={`${n.title}, ${ui.step.toLowerCase()} ${i + 1} ${ui.of} ${NODES.length}`}
-                style={{ border: 0, background: "transparent", padding: 0, textAlign: "center", cursor: "pointer", fontFamily: "var(--font-primary)", color: "inherit", opacity: inView ? 1 : 0, transform: inView ? "translateY(0)" : "translateY(8px)", transition: `opacity .5s ${120 + i * 90}ms, transform .5s ${120 + i * 90}ms var(--ease-premium)` }}
+                style={{ border: 0, background: "transparent", padding: 0, textAlign: "center", cursor: "pointer", fontFamily: "var(--font-primary)", color: "inherit", opacity: inView ? 1 : 0, transform: inView ? "translateY(0)" : "translateY(8px)", transition: `opacity var(--duration-enter) ${120 + i * 90}ms, transform var(--duration-enter) ${120 + i * 90}ms var(--ease-premium)` }}
               >
                 {/* Numeral monoespaciado, sobrio */}
                 <span aria-hidden="true" style={{ display: "block", marginBottom: 14, font: "600 var(--text-meta) var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: on ? n.color : "var(--text-faint)", transition: "color var(--duration-standard) var(--ease-premium)" }}>
@@ -191,7 +191,7 @@ export default function MethodFlow({ lang = "es" }: { lang?: Lang }) {
                     margin: "0 auto 24px",
                     background: on ? n.color : "var(--surface-card)",
                     border: `1.5px solid ${on || past ? n.color : "var(--border-subtle)"}`,
-                    color: on ? "#fff" : n.color,
+                    color: on ? "var(--text-inverse)" : n.color,
                     boxShadow: on
                       ? `0 0 0 6px var(--surface-card), 0 0 0 10px ${n.halo}, 0 12px 28px ${n.halo}`
                       : `0 0 0 4px var(--surface-card)`,
@@ -283,7 +283,7 @@ export default function MethodFlow({ lang = "es" }: { lang?: Lang }) {
         .mf-range::-moz-range-track { height: 6px; background:
           linear-gradient(90deg, transparent 0 var(--mf-pct,0%), var(--soft-stone-gray) var(--mf-pct,0%) 100%),
           linear-gradient(90deg, var(--signal-cyan) 0%, var(--soft-violet) 52%, var(--change-violet) 100%); }
-        .mf-range::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--mf-thumb, var(--change-violet)); border: 2px solid var(--surface-card); box-shadow: 0 2px 10px rgba(31,17,72,.3); margin-top: -6px; transition: background .3s var(--ease-premium); }
+        .mf-range::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 18px; height: 18px; border-radius: 50%; background: var(--mf-thumb, var(--change-violet)); border: 2px solid var(--surface-card); box-shadow: 0 2px 10px rgba(31,17,72,.3); margin-top: -6px; transition: background var(--duration-premium) var(--ease-premium); }
         .mf-range::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--mf-thumb, var(--change-violet)); border: 2px solid var(--surface-card); box-shadow: 0 2px 10px rgba(31,17,72,.3); }
         .mf-range:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px color-mix(in srgb, var(--change-violet) 30%, transparent); }
         .mf-comet { left: ${INSET}%; animation: mf-comet 6s var(--ease-premium) infinite alternate; }

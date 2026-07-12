@@ -44,15 +44,15 @@ export default function LanguageToggle({ variant = "light" }: Props) {
           display: inline-flex; align-items: center; gap: 7px; padding: 5px 10px;
           border: 1px solid var(--border-subtle); user-select: none;
           color: var(--text-faint);
-          transition: color .2s var(--ease-premium), border-color .2s var(--ease-premium);
+          transition: color var(--duration-standard) var(--ease-premium), border-color var(--duration-standard) var(--ease-premium);
         }
         .lang-code {
           font: 700 11px var(--font-mono); letter-spacing: .12em; text-transform: uppercase;
-          color: var(--text-faint); transition: color .2s var(--ease-premium);
+          color: var(--text-faint); transition: color var(--duration-standard) var(--ease-premium);
         }
         .lang-switch:hover { border-color: color-mix(in srgb, var(--hue) 45%, transparent); color: var(--hue); }
         .lang-switch:hover .lang-code { color: var(--hue); }
-        .lang-swap { flex-shrink: 0; opacity: .7; transition: opacity .2s var(--ease-premium); }
+        .lang-swap { flex-shrink: 0; opacity: .7; transition: opacity var(--duration-standard) var(--ease-premium); }
         .lang-switch:hover .lang-swap { opacity: 1; }
 
         .lang-dark { color: rgba(240,244,255,.55); border-color: rgba(255,255,255,.16); }

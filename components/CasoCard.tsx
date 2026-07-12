@@ -156,7 +156,7 @@ export default function CasoCard({ caso, idx, bg, lang = "es" }: { caso: Caso; i
                       }}
                     >
                       {/* Meta eyebrow */}
-                      <span style={{ display: "inline-flex", alignItems: "center", gap: 7, font: "700 10px var(--font-secondary)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--ink-graphite)", marginBottom: 10 }}>
+                      <span style={{ display: "inline-flex", alignItems: "center", gap: 7, font: "700 11px var(--font-secondary)", letterSpacing: ".12em", textTransform: "uppercase", color: "var(--ink-graphite)", marginBottom: 10 }}>
                         <span aria-hidden="true" style={{ width: 5, height: 5, borderRadius: "50%", background: evoColor }} />
                         {STEPS[i]}
                       </span>
@@ -172,13 +172,13 @@ export default function CasoCard({ caso, idx, bg, lang = "es" }: { caso: Caso; i
 
           {/* Leyenda de Evolution Ramp */}
           <div style={{ display: "flex", alignItems: "center", gap: 20, flexWrap: "wrap", marginTop: 24, padding: "12px 0", borderTop: "1px solid var(--border-subtle)" }}>
-            <span style={{ font: "700 9px var(--font-secondary)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-faint)" }}>Estado del recorrido</span>
+            <span style={{ font: "700 11px var(--font-secondary)", letterSpacing: ".14em", textTransform: "uppercase", color: "var(--text-faint)" }}>Estado del recorrido</span>
             {[
               { l: "En análisis", c: "var(--evo-analysis)" },
               { l: "En foco", c: "var(--evo-focus)" },
               { l: "Validado", c: "var(--evo-validated)" },
             ].map((r) => (
-              <span key={r.l} style={{ display: "inline-flex", alignItems: "center", gap: 5, font: "700 9px var(--font-secondary)", letterSpacing: ".1em", textTransform: "uppercase", color: r.c }}>
+              <span key={r.l} style={{ display: "inline-flex", alignItems: "center", gap: 5, font: "700 11px var(--font-secondary)", letterSpacing: ".1em", textTransform: "uppercase", color: r.c }}>
                 <span aria-hidden="true" style={{ width: 6, height: 6, borderRadius: "50%", background: r.c }} />
                 {r.l}
               </span>
