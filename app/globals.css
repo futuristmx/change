@@ -19,6 +19,12 @@
 @import "./tokens/density.css";
 @import "../components/ds/cards.css";
 
+/* ── UPGRADE 2.5/2.6 (aditivo): motion living + SVG/dataviz animado.
+   Solo tokens y utilidades .change-*; sin efecto hasta que un componente
+   los use. Sincronizado desde el DS canónico (Design System Change). ── */
+@import "../styles/ds/tokens/motion-living.css";
+@import "../styles/ds/tokens/motion-svg.css";
+
 /* Web fonts BD Orange Variable (Typekit) + IBM Plex Mono (Google) are loaded
    via <link> in app/layout.tsx — @import after Tailwind's inlined rules would
    be dropped by the browser. */

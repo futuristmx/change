@@ -1,0 +1,174 @@
+/* ════════════════════════════════════════════════════════════
+   Change UI — Motion Living · UPGRADE 2.5
+   Ambient and narrative motion. Draws trajectories, drifts
+   constellations, breathes in opacity. Movement clarifies and
+   gives life — never decorates. Additive over motion.css.
+   Always honours prefers-reduced-motion; freezes on print/PDF.
+   ════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ── Strategic easing (canonical alias of --ease-premium) ── */
+  --ease-strategic: cubic-bezier(0.22, 1, 0.36, 1);  /* @kind other */
+
+  /* ── Narrative durations ── */
+  /* trajectory / ramp line: clip-path L→R draw */
+  --motion-draw:          3600ms;  /* @kind other */
+  /* constellation drift / slow watermark rotation */
+  --motion-ambient-drift:   90s;   /* @kind other */
+  /* ambient opacity breath cycle */
+  --motion-breathe:          7s;   /* @kind other */
+
+  /* ── Synchronized pulse wave ── */
+  /* one full pulse cycle for a single node */
+  --pulse-period:  3200ms;   /* @kind other */
+  /* delay per consecutive node — creates directional wave */
+  --pulse-stagger: 0.75s;    /* @kind other */
+  /* peak scale of a pulsing node */
+  --pulse-scale:   1.28;     /* @kind other */
+
+  /* ── Pulse glow tints — box-shadow color for .change-pulse-dot ── */
+  --pulse-glow-violet:  rgba(109, 59, 255, 0.22);  /* @kind color */
+  --pulse-glow-signal:  rgba(89, 184, 217, 0.26);  /* @kind color */
+  --pulse-glow-mineral: rgba(90, 166, 122, 0.26);  /* @kind color */
+}
+
+/* ─────────────────────────────────────────────────────────────
+   KEYFRAMES — all freeze at final visible state (print-safe)
+   ───────────────────────────────────────────────────────────── */
+
+/* Trajectory draw: a line/ramp appears left → right */
+@keyframes change-draw-ltr {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0%   0 0); }
+}
+
+/* Ambient opacity breathe (surfaces, watermarks) */
+@keyframes change-breathe {
+  0%, 100% { opacity: 0.60; }
+  50%      { opacity: 1.00; }
+}
+
+/* Watermark / swirl slow rotation */
+@keyframes change-swirl-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Node pulse: scale + subtle glow fade */
+@keyframes change-pulse {
+  0%, 100% { transform: scale(1);                        opacity: 0.65; }
+  50%      { transform: scale(var(--pulse-scale, 1.28)); opacity: 1.00; }
+}
+
+/* Node arrival (from trajectory draw) */
+@keyframes change-node-arrive {
+  from { opacity: 0; transform: scale(0.52); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* Glyph accent pulse (continuous, subdued) */
+@keyframes change-glyph-pulse {
+  0%, 100% { transform: scale(1);    opacity: 0.55; }
+  50%      { transform: scale(1.18); opacity: 0.90; }
+}
+
+/* DOM node pulse — scale + glow ring (box-shadow color from --pulse-glow) */
+@keyframes change-pulse-glow {
+  0%, 100% { transform: scale(1);                        box-shadow: 0 0 0 0 transparent; }
+  50%      { transform: scale(var(--pulse-scale, 1.28)); box-shadow: 0 0 0 6px var(--pulse-glow, rgba(109,59,255,0.22)); }
+}
+
+/* Ambient drift — barely-perceptible meditative float (constellations) */
+@keyframes change-drift {
+  0%   { transform: translate3d(0, 0, 0); }
+  33%  { transform: translate3d(6px, -8px, 0); }
+  66%  { transform: translate3d(-5px, -3px, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+/* ── Utility classes ── */
+
+/* Draw a line/bar from left to right on .is-active */
+.change-draw {
+  clip-path: inset(0 100% 0 0);
+  transition: clip-path var(--motion-draw, 3600ms) var(--ease-strategic, cubic-bezier(0.22,1,0.36,1));
+}
+.change-draw.is-active {
+  clip-path: inset(0 0% 0 0);
+}
+
+/* Slow ambient breathe */
+.change-breathe {
+  animation: change-breathe var(--motion-breathe, 7s) ease-in-out infinite;
+}
+
+/* Node pulse (SVG <circle>/<rect>) — staggered by --pulse-i so the wave
+   travels with direction, never a flat uniform blink. */
+.change-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: change-pulse var(--pulse-period, 3200ms) ease-in-out infinite;
+  animation-delay: calc(var(--pulse-stagger, 0.75s) * var(--pulse-i, 0));
+}
+
+/* Node pulse (DOM dot) — adds a glow ring; tint via --pulse-glow,
+   stagger via --pulse-i. */
+.change-pulse-dot {
+  animation: change-pulse-glow var(--pulse-period, 3200ms) ease-in-out infinite;
+  animation-delay: calc(var(--pulse-stagger, 0.75s) * var(--pulse-i, 0));
+}
+
+/* Slow watermark / swirl rotation */
+.change-swirl {
+  animation: change-swirl-spin var(--motion-ambient-drift, 90s) linear infinite;
+}
+
+/* Ambient drift — meditative float for constellations / watermarks */
+.change-ambient-drift {
+  animation: change-drift var(--motion-ambient-drift, 90s) ease-in-out infinite;
+}
+
+/* NOTE: the SVG stroke-draw primitive (.change-draw-stroke) and the
+   data-viz utilities (.change-gauge-arc / .change-bar-grow / .change-flow)
+   live in tokens/motion-svg.css (UPGRADE 2.6). */
+
+/* ─────────────────────────────────────────────────────────────
+   REDUCED-MOTION — collapse all living motion to final state
+   ───────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-draw:          1ms;  /* @kind other */
+    --motion-ambient-drift: 1ms;  /* @kind other */
+    --motion-breathe:       1ms;  /* @kind other */
+    --pulse-period:         1ms;  /* @kind other */
+    --pulse-stagger:        0s;  /* @kind other */
+  }
+
+  @keyframes change-draw-ltr    { to { clip-path: inset(0 0% 0 0); } }
+  @keyframes change-breathe     { to { opacity: 1; } }
+  @keyframes change-swirl-spin  { to { transform: rotate(0deg); } }
+  @keyframes change-pulse       { to { transform: scale(1); opacity: 1; } }
+  @keyframes change-node-arrive { to { opacity: 1; transform: scale(1); } }
+  @keyframes change-glyph-pulse { to { transform: scale(1); opacity: 0.90; } }
+  @keyframes change-pulse-glow  { to { transform: scale(1); box-shadow: none; } }
+  @keyframes change-drift       { to { transform: none; } }
+
+  .change-draw  { clip-path: inset(0 0% 0 0); transition: none; }
+  .change-breathe { animation: none; opacity: 1; }
+  .change-pulse,
+  .change-pulse-dot,
+  .change-swirl,
+  .change-ambient-drift { animation: none !important; }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   PRINT / PDF EXPORT — freeze everything at final visible state
+   ───────────────────────────────────────────────────────────── */
+@media print {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+  .change-draw { clip-path: inset(0 0% 0 0) !important; }
+  .change-breathe { opacity: 1 !important; }
+}
