@@ -1,0 +1,47 @@
+/* ════════════════════════════════════════════════════════════
+   @change/motion-tokens · capa canónica de Motion (FUENTE ÚNICA)
+   Consolida los tokens dispersos de styles/ds/tokens/motion*.css a
+   un solo set sin contradicciones. Los consumidores importan ESTE
+   archivo — no redefinen duraciones ni curvas localmente.
+   Regla: cero literales de tiempo/easing en el call site.
+   ════════════════════════════════════════════════════════════ */
+:root {
+  /* ── Escalera de interacción (chrome) ── */
+  --dur-instant:  0ms;      /* frequency-gate: alta frecuencia no anima */
+  --dur-fast:     120ms;    /* micro-feedback: color/bg/border en hover/focus */
+  --dur-standard: 220ms;    /* transición estándar on-screen */
+  --dur-premium:  330ms;    /* techo del chrome · glide/énfasis */
+  --dur-enter:    420ms;    /* entrada por scroll (reveal) */
+
+  /* ── Capa de señal (foresight) — único territorio >420ms ── */
+  --dur-draw:     1100ms;   /* line-draw · FUENTE ÚNICA (no 900/3600) */
+  --dur-pulse:    5000ms;   /* pulso ambiental · dentro de 4–6s */
+  --dur-breathe:  7000ms;   /* aliento de opacidad · watermarks */
+  --dur-drift:    90000ms;  /* deriva de constelaciones */
+
+  /* ── Easing — UNA curva de interacción, una de salida, un loop ── */
+  --ease-strategic: cubic-bezier(0.22, 1, 0.36, 1);  /* casa · aterriza en y=1, sin overshoot */
+  --ease-exit:      cubic-bezier(0.4, 0, 1, 1);       /* accelerate-out · solo salidas */
+  --ease-loop:      linear;                            /* solo loops ambientales */
+
+  /* ── Coreografía ── */
+  --stagger-list:  90ms;    /* delay por ítem en reveals de lista/deck */
+  --stagger-pulse: 750ms;   /* delay por nodo — la onda viaja, no parpadea */
+  --stagger-i:     0;        /* índice del nodo (se fija inline por consumidor) */
+
+  /* ── Transiciones compuestas de conveniencia ── */
+  --transition-base:  all var(--dur-standard) var(--ease-strategic);
+  --transition-color: color var(--dur-fast) var(--ease-strategic),
+                      background-color var(--dur-fast) var(--ease-strategic),
+                      border-color var(--dur-fast) var(--ease-strategic);
+}
+
+/* Reduced-motion: ambiental congela; --stagger a 0. Los consumidores de moción
+   significativa (reveal/glide/count) deben sustituir por cross-fade en su capa. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 1ms; --dur-standard: 1ms; --dur-premium: 1ms; --dur-enter: 1ms;
+    --dur-draw: 1ms; --dur-pulse: 1ms; --dur-breathe: 1ms; --dur-drift: 1ms;
+    --stagger-list: 0ms; --stagger-pulse: 0s;
+  }
+}
