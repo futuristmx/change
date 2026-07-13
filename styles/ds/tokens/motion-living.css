@@ -7,11 +7,17 @@
    ════════════════════════════════════════════════════════════ */
 
 :root {
-  /* ── Strategic easing (canonical alias of --ease-premium) ── */
-  --ease-strategic: cubic-bezier(0.22, 1, 0.36, 1);  /* @kind other */
+  /* ── Strategic easing — alias de FUENTE ÚNICA de --ease-premium ──
+     Antes duplicaba el literal (y existe una 2ª grafía .22,1,.36,1 en app/hub/_proposal.ts);
+     ahora HEREDA para que la curva de casa viva en un solo lugar (motion.css). */
+  --ease-strategic: var(--ease-premium, cubic-bezier(0.22, 1, 0.36, 1));  /* @kind other */
 
   /* ── Narrative durations ── */
-  /* trajectory / ramp line: clip-path L→R draw */
+  /* trajectory / ramp line: clip-path L→R draw
+     ⚠ CONFLICTO CON SPEC D8 — decisión pendiente (ver PR de consolidación 2026-07-12):
+     la spec declara line-draw 900–1400ms y motion.css define --duration-line:1100ms;
+     este valor (3600ms) es 2.6× el techo. El feel NO se cambió aquí a propósito: alinear
+     3600→1100 requiere QA visual en MethodFlow/SystemicDescent (draw 2.6× más rápido). */
   --motion-draw:          3600ms;  /* @kind other */
   /* constellation drift / slow watermark rotation */
   --motion-ambient-drift:   90s;   /* @kind other */
@@ -19,7 +25,10 @@
   --motion-breathe:          7s;   /* @kind other */
 
   /* ── Synchronized pulse wave ── */
-  /* one full pulse cycle for a single node */
+  /* one full pulse cycle for a single node
+     ⚠ CONFLICTO CON SPEC D8 — decisión pendiente: la spec declara pulso ambient 4–6s y
+     motion.css define --duration-pulse:5000ms; este valor (3200ms) está bajo el piso de
+     4s. Feel intacto en esta consolidación — alineación a decidir en QA. */
   --pulse-period:  3200ms;   /* @kind other */
   /* delay per consecutive node — creates directional wave */
   --pulse-stagger: 0.75s;    /* @kind other */

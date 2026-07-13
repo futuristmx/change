@@ -7,6 +7,7 @@
 
 :root {
   /* ── Durations ── */
+  --duration-instant:  0ms;     /* @kind other · frequency-gate: chrome de alta frecuencia (inputs, tabs) no anima */
   --duration-fast:     120ms;   /* @kind other */
   --duration-standard: 220ms;   /* @kind other */
   --duration-premium:  330ms;   /* @kind other */
@@ -14,10 +15,12 @@
   --duration-line:     1100ms;  /* @kind other */
   --duration-pulse:    5000ms;  /* @kind other */
 
-  /* ── Easing ── */
+  /* ── Easing ──
+     UNA sola curva de interacción (regla D8 "easing único de casa"): aterriza limpio
+     en y=1, sin overshoot — ese aterrizaje ES la marca. --ease-standard (Material
+     0.4,0,0.2,1) y --ease-out (0,0,0.2,1) se retiraron en la consolidación 2026-07-12:
+     tenían 0 consumidores y violaban la regla de easing único. */
   --ease-premium:  cubic-bezier(0.22, 1, 0.36, 1);  /* @kind other */
-  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);    /* @kind other */
-  --ease-out:      cubic-bezier(0, 0, 0.2, 1);      /* @kind other */
 
   /* ── Composed transitions ── */
   --transition-base:  all var(--duration-standard) var(--ease-premium);  /* @kind other */
