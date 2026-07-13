@@ -1,0 +1,22 @@
+{
+  "name": "@change/motion-tokens",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Fuente única del sistema de Motion del Change DS: tokens de duración/easing/coreografía + adapter de framer-motion. No hardcodees segundos ni springs — importa de aquí.",
+  "type": "module",
+  "sideEffects": ["*.css"],
+  "exports": {
+    ".": "./index.ts",
+    "./css": "./motion-tokens.css"
+  },
+  "files": [
+    "motion-tokens.css",
+    "tokens.ts",
+    "presets.ts",
+    "index.ts",
+    "README.md"
+  ],
+  "peerDependencies": {
+    "framer-motion": ">=11"
+  }
+}
