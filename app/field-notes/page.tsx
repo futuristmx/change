@@ -69,7 +69,7 @@ const FN_COPY = {
     contractK: "El contrato de la nota", contractH: "Cómo se construye cada Field Note.", contractP: "Toda nota recorre la misma estructura, en orden. Es la misma lógica con la que leemos el entorno de un cliente: de la señal suelta a la decisión que abre.",
     findK: "Qué vas a encontrar", findH: "Tres tipos de nota, una sola disciplina.", findP: "Cambia el ángulo de entrada, no el rigor. Cada tipo termina en lo mismo: una tensión legible y una decisión que sigue en tus manos.",
     rhythmK: "Cómo lo manejamos", rhythmH: "Ritmo honesto: pocas notas, ninguna de relleno.",
-    ctaH: "Una nota te muestra la tensión. Una sesión la convierte en tu decisión.", ctaP: "Las Field Notes son cómo construimos capacidad de futuro en público. Cuando una toca un nervio real de tu organización, el siguiente paso no es leer más: es trabajar esa decisión con instrumentos hechos para tu caso.", ctaWork: "Trabajar una decisión", ctaHow: "Cómo trabajamos",
+    ctaH: "Una nota te muestra la tensión. Una sesión la convierte en tu decisión.", ctaP: "Las Field Notes son cómo construimos capacidad de futuro en público. Cuando una toca un nervio real de tu organización, el siguiente paso no es leer más: es trabajar esa decisión con instrumentos hechos para tu caso.", ctaWork: "Iniciar la conversación", ctaHow: "Cómo trabajamos",
   },
   en: {
     kicker: "Field Notes", titlePre: "Notes for deciding before", titleAccent: "urgency closes your options.",
@@ -84,7 +84,7 @@ const FN_COPY = {
     contractK: "The note's contract", contractH: "How each Field Note is built.", contractP: "Every note follows the same structure, in order. It's the same logic we use to read a client's environment: from the loose signal to the decision it opens.",
     findK: "What you'll find", findH: "Three kinds of note, one discipline.", findP: "The angle of entry changes, not the rigor. Each kind ends in the same place: a readable tension and a decision still in your hands.",
     rhythmK: "How we handle it", rhythmH: "Honest rhythm: few notes, none for filler.",
-    ctaH: "A note shows you the tension. A session turns it into your decision.", ctaP: "Field Notes are how we build future capacity in public. When one touches a real nerve in your organization, the next step isn't to read more: it's to work that decision with instruments made for your case.", ctaWork: "Work on a decision", ctaHow: "How we work",
+    ctaH: "A note shows you the tension. A session turns it into your decision.", ctaP: "Field Notes are how we build future capacity in public. When one touches a real nerve in your organization, the next step isn't to read more: it's to work that decision with instruments made for your case.", ctaWork: "Start the conversation", ctaHow: "How we work",
   },
 };
 

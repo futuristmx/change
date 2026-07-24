@@ -62,7 +62,7 @@ export default function StickyCta() {
         className="btn btn-primary"
         style={{ flex: 1, minHeight: 44, height: 44, fontSize: 15 }}
       >
-        Trabajar una decisión
+        Iniciar la conversación
       </Link>
       <style>{`
         .ch-sticky-cta { display: none; }

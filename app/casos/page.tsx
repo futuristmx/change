@@ -206,7 +206,7 @@ const CAS_COPY = {
       ["Diseñar", "Un roadmap vivo que le da forma ejecutable a la decisión.", "var(--change-violet)"],
       ["Sostener", "Mission Control: la memoria estratégica donde la capacidad se queda viva.", "var(--lavender-mist)"],
     ],
-    ctaH: "¿Cuál de estas tensiones se parece a la tuya?", ctaP: "Ninguna de estas decisiones empezó con un plan. Empezó con una organización que sabía que tenía que actuar antes de tener certeza. Tráenos la decisión que traes atorada y trabajémosla — esa es la entrada.", ctaWork: "Trabajar una decisión", ctaHow: "Ver cómo trabajamos",
+    ctaH: "¿Cuál de estas tensiones se parece a la tuya?", ctaP: "Ninguna de estas decisiones empezó con un plan. Empezó con una organización que sabía que tenía que actuar antes de tener certeza. Tráenos la decisión que traes atorada y trabajémosla — esa es la entrada.", ctaWork: "Iniciar la conversación", ctaHow: "Ver cómo trabajamos",
   },
   en: {
     kicker: "Cases by tension · Our work", titlePre: "Decisions that became", titleAccent: "capacity.",
@@ -220,7 +220,7 @@ const CAS_COPY = {
       ["Design", "A living roadmap that gives the decision an executable form.", "var(--change-violet)"],
       ["Sustain", "Mission Control: the strategic memory where capacity stays alive.", "var(--lavender-mist)"],
     ],
-    ctaH: "Which of these tensions looks like yours?", ctaP: "None of these decisions started with a plan. It started with an organization that knew it had to act before having certainty. Bring us the decision you have stuck and let's work it — that's the entry.", ctaWork: "Work on a decision", ctaHow: "See how we work",
+    ctaH: "Which of these tensions looks like yours?", ctaP: "None of these decisions started with a plan. It started with an organization that knew it had to act before having certainty. Bring us the decision you have stuck and let's work it — that's the entry.", ctaWork: "Start the conversation", ctaHow: "See how we work",
   },
 };
 

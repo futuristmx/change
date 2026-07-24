@@ -37,7 +37,7 @@ const MC_COPY = {
     nextP: "Si quieres profundizar, existe el Sprint de Rumbo: del diagnóstico al diseño, en seis a diez semanas. Y para lo que debe sostenerse en el tiempo, Mission Control. Pero el diagnóstico es tuyo y se queda en tu empresa — sigas o no.",
     ctaH: "Trae la decisión que más te pesa hoy.",
     ctaP: "¿Prefieres probar primero? El simulador: 5 preguntas, 2 minutos.",
-    ctaWork: "Trabajar una decisión", ctaSim: "Probar el simulador",
+    ctaWork: "Iniciar la conversación", ctaSim: "Probar el simulador",
   },
   en: {
     kicker: "Clarity Map · The entry",
@@ -58,7 +58,7 @@ const MC_COPY = {
     nextP: "If you want to go deeper, there's the Direction Sprint: from diagnosis to design, in six to ten weeks. And for what must be sustained over time, Mission Control. But the diagnosis is yours and stays in your company — whether you continue or not.",
     ctaH: "Bring the decision weighing on you most today.",
     ctaP: "Prefer to try first? The simulator: 5 questions, 2 minutes.",
-    ctaWork: "Work on a decision", ctaSim: "Try the simulator",
+    ctaWork: "Start the conversation", ctaSim: "Try the simulator",
   },
 };
 

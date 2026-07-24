@@ -53,8 +53,8 @@ interface PageScaffoldProps {
  */
 export default function PageScaffold({ kicker, title, lead, dark = false, ambient = false, lang = "es", children }: PageScaffoldProps) {
   const fb = lang === "en"
-    ? { eyebrow: "Coming soon", title: "This section is being built in detail.", lead: "The full content arrives in the next phase. In the meantime, you can start with a conversation.", cta: "Work on a decision" }
-    : { eyebrow: "Próximamente", title: "Esta sección se está construyendo a detalle.", lead: "El contenido completo llega en la siguiente fase. Mientras tanto, puedes empezar por una conversación.", cta: "Trabajar una decisión" };
+    ? { eyebrow: "Coming soon", title: "This section is being built in detail.", lead: "The full content arrives in the next phase. In the meantime, you can start with a conversation.", cta: "Start the conversation" }
+    : { eyebrow: "Próximamente", title: "Esta sección se está construyendo a detalle.", lead: "El contenido completo llega en la siguiente fase. Mientras tanto, puedes empezar por una conversación.", cta: "Iniciar la conversación" };
   const heroBg = dark
     ? "radial-gradient(circle at 82% 0%,color-mix(in srgb, var(--change-violet) 22%, transparent),transparent 40%),linear-gradient(180deg,var(--surface-dark) 0%,var(--surface-dark-secondary) 100%)"
     : "radial-gradient(110% 80% at 84% -10%,rgba(138,108,255,.14) 0%,rgba(89,184,217,.06) 32%,rgba(255,255,255,0) 58%),linear-gradient(180deg,var(--white-absolute) 0%,var(--pure-white) 70%,var(--warm-haze) 100%)";

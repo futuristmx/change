@@ -67,7 +67,7 @@ const FUT_COPY = {
     quote: "Capacidad de futuro es una forma de operar — una habilidad organizacional instalada, no un servicio contratado.", quoteFoot: "El método se gobierna desde Change · la capacidad se queda en el cliente.",
     horizK: "Hacia dónde apunta Change", horizH: "Tres horizontes que sostienen cada decisión nuestra.",
     valK: "Valores · Cómo gobierna Change", valH: "Seis principios que ningún proyecto se salta.", valP: "Aplican al primer correo, al primer diagnóstico del board y a la última versión del artefacto. La capacidad se construye con disciplina; el método no se delega.",
-    ctaH: "La capacidad de futuro empieza con una decisión real.", ctaP: "No hace falta tener clara la pregunta. Trae la decisión que más te pesa y la trabajamos juntos. Desde ahí construimos la capacidad para volver a hacerlo sin Change en la sala.", ctaWork: "Trabajar una decisión", ctaMethod: "Conocer el método",
+    ctaH: "La capacidad de futuro empieza con una decisión real.", ctaP: "No hace falta tener clara la pregunta. Trae la decisión que más te pesa y la trabajamos juntos. Desde ahí construimos la capacidad para volver a hacerlo sin Change en la sala.", ctaWork: "Iniciar la conversación", ctaMethod: "Conocer el método",
   },
   en: {
     kicker: "Future · Change thesis", titlePre: "Future capacity", titleAccent: "is what lets you decide when certainty no longer arrives in time.",
@@ -78,7 +78,7 @@ const FUT_COPY = {
     quote: "Future capacity is a way of operating — an installed organizational ability, not a contracted service.", quoteFoot: "The method is governed from Change · the capacity stays with the client.",
     horizK: "Where Change points", horizH: "Three horizons that hold every decision we make.",
     valK: "Values · How Change governs", valH: "Six principles no project skips.", valP: "They apply to the first email, the board's first diagnosis, and the last version of the artifact. Capacity is built with discipline; the method isn't delegated.",
-    ctaH: "Future capacity starts with a real decision.", ctaP: "You don't need the question figured out. Bring the decision weighing on you most and we'll work it together. From there we build the capacity to do it again without Change in the room.", ctaWork: "Work on a decision", ctaMethod: "Get to know the method",
+    ctaH: "Future capacity starts with a real decision.", ctaP: "You don't need the question figured out. Bring the decision weighing on you most and we'll work it together. From there we build the capacity to do it again without Change in the room.", ctaWork: "Start the conversation", ctaMethod: "Get to know the method",
   },
 };
 

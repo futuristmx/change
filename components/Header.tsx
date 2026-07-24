@@ -20,7 +20,7 @@ const NAV = [
   { idx: "07", es: "Acceso Clientes", en: "Client Access", href: ACCESO_HREF },
 ];
 
-const CTA_LABEL = { es: "Trabajar una decisión", en: "Work on a decision" };
+const CTA_LABEL = { es: "Iniciar la conversación", en: "Start the conversation" };
 
 // Pulse del logo — secuencia variable:
 // pulse a los 15s, 30s, 45s, 60s, 75s, 95s, 120s; luego cada 45s.
@@ -32,7 +32,7 @@ const PULSE_VISIBLE_MS = 1200;
 interface HeaderProps {
   /** "dark" → variante glass oscura (para superficies dark como el login) */
   variant?: "light" | "dark";
-  /** false → oculta el CTA "Trabajar una decisión" (p. ej. en el login) */
+  /** false → oculta el CTA "Iniciar la conversación" (p. ej. en el login) */
   showCta?: boolean;
   /** idioma activo — localiza labels y hrefs */
   lang?: Lang;
@@ -194,10 +194,11 @@ export default function Header({ variant = "light", showCta = true, lang = "es" 
             })}
           </div>
 
-          <span className="ch-lang" style={{ justifySelf: "center" }}><LanguageToggle variant={variant} /></span>
+          <span aria-hidden="true" />{/* spacer col4 — mantiene el menú centrado */}
 
           <div style={{ justifySelf: "end", display: "flex", alignItems: "center", gap: 12 }}>
-            {showCta && <Link href={localizeHref("/contacto", lang)} className="btn btn-primary btn-sm ch-cta">{lang === "en" ? CTA_LABEL.en : CTA_LABEL.es}</Link>}
+            {showCta && <Link href={localizeHref("/contacto", lang)} className="btn btn-primary btn-sm ch-cta" style={{ height: 54 }}>{lang === "en" ? CTA_LABEL.en : CTA_LABEL.es}</Link>}
+            <span className="ch-lang" style={{ display: "flex" }}><LanguageToggle variant={variant} /></span>
             <button
               onClick={() => setOpen((v) => !v)}
               aria-label="Menú" aria-expanded={open}
@@ -257,6 +258,8 @@ export default function Header({ variant = "light", showCta = true, lang = "es" 
         .ch-nav[data-variant="light"] .ch-navlink:hover .ch-navidx { color: var(--ink-graphite) !important; }
         .ch-nav[data-variant="dark"] .ch-navlink:hover { color: var(--dark-text) !important; background: rgba(255,255,255,.07); }
         .ch-nav[data-variant="dark"] .ch-navlink:hover .ch-navidx { color: var(--dark-text) !important; }
+        /* Idioma a la altura del pill del menú y del CTA — los tres alinean su base */
+        .ch-lang .lang-switch { height: 54px; padding: 0 14px; }
         @media (max-width: 1200px) {
           .ch-command { display: none !important; }
           .ch-burger { display: inline-flex !important; }

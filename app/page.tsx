@@ -35,8 +35,8 @@ const TENSIONES: Array<{ es: string; en: string; c: string; sim: string | null; 
 const COPY = {
   es: {
     heroBadge: "Capacidad de futuro",
-    heroH1a: "Las decisiones grandes de tu empresa", heroH1b: "pasan todas por ti.",
-    heroLead: "Change instala en tu equipo la capacidad de leer lo que cambia, decidir a tiempo y sostener el rumbo.",
+    heroH1a: "La certeza dejó de ser", heroH1b: "condición para actuar.",
+    heroLead: "Change diseña en tu organización la capacidad de leer lo que cambia, decidir a tiempo y sostener el rumbo — incluso cuando el futuro no da garantías.",
     heroScroll: "¿Cuál es tu tensión? ↓",
     tenseKicker: "Las tensiones", tenseTitle: "Seis tensiones que conocemos de cerca. ¿Cuál es la tuya?",
     tenseSee: "Ver esta tensión", tenseWork: "Trabajarla ahora",
@@ -49,12 +49,12 @@ const COPY = {
     whyKicker: "Por qué Change", whyTitle: "Más de 12 años. Más de 13 países. Un sistema propio.",
     whyLead: "Change opera con un sistema propio de interpretación, decisión y seguimiento. Y lo que se decide no se archiva: sigue vivo en Mission Control.",
     whyCta1: "Conocer al equipo", whyCta2: "Ver Mission Control",
-    ctaKicker: "El primer movimiento", ctaTitle: "Trae la decisión que más te pesa hoy.", ctaWork: "Trabajar una decisión",
+    ctaKicker: "El primer movimiento", ctaTitle: "Trae la decisión que más te pesa hoy.", ctaWork: "Iniciar la conversación",
   },
   en: {
     heroBadge: "Future Capacity",
-    heroH1a: "The big decisions in your company", heroH1b: "all run through you.",
-    heroLead: "Change installs in your team the capacity to read what's changing, decide in time, and hold the course.",
+    heroH1a: "Certainty is no longer", heroH1b: "a condition for acting.",
+    heroLead: "Change designs in your organization the capacity to read what's changing, decide in time, and hold the course — even when the future offers no guarantees.",
     heroScroll: "Which tension is yours? ↓",
     tenseKicker: "The tensions", tenseTitle: "Six tensions we know up close. Which one is yours?",
     tenseSee: "See this tension", tenseWork: "Work it now",
@@ -67,7 +67,7 @@ const COPY = {
     whyKicker: "Why Change", whyTitle: "Over 12 years. Over 13 countries. A system of our own.",
     whyLead: "Change operates with its own system for interpreting, deciding and following through. And what gets decided isn't archived: it stays alive in Mission Control.",
     whyCta1: "Meet the team", whyCta2: "See Mission Control",
-    ctaKicker: "The first move", ctaTitle: "Bring the decision weighing on you most today.", ctaWork: "Work on a decision",
+    ctaKicker: "The first move", ctaTitle: "Bring the decision weighing on you most today.", ctaWork: "Start the conversation",
   },
 };
 

@@ -75,7 +75,7 @@ const CAP_COPY = {
     fiveKicker: "Las cinco capacidades", fiveTitle: "Cinco movimientos para convertir incertidumbre en decisión.", fiveLead: "Cada capacidad responde una pregunta distinta y deja un instrumento concreto. Juntas forman el método con el que una organización pasa de reaccionar a anticipar.",
     artKicker: "La capacidad se ve", artTitle: "Cada capacidad deja un instrumento.", artLead: "Construimos instrumentos de decisión: artefactos con los que el pensamiento se vuelve algo que tu equipo puede leer, usar y defender.",
     buildKicker: "Construcción progresiva", buildTitle: "La capacidad no se entrega de golpe. Se construye por etapas.", buildLead: "Empiezas con una decisión y, si el sistema lo amerita, lo conviertes en una forma permanente de operar. Cada etapa deja valor por sí sola y prepara la siguiente.",
-    ctaTitle: "El mejor momento para construir capacidad es antes de necesitarla.", ctaLead: "Cada relación arranca con la decisión que ya tienes enfrente. Trae una y la trabajamos juntos.", ctaWork: "Trabajar una decisión", ctaCases: "Ver capacidades instaladas",
+    ctaTitle: "El mejor momento para construir capacidad es antes de necesitarla.", ctaLead: "Cada relación arranca con la decisión que ya tienes enfrente. Trae una y la trabajamos juntos.", ctaWork: "Iniciar la conversación", ctaCases: "Ver capacidades instaladas",
   },
   en: {
     scaffoldKicker: "Capabilities · Method",
@@ -90,7 +90,7 @@ const CAP_COPY = {
     fiveKicker: "The five capacities", fiveTitle: "Five moves to turn uncertainty into a decision.", fiveLead: "Each capacity answers a different question and leaves a concrete instrument. Together they form the method by which an organization moves from reacting to anticipating.",
     artKicker: "Capacity is visible", artTitle: "Each capacity leaves an instrument.", artLead: "We build instruments for deciding: artifacts that turn thinking into something your team can read, use, and defend.",
     buildKicker: "Progressive construction", buildTitle: "Capacity isn't delivered all at once. It's built in stages.", buildLead: "You start with a decision and, if the system warrants it, turn it into a permanent way of operating. Each stage delivers value on its own and sets up the next.",
-    ctaTitle: "The best time to build capacity is before you need it.", ctaLead: "Every relationship starts with the decision already in front of you. Bring one and we'll work it together.", ctaWork: "Work on a decision", ctaCases: "See installed capabilities",
+    ctaTitle: "The best time to build capacity is before you need it.", ctaLead: "Every relationship starts with the decision already in front of you. Bring one and we'll work it together.", ctaWork: "Start the conversation", ctaCases: "See installed capabilities",
   },
 };
 
