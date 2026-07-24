@@ -260,7 +260,9 @@ export default function DecisionSimulator({ lang = "es" }: { lang?: Lang }) {
 
   useEffect(() => {
     if (phase === "quiz") {
-      setTimeout(() => textareaRef.current?.focus(), 80);
+      // preventScroll: el reposicionamiento de la card lo hace el efecto de
+      // fase vía Lenis; el focus no debe arrastrar el scroll por su cuenta.
+      setTimeout(() => textareaRef.current?.focus({ preventScroll: true }), 80);
     }
   }, [phase, step]);
 
@@ -278,16 +280,22 @@ export default function DecisionSimulator({ lang = "es" }: { lang?: Lang }) {
   }, []);
 
   // El instrumento es UNA sola superficie: las fases se intercambian dentro de
-  // la misma card, sin reposicionar la página. Solo aseguramos —de forma
-  // instantánea y sin pelear con el smooth-scroll de Lenis— que la card siga a
-  // la vista si quedó parcialmente fuera; nunca arrastramos al usuario.
+  // la misma card. Al cambiar de fase reposicionamos la card al tope visible.
+  // El scroll DEBE pasar por Lenis (window.__lenis): un scrollIntoView nativo
+  // lo revierte su raf en el siguiente frame y el usuario queda abajo.
+  const phaseMountedRef = useRef(false);
   useEffect(() => {
-    if (phase === "intro") return;
+    if (!phaseMountedRef.current) { phaseMountedRef.current = true; return; }
     const el = containerRef.current;
     if (!el) return;
     const r = el.getBoundingClientRect();
     if (r.top < 0 || r.top > window.innerHeight * 0.5) {
-      el.scrollIntoView({ block: "start", behavior: "auto" });
+      const lenis = (window as typeof window & { __lenis?: { scrollTo: (target: HTMLElement, opts?: { offset?: number; duration?: number; force?: boolean }) => void } }).__lenis;
+      if (lenis) {
+        lenis.scrollTo(el, { offset: -96, duration: 0.6, force: true });
+      } else {
+        el.scrollIntoView({ block: "start", behavior: "auto" });
+      }
     }
   }, [phase]);
 
