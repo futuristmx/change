@@ -70,7 +70,8 @@ export default function PageScaffold({ kicker, title, lead, dark = false, ambien
       <main id="main-content" style={{ flex: 1 }}>
         <section style={{ position: "relative", overflow: "hidden", background: heroBg }}>
           {ambient && <SignalField />}
-          <div style={{ position: "relative", width: WRAP, margin: "0 auto", padding: "clamp(96px,13vw,170px) 0 clamp(64px,8vw,110px)" }}>
+          {/* Top corto a propósito: sin el gradiente celestial del home, más aire se lee como vacío (feedback 2026-07-24) */}
+          <div style={{ position: "relative", width: WRAP, margin: "0 auto", padding: "clamp(52px,6.5vw,92px) 0 clamp(64px,8vw,110px)" }}>
             <Reveal style={{ display: "inline-flex", alignItems: "center", gap: 11, marginBottom: 28 }}>
               <span data-pulse={dark ? "" : undefined} style={{ width: 7, height: 7, borderRadius: dark ? "50%" : 0, background: dark ? "var(--signal-cyan)" : "var(--change-violet)" }} />
               <span style={{ font: "600 11px var(--font-mono)", letterSpacing: ".14em", textTransform: "uppercase", color: kickerColor }}>{kicker}</span>
