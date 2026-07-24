@@ -53,7 +53,7 @@ const MC_COPY = {
     probK: "El problema que resuelve", probH: "El criterio no debería morir en una junta.", probP: "Sin un lugar donde sostenerse, la inteligencia estratégica se evapora. Mission Control existe para que el trabajo de leer, interpretar y decidir no se repita desde cero cada vez.",
     demoBadge: "Tres planos de una decisión · datos de ejemplo", demoH: "Señales, decisiones y rumbo, leídos juntos.", demoP: "Mission Control conecta lo que normalmente vive disperso. El radar de señales, la memoria de decisiones y el roadmap ejecutivo se leen juntos y se sostienen con rituales de seguimiento. Lo que ves aquí es un ejemplo: los datos son ficticios y existen solo para mostrar la estructura.",
     lastK: "El último escalón", lastH: "Mission Control no se instala. Se gana.",
-    ctaH: "Empieza por la decisión, no por el sistema.", ctaP: "Tráenos una decisión que tu organización tenga que tomar bajo ambigüedad. La trabajamos juntos y, si hay capacidad que sostener, Mission Control llega después.", ctaWork: "Trabajar una decisión", ctaMethod: "Ver el método",
+    ctaH: "Empieza por la decisión, no por el sistema.", ctaP: "Tráenos una decisión que tu organización tenga que tomar bajo ambigüedad. La trabajamos juntos y, si hay capacidad que sostener, Mission Control llega después.", ctaWork: "Iniciar la conversación", ctaMethod: "Ver el método",
   },
   en: {
     kicker: "Mission Control", titlePre: "Where future capacity", titleAccent: "is sustained.",
@@ -65,7 +65,7 @@ const MC_COPY = {
     probK: "The problem it solves", probH: "Judgment shouldn't die in a meeting.", probP: "Without a place to hold, strategic intelligence evaporates. Mission Control exists so the work of reading, interpreting and deciding isn't repeated from scratch every time.",
     demoBadge: "Three planes of a decision · sample data", demoH: "Signals, decisions and course, read together.", demoP: "Mission Control connects what usually lives scattered. The signal radar, the decision memory and the executive roadmap are read together and held with follow-through rituals. What you see here is an example: the data is fictional and exists only to show the structure.",
     lastK: "The last rung", lastH: "Mission Control isn't installed. It's earned.",
-    ctaH: "Start with the decision, not the system.", ctaP: "Bring us a decision your organization has to make under ambiguity. We work it together and, if there's capacity to sustain, Mission Control comes after.", ctaWork: "Work on a decision", ctaMethod: "See the method",
+    ctaH: "Start with the decision, not the system.", ctaP: "Bring us a decision your organization has to make under ambiguity. We work it together and, if there's capacity to sustain, Mission Control comes after.", ctaWork: "Start the conversation", ctaMethod: "See the method",
   },
 };
 

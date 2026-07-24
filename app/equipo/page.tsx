@@ -85,7 +85,7 @@ const EQ_COPY = {
     partnersK: "Socios fundadores", partnersH: "Change nació de dos obsesiones complementarias: leer el cambio a tiempo y volverlo decisión que se sostiene.",
     partnersP: "Dos fundadores, dos disciplinas, un mismo método. No repartimos un proyecto en tareas: repartimos una decisión en capacidades. Y el método no se delega — se gobierna desde aquí.",
     enterK: "Cómo entramos", enterH: "El trabajo empieza por una decisión, no por un retainer.",
-    ctaH: "Trae la decisión que más te pesa hoy.", ctaP: "No necesitas tener claro el problema ni el camino. Eso es justo lo que el board hace contigo.", ctaWork: "Trabajar una decisión", ctaMethod: "Ver el método",
+    ctaH: "Trae la decisión que más te pesa hoy.", ctaP: "No necesitas tener claro el problema ni el camino. Eso es justo lo que el board hace contigo.", ctaWork: "Iniciar la conversación", ctaMethod: "Ver el método",
   },
   en: {
     kicker: "Board", titlePre: "Future capacity is built", titleAccent: "with a senior board.",
@@ -95,7 +95,7 @@ const EQ_COPY = {
     partnersK: "Founding partners", partnersH: "Change was born from two complementary obsessions: reading change in time and turning it into a decision that holds.",
     partnersP: "Two founders, two disciplines, one method. We don't split a project into tasks: we split a decision into capacities. And the method isn't delegated — it's governed from here.",
     enterK: "How we come in", enterH: "The work starts with a decision, not a retainer.",
-    ctaH: "Bring the decision weighing on you most today.", ctaP: "You don't need the problem or the path figured out. That's exactly what the board does with you.", ctaWork: "Work on a decision", ctaMethod: "See the method",
+    ctaH: "Bring the decision weighing on you most today.", ctaP: "You don't need the problem or the path figured out. That's exactly what the board does with you.", ctaWork: "Start the conversation", ctaMethod: "See the method",
   },
 };
 

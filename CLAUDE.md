@@ -21,7 +21,8 @@ No redefinas. No es negociable.
 - **Board visible:** Andrés Valencia + Miguel Cadena + Red de especialistas
 - **Voz:** sobria, ejecutiva, premium, es-MX. Sin emojis.
 - **Cliente:** organizaciones y líderes que deciden bajo ambigüedad
-- **CTA global:** "Trabajar una decisión" (decisión de Andrés, 2026-06-25). NO usar "Simular una decisión": suena a inventado, no da certeza
+- **CTA global:** "Iniciar la conversación" / EN "Start the conversation" (decisión de Andrés, 2026-07-24, tras feedback de clientes: "Trabajar una decisión" sonaba operativo y no correlacionaba con contacto — el contacto es invitación a conversación estratégica, no formulario). NO usar "Trabajar una decisión" ni "Simular una decisión"
+- **Hero home:** "La certeza dejó de ser condición para actuar." (decisión de Andrés, 2026-07-24 — la idea madre como titular; el anterior "Las decisiones grandes… pasan todas por ti" tuvo mala recepción con clientes: sonaba a tareas operativas)
 - **CTA post-resultado:** "Trabajar esta decisión con Change" — solo después de que el usuario recibió un diagnóstico/resultado del simulador
 - **Vocabulario:** evitar "lectura" como entregable (se malinterpreta como tarot) → usar "diagnóstico" / "interpretación". El verbo "Leer" del método se mantiene
 - No parecer agencia, SaaS, trend lab ni consultora de decks
